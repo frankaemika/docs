@@ -32,7 +32,9 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.mathjax']
+extensions = ['sphinx.ext.mathjax', 'sphinx.ext.todo']
+
+# TODO: set mathjax_path for offline support
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -48,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'libfranka'
-copyright = '2017, libfranka authors'
+copyright = '2017, FRANKA EMIKA GmbH'
 author = 'libfranka authors'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -76,7 +78,7 @@ exclude_patterns = []
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -110,7 +112,7 @@ htmlhelp_basename = 'libfrankadoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
