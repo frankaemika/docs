@@ -22,7 +22,7 @@ Before we get started with controlling FRANKA, here are a few important points t
 
     Pressing the user stop will switch the joint motor controllers to hold their position. **The user stop is not an emergency stop!**
 
-Plug in a network cable to the ethernet connection at the base of FRANKA (*not* to the master controller). You can now point a web browser to https://robot.franka.de to connect to the FRANKA DESK interface.
+Plug in a network cable to the ethernet connection at the base of FRANKA ARM. You can now point a web browser to https://robot.franka.de to connect to the FRANKA DESK interface.
 
 Getting started with the research interface
 -------------------------------------------
