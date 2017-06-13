@@ -27,3 +27,4 @@ Setting up a realtime kernel
 .. todo::
 
   Add realtime kernel docu
+  How to set thread scheduling to real time without sudo
