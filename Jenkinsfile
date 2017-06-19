@@ -15,12 +15,12 @@ node {
 
     stage('Pack HTML documentation') {
       dir('build') {
-        sh 'tar cfz libfranka.tar.gz html'
+        sh 'tar cfz research-interface.tar.gz html'
       }
     }
 
     stage('Archive results') {
-      archive 'build/libfranka.tar.gz, build/latex/libfranka.pdf'
+      archive 'build/research-interface.tar.gz, build/latex/research-interface.pdf'
       publishHTML([allowMissing: false,
                    alwaysLinkToLastBuild: false,
                    keepAll: true,

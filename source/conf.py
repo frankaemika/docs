@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# libfranka documentation build configuration file, created by
+# research-interface documentation build configuration file, created by
 # sphinx-quickstart on Wed May 24 14:40:52 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -49,9 +49,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'libfranka'
+project = 'FRANKA EMIKA Research Interface'
 copyright = '2017, FRANKA EMIKA GmbH'
-author = 'libfranka authors'
+author = 'FRANKA EMIKA Research Interface Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -106,7 +106,7 @@ html_logo = '_static/logo.png'
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'libfrankadoc'
+htmlhelp_basename = 'research-interface-doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -133,8 +133,9 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'libfranka.tex', 'libfranka Documentation',
-     'libfranka authors', 'manual'),
+    (master_doc, 'research-interface.tex',
+     'FRANKA EMIKA Research Interface Documentation',
+     'FRANKA EMIKA Research Interface Team', 'manual'),
 ]
 
 
@@ -143,8 +144,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'libfranka', 'libfranka Documentation',
-     [author], 1)
+    (master_doc, 'research-interface',
+     'FRANKA EMIKA Research Interface Documentation', [author], 1)
 ]
 
 
@@ -154,7 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'libfranka', 'libfranka Documentation',
-     author, 'libfranka', 'C++ research library for FRANKA EMIKA',
+    (master_doc, 'research-interface',
+     'FRANKA EMIKA Research Interface Documentation', author,
+     'research-interface', 'research interface for FRANKA EMIKA',
      'Miscellaneous'),
 ]

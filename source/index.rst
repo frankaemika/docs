@@ -1,11 +1,11 @@
-Welcome to ``libfranka``'s documentation!
-=========================================
+FRANKA EMIKA Research Interface Documentation
+=============================================
 
 .. todolist::
 
 ``libfranka`` is a C++ library that provides low-level control of the `FRANKA robot arm <https://franka.de>`_. Its source code is available on `GitHub <https://github.com/frankaemika/libfranka>`_.
 
-The source code of this documentation is also `available online <https://github.com/frankaemika/libfranka-docs>`_.
+The source code of this documentation is also `available online <https://github.com/frankaemika/research-interface-docs>`_.
 
 .. toctree::
    :maxdepth: 2
