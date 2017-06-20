@@ -12,7 +12,7 @@ Before we get started with controlling FRANKA, here are a few important points t
 
 .. caution::
 
-    FRANKA's built-in controllers only support tabletop mounting, i.e. assumes that FRANKA is mounted perpendicular to the ground! You can implement your own controller to work around this limitation, but this might **damage the robot** and void your warranty!
+    FRANKA's built-in controllers only support tabletop mounting, i.e. assumes that FRANKA is mounted perpendicular to the ground! Other mountings will void your warranty, **decrease the performance of the robot** or **might damage the robot**!
 
 
 2. Ensure that the cable connecting FRANKA and FRANKA CONTROL is firmly attached on both sides.
@@ -59,20 +59,20 @@ the object is created:
 
     franka::Robot robot("robot.franka.de");
 
-The address can be passed either as a hostname or an IP addresss. In case of any error, either due to networking, or conflicting library version, an exception of the ``franka::Exception`` type will be thrown. When using several FRANKAs at the same time, simply create several objects with appropriate addresses.
+The address can be passed either as a hostname or an IP address. In case of any error, either due to networking, or conflicting library version, an exception of the ``franka::Exception`` type will be thrown. When using several FRANKAs at the same time, simply create several objects with appropriate addresses.
 
 
 Reading the robot state
 -----------------------
 
-Use the ``read`` or ``readOnce`` functions if you want to read the robot state, e.g. for logging or visualizaiton, but do not need to execute any motions. With a valid connection, a single sample of the robot state can be read using the ``readOnce`` function:
+Use the ``read`` or ``readOnce`` functions if you want to read the robot state, e.g. for logging or visualization, but do not need to execute any motions. With a valid connection, a single sample of the robot state can be read using the ``readOnce`` function:
 
 .. code-block:: c++
 
     franka::RobotState state = robot.readOnce();
 
 
-The state can be read continously using the ``read`` function and a callback. Return ``false`` in the callback when you want to stop, 
+The state can be read continuously using the ``read`` function and a callback. Return ``false`` in the callback when you want to stop, 
 like in the ``echo_robot_state`` example:
 
 .. code-block:: c++
@@ -88,7 +88,7 @@ Moving the robot
 ----------------
 
 To try moving the robot, execute the ``generate_joint_velocity_motion`` example. Brakes and the user stop must be released before moving.
-The example will move the last four joints. After veryfing that the robot has enough free space to move without colliding, 
+The example will move the last four joints. After verifying that the robot has enough free space to move without colliding, 
 execute the following from the build directory:
 
 .. code-block:: shell
@@ -124,7 +124,7 @@ An example usage can be seen in ``examples/generate_joint_velocity_motion.cpp``:
     });
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from FRANKA, at :math:`1 KHz` frequency. In the above example. the desired velocity is returned ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion. When the motion is finished ``franka::Stop`` is returned instead. This example uses the default `Joint Impedance` controller, which offers the best performance(and can 
-be used for cartesian motions as well).
+be used for Cartesian motions as well).
 
 .. caution::
 
