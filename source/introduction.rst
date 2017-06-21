@@ -4,7 +4,6 @@ Introduction
 .. todo::
 
   Update overview graphics, add gripper (replace FRANKA ARM label), Replace FCI  with Research Interface
-  ROS: kinematic simulations
 
 The research interface allows a fast and direct low-level bidirectional connection to the FRANKA EMIKA arm and gripper. The following figure shows a schematic overview of the components. 
 
