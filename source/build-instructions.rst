@@ -23,8 +23,8 @@ If the build was successful, you can move on to the :doc:`tutorial`.
 
 Setting up a realtime kernel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In order to control your Franka using ``libfranka``, your controller program must run with `real-time priority` under an ``RT-PREEMPT`` kernel. Therefore, you must first apply the ``RT-PREEMPT`` patch, and then build and install the patched kernel.
+As building the Linux kernel is quite time consuming, it is advised that you make a deb package so the installation can be seamlessly done on multiple machines. The procedure for patching the kernel and creating an installation package can be found here: http://home.gwu.edu/~jcmarsh/wiki/pmwiki.php%3Fn=Notes.RTPatch.html
 
-.. todo::
 
-  Add realtime kernel docu
-  How to set thread scheduling to real time without sudo
+
