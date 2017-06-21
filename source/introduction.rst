@@ -3,7 +3,7 @@ Introduction
 
 .. todo::
 
-  Update overview graphics, add gripper (replace FRANKA ARM label)
+  Update overview graphics, add gripper (replace FRANKA ARM label), Replace FCI  with Research Interface
   ROS: kinematic simulations
 
 The research interface allows a fast and direct low-level bidirectional connection to the FRANKA EMIKA arm and gripper. The following figure shows a schematic overview of the components. 
@@ -12,7 +12,7 @@ The research interface allows a fast and direct low-level bidirectional connecti
     :align: center
     :alt: alternate text
     :figclass: align-center
-    
+
     Schematic overview of the components.
 
 ``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The connection to FRANKA CONTROL is established via a standard Ethernet connection. The interface provides high-speed measurements, internal data of the robot and the gripper. Further, it accepts parameters and control values at an update frequency of up to :math:`1 kHz`. With this library, it is possible to:
@@ -37,7 +37,7 @@ The **Robot Model Library** provides you access to the following quantities:
  * Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
 
-The **FRANKA CONTROL INTERFACE (FCI)** provides feedback-data and enables controlling the robot.  By sending real-time control values you can execute a custom robot behavior: 
+The **Research Interface (RI)** provides feedback-data and enables controlling the robot.  By sending real-time control values you can execute a custom robot behavior: 
 
  * Joint torque control.
  * Desired joint position or velocity command.
@@ -53,4 +53,4 @@ Further, you get access to the following feedback data:
 
 .. hint::
 
-    While the FCI is active you have full control of the robot, but you cannot use FRANKA DESK. This means that you cannot use APPS and the FCI at the same time.
+    While the RI is active you have full control of the robot, but you cannot use FRANKA DESK. This means that you cannot use APPS and the RI at the same time.

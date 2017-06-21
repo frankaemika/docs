@@ -8,26 +8,25 @@ node {
       checkout scm
     }
 
-    stage('Build documentation') {
+    stage('Build HTML') {
       sh 'make html'
-      sh 'make latexpdf'
-    }
-
-    stage('Pack HTML documentation') {
       dir('build') {
         sh 'tar cfz research-interface.tar.gz html'
+        archive 'research-interface.tar.gz'
+        publishHTML([allowMissing: false,
+                     alwaysLinkToLastBuild: false,
+                     keepAll: true,
+                     reportDir: 'html',
+                     reportFiles: 'index.html',
+                     reportName: 'User Documentation'])
       }
     }
 
-    stage('Archive results') {
-      archive 'build/research-interface.tar.gz, build/latex/research-interface.pdf'
-      publishHTML([allowMissing: false,
-                   alwaysLinkToLastBuild: false,
-                   keepAll: true,
-                   reportDir: 'build/html',
-                   reportFiles: 'index.html',
-                   reportName: 'User Documentation'])
+    stage('Build PDF') {
+      sh 'make latexpdf'
+      archive 'build/latex/research-interface.pdf'
     }
+
     currentBuild.result = 'SUCCESS'
   } catch (e) {
     currentBuild.result = 'FAILED'
