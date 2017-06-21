@@ -34,8 +34,8 @@ Then, edit  ``/etc/security/limits.conf`` and add::
     @realtime hard memlock 102400
 
 
-Building on Ubuntu
----------------------------
+Building libfranka on Ubuntu
+--------------------------------
 
 First, install the necessary dependencies for building the library and API documentation from Ubuntu's package manager::
 
@@ -52,3 +52,11 @@ If the build was successful make sure, that you use a RT kernel.
 
 
 After you booted into a RT patched kernel and built ``libfranka``, you can move on to the :doc:`tutorial`.
+
+Installing ROS on Ubuntu
+----------------------------
+
+Please have a look at the `ROS Wiki <http://wiki.ros.org>`_:
+
+ * `Install ROS <http://wiki.ros.org/lunar/Installation/Ubuntu>`_
+ * `Getting Started <http://wiki.ros.org/ROS/StartGuide>`_
