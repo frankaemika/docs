@@ -1,10 +1,10 @@
 Getting started
-===============
+---------------
 
 After :doc:`building the library <build-instructions>`, you can get started with your FRANKA!
 
 Setting up the robot
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 Before we get started with controlling FRANKA, here are a few important points to consider when working with FRANKA.
 
@@ -25,10 +25,8 @@ Before we get started with controlling FRANKA, here are a few important points t
 Plug in a network cable to the Ethernet connection at the base of FRANKA ARM. You can now point a web browser to https://robot.franka.de to connect to the FRANKA DESK interface.
 
 
--------------------------------------------
-
 Verifying the connection
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can run the ``echo_robot_state`` example to see if you can successfully connect to your FRANKA using the research interface. Ensure your network cable is plugged in to the Ethernet connection at the base of FRANKA (*not* to the master controller!).
 
@@ -46,7 +44,7 @@ The program will print the current state of the robot to the console and termina
 
 
 Connecting libfranka to the robot
----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 All operations on the robot are performed through the ``franka::Robot`` object. A connection to the robot will be established when
 the object is created:
@@ -63,7 +61,7 @@ The address can be passed either as a hostname or an IP address. In case of any 
 
 
 Reading the robot state
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Use the ``read`` or ``readOnce`` functions if you want to read the robot state, e.g. for logging or visualization, but do not need to execute any motions. With a valid connection, a single sample of the robot state can be read using the ``readOnce`` function:
 
@@ -85,7 +83,7 @@ like in the ``echo_robot_state`` example:
 
 
 Moving the robot
-----------------
+^^^^^^^^^^^^^^^^
 
 To try moving the robot, execute the ``generate_joint_velocity_motion`` example. Brakes and the user stop must be released before moving.
 The example will move the last four joints. After verifying that the robot has enough free space to move without colliding, 

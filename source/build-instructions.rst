@@ -5,6 +5,7 @@ Build Instructions
 
 While it should in principle be possible to build ``libfranka`` on different operating systems and distributions, official support is only provided for Ubuntu 16.04 LTS `Xenial Xerus`. First, make sure, that you have installed a RT kernel.
 
+
 Setting up a realtime kernel
 ----------------------------
 
@@ -23,7 +24,7 @@ First, add a realtime group and add your user to it::
     sudo adduser $(whoami) realtime
 
 
-Then, edit  */etc/security/limits.conf* and add::
+Then, edit  ``/etc/security/limits.conf`` and add::
 
     @realtime soft rtprio 99
     @realtime soft priority 99
