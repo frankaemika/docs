@@ -14,6 +14,25 @@ In order to control your Franka using ``libfranka``, your controller program mus
 * `HOWTO setup Linux with PREEMPT_RT properly <https://wiki.linuxfoundation.org/realtime/documentation/howto/applications/preemptrt_setup>`_
 
 
+Allow user to set realtime permissions for its processes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+First, add a realtime group and add your user to it::
+
+    sudo addgroup realtime
+    sudo adduser $(whoami) realtime
+
+
+Then, edit  */etc/security/limits.conf* and add::
+
+    @realtime soft rtprio 99
+    @realtime soft priority 99
+    @realtime soft memlock 102400
+    @realtime hard rtprio 99
+    @realtime hard priority 99
+    @realtime hard memlock 102400
+
+
 Building on Ubuntu
 ---------------------------
 
