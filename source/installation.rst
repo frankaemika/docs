@@ -44,8 +44,8 @@ While it should in principle be possible to build ``libfranka`` and the FRANKA R
 different operating systems and distributions, official support is currently only provided for
 Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`.
 
-Building ``libfranka``
-^^^^^^^^^^^^^^^^^^^^^^
+Building libfranka
+^^^^^^^^^^^^^^^^^^
 
 Install the necessary dependencies for building the library and API documentation from Ubuntu's
 package manager::

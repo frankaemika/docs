@@ -53,8 +53,8 @@ iterations.
     brakes from FRANKA DESK at https://robot.franka.de.
 
 
-Getting started with ``libfranka``
-----------------------------------
+Getting started with libfranka
+------------------------------
 
 Connecting libfranka to the robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -1,5 +1,5 @@
 Troubleshooting
-=================
+===============
 
 
 Jumps in robot movement
@@ -16,3 +16,5 @@ Please check the following things:
 Network bandwidth, delay and jitter test
 ----------------------------------------
 
+.. todo::
+ Extend Troubleshooting section.

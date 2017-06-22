@@ -36,16 +36,15 @@ and control values at an update frequency of up to 1 kHz. With this library, it 
     Data is sent to FRANKA over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-The **ROS support** allows interfacing FRANKA via your own ROS-nodes and make use of the entire ROS
-ecosystem. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
-kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
-
 The **Robot Model Library** provides you access to the following quantities:
 
  * Forward kinematics of all joints.
  * Jacobian matrix of all joints.
  * Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
+The **ROS support** allows interfacing FRANKA via your own ROS-nodes and make use of the entire ROS
+ecosystem. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
+kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
 
 The **Research Interface (RI)** provides feedback-data and enables controlling the robot. By sending
 real-time control values you can execute a custom robot behavior:
