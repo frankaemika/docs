@@ -6,6 +6,7 @@ node {
   try {
     stage('Checkout') {
       checkout scm
+      make clean
     }
 
     stage('Build HTML') {
@@ -30,6 +31,7 @@ node {
     stage('Run linter') {
       sh 'npm install eclint'
       sh 'node $(npm bin)/eclint check source/*.rst'
+      // TODO(FWA): run 'make linkcheck'
     }
 
     currentBuild.result = 'SUCCESS'
