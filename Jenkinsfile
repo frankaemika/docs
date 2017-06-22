@@ -27,6 +27,11 @@ node {
       archive 'build/latex/research-interface.pdf'
     }
 
+    stage('Run linter') {
+      sh 'npm install eclint'
+      sh 'node $(npm bin)/eclint check source/*.rst'
+    }
+
     currentBuild.result = 'SUCCESS'
   } catch (e) {
     currentBuild.result = 'FAILED'
