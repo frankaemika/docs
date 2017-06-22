@@ -6,7 +6,7 @@ node {
   try {
     stage('Checkout') {
       checkout scm
-      make clean
+      sh 'make clean'
     }
 
     stage('Build HTML') {
