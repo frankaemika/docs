@@ -1,2 +1,0 @@
-FRANKA ROS Support
-==================

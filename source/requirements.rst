@@ -18,4 +18,4 @@ Workstation PC
 Network
 -----------------------------
 
-If possible, directly connect your workstation / control PC to the robot. Having relays in between could lead to delay, jitter or packet loss. This will decrease the performance of your controller or even make it unusable. 
+If possible, directly connect your workstation / control PC to the robot. Having relays in between could lead to delay, jitter or packet loss. This will decrease the performance of your controller or even make it unusable.

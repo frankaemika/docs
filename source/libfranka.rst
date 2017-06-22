@@ -1,5 +1,0 @@
-Libfranka
-==============
-
-
-.. include:: tutorial.rst
