@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# libfranka documentation build configuration file, created by
+# research-interface documentation build configuration file, created by
 # sphinx-quickstart on Wed May 24 14:40:52 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -32,7 +32,9 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.mathjax']
+extensions = ['sphinx.ext.mathjax', 'sphinx.ext.todo']
+
+# TODO: set mathjax_path for offline support
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -47,9 +49,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'libfranka'
-copyright = '2017, libfranka authors'
-author = 'libfranka authors'
+project = 'FRANKA EMIKA Research Interface'
+copyright = '2017, FRANKA EMIKA GmbH'
+author = 'FRANKA EMIKA Research Interface Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -76,7 +78,7 @@ exclude_patterns = []
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -98,11 +100,13 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_favicon = '_static/favicon.png'
+html_logo = '_static/logo.png'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'libfrankadoc'
+htmlhelp_basename = 'research-interface-doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -110,7 +114,7 @@ htmlhelp_basename = 'libfrankadoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
@@ -129,8 +133,9 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'libfranka.tex', 'libfranka Documentation',
-     'libfranka authors', 'manual'),
+    (master_doc, 'research-interface.tex',
+     'FRANKA EMIKA Research Interface Documentation',
+     'FRANKA EMIKA Research Interface Team', 'manual'),
 ]
 
 
@@ -139,8 +144,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'libfranka', 'libfranka Documentation',
-     [author], 1)
+    (master_doc, 'research-interface',
+     'FRANKA EMIKA Research Interface Documentation', [author], 1)
 ]
 
 
@@ -150,7 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'libfranka', 'libfranka Documentation',
-     author, 'libfranka', 'C++ research library for FRANKA EMIKA',
+    (master_doc, 'research-interface',
+     'FRANKA EMIKA Research Interface Documentation', author,
+     'research-interface', 'research interface for FRANKA EMIKA',
      'Miscellaneous'),
 ]

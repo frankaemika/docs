@@ -1,4 +1,4 @@
-# libfranka-docs
+# research-interface-docs
 
 To build the documentation, execute:
 
