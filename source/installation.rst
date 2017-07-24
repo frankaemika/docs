@@ -50,9 +50,13 @@ Building libfranka
 Install the necessary dependencies for building the library and API documentation from Ubuntu's
 package manager::
 
-    sudo apt install build-essential cmake libpoco-dev doxygen
+    sudo apt install build-essential cmake doxygen git libpoco-dev
 
-Obtain the ``libfranka`` source code from `GitHub <https://github.com/frankaemika/libfranka>`__.
+Clone the ``libfranka`` source code from `GitHub <https://github.com/frankaemika/libfranka>`__::
+
+    git clone --recursive https://github.com/frankaemika/libfranka
+    cd libfranka
+
 In the source directory, create a build directory and run CMake::
 
     mkdir build
@@ -66,7 +70,13 @@ Building the ROS packages
 
 If you have `set up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, download the
 FRANKA ROS packages from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put them into
-your Catkin workspace. In your Catkin workspace, execute ``catkin_make`` with the path to the
+your Catkin workspace::
+
+    cd catkin_ws/src
+    git clone --recursive https://github.com/frankaemika/franka_ros
+
+In your Catkin workspace, execute ``catkin_make`` with the path to the
 ``libfranka`` build directory::
 
+    cd catkin_ws
     catkin_make -D Franka_DIR=/path/to/libfranka/build
