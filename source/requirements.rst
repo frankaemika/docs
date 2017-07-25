@@ -49,6 +49,5 @@ stop the robot.
 
 
 .. hint::
-	Measure the performance of your network (see `Network bandwidth, delay and jitter test
-	<troubleshooting.html#network-bandwidth-delay-and-jitter-test>`_) and the algorithm in
+	Measure the performance of your network (see :ref:`network-bandwidth-delay-test`) and the algorithm in
 	beforehand.

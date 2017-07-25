@@ -4,17 +4,45 @@ Overview
 .. todo::
 
   Update overview graphics, add gripper (replace FRANKA ARM label),
-  Replace FCI  with Research Interface
+  Replace FCI  with Research Interface,
+  Remove the Robot Model Library in the figure / add it to libfranka
 
-The research interface allows a fast and direct low-level bidirectional connection to the FRANKA
-EMIKA arm and gripper. The following figure shows a schematic overview of the components.
-
- ..  figure:: _static/overview.png
+.. figure:: _static/overview.png
     :align: center
     :alt: alternate text
     :figclass: align-center
 
+
     Schematic overview of the components.
+
+The FRANKA research interface allows a fast and direct low-level bidirectional connection to
+the FRANKA EMIKA arm and gripper.
+
+The **Research Interface (RI)** provides feedback-data and enables controlling the robot.
+By sending real-time control values you can execute a custom robot behavior:
+
+ * Joint torque control.
+ * Desired joint position or velocity command.
+ * Desired Cartesian position or velocity command.
+
+Further, you get access to the following feedback data:
+
+ * Measured joint data, like the position, velocity and torque.
+ * Low-level desired joint goals.
+ * Estimation of externally applied torques and wrenches.
+ * Various collision and contact information.
+
+.. important::
+
+    While the RI is active you have full control of the robot, but you cannot use FRANKA DESK.
+    This means that you cannot use APPS and the RI at the same time.
+
+
+It consists of two components::
+
+* libfranka
+* franka_ros (ROS support)
+
 
 ``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The
 connection to FRANKA CONTROL is established via a standard Ethernet connection. The interface
@@ -31,38 +59,18 @@ possible to:
   joint/Cartesian stiffness.
 * Calculate forward kinematics and other model properties from the current robot state.
 * Control the FRANKA gripper.
+* Robot model library:
+
+  - Forward kinematics of all joints.
+  - Jacobian matrix of all joints.
+  - Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
 .. important::
 
     Data is sent to FRANKA over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-The **Robot Model Library** provides you access to the following quantities:
-
- * Forward kinematics of all joints.
- * Jacobian matrix of all joints.
- * Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
-
-The **ROS support** allows interfacing FRANKA via your own ROS-nodes and make use of the entire ROS
-ecosystem. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
+``franka_ros`` allows interfacing FRANKA via your own ROS-nodes and make use of the entire ROS
+ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
 kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
 
-The **Research Interface (RI)** provides feedback-data and enables controlling the robot.
-By sending real-time control values you can execute a custom robot behavior:
-
- * Joint torque control.
- * Desired joint position or velocity command.
- * Desired Cartesian position or velocity command.
-
-Further, you get access to the following feedback data:
-
- * Measured joint data, like the position, velocity and torque.
- * Low-level desired joint goals.
- * Estimation of externally applied torques and wrenches.
- * Various collision and contact information.
-
-
-.. hint::
-
-    While the RI is active you have full control of the robot, but you cannot use FRANKA DESK.
-    This means that you cannot use APPS and the RI at the same time.

@@ -12,6 +12,7 @@ Please check the following things:
 * Check `Network bandwidth, delay and jitter test`_
 
 
+.. _network-bandwidth-delay-test:
 
 Network bandwidth, delay and jitter test
 ----------------------------------------
