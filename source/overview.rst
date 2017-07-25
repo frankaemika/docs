@@ -16,10 +16,11 @@ EMIKA arm and gripper. The following figure shows a schematic overview of the co
 
     Schematic overview of the components.
 
-``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The connection
-to FRANKA CONTROL is established via a standard Ethernet connection. The interface provides
-high-speed measurements, internal data of the robot and the gripper. Further, it accepts parameters
-and control values at an update frequency of up to 1 kHz. With this library, it is possible to:
+``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The
+connection to FRANKA CONTROL is established via a standard Ethernet connection. The interface
+provides high-speed measurements, internal data of the robot and the gripper. Further, it accepts
+parameters and control values at an update frequency of up to 1 kHz. With this library, it is
+possible to:
 
 * Retrieve information about the current state of FRANKA, e.g. current end effector pose, joint
   angles or the gripper status.
@@ -46,8 +47,8 @@ The **ROS support** allows interfacing FRANKA via your own ROS-nodes and make us
 ecosystem. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
 kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
 
-The **Research Interface (RI)** provides feedback-data and enables controlling the robot. By sending
-real-time control values you can execute a custom robot behavior:
+The **Research Interface (RI)** provides feedback-data and enables controlling the robot.
+By sending real-time control values you can execute a custom robot behavior:
 
  * Joint torque control.
  * Desired joint position or velocity command.
