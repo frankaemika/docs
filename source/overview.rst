@@ -12,13 +12,10 @@ Overview
     :alt: alternate text
     :figclass: align-center
 
-
     Schematic overview of the components.
 
 The FRANKA research interface allows a fast and direct low-level bidirectional connection to
-the FRANKA EMIKA arm and gripper.
-
-The **Research Interface (RI)** provides feedback-data and enables controlling the robot.
+the FRANKA arm and gripper. It provides feedback-data and enables controlling the robot.
 By sending real-time control values you can execute a custom robot behavior:
 
  * Joint torque control.
@@ -34,8 +31,8 @@ Further, you get access to the following feedback data:
 
 .. important::
 
-    While the RI is active you have full control of the robot, but you cannot use FRANKA DESK.
-    This means that you cannot use APPS and the RI at the same time.
+    While the research interface is active you have full control of the robot, but you cannot use
+    FRANKA DESK. This means that you cannot use APPS and the RI at the same time.
 
 
 It consists of two components::
@@ -67,10 +64,9 @@ possible to:
 
 .. important::
 
-    Data is sent to FRANKA over the network with a frequency of 1 kHz. Therefore, a good network
+    Data is sent over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-``franka_ros`` allows interfacing FRANKA via your own ROS-nodes and make use of the entire ROS
-ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes with a URDF model of FRANKA, which allows visualization (e.g. RViz) and
+``franka_ros`` allows to interface FRANKA via your own ROS-nodes and make use of the entire ROS
+ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes with a URDF model of the FRANKA arm and gripper, which allows visualization (e.g. RViz) and
 kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
-
