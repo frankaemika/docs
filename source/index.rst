@@ -9,7 +9,7 @@ improvements.
 
 These components are:
 
- * ``libfranka``, a C++ library that provides low-level control of the `FRANKA robot arm and gripper
+ * ``libfranka``, a C++ library that provides low-level control of the `FRANKA ARM and gripper
    <https://franka.de>`_. Its source code is available at https://github.com/frankaemika/libfranka.
  * `ROS packages <http://wiki.ros.org/franka>`_, including ROS Control and MoveIt! integration.
    The source code is available at https://github.com/frankaemika/franka_ros.

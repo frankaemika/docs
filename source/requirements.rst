@@ -26,7 +26,6 @@ performance of your controller or make it unusable.
 	To minimize the delay, use the LAN port of FRANKA CONTROL, not the LAN port in the base of the
 	FRANKA ARM.
 
-
 In order to get a good performance of the robot, it must be guaranteed, that the sum of the
 following chronometries is less than 1 ms.
 

@@ -3,31 +3,35 @@
 Installation instructions
 =========================
 
+In this chapter, the steps to set up a realtime kernel on Ubuntu as well as building ``libfranka``
+and ``franka_ros`` are described. 
+
+
 Setting up a realtime kernel
 ----------------------------
 
-In order to control your FRANKA using ``libfranka``, your controller program must run with
-`real-time priority` under a ``PREEMPT_RT`` kernel. Therefore, you must first apply the
-``PREEMPT_RT`` patch to a matching Linux kernel and then build and install the patched kernel.
-The procedure for patching the kernel and creating an installation package in the following online
-resources:
+In order to control the FRANKA ARM using ``libfranka``, the controller program on the workstation
+PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. Therefore, the ``PREEMPT_RT``
+patch needs to be applied to a matching Linux kernel. Afterwards, the patched Linux kernel is
+built and installed on the workstation PC.
+The procedure of patching a kernel and creating an installation package is described by the
+following online resources:
 
  * `Installing a Kernel with the RT Patch
    <http://home.gwu.edu/~jcmarsh/wiki/pmwiki.php%3Fn=Notes.RTPatch.html>`_
- * `HOWTO setup Linux with PREEMPT_RT properly
+ * `Howto setup Linux with PREEMPT_RT properly
    <https://wiki.linuxfoundation.org/realtime/documentation/howto/applications/preemptrt_setup>`_
 
 
 Allow user to set realtime permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-First, add a realtime group and add your user to it::
+After the RT-patched kernel is installed and running, a realtime group with the user controlling  the robot must be added to the group::
 
     sudo addgroup realtime
     sudo adduser $(whoami) realtime
 
 
-Then, edit  ``/etc/security/limits.conf`` and add::
+Afterwards, the limits for the realtime group are added to ``/etc/security/limits.conf``::
 
     @realtime soft rtprio 99
     @realtime soft priority 99
@@ -37,22 +41,24 @@ Then, edit  ``/etc/security/limits.conf`` and add::
     @realtime hard memlock 102400
 
 
+
 Building from source
 --------------------
 
-While it should in principle be possible to build ``libfranka`` and the FRANKA ROS components on
-different operating systems and distributions, official support is currently only provided for
+While it should in principle be possible to build ``libfranka`` and the ``franka_ros`` components
+on different operating systems and distributions, official support is currently only provided for
 Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`.
 
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
 
-Install the necessary dependencies for building the library and API documentation from Ubuntu's
-package manager::
+Building ``libfranka`` and the API documentation requires to install some dependencies from
+Ubuntu's package manager::
 
     sudo apt install build-essential cmake doxygen git libpoco-dev
 
-Clone the ``libfranka`` source code from `GitHub <https://github.com/frankaemika/libfranka>`__::
+Then, the source code is acquired by cloning ``libfranka`` from
+`GitHub <https://github.com/frankaemika/libfranka>`__::
 
     git clone --recursive https://github.com/frankaemika/libfranka
     cd libfranka
@@ -65,18 +71,25 @@ In the source directory, create a build directory and run CMake::
     cmake --build .
 
 
+If a system-wide installation is desired, execute the following instructions::
+
+    cd libfranka/build
+    cpack
+    sudo dpkg -i libfranka-0.0.1-amd64.deb
+
+
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you have `set up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, download the
-FRANKA ROS packages from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put them into
-your Catkin workspace::
+After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, download
+``franka_ros`` from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put them into
+the Catkin workspace::
 
     cd catkin_ws/src
     git clone --recursive https://github.com/frankaemika/franka_ros
 
-In your Catkin workspace, execute ``catkin_make`` with the path to the
-``libfranka`` build directory::
+In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfranka`` build
+directory::
 
     cd catkin_ws
     catkin_make -D Franka_DIR=/path/to/libfranka/build

@@ -15,7 +15,7 @@ Overview
     Schematic overview of the components.
 
 The FRANKA research interface allows a fast and direct low-level bidirectional connection to
-the FRANKA arm and gripper. It provides feedback-data and enables controlling the robot.
+the FRANKA ARM and gripper. It provides feedback-data and enables controlling the robot.
 By sending real-time control values you can execute a custom robot behavior:
 
  * Joint torque control.
@@ -68,5 +68,6 @@ possible to:
     connection is vital!
 
 ``franka_ros`` allows to interface FRANKA via your own ROS-nodes and make use of the entire ROS
-ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes with a URDF model of the FRANKA arm and gripper, which allows visualization (e.g. RViz) and
+ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes
+with a URDF model of the FRANKA ARM and gripper, which allows visualization (e.g. RViz) and
 kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
