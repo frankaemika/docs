@@ -81,7 +81,7 @@ Example output:
 .. hint::
 
     If an error occurs at this point, do the :ref:`ping test <troubleshooting_robot_not_reachable>`
-    and ensure that FRANKA's brakes are opened. The breaks can be opened the from FRANKA DESK at
+    and ensure that FRANKA's brakes are opened. The brakes can be opened the from FRANKA DESK at
     https://<franka-control-ip>.
 
 
@@ -141,8 +141,9 @@ Moving the robot
 ^^^^^^^^^^^^^^^^
 
 The robot can be moved, by executing one of many examples provided with ``libfranka``, like the
-``generate_joint_velocity_motion`` example. As already mentioned before, the brakes and the user
-stop must be released before moving, otherwise an error is printed. This example will move the
+``generate_joint_velocity_motion`` example. As already mentioned before, the
+:ref:`brakes <troubleshooting_open_brakes>` and the user stop must be released before moving,
+otherwise an error is printed. This example will move the
 last four joints.
 
 After verifying, that the robot has enough free space to move without colliding, execute the
@@ -189,7 +190,8 @@ the following:
 
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
-FRANKA, at 1 kHz frequency. In the above example. the desired velocity is returned
+FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
+state is provided. In the above example. the desired velocity is returned
 ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion. When the motion is finished
 ``franka::Stop`` is returned instead. This example uses the default `Joint Impedance` controller,
 which offers the best performance (and can be used for Cartesian motions as well).
@@ -200,7 +202,8 @@ which offers the best performance (and can be used for Cartesian motions as well
     influence the timings.
 
 For writing a controller, the ``franka::Robot::control`` function is used as well. The following
-example shows a **simple controller** commanding zero torque for each joint:
+example shows a **simple controller** commanding zero torque for each joint. The gravity is
+compensated by the robot.
 
 .. code-block:: c++
 

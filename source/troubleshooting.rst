@@ -19,6 +19,10 @@ Robot is not reachable
 ----------------------
 
 
+.. _troubleshooting_open_brake:
+
+Open the brakes of the robot
+----------------------------
 
 
 .. _network-bandwidth-delay-test:
