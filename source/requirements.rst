@@ -27,7 +27,7 @@ performance of your controller or make it unusable.
 	FRANKA ARM.
 
 In order to get a good performance of the robot, it must be guaranteed, that the sum of the
-following chronometries is less than 1 ms.
+following time measurements is less than 1 ms.
 
 The time,
  * it takes to send the current measurements from FRANKA CONTROL to the workstation PC.
