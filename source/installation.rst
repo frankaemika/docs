@@ -75,7 +75,7 @@ If a system-wide installation is desired, execute the following instructions::
 
     cd libfranka/build
     cpack
-    sudo dpkg -i libfranka-0.0.1-amd64.deb
+    sudo dpkg -i libfranka-*.deb
 
 
 Building the ROS packages
@@ -89,7 +89,8 @@ the Catkin workspace::
     git clone --recursive https://github.com/frankaemika/franka_ros
 
 In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfranka`` build
-directory::
+directory. If a system wide installation of ``libfranka`` is done, specifying``Franka_DIR`` is not
+necessary.
 
     cd catkin_ws
     catkin_make -D Franka_DIR=/path/to/libfranka/build
