@@ -18,11 +18,22 @@ Please check the following things:
 Robot is not reachable
 ----------------------
 
+Try to ping the robot using the following command:
+
+	ping <franka-control-ip>
+
+If this command fails, the robot is not properly connected to the network, or the IP was not
+correctly assigned during the setup phase. Please set up the network according to documents, sent
+with the robot.
+
 
 .. _troubleshooting_open_brake:
 
 Open the brakes of the robot
 ----------------------------
+
+The brakes can be opened from the from FRANKA DESK at https://<franka-control-ip>. Further
+information are provided by the documents, shipped with the robot.
 
 
 .. _network-bandwidth-delay-test:
@@ -48,7 +59,3 @@ Example output::
 	--- <franka-control-ip> ping statistics ---
 	10000 packets transmitted, 10000 received, 0% packet loss, time 10057ms
 	rtt min/avg/max/mdev = 0.147/0.240/0.304/0.041 ms
-
-
-.. todo::
- Extend Troubleshooting section.
