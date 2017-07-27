@@ -152,14 +152,13 @@ command from the ``libfranka`` build directory:
     ./examples/generate_joint_velocity_motion <franka-control-ip>
 
 The robot is moved by a `controller` which specifies the desired torque on each joint. It is
-possible to choose between several built in `controllers`. Alternatively, a self written controller
-can be provided. Additionally, the `controllers` can be fed with desired joint values :math:`q_d`
-by `motion generators`.
+possible to use a built in `controller`. Alternatively, a self written controller can be provided.
+Additionally, the `controller` can be fed with desired joint values :math:`q_d` by `motion
+generators`.
 
 
-The provided internal controllers are:
+The provided internal controller is:
 
-* Cartesian impedance
 * Joint impedance
 
 
