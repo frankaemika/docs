@@ -42,7 +42,7 @@ must always be connected to the LAN port of FRANKA CONTROL, not to the LAN port 
 Verifying the connection
 ------------------------
 
-In order to verify, that everything is correctly set up and it is possible to use the research
+In order to verify that everything is correctly set up and it is possible to use the research
 interface, run the ``echo_robot_state`` example from ``libfranka``.
 
 Change to the build directory of ``libfranka`` and execute the example:
@@ -140,23 +140,30 @@ callback. Returning ``false`` in the callback stops the loop. In the following, 
 Moving the robot
 ^^^^^^^^^^^^^^^^
 
-The robot can be moved, by executing one of many examples provided with ``libfranka``, like the
+The robot can be moved by executing one of many examples provided with ``libfranka``, like the
 ``generate_joint_velocity_motion`` example. As already mentioned before, the
 :ref:`brakes <troubleshooting_open_brakes>` and the user stop must be released before moving,
-otherwise an error is printed. This example will move the
-last four joints.
-
-After verifying, that the robot has enough free space to move without colliding, execute the
-following command from the build directory:
+otherwise an error is printed. This example will move the last four joints for +/-0.2 RAD. Verify
+that the robot has enough free space to move without colliding. Then, execute the following
+command from the ``libfranka`` build directory:
 
 .. code-block:: shell
 
     ./examples/generate_joint_velocity_motion <franka-control-ip>
 
 The robot is moved by a `controller` which specifies the desired torque on each joint. It is
-possible to choose between four built in `controllers`. Further, a self written controller
+possible to choose between several built in `controllers`. Alternatively, a self written controller
 can be provided. Additionally, the `controllers` can be fed with desired joint values :math:`q_d`
-by `motion generators`. For building a motion generator, one of the four interfaces can be used:
+by `motion generators`.
+
+
+The provided internal controllers are:
+
+* Cartesian impedance
+* Joint impedance
+
+
+For building a motion generator, one of the four interfaces can be used:
 
 * Joint position
 * Joint velocity
