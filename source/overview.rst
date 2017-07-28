@@ -1,12 +1,6 @@
 Overview
 ========
 
-.. todo::
-
-  Update overview graphics, add gripper (replace FRANKA ARM label),
-  Replace FCI  with Research Interface,
-  Remove the Robot Model Library in the figure / add it to libfranka
-
 .. figure:: _static/overview.png
     :align: center
     :alt: alternate text
