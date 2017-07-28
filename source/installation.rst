@@ -25,13 +25,15 @@ following online resources:
 
 Allow user to set realtime permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-After the RT-patched kernel is installed and running, a realtime group with the user controlling  the robot must be added to the group::
+
+After the RT-patched kernel is installed and running, add a group named `realtime` and 
+add to it the user controlling the robot::
 
     sudo addgroup realtime
     sudo adduser $(whoami) realtime
 
 
-Afterwards, the limits for the realtime group are added to ``/etc/security/limits.conf``::
+Afterwards, the limits for the `realtime` group are added to ``/etc/security/limits.conf``::
 
     @realtime soft rtprio 99
     @realtime soft priority 99
@@ -52,12 +54,12 @@ Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`.
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
 
-Building ``libfranka`` and the API documentation requires to install some dependencies from
+To build ``libfranka`` and the API documentation install the following dependencies from
 Ubuntu's package manager::
 
     sudo apt install build-essential cmake doxygen git libpoco-dev
 
-Then, the source code is acquired by cloning ``libfranka`` from
+Then, download the source code by cloning ``libfranka`` from
 `GitHub <https://github.com/frankaemika/libfranka>`__::
 
     git clone --recursive https://github.com/frankaemika/libfranka
@@ -82,14 +84,14 @@ Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, download
-``franka_ros`` from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put them into
+``franka_ros`` from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put it into
 the Catkin workspace::
 
     cd catkin_ws/src
     git clone --recursive https://github.com/frankaemika/franka_ros
 
 In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfranka`` build
-directory. If a system wide installation of ``libfranka`` is done, specifying``Franka_DIR`` is not
+directory. If you installed ``libfranka`` system wide, specifying``Franka_DIR`` is not
 necessary.
 
     cd catkin_ws

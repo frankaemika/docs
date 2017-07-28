@@ -48,4 +48,4 @@ stop the robot.
 
 .. hint::
 	Measure the performance of your network (see :ref:`network-bandwidth-delay-test`) and the
-	algorithm in beforehand.
+	algorithm beforehand.

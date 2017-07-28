@@ -50,7 +50,7 @@ possible to:
   joint/Cartesian stiffness.
 * Calculate forward kinematics and other model properties from the current robot state.
 * Control the FRANKA gripper.
-* Robot model library:
+* Use the robot model library which provides the following:
 
   - Forward kinematics of all joints.
   - Jacobian matrix of all joints.
@@ -61,7 +61,7 @@ possible to:
     Data is sent over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-``franka_ros`` allows to interface FRANKA via your own ROS-nodes and make use of the entire ROS
-ecosystem. The functionality is equivalent to the functionality of ``libfranka``. It also comes
-with a URDF model of the FRANKA ARM and gripper, which allows visualization (e.g. RViz) and
-kinematic simulations. Examples are provided as well as **MoveIt!** integration is done.
+``franka_ros`` connects FRANKA with the entire ROS ecosystem. It provides functionality equivalent to 
+``libfranka`` inside of ROS. Additionally, it includes a URDF model of the FRANKA ARM and gripper, 
+which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!** integration makes it 
+easy to move the robot, and examples show how to control FRANKA from ROS.

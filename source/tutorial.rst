@@ -20,7 +20,7 @@ Always check the following things before turning on the robot.
    when performing fast motions or abrupt stops.
 
 .. caution::
-   FRANKA's built-in controllers only support tabletop mounting, i.e. assumes that FRANKA is
+   FRANKA's built-in controllers only support tabletop mounting, i.e. they assume that FRANKA is
    mounted perpendicular to the ground! Other mountings will **void your warranty**, decrease the
    performance of the robot and **might damage the robot**!
 
@@ -34,9 +34,9 @@ Always check the following things before turning on the robot.
 
 
 In the setup process, described in the manual which is shipped with Franka, the IP of the FRANKA
-CONTROL LAN port is set. In the following, the **FRANAK CONTROL IP is referred as
+CONTROL LAN port is set. In the following, the **FRANKA CONTROL IP is referred as
 <franka-control-ip>.** The workstation PC, which commands the robot using the research interface,
-must always be connected to the LAN port of FRANKA CONTROL, not to the LAN port at the robot base.
+must always be connected to it through the LAN port of FRANKA CONTROL, not to through the LAN port at the robot base.
 
 
 Verifying the connection
@@ -143,7 +143,7 @@ Moving the robot
 The robot can be moved by executing one of many examples provided with ``libfranka``, like the
 ``generate_joint_velocity_motion`` example. As already mentioned before, the
 :ref:`brakes <troubleshooting_open_brakes>` and the user stop must be released before moving,
-otherwise an error is printed. This example will move the last four joints for +/-0.2 RAD. Verify
+otherwise an error is printed. This example will move the last four joints by +/-12 degrees. Verify
 that the robot has enough free space to move without colliding. Then, execute the following
 command from the ``libfranka`` build directory:
 
@@ -197,10 +197,9 @@ the following:
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
 FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
-state is provided. In the above example. the desired velocity is returned
+state is provided. In the above example, the desired velocity is returned
 ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion. When the motion is finished
-``franka::Stop`` is returned instead. This example uses the default `Joint Impedance` controller,
-which offers the best performance (and can be used for Cartesian motions as well).
+``franka::Stop`` is returned instead. This example uses the internal `Joint Impedance` controller.
 
 .. caution::
 
