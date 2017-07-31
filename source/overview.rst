@@ -9,8 +9,8 @@ Overview
     Schematic overview of the components.
 
 The FRANKA research interface allows a fast and direct low-level bidirectional connection to
-the FRANKA ARM and gripper. It provides feedback-data and enables controlling the robot.
-By sending real-time control values you can execute a custom robot behavior:
+the FRANKA ARM and gripper. It provides the current status of the robot and enables direct control
+of the robot. You can execute custom trajectories by sending real-time control values:
 
  * Joint torque control.
  * Desired joint position or velocity command.
@@ -18,7 +18,7 @@ By sending real-time control values you can execute a custom robot behavior:
 
 Further, you get access to the following feedback data:
 
- * Measured joint data, like the position, velocity and torque.
+ * Measured joint data, like the position, velocity, and torque.
  * Low-level desired joint goals.
  * Estimation of externally applied torques and wrenches.
  * Various collision and contact information.
@@ -26,10 +26,10 @@ Further, you get access to the following feedback data:
 .. important::
 
     While the research interface is active you have full control of the robot, but you cannot use
-    FRANKA DESK. This means that you cannot use APPS and the RI at the same time.
+    FRANKA DESK. This means that you cannot use APPS and the research interface at the same time.
 
 
-It consists of two components::
+It consists of two components:
 
 * libfranka
 * franka_ros (ROS support)

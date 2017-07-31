@@ -23,8 +23,8 @@ Try to ping the robot using the following command:
 	ping <franka-control-ip>
 
 If this command fails, the robot is not properly connected to the network, or the IP was not
-correctly assigned during the setup phase. Please set up the network according to documents, sent
-with the robot.
+correctly assigned during the setup phase. Please set up the network according to the documents
+sent with the robot.
 
 
 .. _troubleshooting_open_brake:
@@ -32,8 +32,8 @@ with the robot.
 Open the brakes of the robot
 ----------------------------
 
-The brakes can be opened from the from FRANKA DESK at https://<franka-control-ip>. Further
-information are provided by the documents, shipped with the robot.
+The brakes can be opened from FRANKA DESK at https://<franka-control-ip>. Further information is
+provided by the documents sent with the robot.
 
 
 .. _network-bandwidth-delay-test:
@@ -41,7 +41,8 @@ information are provided by the documents, shipped with the robot.
 Network bandwidth, delay and jitter test
 ----------------------------------------
 
-The following command will simulate an equivalent network load::
+The following command will simulate a network load which is equivalent to a scenario where the
+robot is controlled::
 
 	sudo ping <franka-control-ip> -i 0.001 -D -c 10000 -s 1200
 
@@ -58,4 +59,11 @@ Example output::
 
 	--- <franka-control-ip> ping statistics ---
 	10000 packets transmitted, 10000 received, 0% packet loss, time 10057ms
-	rtt min/avg/max/mdev = 0.147/0.240/0.304/0.041 ms
+	rtt min/avg/max/mdev = 0.147/0.240/0.502/0.038 ms
+
+The example result show an average round-trip time of 0.24 ms and a maximum round-trip
+time of 0.5 ms. The standard deviation `mdev` is around 0.04 ms. As explained in the
+:ref:`network requirements section<requirement-network>` it must be guaranteed that the sum of the
+round-trip time and the execution time of the motion generator or control loop is **less than 1 ms
+**. If this constraint is violated for a cycle, the received packet is dropped by the research
+interface.

@@ -7,8 +7,8 @@ Getting started
 
 
 After :doc:`setting up the required software <installation>`, the robot needs to be installed and
-tested. **Please read - in beforehand - through the documents shipped with the robot and follow
-the set-up instructions!**
+tested. **Please read through the documents shipped with the robot and follow the setup
+instructions before continuing any further!**
 
 
 Turning on the robot
@@ -80,9 +80,9 @@ Example output:
 
 .. hint::
 
-    If an error occurs at this point, do the :ref:`ping test <troubleshooting_robot_not_reachable>`
-    and ensure that FRANKA's brakes are opened. The brakes can be opened the from FRANKA DESK at
-    https://<franka-control-ip>.
+    If an error occurs at this point, perform the
+    :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that FRANKA's brakes are
+    opened. The brakes can be opened the from FRANKA DESK at https://<franka-control-ip>.
 
 
 Getting started with libfranka
@@ -103,7 +103,7 @@ robot will be established when the object is created:
     franka::Robot robot("<franka-control-ip>");
 
 The address can be passed either as a hostname or an IP address. In case of any error, either due
-to networking or conflicting library version, an exception of the ``franka::Exception`` type will
+to networking or conflicting library version, an exception of type ``franka::Exception`` will
 be thrown. When using several FRANKAs at the same time, simply create several objects with
 appropriate IP addresses.
 
@@ -171,8 +171,7 @@ For building a motion generator, one of the four interfaces can be used:
 
 
 The motions are executed by providing a callback to the ``franka::Robot::control`` function.
-An excerpt from ``examples/generate_joint_velocity_motion.cpp`` of an example usage is shown in
-the following:
+An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the following:
 
 .. code-block:: c++
 
@@ -197,7 +196,7 @@ the following:
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
 FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
-state is provided. In the above example, the desired velocity is returned
+state is provided. In the above example, the desired velocity is returned as
 ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion. When the motion is finished
 ``franka::Stop`` is returned instead. This example uses the internal `Joint Impedance` controller.
 

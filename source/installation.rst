@@ -3,18 +3,16 @@
 Installation instructions
 =========================
 
-In this chapter, the steps to set up a realtime kernel on Ubuntu as well as building ``libfranka``
-and ``franka_ros`` are described. 
+In this chapter, the steps to set up a realtime kernel on Ubuntu as well as building
+``libfranka`` and ``franka_ros`` are described.
 
 
 Setting up a realtime kernel
 ----------------------------
 
 In order to control the FRANKA ARM using ``libfranka``, the controller program on the workstation
-PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. Therefore, the ``PREEMPT_RT``
-patch needs to be applied to a matching Linux kernel. Afterwards, the patched Linux kernel is
-built and installed on the workstation PC.
-The procedure of patching a kernel and creating an installation package is described by the
+PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. The procedure of patching a
+kernel to support ``PREEMPT_RT`` and creating an installation package is described by the
 following online resources:
 
  * `Installing a Kernel with the RT Patch
@@ -26,14 +24,14 @@ following online resources:
 Allow user to set realtime permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After the RT-patched kernel is installed and running, add a group named `realtime` and 
+After the ``PREEMPT_RT`` kernel is installed and running, add a group named `realtime` and
 add to it the user controlling the robot::
 
     sudo addgroup realtime
     sudo adduser $(whoami) realtime
 
 
-Afterwards, the limits for the `realtime` group are added to ``/etc/security/limits.conf``::
+Afterwards, add the limits to the `realtime` group in ``/etc/security/limits.conf``::
 
     @realtime soft rtprio 99
     @realtime soft priority 99
@@ -73,7 +71,7 @@ In the source directory, create a build directory and run CMake::
     cmake --build .
 
 
-If a system-wide installation is desired, execute the following instructions::
+If a systemwide installation is desired, execute the following instructions::
 
     cd libfranka/build
     cpack
@@ -91,7 +89,7 @@ the Catkin workspace::
     git clone --recursive https://github.com/frankaemika/franka_ros
 
 In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfranka`` build
-directory. If you installed ``libfranka`` system wide, specifying``Franka_DIR`` is not
+directory. If you installed ``libfranka`` systemwide, specifying``Franka_DIR`` is not
 necessary.
 
     cd catkin_ws

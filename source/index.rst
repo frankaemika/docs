@@ -17,7 +17,7 @@ These components are:
 The source code of this documentation is also `available online
 <https://github.com/frankaemika/research-interface-docs>`_.
 
-Before you start using the Research Interface, please read the chapter :doc:`requirements`.
+Before you start using the research interface, please read the chapter :doc:`requirements`.
 
 .. toctree::
    :maxdepth: 2
