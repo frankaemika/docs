@@ -156,7 +156,7 @@ possible to use a built in `controller`. Alternatively, a self written controlle
 Additionally, the `controller` can be fed with desired values by `motion generators`.
 
 
-The provided internal controller is:
+Currently the following internal controllers are available:
 
 * Joint impedance
 
