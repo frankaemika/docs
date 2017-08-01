@@ -25,7 +25,7 @@ Allow user to set realtime permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After the ``PREEMPT_RT`` kernel is installed and running, add a group named `realtime` and
-add to it the user controlling the robot::
+add the user controlling the robot::
 
     sudo addgroup realtime
     sudo adduser $(whoami) realtime
