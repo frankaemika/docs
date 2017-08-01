@@ -27,8 +27,8 @@ performance of your controller or make it unusable.
 	To minimize the delay, use the LAN port of FRANKA CONTROL, not the LAN port in the base of the
 	FRANKA ARM.
 
-In order to get a good performance of the robot, it must be guaranteed that the sum of the
-following time measurements is less than 1 ms:
+To control the robot, it must be guaranteed that the sum of the following time
+measurements is less than 1 ms:
 
  * Round-trip time between the workstation PC and FRANKA CONTROL.
  * Execution time of the motion generator or control loop.
@@ -38,8 +38,8 @@ following time measurements is less than 1 ms:
 	research interface. After 50 dropped packets, the robot stops.
 
 If a **motion generator command packet is dropped**, the robot takes the previous waypoints and
-performs a linear extrapolation (keep acceleration constant and integrate) for the missed timestep. If
-more than 50 packets are lost or dropped in a row, the robot stops.
+performs a linear extrapolation (keep acceleration constant and integrate) for the missed
+timestep. If more than 50 packets are lost or dropped in a row, the robot stops.
 
 If a **controller command packet is dropped**, the research interface will reuse the torques of
 the last successful received packet. Again, more than 50 in a row lost or dropped packets will

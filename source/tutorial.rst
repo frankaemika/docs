@@ -11,10 +11,10 @@ tested. **Please read through the documents shipped with the robot and follow th
 instructions before continuing any further!**
 
 
-Turning on the robot
---------------------
+Powering on the robot
+---------------------
 
-Always check the following things before turning on the robot.
+Always check the following things before powering on the robot.
 
 1. Make sure that the FRANKA ARM has been mounted on a stable base and cannot topple over, even
    when performing fast motions or abrupt stops.
@@ -142,7 +142,7 @@ Moving the robot
 
 The robot can be moved by executing one of many examples provided with ``libfranka``, like the
 ``generate_joint_velocity_motion`` example. As already mentioned before, the
-:ref:`brakes <troubleshooting_open_brakes>` and the user stop must be released before moving,
+:ref:`brakes <troubleshooting_open_brake>` and the user stop must be released before moving,
 otherwise an error is printed. This example will move the last four joints by +/-12 degrees. Verify
 that the robot has enough free space to move without colliding. Then, execute the following
 command from the ``libfranka`` build directory:
@@ -153,8 +153,7 @@ command from the ``libfranka`` build directory:
 
 The robot is moved by a `controller` which specifies the desired torque on each joint. It is
 possible to use a built in `controller`. Alternatively, a self written controller can be provided.
-Additionally, the `controller` can be fed with desired joint values :math:`q_d` by `motion
-generators`.
+Additionally, the `controller` can be fed with desired values by `motion generators`.
 
 
 The provided internal controller is:

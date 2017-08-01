@@ -92,5 +92,7 @@ In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfrank
 directory. If you installed ``libfranka`` systemwide, specifying``Franka_DIR`` is not
 necessary.
 
+.. code-block:: shell
+
     cd catkin_ws
     catkin_make -D Franka_DIR=/path/to/libfranka/build
