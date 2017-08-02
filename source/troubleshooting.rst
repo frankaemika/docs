@@ -20,7 +20,9 @@ Robot is not reachable
 
 Try to ping the robot using the following command:
 
-	ping <franka-control-ip>
+.. code-block:: shell
+
+    ping <franka-control-ip>
 
 If this command fails, the robot is not properly connected to the network, or the IP was not
 correctly assigned during the setup phase. Please set up the network according to the documents
