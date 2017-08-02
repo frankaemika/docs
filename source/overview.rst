@@ -16,7 +16,7 @@ of the robot. You can execute custom trajectories by sending real-time control v
  * Desired joint position or velocity command.
  * Desired Cartesian position or velocity command.
 
-Further, you get access to the following feedback data:
+Furthermore, you get access to the following feedback data:
 
  * Measured joint data, like the position, velocity, and torque.
  * Low-level desired joint goals.
@@ -53,7 +53,6 @@ possible to:
 * Use the robot model library which provides the following:
 
   - Forward kinematics of all joints.
-  - Jacobian matrix of all joints.
   - Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
 .. important::

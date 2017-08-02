@@ -3,12 +3,12 @@
 Installation instructions
 =========================
 
-In this chapter, the steps to set up a realtime kernel on Ubuntu as well as building
+In this chapter, the steps to set up a real-time kernel on Ubuntu as well as building
 ``libfranka`` and ``franka_ros`` are described.
 
 
-Setting up a realtime kernel
-----------------------------
+Setting up a real-time kernel
+-----------------------------
 
 In order to control the FRANKA ARM using ``libfranka``, the controller program on the workstation
 PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. The procedure of patching a
@@ -21,8 +21,8 @@ following online resources:
    <https://wiki.linuxfoundation.org/realtime/documentation/howto/applications/preemptrt_setup>`_
 
 
-Allow user to set realtime permissions for its processes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Allow user to set real-time permissions for its processes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After the ``PREEMPT_RT`` kernel is installed and running, add a group named `realtime` and
 add the user controlling the robot::
