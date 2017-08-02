@@ -1,11 +1,6 @@
 Getting started
 ===============
 
-.. todo::
-
-  Add information about the emergency stop
-
-
 After :doc:`setting up the required software <installation>`, the robot needs to be installed and
 tested. **Please read through the documents shipped with the robot and follow the setup
 instructions before continuing any further!**

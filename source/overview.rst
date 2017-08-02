@@ -53,6 +53,7 @@ possible to:
 * Use the robot model library which provides the following:
 
   - Forward kinematics of all joints.
+  - Jacobian matrix of all joints.
   - Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
 .. important::
