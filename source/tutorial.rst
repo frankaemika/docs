@@ -31,7 +31,8 @@ Always check the following things before powering on the robot.
 In the setup process, described in the manual which is shipped with Franka, the IP of the FRANKA
 CONTROL LAN port is set. In the following, the **FRANKA CONTROL IP is referred as
 <franka-control-ip>.** The workstation PC, which commands the robot using the research interface,
-must always be connected to it through the LAN port of FRANKA CONTROL, not to through the LAN port at the robot base.
+must always be connected to it through the LAN port of FRANKA CONTROL, not to through the LAN port
+at the robot base.
 
 
 Verifying the connection

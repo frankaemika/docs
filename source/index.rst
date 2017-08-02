@@ -19,8 +19,8 @@ The source code of this documentation is also `available online
 
 
 .. important::
-	Before you start using the research interface, please read through the documents shipped with
-	the robot and the :doc:`minimum system and network requirements <requirements>` chapter.
+    Before you start using the research interface, please read through the documents shipped with
+    the robot and the :doc:`minimum system and network requirements <requirements>` chapter.
 
 
 .. toctree::

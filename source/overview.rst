@@ -61,7 +61,7 @@ possible to:
     Data is sent over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-``franka_ros`` connects FRANKA with the entire ROS ecosystem. It provides functionality equivalent to 
-``libfranka`` inside of ROS. Additionally, it includes a URDF model of the FRANKA ARM and gripper, 
-which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!** integration makes it 
-easy to move the robot, and examples show how to control FRANKA from ROS.
+``franka_ros`` connects FRANKA with the entire ROS ecosystem. It provides functionality equivalent
+to ``libfranka`` inside of ROS. Additionally, it includes a URDF model of the FRANKA ARM and
+gripper, which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!**
+integration makes it easy to move the robot, and examples show how to control FRANKA from ROS.
