@@ -95,4 +95,4 @@ necessary.
 .. code-block:: shell
 
     cd catkin_ws
-    catkin_make -D Franka_DIR=/path/to/libfranka/build
+    catkin_make -DFranka_DIR=/path/to/libfranka/build
