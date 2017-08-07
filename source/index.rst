@@ -32,6 +32,7 @@ The source code of this documentation is also `available online
    installation
    tutorial
    troubleshooting
+   ros_introduction
 
 Indices and tables
 ==================
