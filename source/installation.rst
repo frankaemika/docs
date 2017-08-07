@@ -77,22 +77,26 @@ If a systemwide installation is desired, execute the following instructions::
     cpack
     sudo dpkg -i libfranka-*.deb
 
+.. _installing_ros:
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, download
-``franka_ros`` from `GitHub <https://github.com/frankaemika/franka_ros>`__ and put it into
-the Catkin workspace::
-
-    cd catkin_ws/src
-    git clone --recursive https://github.com/frankaemika/franka_ros
-
-In the Catkin workspace, execute ``catkin_make`` with the path to the ``libfranka`` build
-directory. If you installed ``libfranka`` systemwide, specifying``Franka_DIR`` is not
-necessary.
+After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_ create a catkin
+workspace in a directory of your choice and build it. You can do that by running
 
 .. code-block:: shell
 
-    cd catkin_ws
-    catkin_make -DFranka_DIR=/path/to/libfranka/build
+    cd /path/to/desired/folder
+    mkdir -p catkin_ws/src
+    cd catkin_ws/src
+    source  /opt/ros/kinetic/setup.sh
+    catkin_init_workspace
+    git clone --recursive https://github.com/frankaemika/franka_ros
+    cd ..
+    catkin_make -DFranka_DIR:PATH=/path/to/libfranka/build
+    source devel/setup.sh
+
+
+If you installed ``libfranka`` systemwide, specifying``Franka_DIR`` is not
+necessary.
