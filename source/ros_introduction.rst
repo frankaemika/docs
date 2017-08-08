@@ -55,6 +55,7 @@ You can launch the ``franka_gripper_node`` with
     roslaunch franka_gripper franka_gripper.launch robot_ip:=<your_robot_ip>
       arm_id:=<your_robot_namespace>
 
+.. _franka_hw:
 
 franka_hw
 ---------
@@ -62,17 +63,17 @@ This package contains the hardware abstraction of the FRANKA ARM for the ROS con
 based on the ``libfranka`` API. The hardware class ``franka_hw::FrankaHW`` is implemented in this
 package offering the following interfaces for use in controllers:
 
- * ``hardware_interface::JointStateInterface`` .. reads joint states.
- * ``hardware_interface::PositionJointInterface`` .. commands joint positions and reads joint states
- * ``hardware_interface::VelocityJointInterface`` .. commands joint velociteis and reads joint
+ * ``hardware_interface::JointStateInterface``:  reads joint states.
+ * ``hardware_interface::PositionJointInterface``:  commands joint positions and reads joint states
+ * ``hardware_interface::VelocityJointInterface``:  commands joint velociteis and reads joint
    states.
- * ``hardware_interface::EffortJointInterface`` .. commands joint torques and reads joint states.
- * ``franka_hw::FrankaStateInterface`` .. reads the complete FRANKA robot state.
- * ``franka_hw::FrankaPoseCartesianInterface`` .. commands cartesian poses and reads the robot
+ * ``hardware_interface::EffortJointInterface``:  commands joint torques and reads joint states.
+ * ``franka_hw::FrankaStateInterface``:  reads the complete FRANKA robot state.
+ * ``franka_hw::FrankaPoseCartesianInterface``:  commands cartesian poses and reads the robot
    state.
- * ``franka_hw::FrankaVelocityCartesianInterface`` .. commands cartesian velocities and reads the
+ * ``franka_hw::FrankaVelocityCartesianInterface``:  commands cartesian velocities and reads the
    robot state.
- * ``franka_hw::FrankaModelInterface`` .. reads the dynamic and kinematic model of the robot.
+ * ``franka_hw::FrankaModelInterface``:  reads the dynamic and kinematic model of the robot.
 
 .. important::
 
@@ -192,11 +193,67 @@ the communication with the robot.
 
 Writing  your own controller
 ----------------------------
-All controllers from  :ref:`the example controllers package<example_controllers>` are implemented
-inheriting from the class ``controller_interface::MultiInterfaceController`` which allows to claim
-up to four interfaces for your controller and which we recommend to use. To write your own
-controller, your controller class must be exported correctly with ``pluginlib`` which requires
-adding
+All controllers from  :ref:`the example controllers package<example_controllers>` inherit from the
+class ``controller_interface::MultiInterfaceController`` which allows claiming up to four interfaces
+for your controller. The declaration of you class then looks like
+
+.. code-block:: c++
+
+    class NameOfYourControllerClass : controller_interface::MultiInterfaceController <
+                                  my_mandatory_first_interface,
+                                  my_possible_second_interface,
+                                  my_possible_third_interface,
+                                  my_possible_fourth_interface> {
+      bool init (hardware_interface::RobotHW* hw, ros::NodeHandle& nh);  // mandatory
+      void update (const ros::Time& time, const ros::Duration& period);  // mandatory
+      void starting (const ros::Time& time)   // optional
+      void stopping (const ros::Time& time);  // optional
+      ...                           
+    }
+
+
+The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
+
+.. important::
+    Note that the claimable combinations of commanding interfaces are restricted as it does not make
+    sense to e.g. command joint positions and Cartesian poses simultaneously. Read-only interfaces
+    like the JointStateInterface, the FrankaStateInterface or the FrankaModelInterface can always be
+    claimed and are not subject to restrictions.  
+    
+    
+Possible claims are
+
+ * all possible single interface claims
+ * EffortJointInterface + PositionJointInterface
+ * EffortJointInterface + VelocityJointInterface 
+ * EffortJointInterface + FrankaCartesianPoseInterface
+ * EffortJointInterface + FrankaCartesianVelocityInterface
+
+The idea behind offering the EffortJointInterface in combination with a motion generator interface
+is to expose the internal motion generators to the user. The answer to the motion generator commands
+can allways be read in the robot state one time step later. This can make sense e.g. in the case
+where you want to follow a Cartesian trajectory using your own joint torque controller. You would
+claim the combination EffortJointInterface + FrankaCartesianPoseInterface, stream your trajectory
+into in the FrankaCartesianPoseInterface and compute your torque commands based on the resulting
+desired joint pose (q_d) from the robot state. Doing that you would basically use the FRANKA
+built-in inverse kinematics instead of having to solve that on your own.
+
+To implement a fully functional controller you have to implement at least the inherited virtual
+functions ``init`` and ``update``. Initializing e.g. start poses should be done in ``starting`` as
+``starting`` is called when restarting the controller while ``init`` is called only once when
+loading the controller. The ``stopping`` method should contain shutdown related functionality
+if needed.
+
+.. important::
+
+    When commanding velocities do NOT command zeros in ``stopping`` as it might be called during
+    motion which is equivalent to commanding a jump in velocity leading to very high resulting
+    torques which can damage your hardware. Rather let the built-in stopping beahvior bring the
+    robot to rest in that case. 
+
+
+To run your own controller, your controller class must be exported correctly with ``pluginlib``
+which requires adding
 
 .. code-block:: c++
 
@@ -232,8 +289,8 @@ which is exported by adding
 
 
 to your package.xml. To run your controller you need to load at least a controller name in
-combination with a controller type to the parameter server. Additionally you can include all other
-parameters you need. An exemplary configuration.yaml file can look like:
+combination with a controller type to the ROS parameter server. Additionally you can include all
+other parameters you need. An exemplary configuration.yaml file can look like:
 
 .. code-block:: yaml
 
@@ -243,7 +300,7 @@ parameters you need. An exemplary configuration.yaml file can look like:
       # ..
 
 You can now start your controller using the ``controller_spawner`` node from ROS control or via the
-service calls offered by the ``hardare_manager``. Just make sure both the ``controller_spawner`` and
+service calls offered by the ``hardware_manager``. Just make sure both the ``controller_spawner`` and
 the ``franka_hw_node`` run in the same namespace. For more details see the controllers from the
 :ref:`franka_example_controllers package<example_controllers>` or the tutorials under
 `wiki.ros.org/ros_control/Tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
