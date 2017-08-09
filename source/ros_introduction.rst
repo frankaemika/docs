@@ -310,8 +310,8 @@ other parameters you need. An exemplary configuration.yaml file can look like:
       # ..
 
 You can now start your controller using the ``controller_spawner`` node from ROS control or via the
-service calls offered by the ``hardware_manager``. Just make sure both the ``controller_spawner`` and
-the ``franka_hw_node`` run in the same namespace. For more details see the controllers from the
+service calls offered by the ``hardware_manager``. Just make sure both the ``controller_spawner``
+and the ``franka_hw_node`` run in the same namespace. For more details see the controllers from the
 :ref:`franka_example_controllers package<example_controllers>` or the tutorials under
 `wiki.ros.org/ros_control/Tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
 
