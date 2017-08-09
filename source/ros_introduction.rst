@@ -81,12 +81,12 @@ package offering the following interfaces to controllers:
 
     In ROS control using interfaces works via resource handles that are retrieved by name. For the
     joint interfaces the handle names are "<arm_id>_joint1" to "<arm_id>_joint7". Cartesian pose and
-    velocity interfaces as well as the FrankaStateInterface offer a handle by the name 
-    "<arm_id>_robot" while the handle of the model interface is named "<arm_id>_model". 
+    velocity interfaces as well as the FrankaStateInterface offer a handle by the name
+    "<arm_id>_robot" while the handle of the model interface is named "<arm_id>_model".
 
 
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
-controllers including the required configuration changes with libfranka. In addition a variety of 
+controllers including the required configuration changes with libfranka. In addition a variety of
 ROS services are offered to expose the full ``libfranka`` API in the ROS ecosystem. The following
 services are offered:
 
@@ -107,7 +107,7 @@ services are offered:
     The <arm_id>_EE frame is a child of the <arm_id>_link8 frame and denotes the configurable
     end-effector frame. The <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center of
     the internal Cartesian impedance. It also serves as a reference frame for external
-    wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the urdf as they can be 
+    wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the urdf as they can be
     changed at run time.
 
 
@@ -117,7 +117,7 @@ That can be done from an action client or by simply publishing on the action goa
 .. code-block:: shell
 
    rostopic pub /<your_robot_namespace>/error_recovery/goal franka_hw/ErrorRecoveryActionGoal "{}"
-   
+
 
 After recovering the ``franka_hw_node`` restarts the controllers that were running. That is possible
 as the node does not die when robot reflexes trigger or errors occur. All of this functionality is
@@ -168,10 +168,10 @@ To move the FRANKA ARM with moveit launch the following three files:
 
     roslaunch franka_hw franka_hw.launch robot_ip:=<your_robot_ip> arm_id:=<your_robot_namespace>
       load_gripper:=<true/false>     # bring up hardware
-    
+
     roslaunch franka_moveit_config franka_moveit.launch  arm_id:=<your_robot_namespace>
       controller:=<effort/position>  # start a joint_trajectory_controller of type <controller>
-    
+
     roslaunch franka_moveit_config moveit_rviz.launch  # for visualization and GUI-based
                                                        # motion planning and execution
 
@@ -218,7 +218,7 @@ for your controller. The declaration of you class then looks like
       void update (const ros::Time& time, const ros::Duration& period);  // mandatory
       void starting (const ros::Time& time)   // optional
       void stopping (const ros::Time& time);  // optional
-      ...                           
+      ...
     }
 
 
@@ -229,13 +229,13 @@ The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
     sense to e.g. command joint positions and Cartesian poses simultaneously. Read-only interfaces
     like the JointStateInterface, the FrankaStateInterface or the FrankaModelInterface can always be
     claimed and are not subject to restrictions.
-    
-    
+
+
 Possible claims are
 
  * all possible single interface claims
  * EffortJointInterface + PositionJointInterface
- * EffortJointInterface + VelocityJointInterface 
+ * EffortJointInterface + VelocityJointInterface
  * EffortJointInterface + FrankaCartesianPoseInterface
  * EffortJointInterface + FrankaCartesianVelocityInterface
 
@@ -259,7 +259,7 @@ if needed.
     When commanding velocities do NOT command zeros in ``stopping`` as it might be called during
     motion which is equivalent to commanding a jump in velocity leading to very high resulting
     torques which can damage your hardware. Rather let the built-in stopping beahvior bring the
-    robot to rest in that case. 
+    robot to rest in that case.
 
 
 To run your own controller, your controller class must be exported correctly with ``pluginlib``
