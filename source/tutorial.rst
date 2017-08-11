@@ -71,7 +71,7 @@ Example output:
       "tau_ext_hat_filtered": [0.172327,-0.230889,-0.130005,-0.189423,0.067974,-0.237919,0.0259882],
       "O_F_ext_hat_K": [-1.28182,0.136979,0.436185,0.0400712,-0.651955,0.0273414],
       "K_F_ext_hat_K": [-1.26755,0.0424965,-0.493591,0.106515,0.0430354,-0.00899586],
-      "current_errors": [], "last_motion_errors": [], "robot_mode": "Move", "time": 12444112
+      "current_errors": [], "last_motion_errors": [], "robot_mode": "Idle", "time": 12444112
     }
 
 
