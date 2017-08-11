@@ -94,6 +94,8 @@ workspace in a directory of your choice and build it. You can do that by running
     catkin_init_workspace
     git clone --recursive https://github.com/frankaemika/franka_ros
     cd ..
+    # install all missing dependencies
+    rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
     catkin_make -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
 
