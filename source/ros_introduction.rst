@@ -1,29 +1,29 @@
 ROS getting started
 ===================
 
-In this section we assume that the steps :ref:`from here <installing_ros>` were conducted meaning
-the ``franka_ros`` repository was cloned, successfully integrated into a catkin workspace, built and
-the ``setup.sh`` or ``setup.bash`` of the workspace was sourced.
+In this chapter we assume that you have followed the steps from :ref:`"Building the ROS packages" <installing_ros>`
+section. 
+
+The ``franka_ros`` repository contains a variety of packages that are briefly introduced here.
+We also give a short how-to for :ref:`writing controllers <write_own_controller>`. 
+
+All parameters passed to launch files in this section come with default values, so they 
+can be omitted if using the default network addresses and ROS namespaces.  To
+Make sure the ``source`` command was called with the setup script from your workspace:
 
 .. code-block:: shell
 
    source /path/to/catkin_ws/devel/setup.sh
 
 
-The ``franka_ros`` repository contains a variety of packages that are briefly introduced in the
-following before giving a short how-to for :ref:`writing own controllers <write_own_controller>`. In
-general all parameters passed to launch files in this section come with default values, so
-specifying them explicitely can be omitted in case the defaults are correct.
-
-
 franka_description
 ------------------
 This package contains the description of the FRANKA ARM and the FRANKA HAND in terms of kinematics,
-joint limits, visual surfaces and collision space. The latter is a simplified version of the
-more detailed visual description to decrease the computational weight of collision checking. The
+joint limits, visual surfaces and collision space. The collision space is a simplified version of the
+visual description used to improve performance of collision checks. The
 descriptions are based on the urdf format according to the `urdf xml documentation
-<http://wiki.ros.org/urdf/XML>`_ . The files do NOT contain inertial terms and can therefore not be
-used for dynamics simulations (e.g. gazebo). The package offers launch files, allowing to display
+<http://wiki.ros.org/urdf/XML>`_ . The files do NOT contain inertial terms and therefore cannot be
+used for dynamics simulations (e.g. gazebo). The package offers launch files which visualize
 the robot descriptions of the arm and the gripper.
 
 .. code-block:: shell
@@ -65,42 +65,58 @@ This package contains the hardware abstraction of the FRANKA ARM for the ROS con
 based on the ``libfranka`` API. The hardware class ``franka_hw::FrankaHW`` is implemented in this
 package offering the following interfaces to controllers:
 
- * ``hardware_interface::JointStateInterface``:  reads joint states.
- * ``hardware_interface::PositionJointInterface``:  commands joint positions and reads joint states
- * ``hardware_interface::VelocityJointInterface``:  commands joint velociteis and reads joint
-   states.
- * ``hardware_interface::EffortJointInterface``:  commands joint torques and reads joint states.
- * ``franka_hw::FrankaStateInterface``:  reads the FRANKA robot state.
- * ``franka_hw::FrankaPoseCartesianInterface``:  commands cartesian poses and reads the FRANKA robot
-   state.
- * ``franka_hw::FrankaVelocityCartesianInterface``:  commands cartesian velocities and reads the
-   FRANKA robot state.
- * ``franka_hw::FrankaModelInterface``:  reads the dynamic and kinematic model of the robot.
++-------------------------------------------------+--------------------------------------------------------+
+| Interface                                       | Function                                               |
++=================================================+========================================================+
+| ``hardware_interface::JointStateInterface``     | reads joint states.                                    |
++-------------------------------------------------+--------------------------------------------------------+
+| ``hardware_interface::VelocityJointInterface``  | commands joint positions and reads joint states        |
++-------------------------------------------------+--------------------------------------------------------+
+| ``hardware_interface::PositionJointInterface``  | commands joint velocities and reads joint              |
++-------------------------------------------------+--------------------------------------------------------+
+| ``hardware_interface::EffortJointInterface``    | commands joint torques and reads joint states.         |
++-------------------------------------------------+--------------------------------------------------------+
+| ``franka_hw::FrankaStateInterface``             | reads the full FRANKA robot state.                     |
++-------------------------------------------------+--------------------------------------------------------+
+| ``franka_hw::FrankaPoseCartesianInterface``     | commands cartesian poses and reads the full FRANKA     |
+|                                                 | robot state.                                           |
++-------------------------------------------------+--------------------------------------------------------+
+| ``franka_hw::FrankaVelocityCartesianInterface`` | commands cartesian velocities and reads the full       |
+|                                                 | FRANKA robot state.                                    |
++-------------------------------------------------+--------------------------------------------------------+
+| ``franka_hw::FrankaModelInterface``             | reads the dynamic and kinematic model of the robot.    |
++-------------------------------------------------+--------------------------------------------------------+
 
-.. important::
+To use ROS control interfaces, you have to retrieve resource handles by name:
 
-    In ROS control using interfaces works via resource handles that are retrieved by name. For the
-    joint interfaces the handle names are "<arm_id>_joint1" to "<arm_id>_joint7". Cartesian pose and
-    velocity interfaces as well as the FrankaStateInterface offer a handle by the name
-    "<arm_id>_robot" while the handle of the model interface is named "<arm_id>_model".
-
+=================================================  ========================================
+Interface                                          Resource handle name                    
+=================================================  ========================================
+``hardware_interface::JointStateInterface``        "<arm_id>_joint1" to "<arm_id>_joint7"  
+``hardware_interface::VelocityJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"  
+``hardware_interface::PositionJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"  
+``hardware_interface::EffortJointInterface``       "<arm_id>_joint1" to "<arm_id>_joint7"  
+``franka_hw::FrankaStateInterface``                "<arm_id>_robot"                        
+``franka_hw::FrankaPoseCartesianInterface``        "<arm_id>_robot"                        
+``franka_hw::FrankaVelocityCartesianInterface``    "<arm_id>_robot"                        
+``franka_hw::FrankaModelInterface``                "<arm_id>_model"                        
+=================================================  ========================================
 
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
-controllers including the required configuration changes with libfranka. In addition a variety of
-ROS services are offered to expose the full ``libfranka`` API in the ROS ecosystem. The following
-services are offered:
+controllers. In addition a variety of ROS services are offered to expose the full ``libfranka`` 
+API in the ROS ecosystem. The following services are offered:
 
- * ``franka_hw::SetJointImpedance`` : sets a joint stiffness for the internal controller
+ * ``franka_hw::SetJointImpedance``  sets a joint stiffness for the internal controller
    (damping is automatically derived from the stiffness)
- * ``franka_hw::SetCartesianImpedance`` : sets a Cartesian stiffness for the internal controller
+ * ``franka_hw::SetCartesianImpedance``  sets a Cartesian stiffness for the internal controller
    (damping is automatically derived from the stiffness)
- * ``franka_hw::SetEEFrame`` : sets the transformation from <arm_id>_EE to <arm_id>_link8 frame
- * ``franka_hw::SetKFrame`` : sets the transformation from <arm_id>_K to <arm_id>_EE frame
- * ``franka_hw::SetForceTorqueCollisionBehavior`` : sets thresholds for external Cartesian wrenches
+ * ``franka_hw::SetEEFrame``  sets the transformation from <arm_id>_EE to <arm_id>_link8 frame
+ * ``franka_hw::SetKFrame``  sets the transformation from <arm_id>_K to <arm_id>_EE frame
+ * ``franka_hw::SetForceTorqueCollisionBehavior``  sets thresholds for external Cartesian wrenches
    to configure the collision reflex.
- * ``franka_hw::SetFullCollisionBehavior`` : sets thresholds for external forces on Cartesian and
+ * ``franka_hw::SetFullCollisionBehavior``  sets thresholds for external forces on Cartesian and
    joint level to configure the collision reflex.
- * ``franka_hw::SetLoad`` : sets an external load to compensate (e.g. of a grasped object)
+ * ``franka_hw::SetLoad``  sets an external load to compensate (e.g. of a grasped object)
 
 .. important::
 
@@ -110,9 +126,8 @@ services are offered:
     wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the urdf as they can be
     changed at run time.
 
-
 To recover from errors and reflexes the ``franka_hw::ErrorRecoveryAction`` can be called.
-That can be done from an action client or by simply publishing on the action goal topic like
+That can be done from an action client or by simply publishing on the action goal topic:
 
 .. code-block:: shell
 
@@ -129,29 +144,29 @@ run by the ``franka_hw_node`` which can be launched with this command:
       load_gripper:=<true/false>
 
 
-This launch file loads besides the ``franka_hw_node`` a ``franka_hw::FrankaStateController``
+This launch file loads, besides the ``franka_hw_node``, a ``franka_hw::FrankaStateController``
 reading and publishing the robot states, including external wrenches, configurable transforms and
-the joint states required for visualization with rivz. For the latter, a ``robot_state_publisher``
-is started together with rviz.
+the joint states required for visualization with rivz. For visualization purposes, a 
+``robot_state_publisher`` is started together with rviz.
 
 
 .. _example_controllers:
 
 franka_example_controllers
 --------------------------
-This package implements a set of exemplary controllers for the use on a FRANKA ARM via ROS control.
+This package implements a set of example controllers for the use on a FRANKA ARM via ROS control.
 The controllers depict the variety of interfaces offered by the ``franka_hw::FrankaHW`` class and
 the according usage. Each example comes with a separate stand-alone launch file that launches
-everything required to run the controller on the robot and visualize it. A ``robot_ip`` an
-``arm_id`` as the robots namespace and a bool ``load_gripper`` are passed as arguments to these
-launch files. The joint impedance example can be run by:
+everything required to run the controller on the robot and visualize it. 
+
+To start the joint impedance example, execute the following command:
 
 .. code-block:: shell
 
     roslaunch franka_example_controllers joint_impedance_example_controller.launch
       robot_ip:=<your_IP> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
 
-
+Other examples are started in the same way.
 
 franka_moveit_config
 --------------------
@@ -176,7 +191,7 @@ To move the FRANKA ARM with moveit launch the following three files:
                                                        # motion planning and execution
 
 
-For more details, documentation and tutorials on the moveit API please refere to
+For more details, documentation and tutorials on the moveit API please refer to
 `the tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
 
 
@@ -191,13 +206,15 @@ using the ``libfranka`` API and visualizes the robot in rviz. To run it launch
       load_gripper:=<true/false>
 
 
-This is pure visualization and does not send any commands to the robot. It rather serves to check
-the communication with the robot.
+This is pure visualization - no commands are sent to the robot. It can be useful to 
+check the connection with the robot.
 
 .. important::
 
     Only one instance of a ``franka::Robot`` can connect to the robot meaning the
-    ``franka_joint_state_publisher`` cannot run in parallel to e.g. the ``franka_hw_node``.
+    ``franka_joint_state_publisher`` cannot run in parallel to e.g. the ``franka_hw_node``. 
+    This also implies that you cannot simply run the visualization example along side 
+    a controller running as a separate program.
 
 .. _write_own_controller:
 
@@ -231,7 +248,7 @@ The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
     claimed and are not subject to restrictions.
 
 
-Possible claims are
+Possible claims are:
 
  * all possible single interface claims
  * EffortJointInterface + PositionJointInterface
@@ -239,26 +256,26 @@ Possible claims are
  * EffortJointInterface + FrankaCartesianPoseInterface
  * EffortJointInterface + FrankaCartesianVelocityInterface
 
-The idea behind offering the EffortJointInterface in combination with a motion generator interface
-is to expose the internal motion generators to the user. The answer to the motion generator commands
-can allways be read in the robot state one time step later. This can make sense e.g. in the case
-where you want to follow a Cartesian trajectory using your own joint torque controller. You would
-claim the combination EffortJointInterface + FrankaCartesianPoseInterface, stream your trajectory
-into in the FrankaCartesianPoseInterface and compute your torque commands based on the resulting
-desired joint pose (q_d) from the robot state. Doing that you would basically use the FRANKA
-built-in inverse kinematics instead of having to solve that on your own.
+The answer to the motion generator commands can always be read in the robot state one time step 
+later. The idea behind offering the EffortJointInterface in combination with a motion generator 
+interface is to expose the internal motion generators to the user. One use case for this combination 
+would be following a Cartesian trajectory using your own joint torque controller.
+In this case you would claim the combination EffortJointInterface + FrankaCartesianPoseInterface, stream your 
+trajectory into the FrankaCartesianPoseInterface, and compute your torque commands based on the resulting
+desired joint pose (q_d) from the robot state. This lets you use the FRANKA built-in 
+inverse kinematics instead of having to solve that on your own.
 
 To implement a fully functional controller you have to implement at least the inherited virtual
-functions ``init`` and ``update``. Initializing e.g. start poses should be done in ``starting`` as
-``starting`` is called when restarting the controller while ``init`` is called only once when
+functions ``init`` and ``update``. Initializing - e.g. start poses - should be done in the ``starting``
+function as ``starting`` is called when restarting the controller, while ``init`` is called only once when
 loading the controller. The ``stopping`` method should contain shutdown related functionality
-if needed.
+(if needed).
 
 .. important::
 
     When commanding velocities do NOT command zeros in ``stopping`` as it might be called during
     motion which is equivalent to commanding a jump in velocity leading to very high resulting
-    torques which can damage your hardware. Rather let the built-in stopping beahvior bring the
+    torques which can damage your hardware. Rather let the built-in stopping behavior bring the
     robot to rest in that case.
 
 
@@ -273,8 +290,8 @@ which requires adding
                            controller_interface::ControllerBase)
 
 
-to the bottom of your controllers .cpp file. In addition you need to define a plugin.xml file with
-the content
+at the end of your controllers ``.cpp`` file. In addition you need to define a ``plugin.xml`` file with
+the content:
 
 .. code-block:: xml
 
@@ -289,7 +306,7 @@ the content
       </library>
 
 
-which is exported by adding
+which is exported by adding:
 
 .. code-block:: xml
 
