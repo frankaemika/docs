@@ -21,7 +21,7 @@ franka_description
 This package contains the description of the FRANKA ARM and the FRANKA HAND in terms of kinematics,
 joint limits, visual surfaces and collision space. The collision space is a simplified version of
 the visual description used to improve performance of collision checks. The descriptions are based
-on the urdf format according to the `urdf xml documentation<http://wiki.ros.org/urdf/XML>`_. The
+on the URDF format according to the `URDF xml documentation <http://wiki.ros.org/urdf/XML>`_ . The
 files do NOT contain inertial terms and therefore cannot be used for dynamics simulations (e.g.
 gazebo). The package offers launch files which visualize the robot descriptions of the arm and the
 gripper.
@@ -128,7 +128,7 @@ API in the ROS ecosystem. The following services are offered:
     The <arm_id>_EE frame is a child of the <arm_id>_link8 frame and denotes the configurable
     end-effector frame. The <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center
     of the internal Cartesian impedance. It also serves as a reference frame for external
-    wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the urdf as they can be
+    wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the URDF as they can be
     changed at run time.
 
 To recover from errors and reflexes the ``franka_hw::ErrorRecoveryAction`` can be called.
@@ -282,16 +282,14 @@ related functionality (if needed).
 
 .. important::
 
-    Your controller should command a gentle slowdown before shutting down. When using velocity
+    Always command a gentle slowdown before shutting down the controller. When using velocity
     interfaces, do not simply command zero velocity in ``stopping``. Since it might be called
     while the robot is still moving, it would be equivalent to commanding a jump in velocity
     leading to very high resulting torques. In this case it would be better to keep the
     same velocity and stop the controller than sending zeros and let the FRANKA CONTROLLER handle
     the slowdown.
 
-
-To run your own controller, your controller class must be exported correctly with ``pluginlib``
-which requires adding
+Your controller class must be exported correctly with ``pluginlib`` which requires adding:
 
 .. code-block:: c++
 
@@ -301,8 +299,8 @@ which requires adding
                            controller_interface::ControllerBase)
 
 
-at the end of your controllers ``.cpp`` file. In addition you need to define a ``plugin.xml`` file
-with the content:
+at the end of the ``.cpp`` file. In addition you need to define a ``plugin.xml`` file with the
+following content:
 
 .. code-block:: xml
 
@@ -326,9 +324,9 @@ which is exported by adding:
     </export>
 
 
-to your package.xml. To run your controller you need to load at least a controller name in
-combination with a controller type to the ROS parameter server. Additionally you can include all
-other parameters you need. An exemplary configuration.yaml file can look like:
+to your package.xml. Further, you need to load at least a controller name in combination with a
+controller type to the ROS parameter server. Additionally, you can include all other parameters you
+need. An exemplary configuration.yaml file can look like:
 
 .. code-block:: yaml
 
