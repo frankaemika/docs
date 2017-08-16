@@ -5,9 +5,9 @@ In this chapter we assume that you have followed the steps from
 :ref:`"Building the ROS packages" <installing_ros>` section.
 
 The ``franka_ros`` repository contains a variety of packages that are briefly introduced here.
-We also give a short how-to for :ref:`writing controllers <write_own_controller>`. 
+We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
 
-All parameters passed to launch files in this section come with default values, so they 
+All parameters passed to launch files in this section come with default values, so they
 can be omitted if using the default network addresses and ROS namespaces.
 Make sure the ``source`` command was called with the setup script from your workspace:
 
@@ -47,7 +47,7 @@ following actions:
  * ``franka_gripper::StopAction`` () : aborts a running action. This can be used to stop applying
    forces after grasping.
  * ``control_msgs::GripperCommandAction`` (width, max_effort) : A standard gripper action
-   recognized by moveit.
+   recognized by MoveIt.
 
 
 You can launch the ``franka_gripper_node`` with
@@ -95,20 +95,20 @@ package offering the following interfaces to controllers:
 To use ROS control interfaces, you have to retrieve resource handles by name:
 
 =================================================  ========================================
-Interface                                          Resource handle name                    
+Interface                                          Resource handle name
 =================================================  ========================================
-``hardware_interface::JointStateInterface``        "<arm_id>_joint1" to "<arm_id>_joint7"  
-``hardware_interface::VelocityJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"  
-``hardware_interface::PositionJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"  
-``hardware_interface::EffortJointInterface``       "<arm_id>_joint1" to "<arm_id>_joint7"  
-``franka_hw::FrankaStateInterface``                "<arm_id>_robot"                        
-``franka_hw::FrankaPoseCartesianInterface``        "<arm_id>_robot"                        
-``franka_hw::FrankaVelocityCartesianInterface``    "<arm_id>_robot"                        
-``franka_hw::FrankaModelInterface``                "<arm_id>_model"                        
+``hardware_interface::JointStateInterface``        "<arm_id>_joint1" to "<arm_id>_joint7"
+``hardware_interface::VelocityJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"
+``hardware_interface::PositionJointInterface``     "<arm_id>_joint1" to "<arm_id>_joint7"
+``hardware_interface::EffortJointInterface``       "<arm_id>_joint1" to "<arm_id>_joint7"
+``franka_hw::FrankaStateInterface``                "<arm_id>_robot"
+``franka_hw::FrankaPoseCartesianInterface``        "<arm_id>_robot"
+``franka_hw::FrankaVelocityCartesianInterface``    "<arm_id>_robot"
+``franka_hw::FrankaModelInterface``                "<arm_id>_model"
 =================================================  ========================================
 
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
-controllers. In addition a variety of ROS services are offered to expose the full ``libfranka`` 
+controllers. In addition a variety of ROS services are offered to expose the full ``libfranka``
 API in the ROS ecosystem. The following services are offered:
 
  * ``franka_hw::SetJointImpedance``  sets a joint stiffness for the internal controller
@@ -152,13 +152,13 @@ functionality is provided by the ``franka_hw_node`` which can be launched with t
 Besides loading the ``franka_hw_node``, the launch file also starts a
 ``franka_hw::FrankaStateController`` for reading and publishing the robot states, including
 external wrenches, configurable transforms and the joint states required for visualization with
-rivz. For visualization purposes, a ``robot_state_publisher`` is started together with rviz.
+rivz. For visualization purposes, a ``robot_state_publisher`` is started together with RViz.
 
 
 franka_visualization
 --------------------
 This package contains the ``franka_joint_state_publisher`` which connects to a FRANKA ARM using
-the ``libfranka`` API and visualizes the robot in rviz. To run it launch
+the ``libfranka`` API and visualizes the robot in RViz. To run it launch
 
 .. code-block:: shell
 
@@ -184,7 +184,7 @@ franka_example_controllers
 This package implements a set of example controllers for the use on a FRANKA ARM via ROS control.
 The controllers depict the variety of interfaces offered by the ``franka_hw::FrankaHW`` class and
 the according usage. Each example comes with a separate stand-alone launch file that launches
-everything required to run the controller on the robot and visualize it. 
+everything required to run the controller on the robot and visualize it.
 
 To start the joint impedance example, execute the following command:
 
@@ -198,14 +198,14 @@ Other examples are started in the same way.
 
 franka_moveit_config
 --------------------
-This package contains partly auto generated files that connect the FRANKA ARM to the moveit motion
+This package contains partly auto generated files that connect the FRANKA ARM to the MoveIt motion
 planning framework. It contains three move-groups:
 
  * franka_with_gripper  (default, arm with gripper)
  * franka  (arm without gripper)
  * franka_gripper  (gripper end-effector only)
 
-To move the FRANKA ARM with moveit launch the following three files:
+To move the FRANKA ARM with MoveIt launch the following three files:
 
 .. code-block:: shell
 
@@ -219,7 +219,7 @@ To move the FRANKA ARM with moveit launch the following three files:
                                                        # motion planning and execution
 
 
-For more details, documentation and tutorials on the moveit API please refer to
+For more details, documentation and tutorials on the MoveIt API please refer to
 `the tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
 
 
@@ -249,6 +249,7 @@ up to four interfaces in one controller instance. The declaration of your class 
 The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
 
 .. important::
+
     Note that the claimable combinations of commanding interfaces are restricted as it does not
     make sense to e.g. command joint positions and Cartesian poses simultaneously. Read-only
     interfaces like the JointStateInterface, the FrankaStateInterface or the FrankaModelInterface

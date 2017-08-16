@@ -95,7 +95,7 @@ workspace in a directory of your choice:
 
 Then clone ``franka_ros`` repository, install any missing dependencies and build the packages:
 
-.. code-block:: shell    
+.. code-block:: shell
 
     git clone --recursive https://github.com/frankaemika/franka_ros
     cd ..
