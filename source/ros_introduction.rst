@@ -147,8 +147,8 @@ command:
 
 .. code-block:: shell
 
-    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip> arm_id:=<your_robot_namespace>
-      load_gripper:=<true/false>
+    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip>
+      arm_id:=<your_robot_namespace> load_gripper:=<true/false>
 
 
 Besides loading the ``franka_hw_node``, the launch file also starts a
