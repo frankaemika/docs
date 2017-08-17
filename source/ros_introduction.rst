@@ -48,7 +48,7 @@ following actions:
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
    forces after grasping.
  * ``control_msgs::GripperCommandAction(width, max_effort)``: A standard gripper action
-   recognized by MoveIt.
+   recognized by MoveIt!.
 
 
 You can launch the ``franka_gripper_node`` with:
@@ -200,14 +200,14 @@ Other examples are started in the same way.
 
 franka_moveit_config
 --------------------
-This package contains partly auto generated files that connect the FRANKA ARM to the MoveIt motion
+This package contains partly auto generated files that connect the FRANKA ARM to the MoveIt! motion
 planning framework. It contains three move-groups:
 
  * franka_with_gripper  (default, arm with gripper)
  * franka  (arm without gripper)
  * franka_gripper  (gripper end-effector only)
 
-To control the FRANKA ARM with MoveIt launch the following three files:
+To control the FRANKA ARM with MoveIt! launch the following three files:
 
 .. code-block:: shell
 
@@ -224,7 +224,7 @@ To control the FRANKA ARM with MoveIt launch the following three files:
 
 
 For more details, documentation and tutorials, please have a look at the
-`MoveIt tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
+`MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
 
 
 .. _write_own_controller:
