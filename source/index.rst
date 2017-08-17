@@ -31,8 +31,8 @@ The source code of this documentation is also `available online
    requirements
    installation
    tutorial
-   troubleshooting
    ros_introduction
+   troubleshooting
 
 Indices and tables
 ==================

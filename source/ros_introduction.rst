@@ -1,8 +1,8 @@
 ROS getting started
 ===================
 
-In this chapter we assume that you have followed the steps from
-:ref:`"Building the ROS packages" <installing_ros>` section.
+Before continuing with this chapter, please follow the steps from the
+:ref:`building the ROS packages <installing_ros>` section.
 
 The ``franka_ros`` repository contains a variety of packages that are briefly introduced here.
 We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
@@ -21,7 +21,7 @@ franka_description
 This package contains the description of the FRANKA ARM and the FRANKA HAND in terms of kinematics,
 joint limits, visual surfaces and collision space. The collision space is a simplified version of
 the visual description used to improve performance of collision checks. The descriptions are based
-on the URDF format according to the `URDF xml documentation <http://wiki.ros.org/urdf/XML>`_ . The
+on the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ . The
 files do NOT contain inertial terms and therefore cannot be used for dynamics simulations (e.g.
 gazebo). The package offers launch files which visualize the robot descriptions of the arm and the
 gripper.
@@ -39,22 +39,23 @@ This package implements the ``franka_gripper_node`` for interfacing a gripper of
 from ROS. The node publishes the joint states of the gripper and offers action servers for the
 following actions:
 
- * ``franka_gripper::MoveAction`` (width, speed) : moves to a target width with the defined speed.
- * ``franka_gripper::GraspAction`` (width, speed, max_current) : tries to grasp at the desired
-   width with the maximum current while closing with the given speed.
- * ``franka_gripper::HomingAction`` () : homes the gripper and updates the maximum width given the
+ * ``franka_gripper::MoveAction(width, speed)``: moves to a target `width` with the defined
+   `speed`.
+ * ``franka_gripper::GraspAction(width, speed, max_current)``: tries to grasp at the desired
+   `width` with the `max_current` while closing with the given `speed`.
+ * ``franka_gripper::HomingAction()``: homes the gripper and updates the maximum width given the
    mounted fingers.
- * ``franka_gripper::StopAction`` () : aborts a running action. This can be used to stop applying
+ * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
    forces after grasping.
- * ``control_msgs::GripperCommandAction`` (width, max_effort) : A standard gripper action
+ * ``control_msgs::GripperCommandAction(width, max_effort)``: A standard gripper action
    recognized by MoveIt.
 
 
-You can launch the ``franka_gripper_node`` with
+You can launch the ``franka_gripper_node`` with:
 
 .. code-block:: shell
 
-    roslaunch franka_gripper franka_gripper.launch robot_ip:=<your_robot_ip>
+    roslaunch franka_gripper franka_gripper.launch robot_ip:=<franka-control-ip>
       arm_id:=<your_robot_namespace>
 
 
@@ -109,27 +110,27 @@ Interface                                          Resource handle name
 
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
 controllers. In addition a variety of ROS services are offered to expose the full ``libfranka``
-API in the ROS ecosystem. The following services are offered:
+API in the ROS ecosystem. The following services are provided:
 
- * ``franka_hw::SetJointImpedance``  sets a joint stiffness for the internal controller
-   (damping is automatically derived from the stiffness)
- * ``franka_hw::SetCartesianImpedance``  sets a Cartesian stiffness for the internal controller
-   (damping is automatically derived from the stiffness)
- * ``franka_hw::SetEEFrame``  sets the transformation from <arm_id>_EE to <arm_id>_link8 frame
- * ``franka_hw::SetKFrame``  sets the transformation from <arm_id>_K to <arm_id>_EE frame
- * ``franka_hw::SetForceTorqueCollisionBehavior``  sets thresholds for external Cartesian wrenches
+ * ``franka_hw::SetJointImpedance`` sets a joint stiffness for the internal controller
+   (damping is automatically derived from the stiffness).
+ * ``franka_hw::SetCartesianImpedance`` sets a Cartesian stiffness for the internal controller
+   (damping is automatically derived from the stiffness).
+ * ``franka_hw::SetEEFrame`` sets the transformation from <arm_id>_EE to <arm_id>_link8 frame.
+ * ``franka_hw::SetKFrame`` sets the transformation from <arm_id>_K to <arm_id>_EE frame.
+ * ``franka_hw::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian wrenches
    to configure the collision reflex.
- * ``franka_hw::SetFullCollisionBehavior``  sets thresholds for external forces on Cartesian and
+ * ``franka_hw::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian and
    joint level to configure the collision reflex.
- * ``franka_hw::SetLoad``  sets an external load to compensate (e.g. of a grasped object)
+ * ``franka_hw::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
 
 .. important::
 
     The <arm_id>_EE frame is a child of the <arm_id>_link8 frame and denotes the configurable
     end-effector frame. The <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center
     of the internal Cartesian impedance. It also serves as a reference frame for external
-    wrenches. Note: Both <arm_id>_EE and <arm_id>_K are not contained in the URDF as they can be
-    changed at run time.
+    wrenches. *Both <arm_id>_EE and <arm_id>_K are not contained in the URDF as they can be
+    changed at run time*.
 
 To recover from errors and reflexes the ``franka_hw::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
@@ -141,11 +142,12 @@ That can be done from an action client or by simply publishing on the action goa
 
 After recovering the ``franka_hw_node`` restarts the controllers that were running. That is
 possible as the node does not die when robot reflexes trigger or errors occur. All this
-functionality is provided by the ``franka_hw_node`` which can be launched with this command:
+functionality is provided by the ``franka_hw_node`` which can be launched with the following
+command:
 
 .. code-block:: shell
 
-    roslaunch franka_hw franka_hw.launch robot_ip:=<your_robot_ip> arm_id:=<your_robot_namespace>
+    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip> arm_id:=<your_robot_namespace>
       load_gripper:=<true/false>
 
 
@@ -162,36 +164,36 @@ the ``libfranka`` API and visualizes the robot in RViz. To run it launch
 
 .. code-block:: shell
 
-    roslaunch franka_visualization franka_visualization.launch robot_ip:=<your_robot_ip>
+    roslaunch franka_visualization franka_visualization.launch robot_ip:=<franka-control-ip>
       load_gripper:=<true/false>
 
 
 This is pure visualization - no commands are sent to the robot. It can be useful to check the
-connection with the robot.
+connection to the robot.
 
 .. important::
 
-    Only one instance of a ``franka::Robot`` can connect to the robot meaning the
-    ``franka_joint_state_publisher`` cannot run in parallel to e.g. the ``franka_hw_node``. This
-    also implies that you cannot simply run the visualization example alongside a controller
-    running as a separate program.
+    Only one instance of a ``franka::Robot`` can connect to the robot. This means, that for example
+    the ``franka_joint_state_publisher`` cannot run in parallel to the ``franka_hw_node``. This
+    also implies that you cannot execute the visualization example alongside a separate program
+    running a controller.
 
 
 .. _example_controllers:
 
 franka_example_controllers
 --------------------------
-This package implements a set of example controllers for the use on a FRANKA ARM via ROS control.
-The controllers depict the variety of interfaces offered by the ``franka_hw::FrankaHW`` class and
-the according usage. Each example comes with a separate stand-alone launch file that launches
-everything required to run the controller on the robot and visualize it.
+In this package a set of example controllers for the use on a FRANKA ARM via ROS control are
+implemented. The controllers depict the variety of interfaces offered by the
+``franka_hw::FrankaHW`` class and the according usage. Each example comes with a separate
+stand-alone launch file that starts the controller on the robot and visualizes it.
 
-To start the joint impedance example, execute the following command:
+To launch the joint impedance example, execute the following command:
 
 .. code-block:: shell
 
     roslaunch franka_example_controllers joint_impedance_example_controller.launch
-      robot_ip:=<your_IP> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
+      robot_ip:=<franka-control-ip> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
 
 Other examples are started in the same way.
 
@@ -205,29 +207,31 @@ planning framework. It contains three move-groups:
  * franka  (arm without gripper)
  * franka_gripper  (gripper end-effector only)
 
-To move the FRANKA ARM with MoveIt launch the following three files:
+To control the FRANKA ARM with MoveIt launch the following three files:
 
 .. code-block:: shell
 
-    roslaunch franka_hw franka_hw.launch robot_ip:=<your_robot_ip> arm_id:=<your_robot_namespace>
-      load_gripper:=<true/false>     # bring up hardware
+    # bring up hardware
+    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip>
+    arm_id:=<your_robot_namespace>  load_gripper:=<true/false>
 
+    # start a joint_trajectory_controller of type <controller>
     roslaunch franka_moveit_config franka_moveit.launch  arm_id:=<your_robot_namespace>
-      controller:=<effort/position>  # start a joint_trajectory_controller of type <controller>
+      controller:=<effort/position>
 
-    roslaunch franka_moveit_config moveit_rviz.launch  # for visualization and GUI-based
-                                                       # motion planning and execution
+    # for visualization and GUI-based motion planning and execution
+    roslaunch franka_moveit_config moveit_rviz.launch
 
 
-For more details, documentation and tutorials on the MoveIt API please refer to
-`the tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
+For more details, documentation and tutorials, please have a look at the
+`MoveIt tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
 
 
 .. _write_own_controller:
 
 Writing  your own controller
 ----------------------------
-All example controllers from :ref:`the example controllers package<example_controllers>` are
+All example controllers from the :ref:`example controllers package<example_controllers>` are
 derived from the ``controller_interface::MultiInterfaceController`` class, which allows to claim
 up to four interfaces in one controller instance. The declaration of your class then looks like:
 
@@ -252,26 +256,26 @@ The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
 
     Note that the claimable combinations of commanding interfaces are restricted as it does not
     make sense to e.g. command joint positions and Cartesian poses simultaneously. Read-only
-    interfaces like the JointStateInterface, the FrankaStateInterface or the FrankaModelInterface
-    can always be claimed and are not subject to restrictions.
+    interfaces like the *JointStateInterface*, the *FrankaStateInterface* or the
+    *FrankaModelInterface* can always be claimed and are not subject to restrictions.
 
 
 Possible claims are:
 
  * all possible single interface claims
- * EffortJointInterface + PositionJointInterface
- * EffortJointInterface + VelocityJointInterface
- * EffortJointInterface + FrankaCartesianPoseInterface
- * EffortJointInterface + FrankaCartesianVelocityInterface
+ * *EffortJointInterface* + *PositionJointInterface*
+ * *EffortJointInterface* + *VelocityJointInterface*
+ * *EffortJointInterface* + *FrankaCartesianPoseInterface*
+ * *EffortJointInterface* + *FrankaCartesianVelocityInterface*
 
-The idea behind offering the EffortJointInterface in combination with a motion generator
+The idea behind offering the *EffortJointInterface* in combination with a motion generator
 interface is to expose the internal motion generators to the user. The calculated desired joint
 pose corresponding to a motion generator command is available in the robot state one time step
 later. One use case for this combination would be following a Cartesian trajectory using your own
-joint torque controller. In this case you would claim the combination EffortJointInterface +
-FrankaCartesianPoseInterface, stream your trajectory into the FrankaCartesianPoseInterface, and
+joint torque controller. In this case you would claim the combination *EffortJointInterface* +
+*FrankaCartesianPoseInterface*, stream your trajectory into the *FrankaCartesianPoseInterface*, and
 compute your torque commands based on the resulting desired joint pose (q_d) from the robot state.
-This lets you use the FRANKA built-in inverse kinematics instead of having to solve that on your
+This allows to use the FRANKA built-in inverse kinematics instead of having to solve that on your
 own.
 
 To implement a fully functional controller you have to implement at least the inherited virtual
@@ -325,7 +329,7 @@ which is exported by adding:
 
 
 to your package.xml. Further, you need to load at least a controller name in combination with a
-controller type to the ROS parameter server. Additionally, you can include all other parameters you
+controller type to the ROS parameter server. Additionally, you can include other parameters you
 need. An exemplary configuration.yaml file can look like:
 
 .. code-block:: yaml
@@ -335,8 +339,8 @@ need. An exemplary configuration.yaml file can look like:
       additional_example_parameter: 0.0
       # ..
 
-You can now start your controller using the ``controller_spawner`` node from ROS control or via the
+Now you can start your controller using the ``controller_spawner`` node from ROS control or via the
 service calls offered by the ``hardware_manager``. Just make sure both the ``controller_spawner``
-and the ``franka_hw_node`` run in the same namespace. For more details see the controllers from the
-:ref:`franka_example_controllers package<example_controllers>` or the tutorials under
-`wiki.ros.org/ros_control/Tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
+and the ``franka_hw_node`` run in the same namespace. For more details have a look at the
+controllers from the :ref:`franka_example_controllers package<example_controllers>` or the
+`ROS control tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
