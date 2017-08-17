@@ -1,5 +1,5 @@
-ROS getting started
-===================
+franka_ros
+==========
 
 Before continuing with this chapter, please follow the steps from the
 :ref:`building the ROS packages <installing_ros>` section.

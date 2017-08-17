@@ -31,6 +31,7 @@ The source code of this documentation is also `available online
    requirements
    installation
    tutorial
+   libfranka
    ros_introduction
    troubleshooting
 

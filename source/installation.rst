@@ -82,6 +82,9 @@ If a systemwide installation is desired, execute the following instructions::
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+This part is optional. If you want to control the robot using `ROS <http://www.ros.org/>`_ please
+follow these instructions.
+
 After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, create a catkin
 workspace in a directory of your choice:
 
