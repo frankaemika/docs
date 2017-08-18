@@ -160,7 +160,7 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started togethe
 franka_visualization
 --------------------
 This package contains the ``franka_joint_state_publisher`` which connects to a FRANKA ARM using
-the ``libfranka`` API and visualizes the robot in RViz. To run it launch
+the ``libfranka`` API and visualizes the robot in RViz. To run it launch:
 
 .. code-block:: shell
 
