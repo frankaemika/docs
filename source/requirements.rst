@@ -35,14 +35,14 @@ measurements is less than 1 ms:
 
 .. caution::
     If the **<1 ms RRT constraint** is violated for a cycle, the received packet is dropped by the
-    research interface. After 50 dropped packets, the robot stops.
+    research interface. After 20 dropped packets, the robot stops.
 
 If a **motion generator command packet is dropped**, the robot takes the previous waypoints and
 performs a linear extrapolation (keep acceleration constant and integrate) for the missed
-timestep. If more than 50 packets are lost or dropped in a row, the robot stops.
+timestep. If more than 20 packets are lost or dropped in a row, the robot stops.
 
 If a **controller command packet is dropped**, the research interface will reuse the torques of
-the last successful received packet. Again, more than 50 in a row lost or dropped packets will
+the last successful received packet. Again, more than 20 in a row lost or dropped packets will
 stop the robot.
 
 .. hint::
