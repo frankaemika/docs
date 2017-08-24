@@ -36,4 +36,5 @@ The source code of this documentation is also `available online
    tutorial
    libfranka
    ros_introduction
+   fci_rcu
    troubleshooting
