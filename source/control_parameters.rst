@@ -121,4 +121,22 @@ Necessary Conditions
   operation.
 
 
+Finishing the Control
+---------------------
 
+Finishing Properly
+******************
+
+To properly finish the control one should set the motion finished flag to 'true' and keep sending
+the same control parameters till the status corresponding to move command is showing that motion
+is finished. Motion finsihed should be sent along with the last sample of control parameters.
+This flag basically mean that this sample of control parameters is the last sample. The flag is
+important for making sure that the motion has completely and sucessfully taken place.
+
+Cancelling the Contol
+*********************
+
+Another way of finishing the control is via stop command. One has two options either sending control
+data till he makes sure that stop command state has changed to active or sucessful or he can right
+away stop sending the control parameters (putting message id to zero) right after sending the stop
+command.
