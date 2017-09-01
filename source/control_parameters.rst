@@ -2,7 +2,7 @@ Control Parameters Specifications
 =================================
 
 The control parameters fed into the robot should met some certain specifications. There are two
-categories of specification namely recommended and necessary. 
+categories of specification namely recommended and necessary.
 
 .. hint::
 
@@ -37,11 +37,11 @@ end of trajectory:
 9. :math:`\ddot{q} = 0`
 
 Necessary Conditions
-********************* 
+*********************
 
 1. :math:`q_{min} < q < q_{max}`
 2. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-3. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}` 
+3. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 4. :math:`\dddot{q}_{min} < \dot{q} < \dddot{q}_{max}`
 
 .. hint::
@@ -69,7 +69,7 @@ beginning of trajectory:
 6. :math:`\dot{p} = 0`
 7. :math:`\ddot{p} = 0`
 
-end of trajectory: 
+end of trajectory:
 
 8. :math:`\dot{p} = 0`
 9. :math:`\ddot{p} = 0`
@@ -85,7 +85,7 @@ Derived from inverse kinematics:
 
 4. :math:`q_{min} < q < q_{max}`
 5. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-6. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}` 
+6. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 
 .. hint::
 
