@@ -77,7 +77,7 @@ end of trajectory:
 Necessary Conditions
 ********************
 
-1. :math:`T` is proper transformationmatrix
+1. :math:`T` is proper transformation matrix
 2. :math:`\dot{p}_{min} < \dot{p} < \dot{p}_{max}`
 3. :math:`\ddot{p}_{min} < \ddot{p} < \ddot{p}_{max}`
 
@@ -101,7 +101,7 @@ Controller requirements
 Recommended Conditions
 **********************
 
-1. :math:`\tau_{j, min} < \tau_j < \tau_{j_max}`
+1. :math:`\tau_{j, min} < \tau_j < \tau_{j, max}`
 2. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
 
 beginning of trajectory:
@@ -127,16 +127,21 @@ Finishing the Control
 Finishing Properly
 ******************
 
-To properly finish the control one should set the motion finished flag to 'true' and keep sending
+To properly finish the control, one should set the motion finished flag to *true* and keep sending
 the same control parameters till the status corresponding to move command is showing that motion
-is finished. Motion finsihed should be sent along with the last sample of control parameters.
-This flag basically mean that this sample of control parameters is the last sample. The flag is
-important for making sure that the motion has completely and sucessfully taken place.
+is finished. One should notice that checking the robot mode is not reliable for assuring the
+motion is finished. For example, the robot mode can change because of violation of any safety
+features. 
+Motion finished should be sent along with the last sample of control parameters (So the control
+data sent with motion finished are considered as a part of motion).
+This flag basically means that this sample of control parameters is the last sample. The flag is
+important for making sure that the motion has completely and successfully taken place.
 
-Cancelling the Contol
-*********************
+Cancelling the Control
+**********************
 
 Another way of finishing the control is via stop command. One has two options either sending control
-data till he makes sure that stop command state has changed to active or sucessful or he can right
-away stop sending the control parameters (putting message id to zero) right after sending the stop
+data till he makes sure that stop command state has changed to active or successful. Or he can right
+away stop sending the control parameters (putting message id to zero) after sending the stop
+command. In the latter case the robot extrapolates the control parameters till it recieves the stop
 command.
