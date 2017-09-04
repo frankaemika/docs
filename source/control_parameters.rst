@@ -1,13 +1,15 @@
 Control Parameters Specifications
 =================================
 
-The control parameters fed into the robot should met some certain specifications. There are two
-categories of specification namely recommended and necessary.
+Control parameters fed into the robot should fulfill *recommended* and *necessary* conditions.
+Recommended conditions should be fulfilled to ensure optimal operation for robot. If necessary
+conditions are not met then the motion will be aborted.
 
-.. hint::
-
-  One should notice that even if the recommended condtions are not met still the robot can
-  perform actions under necessary conditions.
+Robot's trajectory before and after user specified trajectory complies with
+recommended conditions. Robot puts the user specified trajectory in between and makes an
+overall trajectory out of it. Therefore, for example, if the first point of the user defined
+joint trajectory is very different from :math:`q_{start}` a velocity limits violation error will
+abort the motion.
 
 .. hint::
 
@@ -44,15 +46,7 @@ Necessary Conditions
 3. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 4. :math:`\dddot{q}_{min} < \dot{q} < \dddot{q}_{max}`
 
-.. hint::
-
-  The user specified trajectory is plugged into a trajectory which meets the recommended
-  conditions for start and end of trajectory. So for example if the first point fo the user defined
-  trajectory is very different from q_start an velocity limits violation error would stop the
-  operation.
-
-
-Cartesian Trajectory requirements
+Cartesian Trajectory Requirements
 ---------------------------------
 
 Recommended Conditions
@@ -81,21 +75,13 @@ Necessary Conditions
 2. :math:`\dot{p}_{min} < \dot{p} < \dot{p}_{max}`
 3. :math:`\ddot{p}_{min} < \ddot{p} < \ddot{p}_{max}`
 
-Derived from inverse kinematics:
+derived from inverse kinematics:
 
 4. :math:`q_{min} < q < q_{max}`
 5. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
 6. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 
-.. hint::
-
-  The user specified trajectory is plugged into a trajectory which meets the recommended
-  conditions for start and end of trajectory. So for example if the first point for the user defined
-  trajectory is very different from O_T_EE _start an velocity limits violation error would stop the
-  operation.
-
-
-Controller requirements
+Controller Requirements
 -----------------------
 
 Recommended Conditions
@@ -113,35 +99,4 @@ Necessary Conditions
 
 1. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
 
-.. hint::
 
-  The user specified torque trajectory is plugged into a trajectory which meets the
-  recommended conditions for start and end of trajectory. So for example if the first point for the
-  user defined trajectory is very different from 0 a torque discontinuity error would stop the
-  operation.
-
-
-Finishing the Control
----------------------
-
-Finishing Properly
-******************
-
-To properly finish the control, one should set the motion finished flag to *true* and keep sending
-the same control parameters till the status corresponding to move command is showing that motion
-is finished. One should notice that checking the robot mode is not reliable for assuring the
-motion is finished. For example, the robot mode can change because of violation of any safety
-features. 
-Motion finished should be sent along with the last sample of control parameters (So the control
-data sent with motion finished are considered as a part of motion).
-This flag basically means that this sample of control parameters is the last sample. The flag is
-important for making sure that the motion has completely and successfully taken place.
-
-Cancelling the Control
-**********************
-
-Another way of finishing the control is via stop command. One has two options either sending control
-data till he makes sure that stop command state has changed to active or successful. Or he can right
-away stop sending the control parameters (putting message id to zero) after sending the stop
-command. In the latter case the robot extrapolates the control parameters till it recieves the stop
-command.
