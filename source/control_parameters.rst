@@ -35,7 +35,7 @@ beginning of trajectory:
 
 end of trajectory:
 
-8. :math:`\dot{q} = 0` 
+8. :math:`\dot{q} = 0`
 9. :math:`\ddot{q} = 0`
 
 Necessary Conditions
