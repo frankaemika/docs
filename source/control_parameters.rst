@@ -2,7 +2,7 @@ Control Parameters Specifications
 =================================
 
 Control parameters fed into the robot should fulfill *recommended* and *necessary* conditions.
-Recommended conditions should be fulfilled to ensure optimal operation for robot. If necessary
+Recommended conditions should be fulfilled to ensure optimal operation of the robot. If necessary
 conditions are not met then the motion will be aborted.
 
 Robot's trajectory before and after user specified trajectory complies with
