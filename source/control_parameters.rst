@@ -5,11 +5,13 @@ Control parameters fed into the robot should fulfill *recommended* and *necessar
 Recommended conditions should be fulfilled to ensure optimal operation of the robot. If necessary
 conditions are not met then the motion will be aborted.
 
-Robot's trajectory before and after user specified trajectory complies with
-recommended conditions. Robot puts the user specified trajectory in between and makes an
-overall trajectory out of it. Therefore, for example, if the first point of the user defined
-joint trajectory is very different from :math:`q_{start}` a velocity limits violation error will
-abort the motion.
+The final robot trajectory is the result of processing the user-specified trajectory ensuring that
+recommended conditions are fulfilled. As long as necessary conditions conditions are met, the robot
+will try to follow the user-provided trajectory but it will only match the final trajectory if it
+also fulfills recommended conditions.
+If the necessary conditions are violated, an error will abort the motion: if, for instance, the
+first point of the user defined joint trajectory is very different from :math:`q_{start}` a velocity
+limits violation error will abort the motion.
 
 .. hint::
 
