@@ -21,8 +21,6 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import sphinx_rtd_theme
-
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -87,7 +85,6 @@ todo_include_todos = True
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -102,12 +99,12 @@ html_static_path = ['_static']
 
 html_context = {
     'css_files': [
-        '_static/style_override.css',  
+        '_static/style_override.css',
         ],
      }
 
 html_favicon = '_static/favicon.png'
-html_logo = '_static/logo.png'
+html_logo = '_static/logo.svg'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
