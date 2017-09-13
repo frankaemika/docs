@@ -7,8 +7,8 @@ Jumps in robot movement
 
 Please check the following things:
 
-* RT kernel is booted
-* RT permissions for the process is set
+* Ubuntu is booted with RT kernel
+* RT permissions for the process are set
 * Check `Network bandwidth, delay and jitter test`_
 
 
@@ -24,9 +24,9 @@ Try to ping the robot using the following command:
 
     ping <franka-control-ip>
 
-If this command fails, the robot is not properly connected to the network, or the IP was not
-correctly assigned during the setup phase. Please set up the network according to the documents
-sent with the robot.
+If this command fails, the Control is not properly connected to the network, or the IP address
+is not correctly assigned during the setup phase. Please set up the network according to the
+documents sent with your robot.
 
 
 .. _troubleshooting_open_brake:
@@ -73,4 +73,4 @@ ms. The standard deviation `mdev` is around 0.04 ms. As explained in the
 :ref:`network requirements section<requirement-network>` it must be guaranteed that the sum of the
 round-trip time and the execution time of the motion generator or control loop is
 **less than 1 ms**. If this constraint is violated for a cycle, the received packet is dropped by
-the research interface.
+FRANKA Control Interface.

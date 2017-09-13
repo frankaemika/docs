@@ -1,8 +1,8 @@
 Getting started
 ===============
 
-After :doc:`setting up the required software <installation>`, the robot needs to be installed and
-tested. **Please read through the documents shipped with the robot and follow the setup
+After :doc:`setting up the required software <installation>`, your robot needs to be installed and
+tested. **Please read through the documents shipped with your robot and follow the setup
 instructions before continuing any further!**
 
 
@@ -11,35 +11,36 @@ Powering on the robot
 
 Always check the following things before powering on the robot.
 
-1. Make sure that the FRANKA ARM has been mounted on a stable base and cannot topple over, even
+1. Make sure that the Arm has been mounted on a stable base and cannot topple over, even
    when performing fast motions or abrupt stops.
 
 .. caution::
-   FRANKA's built-in controllers only support tabletop mounting, i.e. they assume that FRANKA is
+   Panda's built-in controllers only support tabletop mounting, i.e. they assume that Arm is
    mounted perpendicular to the ground! Other mountings will **void your warranty**, decrease the
-   performance of the robot and **might damage the robot**!
+   performance of the robot and **might cause damage to the robot**!
 
-2. Ensure that the cable connecting FRANKA ARM and FRANKA CONTROL is firmly attached on both sides.
-3. Connect a user stop to FRANKA's base and keep it next to you in order to be able to stop
-   the robot at any time.
+2. Ensure that the cable connecting Arm and Control is firmly attached on both sides.
+3. Connect the external activation device to Arm's base and keep it next to you in order to be
+   able to stop the robot at any time.
 
 .. hint::
-   Pressing the user stop will switch from FRANKA CONTROL to the joint motor controllers. They
-   will hold their current position. **The user stop is not an emergency stop!**
+   Activating the external activation device will disconnect the Arm from Control and
+   wires it to its joint motor controllers that will hold their current position.
+   The *external activation device is not an emergency stop!*
 
 
-In the setup process, described in the manual which is shipped with Franka, the IP of the FRANKA
-CONTROL LAN port is set. In the following, the **FRANKA CONTROL IP is referred as
-<franka-control-ip>.** The workstation PC, which commands the robot using the research interface,
-must always be connected to it through the LAN port of FRANKA CONTROL, not to through the LAN port
-at the robot base.
+In the setup process, described in the manual which is shipped your robot, the IP address of
+the Control's LAN port is specified. In the following, the IP address of Control is
+referred to as <franka-control-ip>.
+The workstation PC, which commands your robot using the Franka Control Interface,
+must always be connected to the LAN port of Control and `not` to the LAN port of Arm.
 
 
 Verifying the connection
 ------------------------
 
-In order to verify that everything is correctly set up and it is possible to use the research
-interface, run the ``echo_robot_state`` example from ``libfranka``.
+In order to verify that everything is correctly set up and it is possible to use the Franka Control
+Interface, run the ``echo_robot_state`` example from ``libfranka``.
 
 Change to the build directory of ``libfranka`` and execute the example:
 
@@ -78,6 +79,6 @@ Example output:
 .. hint::
 
     If an error occurs at this point, perform the
-    :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that FRANKA's brakes are
-    opened. The brakes can be opened the from FRANKA DESK at
+    :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that robot's brakes are
+    opened. The brakes can be opened the from Desk at
     `https://\<franka-control-ip\>/ <https://\<franka-control-ip\>/>`_.
