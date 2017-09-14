@@ -24,7 +24,7 @@ Try to ping the robot using the following command:
 
     ping <franka-control-ip>
 
-If this command fails, the Control is not properly connected to the network, or the IP address
+If this command fails, the robot is not properly connected to the network, or the IP address
 is not correctly assigned during the setup phase. Please set up the network according to the
 documents sent with your robot.
 
@@ -34,7 +34,7 @@ documents sent with your robot.
 Open the brakes of the robot
 ----------------------------
 
-The brakes can be opened from FRANKA DESK at https://<franka-control-ip>. Further information is
+The brakes can be opened from Desk at https://<franka-control-ip>. Further information is
 provided by the documents sent with the robot.
 
 

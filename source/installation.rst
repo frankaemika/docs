@@ -10,7 +10,7 @@ In this chapter, the steps to set up a real-time kernel on Ubuntu as well as bui
 Setting up a real-time kernel
 -----------------------------
 
-In order to control your Panda using ``libfranka``, the controller program on the workstation
+In order to control your robot using ``libfranka``, the controller program on the workstation
 PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. The procedure of patching a
 kernel to support ``PREEMPT_RT`` and creating an installation package is described by the
 following online resources:
@@ -25,7 +25,7 @@ Allow user to set real-time permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After the ``PREEMPT_RT`` kernel is installed and running, add a group named `realtime` and
-add the user controlling your Panda to this group::
+add the user controlling your robot to this group::
 
     sudo addgroup realtime
     sudo usermod -a -G realtime $(whoami)
@@ -81,7 +81,7 @@ If a systemwide installation is desired, execute the following instructions::
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This part is optional. If you want to control your Panda using `ROS <http://www.ros.org/>`_ please
+This part is optional. If you want to control your robot using `ROS <http://www.ros.org/>`_ please
 follow these instructions.
 
 After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`_, create a catkin

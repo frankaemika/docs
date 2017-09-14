@@ -57,8 +57,8 @@ The robot can be moved by executing one of the many examples provided with ``lib
 the ``generate_joint_velocity_motion`` example. As already mentioned before, the
 :ref:`brakes <troubleshooting_open_brake>` and the External Activation Device must be released
 before moving, otherwise an error is printed.
-This example will move the last four joints by +/-12 degrees. To avoid collision, please verify
-that the robot has enough moving space prior to running the example. Then, execute the following
+This example will move the last four joints by +/-12 degrees. Prior to running the example,
+verify that the robot has enough free space to move without colliding. Then, execute the following
 command from the ``libfranka`` build directory:
 
 .. code-block:: shell
@@ -108,11 +108,11 @@ An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the 
 
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
-FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
-state is provided as an input argument to the callback. In the above example, the desired velocity
-is returned as ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion.
-When the motion is finished ``franka::Stop`` is returned instead. This example uses Panda's
-internal joint impedance controller.
+the robot by the control interface, at 1 kHz frequency. In the callback, read() and readOnce() are
+not needed, as the robot state is provided as an input argument to the callback. In the above
+example, the desired velocity is returned as ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}``
+during motion. When the motion is finished ``franka::Stop`` is returned instead. This example uses
+robot's internal joint impedance controller.
 
 .. caution::
 

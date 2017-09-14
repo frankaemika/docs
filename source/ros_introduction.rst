@@ -18,13 +18,13 @@ Make sure the ``source`` command was called with the setup script from your work
 
 franka_description
 ------------------
-This package contains the description of the Arm and the Hand in terms of kinematics,
+This package contains the description of our robots and end effectors in terms of kinematics,
 joint limits, visual surfaces and collision space. The collision space is a simplified version of
 the visual description used to improve performance of collision checks. The descriptions are based
 on the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ . The
 files do NOT contain inertial terms and therefore cannot be used for dynamics simulations (e.g.
-gazebo). The package offers launch files which visualize the robot descriptions of the Arm and the
-Hand.
+gazebo). The package offers launch files which visualize the robot descriptions of the robot and the
+gripper.
 
 .. code-block:: shell
 
@@ -35,8 +35,8 @@ Hand.
 
 franka_gripper
 --------------
-This package implements the ``franka_gripper_node`` for interfacing a Hand from ROS.
-The node publishes the state of the Hand and offers the following `actions servers`:
+This package implements the ``franka_gripper_node`` for interfacing a gripper from ROS.
+The node publishes the state of the gripper and offers the following `actions servers`:
 
  * ``franka_gripper::MoveAction(width, speed)``: moves to a target `width` with the defined
    `speed`.
@@ -62,7 +62,7 @@ You can launch the ``franka_gripper_node`` with:
 
 franka_hw
 ---------
-This package contains the hardware abstraction of the Arm for the ROS control framework
+This package contains the hardware abstraction of the robot for the ROS control framework
 based on the ``libfranka`` API. The hardware class ``franka_hw::FrankaHW`` is implemented in this
 package offering the following interfaces to controllers:
 
@@ -296,7 +296,7 @@ related functionality (if needed).
     interfaces, do not simply command zero velocity in ``stopping``. Since it might be called
     while the robot is still moving, it would be equivalent to commanding a jump in velocity
     leading to very high resulting torques. In this case it would be better to keep the
-    same velocity and stop the controller than sending zeros and let the Control handle
+    same velocity and stop the controller than sending zeros and let the robot handle
     the slowdown.
 
 Your controller class must be exported correctly with ``pluginlib`` which requires adding:

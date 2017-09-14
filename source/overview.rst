@@ -33,7 +33,7 @@ Furthermore, you get access to the following feedback data:
 It consists of two components:
 
 * ``libfranka``
-* ``franka_ros`` (ROS support)
+* ``franka_ros``
 
 
 ``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The
@@ -62,8 +62,8 @@ possible to:
     Data is sent over the network with a frequency of 1 kHz. Therefore, a good network
     connection is vital!
 
-``franka_ros`` connects Panda with the entire ROS ecosystem. It provides functionality equivalent
-to ``libfranka`` inside of ROS. Additionally, it includes a URDF model of the Arm and
-Hand, which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!**
+``franka_ros`` connects our robots with the entire ROS ecosystem. It provides functionality equivalent
+to ``libfranka`` inside of ROS. Additionally, it includes a URDF model of our robots and
+end effectors, which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!**
 integration makes it easy to move the robot and control the gripper, and the provided examples show
-you how to control your Panda from ROS.
+you how to control your robot from ROS.
