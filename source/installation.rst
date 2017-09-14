@@ -10,7 +10,7 @@ In this chapter, the steps to set up a real-time kernel on Ubuntu as well as bui
 Setting up a real-time kernel
 -----------------------------
 
-In order to control the Panda using ``libfranka``, the controller program on the workstation
+In order to control your Panda using ``libfranka``, the controller program on the workstation
 PC must run with `real-time priority` under a ``PREEMPT_RT`` kernel. The procedure of patching a
 kernel to support ``PREEMPT_RT`` and creating an installation package is described by the
 following online resources:

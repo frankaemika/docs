@@ -16,7 +16,7 @@ These components are:
    MoveIt!. The source code is available at https://github.com/frankaemika/franka_ros.
 
 The source code of this documentation is also `available online
-<https://github.com/frankaemika/control-interface-docs>`_.
+<https://github.com/frankaemika/docs>`_.
 
 
 .. important::

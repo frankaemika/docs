@@ -59,7 +59,7 @@ the ``generate_joint_velocity_motion`` example. As already mentioned before, the
 before moving, otherwise an error is printed.
 This example will move the last four joints by +/-12 degrees. To avoid collision, please verify
 that the robot has enough moving space prior to running the example. Then, execute the following
-command from the ``libfranka``'s build directory:
+command from the ``libfranka`` build directory:
 
 .. code-block:: shell
 
@@ -111,8 +111,8 @@ The callback provided to the ``robot.control`` will be executed for each robot s
 FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
 state is provided as an input argument to the callback. In the above example, the desired velocity
 is returned as ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion.
-When the motion is finished ``franka::Stop`` is returned instead.This example uses the internal
-`Joint Impedance` controller.
+When the motion is finished ``franka::Stop`` is returned instead. This example uses Panda's
+internal joint impedance controller.
 
 .. caution::
 
