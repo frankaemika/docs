@@ -1,27 +1,30 @@
-FRANKA EMIKA Research Interface Documentation
-=============================================
+
+FRANKA Control Interface Documentation
+======================================
 
 .. todolist::
 
-FRANKA EMIKA Research Interface consists of several open source components which we provide on
+The FRANKA Control Interface (FCI) consists of several open source components which we provide on
 `GitHub <https://github.com/frankaemika>`_. We welcome contributions and suggestions for
 improvements.
 
 These components are:
 
- * ``libfranka``, a C++ library that provides low-level control of the `FRANKA ARM and gripper
-   <https://franka.de>`_. Its source code is available at https://github.com/frankaemika/libfranka.
- * `ROS packages <http://wiki.ros.org/franka>`_, including ROS Control and MoveIt! integration.
-   The source code is available at https://github.com/frankaemika/franka_ros.
+ * ``franka_description``, a collection of URDF models and 3D meshes for Franka Emika research
+   robots and end effectors, available at https://github.com/frankaemika/franka_description.
+ * ``libfranka``, a C++ library that provides low-level control of Franka Emika research robots.
+   Its source code is available at https://github.com/frankaemika/libfranka.
+ * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for
+   ROS Control and MoveIt!. The source code is available at
+   https://github.com/frankaemika/franka_ros.
 
 The source code of this documentation is also `available online
-<https://github.com/frankaemika/research-interface-docs>`_.
+<https://github.com/frankaemika/docs>`_.
 
 
 .. important::
-    Before you start using the research interface, please read through the documents shipped with
-    the robot and the :doc:`minimum system and network requirements <requirements>` chapter.
-
+    Before you start using the FCI, please read through the documents shipped with the robot and
+    the :doc:`minimum system and network requirements <requirements>` chapter.
 
 .. toctree::
    :maxdepth: 2
@@ -34,10 +37,3 @@ The source code of this documentation is also `available online
    libfranka
    ros_introduction
    troubleshooting
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

@@ -13,11 +13,11 @@ robot will be established when the object is created:
 
     ...
 
-    franka::Robot robot("<franka-control-ip>");
+    franka::Robot robot("<control-ip>");
 
 The address can be passed either as a hostname or an IP address. In case of any error, either due
 to networking or conflicting library version, an exception of type ``franka::Exception`` will
-be thrown. When using several FRANKAs at the same time, simply create several objects with
+be thrown. When using several robots at the same time, simply create several objects with
 appropriate IP addresses.
 
 
@@ -53,20 +53,23 @@ callback. Returning ``false`` in the callback stops the loop. In the following, 
 Moving the robot
 ----------------
 
-The robot can be moved by executing one of many examples provided with ``libfranka``, like the
-``generate_joint_velocity_motion`` example. As already mentioned before, the
-:ref:`brakes <troubleshooting_open_brake>` and the user stop must be released before moving,
-otherwise an error is printed. This example will move the last four joints by +/-12 degrees. Verify
-that the robot has enough free space to move without colliding. Then, execute the following
+ .. warning::
+
+    Please read the manual before you start using the robot.
+
+The robot can be moved by executing one of the many examples provided with ``libfranka``, such as
+the ``generate_joint_velocity_motion`` example.
+This example will move the last four joints by +/-12 degrees. Prior to running the example,
+verify that the robot has enough free space to move without colliding. Then, execute the following
 command from the ``libfranka`` build directory:
 
 .. code-block:: shell
 
-    ./examples/generate_joint_velocity_motion <franka-control-ip>
+    ./examples/generate_joint_velocity_motion <control-ip>
 
-The robot is moved by a `controller` which specifies the desired torque on each joint. It is
-possible to use a built in `controller`. Alternatively, a self written controller can be provided.
-Additionally, the `controller` can be fed with desired values by `motion generators`.
+The robot is moved by a `controller` which specifies the desired joint level torque. It
+is possible to use a built in `controller`. Alternatively, a self written controller can be
+provided. Additionally, the `controller` can be fed with desired values by `motion generators`.
 
 
 Currently the following internal controllers are available:
@@ -74,7 +77,7 @@ Currently the following internal controllers are available:
 * Joint impedance
 
 
-For building a motion generator, one of the four interfaces can be used:
+For building a motion generator, one of the following four interfaces can be used:
 
 * Joint position
 * Joint velocity
@@ -107,10 +110,11 @@ An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the 
 
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
-FRANKA, at 1 kHz frequency. In the callback, read() and readOnce() is not needed, as the robot
-state is provided. In the above example, the desired velocity is returned as
-``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}`` during motion. When the motion is finished
-``franka::Stop`` is returned instead. This example uses the internal `Joint Impedance` controller.
+the robot by the control interface, at 1 kHz frequency. In the callback, read() and readOnce() are
+not needed as the robot state is provided as an input argument to the callback. In the above
+example, the desired velocity is returned as ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}``
+during motion. When the motion is finished ``franka::Stop`` is returned instead. This example uses
+robot's internal joint impedance controller.
 
 .. caution::
 
@@ -118,7 +122,7 @@ state is provided. In the above example, the desired velocity is returned as
     influence the timings.
 
 For writing a controller, the ``franka::Robot::control`` function is used as well. The following
-example shows a **simple controller** commanding zero torque for each joint. The gravity is
+example shows a simple controller commanding zero torque for each joint. The gravity is
 compensated by the robot.
 
 .. code-block:: c++
@@ -128,7 +132,7 @@ compensated by the robot.
         });
 
 
-The combination of both, **external motion generation and control** is shown in the example file
+The combination of both, external motion generation and control is shown in the example file
 ``motion_with_control.cpp``.
 
 When creating motions, make sure they have smooth velocity and acceleration profiles. Big
