@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# control-interface documentation build configuration file, created by
+# FCI documentation build configuration file, created by
 # sphinx-quickstart on Wed May 24 14:40:52 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -49,7 +49,7 @@ master_doc = 'index'
 # General information about the project.
 project = 'FRANKA Control Interface (FCI)'
 copyright = '2017, FRANKA EMIKA GmbH'
-author = 'FRANKA Control Interface Team'
+author = 'FRANKA EMIKA GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -109,7 +109,7 @@ html_logo = '_static/logo.svg'
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'control-interface-doc'
+htmlhelp_basename = 'fci-docs'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -136,9 +136,9 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'control-interface.tex',
+    (master_doc, 'fci.tex',
      'FRANKA Control Interface Documentation',
-     'FRANKA Control Interface Team', 'manual'),
+     author, 'manual'),
 ]
 
 
@@ -147,7 +147,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'control-interface',
+    (master_doc, 'fci',
      'FRANKA Control Interface Documentation', [author], 1)
 ]
 
@@ -158,8 +158,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'control-interface',
+    (master_doc, 'fci',
      'FRANKA Control Interface Documentation', author,
-     'control-interface', 'control interface for Panda',
+     'fci', 'FRANKA Control Interface',
      'Miscellaneous'),
 ]
