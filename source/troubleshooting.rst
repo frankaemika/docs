@@ -4,7 +4,7 @@ This section lists solutions to a set of possible errors which can happen when u
 
  .. hint::
 
-	Further help is provided in the troubleshooting page of the manual shipped with your robot.
+    Further help is provided in the troubleshooting page of the manual shipped with your robot.
 
 
 Jumps in robot motion

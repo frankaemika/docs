@@ -55,7 +55,7 @@ Moving the robot
 
  .. warning::
 
-	Please read the manual before you start using the robot.
+    Please read the manual before you start using the robot.
 
 The robot can be moved by executing one of the many examples provided with ``libfranka``, such as
 the ``generate_joint_velocity_motion`` example.
