@@ -8,7 +8,7 @@ Overview
 
     Schematic overview of the components.
 
-The FRANKA Control Interface (FCI) allows a fast and direct low-level bidirectional connection
+The Franka Control Interface (FCI) allows a fast and direct low-level bidirectional connection
 to the Arm and Hand. It provides the current status of the robot and enables its direct control.
 You can execute custom trajectories by sending real-time control values:
 

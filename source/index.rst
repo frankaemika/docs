@@ -1,10 +1,10 @@
 
-FRANKA Control Interface Documentation
+Franka Control Interface Documentation
 ======================================
 
 .. todolist::
 
-The FRANKA Control Interface (FCI) consists of several open source components which we provide on
+The Franka Control Interface (FCI) consists of several open source components which we provide on
 `GitHub <https://github.com/frankaemika>`_. We welcome contributions and suggestions for
 improvements.
 

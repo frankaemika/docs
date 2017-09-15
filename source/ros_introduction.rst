@@ -205,14 +205,10 @@ To launch the joint impedance example, execute the following command:
 Other examples are started in the same way.
 
 
-franka_moveit_config
+panda_moveit_config
 --------------------
-This package contains partly auto generated files that connect the FRANKA ARM to the MoveIt! motion
-planning framework. It contains three move-groups:
-
- * franka_with_gripper (default, robot and gripper)
- * franka (robot only)
- * franka_gripper (gripper only)
+This package contains partly auto generated files that provide an out-of-the-box MoveIt!
+configuration for Panda Arm and Hand.
 
 To control the robot with MoveIt! launch the following three files:
 
@@ -220,15 +216,14 @@ To control the robot with MoveIt! launch the following three files:
 
     # bring up hardware
     roslaunch franka_control franka_control.launch robot_ip:=<fci-ip>
-    arm_id:=<your_robot_namespace>  load_gripper:=<true/false>
+      arm_id:=<your_robot_namespace>  load_gripper:=<true/false>
 
     # start a joint_trajectory_controller of type <controller>
-    roslaunch franka_moveit_config franka_moveit.launch  arm_id:=<your_robot_namespace>
+    roslaunch panda_moveit_config panda_moveit.launch  arm_id:=<your_robot_namespace>
       controller:=<effort/position>
 
     # for visualization and GUI-based motion planning and execution
-    roslaunch franka_moveit_config moveit_rviz.launch
-
+    roslaunch panda_moveit_config moveit_rviz.launch
 
 For more details, documentation and tutorials, please have a look at the
 `MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.

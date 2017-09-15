@@ -137,7 +137,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'fci.tex',
-     'FRANKA Control Interface Documentation',
+     'Franka Control Interface Documentation',
      author, 'manual'),
 ]
 
@@ -148,7 +148,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     (master_doc, 'fci',
-     'FRANKA Control Interface Documentation', [author], 1)
+     'Franka Control Interface Documentation', [author], 1)
 ]
 
 
@@ -159,7 +159,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'fci',
-     'FRANKA Control Interface Documentation', author,
-     'fci', 'FRANKA Control Interface',
+     'Franka Control Interface Documentation', author,
+     'fci', 'Franka Control Interface',
      'Miscellaneous'),
 ]
