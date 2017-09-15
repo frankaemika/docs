@@ -20,6 +20,7 @@ following online resources:
  * `Howto setup Linux with PREEMPT_RT properly
    <https://wiki.linuxfoundation.org/realtime/documentation/howto/applications/preemptrt_setup>`_
 
+.. _installation-real-time:
 
 Allow user to set real-time permissions for its processes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
