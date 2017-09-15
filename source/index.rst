@@ -10,9 +10,10 @@ improvements.
 
 These components are:
 
- * ``libfranka``, a C++ library that provides low-level control of a `Franka Emika
-   <https://franka.de>`_ research robot. Its source code is available at
-   https://github.com/frankaemika/libfranka.
+ * ``franka_description``, a collection of URDF models and 3D meshes for Franka Emika research
+   robots and end effectors, available at https://github.com/frankaemika/franka_description.
+ * ``libfranka``, a C++ library that provides low-level control of Franka Emika research robots.
+   Its source code is available at https://github.com/frankaemika/libfranka.
  * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for
    ROS Control and MoveIt!. The source code is available at
    https://github.com/frankaemika/franka_ros.

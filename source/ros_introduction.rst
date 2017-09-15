@@ -22,14 +22,7 @@ franka_description
 This package contains the description of our robots and end effectors in terms of kinematics, joint
 limits, visual surfaces and collision space. The collision space is a simplified version of the
 visual description used to improve performance of collision checks. The descriptions are based on
-the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ . The
-package offers launch files which visualize the robot descriptions of the robot and the gripper.
-
-.. code-block:: shell
-
-    roslaunch franka_description visualize_franka.launch                      # with gripper
-    roslaunch franka_description visualize_franka.launch load_gripper:=false  # without gripper
-    roslaunch franka_description display_gripper.launch                       # gripper only
+the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ .
 
 
 franka_gripper
