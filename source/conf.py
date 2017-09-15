@@ -47,9 +47,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'FRANKA Control Interface (FCI)'
-copyright = '2017, FRANKA EMIKA GmbH'
-author = 'FRANKA EMIKA GmbH'
+project = 'Franka Control Interface (FCI)'
+copyright = '2017, Franka Emika GmbH'
+author = 'Franka Emika GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

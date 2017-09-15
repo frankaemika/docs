@@ -10,7 +10,7 @@ improvements.
 
 These components are:
 
- * ``libfranka``, a C++ library that provides low-level control of a `FRANKA EMIKA
+ * ``libfranka``, a C++ library that provides low-level control of a `Franka Emika
    <https://franka.de>`_ research robot. Its source code is available at
    https://github.com/frankaemika/libfranka.
  * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for

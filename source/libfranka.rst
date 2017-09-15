@@ -53,6 +53,8 @@ callback. Returning ``false`` in the callback stops the loop. In the following, 
 Moving the robot
 ----------------
 
+MANUAL REFERENCE
+
 The robot can be moved by executing one of the many examples provided with ``libfranka``, such as
 the ``generate_joint_velocity_motion`` example. As already mentioned before, the
 :ref:`brakes <troubleshooting_open_brake>` and the External Activation Device must be released
@@ -65,9 +67,9 @@ command from the ``libfranka`` build directory:
 
     ./examples/generate_joint_velocity_motion <control-ip>
 
-The robot is moved by a `controller` which specifies the desired torque on each joint. It is
-possible to use a built in `controller`. Alternatively, a self written controller can be provided.
-Additionally, the `controller` can be fed with desired values by `motion generators`.
+The robot is moved by a `controller` which specifies the desired joint level torque. It
+is possible to use a built in `controller`. Alternatively, a self written controller can be
+provided. Additionally, the `controller` can be fed with desired values by `motion generators`.
 
 
 Currently the following internal controllers are available:
