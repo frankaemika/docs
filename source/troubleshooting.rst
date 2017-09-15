@@ -36,7 +36,7 @@ The robot does not move
 There can be many reasons for this. If an exception is thrown by the FCI during the motion
 generation or control loop, you should consult the API documentation on the received exception.
 However, if your commands are simply rejected, make sure that your robot's breaks are open prior to
-sending the commands to the FCI. The brakes can be opened from Desk at https://<fci-ip>.
+sending the commands to the FCI. The robot's brakes can be opened from Desk at https://<fci-ip>.
 Further information is provided by the documents sent with the robot.
 
 
@@ -76,3 +76,8 @@ ms. The standard deviation `mdev` is around 0.04 ms. As explained in the
 round-trip time and the execution time of the motion generator or control loop is
 **less than 1 ms**. If this constraint is violated for a cycle, the received packet is dropped by
 the FCI.
+
+If your problem is not addressed here
+-------------------------------------
+
+Please consult the troubleshooting section of the operation manual that comes with your robot.
