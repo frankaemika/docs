@@ -69,8 +69,3 @@ ms. The standard deviation `mdev` is around 0.04 ms. As explained in the
 round-trip time and the execution time of the motion generator or control loop is
 **less than 1 ms**. If this constraint is violated for a cycle, the received packet is dropped by
 the FCI.
-
-If your problem is not addressed here
--------------------------------------
-
-Please consult the troubleshooting section of the operation manual that comes with your robot.
