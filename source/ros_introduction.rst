@@ -23,8 +23,8 @@ joint limits, visual surfaces and collision space. The collision space is a simp
 the visual description used to improve performance of collision checks. The descriptions are based
 on the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ . The
 files do NOT contain inertial terms and therefore cannot be used for dynamics simulations (e.g.
-gazebo). The package offers launch files which visualize the robot descriptions of the robot and the
-gripper.
+Gazebo). The package offers launch files which visualize the robot descriptions of the robot and
+the gripper.
 
 .. code-block:: shell
 
@@ -40,8 +40,8 @@ The node publishes the state of the gripper and offers the following `actions se
 
  * ``franka_gripper::MoveAction(width, speed)``: moves to a target `width` with the defined
    `speed`.
- * ``franka_gripper::GraspAction(width, speed, max_current)``: tries to grasp at the desired
-   `width` with the `max_current` while closing with the given `speed`.
+ * ``franka_gripper::GraspAction(width, speed, force)``: tries to grasp at the desired
+   `width` with a desired `force` while closing with the given `speed`.
  * ``franka_gripper::HomingAction()``: homes the gripper and updates the maximum width given the
    mounted fingers.
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
@@ -54,7 +54,7 @@ You can launch the ``franka_gripper_node`` with:
 
 .. code-block:: shell
 
-    roslaunch franka_gripper franka_gripper.launch robot_ip:=<franka-control-ip>
+    roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
       arm_id:=<your_robot_namespace>
 
 
@@ -69,26 +69,26 @@ package offering the following interfaces to controllers:
 +-------------------------------------------------+----------------------------------------------+
 |                    Interface                    |                   Function                   |
 +=================================================+==============================================+
-| ``hardware_interface::JointStateInterface``     | reads joint states.                          |
+| ``hardware_interface::JointStateInterface``     | Reads joint states.                          |
 +-------------------------------------------------+----------------------------------------------+
-| ``hardware_interface::VelocityJointInterface``  | commands joint positions and reads joint     |
+| ``hardware_interface::VelocityJointInterface``  | Commands joint velocities and reads joint    |
 |                                                 | states.                                      |
 +-------------------------------------------------+----------------------------------------------+
-| ``hardware_interface::PositionJointInterface``  | commands joint velocities and reads joint    |
+| ``hardware_interface::PositionJointInterface``  | Commands joint positions and reads joint     |
 |                                                 | states.                                      |
 +-------------------------------------------------+----------------------------------------------+
-| ``hardware_interface::EffortJointInterface``    | commands joint torques and reads joint       |
-|                                                 | states.                                      |
+| ``hardware_interface::EffortJointInterface``    | Commands joint-level torques and reads       |
+|                                                 | joint states.                                |
 +-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaStateInterface``             | reads the full robot state.                  |
+| ``franka_hw::FrankaStateInterface``             | Reads the full robot state.                  |
 +-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaPoseCartesianInterface``     | commands Cartesian poses and reads the full  |
+| ``franka_hw::FrankaPoseCartesianInterface``     | Commands Cartesian poses and reads the full  |
 |                                                 | robot state.                                 |
 +-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaVelocityCartesianInterface`` | commands Cartesian velocities and reads the  |
+| ``franka_hw::FrankaVelocityCartesianInterface`` | Commands Cartesian velocities and reads the  |
 |                                                 | full robot state.                            |
 +-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaModelInterface``             | reads the dynamic and kinematic model of the |
+| ``franka_hw::FrankaModelInterface``             | Reads the dynamic and kinematic model of the |
 |                                                 | robot.                                       |
 +-------------------------------------------------+----------------------------------------------+
 
@@ -115,20 +115,29 @@ To use ROS control interfaces, you have to retrieve resource handles by name:
 +-------------------------------------------------+----------------------------------------+
 
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
-controllers. In addition a variety of ROS services are offered to expose the full ``libfranka``
+controllers.
+
+
+.. _franka_control:
+
+franka_control
+--------------
+
+``franka_control`` provides a variety of ROS services to expose the full ``libfranka``
 API in the ROS ecosystem. The following services are provided:
 
- * ``franka_hw::SetJointImpedance`` specifies joint stiffness for the internal controller
+ * ``franka_control::SetJointImpedance`` specifies joint stiffness for the internal controller
    (damping is automatically derived from the stiffness).
- * ``franka_hw::SetCartesianImpedance`` specifies Cartesian stiffness for the internal controller
-   (damping is automatically derived from the stiffness).
- * ``franka_hw::SetEEFrame`` specifies the transformation from <arm_id>_EE to <arm_id>_link8 frame.
- * ``franka_hw::SetKFrame`` specifies the transformation from <arm_id>_K to <arm_id>_EE frame.
- * ``franka_hw::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian wrenches
-   to configure the collision reflex.
- * ``franka_hw::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian and
-   joint level to configure the collision reflex.
- * ``franka_hw::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
+ * ``franka_control::SetCartesianImpedance`` specifies Cartesian stiffness for the internal
+   controller (damping is automatically derived from the stiffness).
+ * ``franka_control::SetEEFrame`` specifies the transformation from <arm_id>_EE to <arm_id>_link8
+   frame.
+ * ``franka_control::SetKFrame`` specifies the transformation from <arm_id>_K to <arm_id>_EE frame.
+ * ``franka_control::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian
+   wrenches to configure the collision reflex.
+ * ``franka_control::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian
+   and joint level to configure the collision reflex.
+ * ``franka_control::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
 
 .. important::
 
@@ -138,7 +147,7 @@ API in the ROS ecosystem. The following services are provided:
     wrenches. *Neither the <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be
     changed at run time*.
 
-To recover from errors and reflexes the ``franka_hw::ErrorRecoveryAction`` can be called.
+To recover from errors and reflexes the ``franka_control::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
 
 .. code-block:: shell
@@ -146,19 +155,19 @@ That can be done from an action client or by simply publishing on the action goa
    rostopic pub /<your_robot_namespace>/error_recovery/goal franka_hw/ErrorRecoveryActionGoal "{}"
 
 
-After recovery, the ``franka_hw_node`` restarts the controllers that were running. That is
+After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
 possible as the node does not die when robot reflexes are triggered or errors are occurred.
-All of these functionalities are provided by the ``franka_hw_node`` which can be launched with the
-following command:
+All of these functionalities are provided by the ``franka_control_node`` which can be launched
+with the following command:
 
 .. code-block:: shell
 
-    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip>
+    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip>
       arm_id:=<your_robot_namespace> load_gripper:=<true/false>
 
 
-Besides loading the ``franka_hw_node``, the launch file also starts a
-``franka_hw::FrankaStateController`` for reading and publishing the robot states, including
+Besides loading the ``franka_control_node``, the launch file also starts a
+``franka_control::FrankaStateController`` for reading and publishing the robot states, including
 external wrenches, configurable transforms and the joint states required for visualization with
 rivz. For visualization purposes, a ``robot_state_publisher`` is started together with RViz.
 
@@ -170,7 +179,7 @@ the ``libfranka`` API and visualizes it in RViz. To run this package launch:
 
 .. code-block:: shell
 
-    roslaunch franka_visualization franka_visualization.launch robot_ip:=<franka-control-ip>
+    roslaunch franka_visualization franka_visualization.launch robot_ip:=<fci-ip>
       load_gripper:=<true/false>
 
 
@@ -180,9 +189,9 @@ connection to the robot.
 .. important::
 
     Only one instance of a ``franka::Robot`` can connect to the robot. This means, that for example
-    the ``franka_joint_state_publisher`` cannot run in parallel to the ``franka_hw_node``. This
-    also implies that you cannot execute the visualization example alongside a separate program
-    running a controller.
+    the ``franka_joint_state_publisher`` cannot run in parallel to the ``franka_control_node``.
+    This also implies that you cannot execute the visualization example alongside a separate
+    program running a controller.
 
 
 .. _example_controllers:
@@ -199,7 +208,7 @@ To launch the joint impedance example, execute the following command:
 .. code-block:: shell
 
     roslaunch franka_example_controllers joint_impedance_example_controller.launch
-      robot_ip:=<franka-control-ip> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
+      robot_ip:=<fci-ip> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
 
 Other examples are started in the same way.
 
@@ -218,7 +227,7 @@ To control the robot with MoveIt! launch the following three files:
 .. code-block:: shell
 
     # bring up hardware
-    roslaunch franka_hw franka_hw.launch robot_ip:=<franka-control-ip>
+    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip>
     arm_id:=<your_robot_namespace>  load_gripper:=<true/false>
 
     # start a joint_trajectory_controller of type <controller>
@@ -278,11 +287,11 @@ The idea behind offering the *EffortJointInterface* in combination with a motion
 interface is to expose the internal motion generators to the user. The calculated desired joint
 pose corresponding to a motion generator command is available in the robot state one time step
 later. One use case for this combination would be following a Cartesian trajectory using your own
-joint torque controller. In this case you would claim the combination *EffortJointInterface* +
-*FrankaCartesianPoseInterface*, stream your trajectory into the *FrankaCartesianPoseInterface*, and
-compute your torque commands based on the resulting desired joint pose (q_d) from the robot state.
-This allows to use the robot's built-in inverse kinematics instead of having to solve it on
-your own.
+joint-level torque controller. In this case you would claim the combination *EffortJointInterface*
++ *FrankaCartesianPoseInterface*, stream your trajectory into the *FrankaCartesianPoseInterface*,
+and compute your joint-level torque commands based on the resulting desired joint pose (q_d) from
+the robot state. This allows to use the robot's built-in inverse kinematics instead of having to
+solve it on your own.
 
 To implement a fully functional controller you have to implement at least the inherited virtual
 functions ``init`` and ``update``. Initializing - e.g. start poses - should be done in the
@@ -295,7 +304,7 @@ related functionality (if needed).
     Always command a gentle slowdown before shutting down the controller. When using velocity
     interfaces, do not simply command zero velocity in ``stopping``. Since it might be called
     while the robot is still moving, it would be equivalent to commanding a jump in velocity
-    leading to very high resulting torques. In this case it would be better to keep the
+    leading to very high resulting joint-level torques. In this case it would be better to keep the
     same velocity and stop the controller than sending zeros and let the robot handle
     the slowdown.
 
@@ -347,6 +356,7 @@ need. An exemplary configuration.yaml file can look like:
 
 Now you can start your controller using the ``controller_spawner`` node from ROS control or via the
 service calls offered by the ``hardware_manager``. Just make sure that both the
-``controller_spawner`` and the ``franka_hw_node`` run in the same namespace. For more details have
-a look at the controllers from the :ref:`franka_example_controllers package<example_controllers>`
-or the `ROS control tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
+``controller_spawner`` and the ``franka_control_node`` run in the same namespace. For more details
+have a look at the controllers from the
+:ref:`franka_example_controllers package<example_controllers>` or the
+`ROS control tutorials <http://wiki.ros.org/ros_control/Tutorials>`_.
