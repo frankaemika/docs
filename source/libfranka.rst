@@ -109,7 +109,7 @@ An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the 
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
 the robot by the control interface, at 1 kHz frequency. In the callback, read() and readOnce() are
-not needed, as the robot state is provided as an input argument to the callback. In the above
+not needed as the robot state is provided as an input argument to the callback. In the above
 example, the desired velocity is returned as ``{{0.0, 0.0, 0.0, omega, omega, omega, omega}}``
 during motion. When the motion is finished ``franka::Stop`` is returned instead. This example uses
 robot's internal joint impedance controller.
@@ -120,7 +120,7 @@ robot's internal joint impedance controller.
     influence the timings.
 
 For writing a controller, the ``franka::Robot::control`` function is used as well. The following
-example shows a **simple controller** commanding zero torque for each joint. The gravity is
+example shows a simple controller commanding zero torque for each joint. The gravity is
 compensated by the robot.
 
 .. code-block:: c++
@@ -130,7 +130,7 @@ compensated by the robot.
         });
 
 
-The combination of both, **external motion generation and control** is shown in the example file
+The combination of both, external motion generation and control is shown in the example file
 ``motion_with_control.cpp``.
 
 When creating motions, make sure they have smooth velocity and acceleration profiles. Big
