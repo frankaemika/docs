@@ -1,5 +1,10 @@
 Troubleshooting
 ===============
+This section lists solutions to a set of possible errors which can happen when using the FCI.
+
+ .. hint::
+
+	Further help is provided in the troubleshooting page of the manual shipped with your robot.
 
 
 Jumps in robot motion
@@ -26,18 +31,6 @@ Try to ping the robot using the following command:
 If this command fails, the robot is not properly connected to the network, or the IP address
 is not correctly assigned during the setup phase. Please set up the network according to the
 documents sent with your robot.
-
-
-.. _troubleshooting_open_brake:
-
-The robot does not move
------------------------
-
-There can be many reasons for this. If an exception is thrown by the FCI during the motion
-generation or control loop, you should consult the API documentation on the received exception.
-However, if your commands are simply rejected, make sure that your robot's breaks are open prior to
-sending the commands to the FCI. The robot's brakes can be opened from Desk at https://<fci-ip>.
-Further information is provided by the documents sent with the robot.
 
 
 .. _network-bandwidth-delay-test:

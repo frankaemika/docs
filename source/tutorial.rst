@@ -79,5 +79,6 @@ Example output:
 .. hint::
 
     If an error occurs at this point, perform the
-    :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that robot's brakes are
-    opened. The brakes can be opened the from Desk at `https://\<fci-ip\>`.
+    :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that the robot's fail-safe
+    safety locking system is opened. Further information are provided in the manual shipped with
+    the robot.

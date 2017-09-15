@@ -53,12 +53,12 @@ callback. Returning ``false`` in the callback stops the loop. In the following, 
 Moving the robot
 ----------------
 
-MANUAL REFERENCE
+ .. warning::
+
+	Please read the manual before you start using the robot.
 
 The robot can be moved by executing one of the many examples provided with ``libfranka``, such as
-the ``generate_joint_velocity_motion`` example. As already mentioned before, the
-:ref:`brakes <troubleshooting_open_brake>` and the External Activation Device must be released
-before moving, otherwise an error is printed.
+the ``generate_joint_velocity_motion`` example.
 This example will move the last four joints by +/-12 degrees. Prior to running the example,
 verify that the robot has enough free space to move without colliding. Then, execute the following
 command from the ``libfranka`` build directory:

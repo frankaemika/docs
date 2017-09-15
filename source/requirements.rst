@@ -24,8 +24,8 @@ Having relays in between could lead to delay, jitter or packet loss. This will d
 performance of your controller or make it unusable.
 
 .. hint::
-    To minimize the delay, use the LAN port of Control, and not the LAN port in the base of
-    your robot.
+    The best performance of your robot can be achieved when you directly connect to the LAN port
+    of Control.
 
 To control the robot, it must be guaranteed that the sum of the following time measurements is
 less than 1 ms:
