@@ -4,7 +4,7 @@ FRANKA Control Interface Documentation
 
 .. todolist::
 
-FRANKA Control Interface (FCI) consists of several open source components which we provide on
+The FRANKA Control Interface (FCI) consists of several open source components which we provide on
 `GitHub <https://github.com/frankaemika>`_. We welcome contributions and suggestions for
 improvements.
 
@@ -13,7 +13,7 @@ These components are:
  * ``libfranka``, a C++ library that provides low-level control of a `FRANKA EMIKA
    <https://franka.de>`_ research robot. Its source code is available at
    https://github.com/frankaemika/libfranka.
- * ``franka_ros``, our `ROS integration <http://wiki.ros.org/franka_ros>`_, including support for
+ * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for
    ROS Control and MoveIt!. The source code is available at
    https://github.com/frankaemika/franka_ros.
 

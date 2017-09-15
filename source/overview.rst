@@ -12,43 +12,42 @@ The FRANKA Control Interface (FCI) allows a fast and direct low-level bidirectio
 to the Arm and Hand. It provides the current status of the robot and enables its direct control.
 You can execute custom trajectories by sending real-time control values:
 
- * Joint torque control.
- * Desired joint position or velocity command.
- * Desired Cartesian position or velocity command.
+ * Joint-level torque commands.
+ * Desired joint position or velocity commands.
+ * Desired Cartesian position or velocity commands.
 
 Furthermore, you get access to the following feedback data:
 
- * Measured joint data, such as the position, velocity, and torque.
+ * Link-side torque signals.
+ * Measured joint data, such as the position and velocity.
  * Low-level desired joint goals.
  * Estimation of externally applied torques and wrenches.
  * Various collision and contact information.
 
 .. important::
 
-    While the FRANKA Control Interface is active you have full control of the robot.
-    However, you `cannot` use Desk and FRANKA Control Interface simultaneously.
-    This means that you `cannot` utilize Apps and FRANKA Control Interface at the same time.
+    While the FCI is active you have full, exclusive control of the Arm and Hand. This means that
+    you `cannot` use Desk or Apps at the same time as the FCI.
 
 
-It consists of two components:
+The FCI consists of two components:
 
 * ``libfranka``
 * ``franka_ros``
 
 
-``libfranka`` provides a **C++ interface** which is run remotely on a workstation PC. The
-connection to Control is established via a standard Ethernet connection. The interface
-provides high-speed measurements, internal data of the robot and the gripper. Further, it accepts
-parameters and control values at an update frequency of up to 1 kHz. With this library, it is
-possible to:
+``libfranka`` provides a C++ interface which is run on a workstation PC. The connection to the FCI
+is established via a standard Ethernet connection to Control. The FCI provides high-speed
+measurements from the Arm and Hand. Furthermore, it accepts control commands at an update frequency
+of 1 kHz. With this library, it is possible to:
 
 * Retrieve information about the current state of the robot, e.g. current end effector pose, joint
-  angles or the gripper status.
-* Execute motions by giving joint positions, joint velocities, Cartesian poses, or Cartesian
+  angles, or the gripper status.
+* Execute motions by sending joint positions, joint velocities, Cartesian poses, or Cartesian
   velocities.
-* Perform torque control.
-* Send commands to the robot, e.g. to set collision sensitivity, set additional loads or the
-  joint/Cartesian stiffness.
+* Send joint-level torque commands.
+* Changing parameters of the Arm, e.g. to set collision sensitivity, to set additional loads, or
+  to change joint/Cartesian stiffness.
 * Calculate forward kinematics and other model properties from the current robot state.
 * Control the gripper.
 * Use the robot model library which provides the following:
@@ -59,11 +58,12 @@ possible to:
 
 .. important::
 
-    Data is sent over the network with a frequency of 1 kHz. Therefore, a good network
-    connection is vital!
+    Data is sent over the network with a frequency of 1 kHz. Therefore, a good network connection
+    is vital!
 
-``franka_ros`` connects our robots with the entire ROS ecosystem. It provides functionality equivalent
-to ``libfranka`` inside of ROS. Additionally, it includes a URDF model of our robots and
-end effectors, which allows for visualization (e.g. RViz) and kinematic simulations. **MoveIt!**
+``franka_ros`` connects FRANKA EMIKA research robots with the entire ROS ecosystem. It provides
+functionality equivalent to ``libfranka`` for `ROS Control <https://wiki.ros.org/ros_control>`_.
+Additionally, it includes a URDF model of our robots and end effectors, which allows for
+visualization (e.g. RViz) and kinematic simulations. `MoveIt! <https://wiki.ros.org/moveit>`_
 integration makes it easy to move the robot and control the gripper, and the provided examples show
 you how to control your robot from ROS.
