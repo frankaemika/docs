@@ -1,4 +1,4 @@
-# research-interface-docs
+# docs: Franka Control Interface (FCI) documentation source
 
 To build the documentation, execute:
 

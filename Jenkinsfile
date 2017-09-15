@@ -12,20 +12,20 @@ node {
     stage('Build HTML') {
       sh 'make html'
       dir('build') {
-        sh 'tar cfz research-interface.tar.gz html'
-        archive 'research-interface.tar.gz'
+        sh 'tar cfz fci.tar.gz html'
+        archive 'fci.tar.gz'
         publishHTML([allowMissing: false,
                      alwaysLinkToLastBuild: false,
                      keepAll: true,
                      reportDir: 'html',
                      reportFiles: 'index.html',
-                     reportName: 'User Documentation'])
+                     reportName: 'FCI Documentation'])
       }
     }
 
     stage('Build PDF') {
       sh 'make latexpdf'
-      archive 'build/latex/research-interface.pdf'
+      archive 'build/latex/fci.pdf'
     }
 
     stage('Run linter') {
