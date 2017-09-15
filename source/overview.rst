@@ -12,9 +12,9 @@ The FRANKA Control Interface (FCI) allows a fast and direct low-level bidirectio
 to the Arm and Hand. It provides the current status of the robot and enables its direct control.
 You can execute custom trajectories by sending real-time control values:
 
- * Joint-level torque commands.
- * Desired joint position or velocity commands.
- * Desired Cartesian position or velocity commands.
+ * Gravity & friction compensated joint level torque commands.
+ * Desired joint position or velocity command.
+ * Desired Cartesian position or velocity command.
 
 Furthermore, you get access to the following feedback data:
 
@@ -45,9 +45,8 @@ of 1 kHz. With this library, it is possible to:
   angles, or the gripper status.
 * Execute motions by sending joint positions, joint velocities, Cartesian poses, or Cartesian
   velocities.
-* Send joint-level torque commands.
-* Changing parameters of the Arm, e.g. to set collision sensitivity, to set additional loads, or
-  to change joint/Cartesian stiffness.
+* Send joint level torque commands.
+* Change parameters like the collision sensitivity, set additional loads, the joint/Cartesian stiffness etc.
 * Calculate forward kinematics and other model properties from the current robot state.
 * Control the gripper.
 * Use the robot model library which provides the following:

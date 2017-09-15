@@ -30,11 +30,11 @@ performance of your controller or make it unusable.
 To control the robot, it must be guaranteed that the sum of the following time measurements is
 less than 1 ms:
 
- * Round-trip time between your workstation PC and FCI.
+ * Round trip time (RTT) between the workstation PC and FCI.
  * Execution time of your motion generator or control loop.
 
 .. caution::
-    If the **<1 ms RRT constraint** is violated for a cycle, the received packet is dropped by
+    If the **<1 ms RTT constraint** is violated for a cycle, the received packet is dropped by
     FCI. After 20 dropped packets, your robot `will stop`.
 
 If a **motion generator command packet is dropped**, the robot takes the previous waypoints and
