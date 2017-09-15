@@ -15,38 +15,38 @@ Always check the following things before powering on the robot.
    when performing fast motions or abrupt stops.
 
 .. caution::
-   Panda's built-in controllers only support tabletop mounting, i.e. they assume that Arm is
-   mounted perpendicular to the ground! Other mountings will **void your warranty**, decrease the
-   performance of the robot and **might cause damage to the robot**!
+   Only tabletop mounting is supported, i.e. the Arm must be mounted perpendicular to the
+   ground! Other mountings will **void your warranty** and **might cause damage
+   to the robot**!
 
 2. Ensure that the cable connecting Arm and Control is firmly attached on both sides.
 3. Connect the external activation device to Arm's base and keep it next to you in order to be
    able to stop the robot at any time.
 
 .. hint::
-   Activating the external activation device will disconnect the Arm from Control and
-   wires it to its joint motor controllers that will hold their current position.
+   Activating the external activation device will disconnect the Arm from Control.
+   The joint motor controllers will then hold their current position.
    The *external activation device is not an emergency stop!*
 
+The manual shipped with your robot describes how to specify the IP address of the Control's
+LAN port during the setup process. In the following sections that address is referred to
+as <fci-ip>.
 
-In the setup process, described in the manual which is shipped your robot, the IP address of
-the Control's LAN port is specified. In the following, the IP address of Control is
-referred to as <franka-control-ip>.
-The workstation PC, which commands your robot using the Franka Control Interface,
+The workstation PC, which commands your robot using the FCI,
 must always be connected to the LAN port of Control and `not` to the LAN port of Arm.
 
 
 Verifying the connection
 ------------------------
 
-In order to verify that everything is correctly set up and it is possible to use the Franka Control
-Interface, run the ``echo_robot_state`` example from ``libfranka``.
+In order to verify that everything is correctly set up, run the ``echo_robot_state``
+example from ``libfranka``.
 
 Change to the build directory of ``libfranka`` and execute the example:
 
 .. code-block:: shell
 
-    ./examples/echo_robot_state <franka-control-ip>
+    ./examples/echo_robot_state <fci-ip>
 
 The program will print the current state of the robot to the console and terminate after a few
 iterations.
@@ -80,5 +80,4 @@ Example output:
 
     If an error occurs at this point, perform the
     :ref:`ping test <troubleshooting_robot_not_reachable>` and ensure that robot's brakes are
-    opened. The brakes can be opened the from Desk at
-    `https://\<franka-control-ip\>/ <https://\<franka-control-ip\>/>`_.
+    opened. The brakes can be opened the from Desk at `https://\<fci-ip\>`.
