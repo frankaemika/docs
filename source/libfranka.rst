@@ -95,19 +95,19 @@ An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the 
     double time = 0.0;
     robot.control([=, &time](const franka::RobotState&,
                              franka::Duration time_step) -> franka::JointVelocities {
-      time += time_step.s();
-
-      if (time > 2 * time_max) {
-        std::cout << std::endl << "Finished motion, shutting down example" << std::endl;
-        return franka::Stop;
-      }
+      time += time_step.toSec();
 
       double cycle = std::floor(std::pow(-1.0, (time - std::fmod(time, time_max)) / time_max));
       double omega = cycle * omega_max / 2.0 * (1.0 - std::cos(2.0 * M_PI / time_max * time));
 
-      return {{0.0, 0.0, 0.0, omega, omega, omega, omega}};
-    });
+      franka::JointVelocities velocities = {{0.0, 0.0, 0.0, omega, omega, omega, omega}};
 
+      if (time >= 2 * time_max) {
+        std::cout << std::endl << "Finished motion, shutting down example" << std::endl;
+        return franka::MotionFinished(velocities);
+      }
+      return velocities;
+    });
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
 the robot by the control interface, at 1 kHz frequency. In the callback, read() and readOnce() are
