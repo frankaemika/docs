@@ -1,0 +1,22 @@
+language: python
+
+python: 3.5
+
+install:
+  - pip install -r requirements.txt
+  - npm install eclint
+
+script:
+  - node $(npm bin)/eclint check source/*.rst
+  - make html
+
+after_success:
+  - touch build/html/.nojekyll
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: $TRAVIS_BUILD_DIR/build/html
+  on:
+    branch: master
