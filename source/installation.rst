@@ -3,8 +3,8 @@
 Installation instructions
 =========================
 
-In this chapter, the steps to set up a real-time kernel on Ubuntu as well as building
-``libfranka`` and ``franka_ros`` are described.
+In this chapter, the steps to set up a real-time kernel on Ubuntu as well as installing resp.
+building ``libfranka`` and ``franka_ros`` are described.
 
 
 Setting up a real-time kernel
@@ -41,6 +41,16 @@ Afterwards, add the following limits to the `realtime` group in ``/etc/security/
     @realtime hard memlock 102400
 
 
+Installing from the ROS repositories
+------------------------------------
+
+Binary packages for ``libfranka`` and ``franka_ros`` are available from the ROS `Kinetic Kame`
+repositories for Ubuntu 16.04 LTS `Xenial Xerus`. After `setting up ROS Kinetic
+<http://wiki.ros.org/kinetic/Installation/Ubuntu>`__, execute::
+
+    sudo apt install ros-kinetic-libfranka ros-kinetic-franka-ros
+
+
 Building from source
 --------------------
 
@@ -68,14 +78,13 @@ In the source directory, create a build directory and run CMake::
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
 
+.. _libfranka_systemwide:
 
-If a systemwide installation is desired, execute the following instructions::
+If a systemwide installation into ``/usr`` is desired, execute the following instructions::
 
     cd libfranka/build
-    cpack
+    cpack -G DEB
     sudo dpkg -i libfranka-*.deb
-
-.. _installing_ros:
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -83,7 +92,7 @@ Building the ROS packages
 This part is optional. If you want to control your robot using `ROS <http://www.ros.org/>`_ please
 follow these instructions.
 
-After `setting up ROS Kinetic <https://wiki.ros.org/kinetic/Installation/Ubuntu>`_, create a Catkin
+After `setting up ROS Kinetic <https://wiki.ros.org/kinetic/Installation/Ubuntu>`__, create a Catkin
 workspace in a directory of your choice:
 
 .. code-block:: shell
@@ -101,8 +110,13 @@ Then clone the ``franka_ros`` repository from `GitHub <https://github.com/franka
 
     git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
     # Install all missing dependencies
-    rosdep install --from-paths src --ignore-src --rosdistro kinetic -y --skip-keys Franka
+    rosdep install --from-paths src --ignore-src --rosdistro kinetic -y --skip-keys libfranka
     catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
 
-If you installed ``libfranka`` systemwide, specifying ``Franka_DIR`` is not necessary.
+.. hint::
+    If you compiled and installed ``libfranka`` systemwide as
+    :ref:`described above <libfranka_systemwide>`, specifying ``Franka_DIR`` is not necessary.
+    However, in this case, if you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be
+    picked up from ``/opt/ros/kinetic`` instead of from your custom ``libfranka`` installation in
+    ``/usr``!

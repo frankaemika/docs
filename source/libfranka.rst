@@ -1,6 +1,8 @@
 libfranka
 =========
 
+Before continuing with this chapter, please :doc:`install or compile libfranka <installation>`.
+
 Connecting libfranka to the robot
 ---------------------------------
 
