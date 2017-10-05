@@ -3,8 +3,15 @@
 Installation instructions
 =========================
 
-In this chapter, the steps to set up a real-time kernel on Ubuntu as well as installing resp.
-building ``libfranka`` and ``franka_ros`` are described.
+This chapter describes how to set up a real-time kernel and install ``libfranka`` and
+``franka_ros``, either as binary packages or by building from source. ``franka_ros`` is only
+required if you want to control your robot using `ROS <http://www.ros.org/>`_.
+
+.. note::
+
+   While ``libfranka`` and the ``franka_ros`` packages should work on different Linux distributions,
+   official support is currently only provided for Ubuntu 16.04 LTS `Xenial Xerus` and ROS
+   `Kinetic Kame`. The following instructions might therefore only work in this environment.
 
 
 Setting up a real-time kernel
@@ -44,9 +51,8 @@ Afterwards, add the following limits to the `realtime` group in ``/etc/security/
 Installing from the ROS repositories
 ------------------------------------
 
-Binary packages for ``libfranka`` and ``franka_ros`` are available from the ROS `Kinetic Kame`
-repositories for Ubuntu 16.04 LTS `Xenial Xerus`. After `setting up ROS Kinetic
-<http://wiki.ros.org/kinetic/Installation/Ubuntu>`__, execute::
+Binary packages for ``libfranka`` and ``franka_ros`` are available from the ROS repositories.
+After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`__, execute::
 
     sudo apt install ros-kinetic-libfranka ros-kinetic-franka-ros
 
@@ -54,9 +60,7 @@ repositories for Ubuntu 16.04 LTS `Xenial Xerus`. After `setting up ROS Kinetic
 Building from source
 --------------------
 
-While it should in principle be possible to build ``libfranka`` and the ``franka_ros`` components
-on different operating systems and distributions, official support is currently only provided for
-Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`.
+This section describes how to build ``libfranka`` and ``franka_ros``.
 
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
@@ -88,9 +92,6 @@ If a systemwide installation into ``/usr`` is desired, execute the following ins
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This part is optional. If you want to control your robot using `ROS <http://www.ros.org/>`_ please
-follow these instructions.
 
 After `setting up ROS Kinetic <https://wiki.ros.org/kinetic/Installation/Ubuntu>`__, create a Catkin
 workspace in a directory of your choice:
