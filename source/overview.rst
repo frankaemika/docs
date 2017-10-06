@@ -31,12 +31,8 @@ Furthermore, you get access to the following feedback data:
 
 The FCI client components are:
 
-* ``franka_description``
 * ``libfranka``
 * ``franka_ros``
-
-``franka_description`` provides `URDF <https://wiki.ros.org/urdf>`_ models and detailed 3D meshes
-of our robots and end effectors. It also includes simplified meshes to be used for collision checks.
 
 ``libfranka`` provides a C++ interface which is run on a workstation PC. The connection to the FCI
 is established via a standard Ethernet connection to Control. The FCI provides high-speed
@@ -65,6 +61,7 @@ of 1 kHz. With this library, it is possible to:
 
 ``franka_ros`` connects Franka Emika research robots with the entire ROS ecosystem. It provides
 functionality equivalent to ``libfranka`` for `ROS Control <https://wiki.ros.org/ros_control>`_.
-In combination with ``franka_description``, it allows visualization (e.g. RViz) and kinematic
-simulations. `MoveIt! <https://wiki.ros.org/moveit>`_ integration makes it easy to move the robot
-and control the gripper, and the provided examples show you how to control your robot using ROS.
+Additionally, it includes `URDF <https://wiki.ros.org/urdf>`_ models and detailed 3D meshes of our
+robots and end effectors, which allows visualization (e.g. RViz) and kinematic simulations.
+`MoveIt! <https://wiki.ros.org/moveit>`_ integration makes it easy to move the robot and control
+the gripper, and the provided examples show you how to control your robot using ROS.
