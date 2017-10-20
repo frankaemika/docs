@@ -143,7 +143,8 @@ That can be done from an action client or by simply publishing on the action goa
 
 .. code-block:: shell
 
-   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_hw/ErrorRecoveryActionGoal "{}"
+   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_control/ErrorRecoveryActionGoal
+     "{}"
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
