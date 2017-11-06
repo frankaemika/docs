@@ -1,10 +1,9 @@
 franka_ros
 ==========
 
-Before continuing with this chapter, please follow the steps from the
-:ref:`building the ROS packages <installing_ros>` section.
+Before continuing with this chapter, please :doc:`install or compile franka_ros <installation>`.
 
-The ``franka_ros`` repository contains a variety of packages that are briefly introduced here.
+The ``franka_ros`` metapackage comprises a variety of packages that are briefly introduced here.
 We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
 
 All parameters passed to launch files in this section come with default values, so they
@@ -144,7 +143,8 @@ That can be done from an action client or by simply publishing on the action goa
 
 .. code-block:: shell
 
-   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_hw/ErrorRecoveryActionGoal "{}"
+   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_control/ErrorRecoveryActionGoal
+     "{}"
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
