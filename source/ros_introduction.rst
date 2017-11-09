@@ -33,8 +33,8 @@ The node publishes the state of the gripper and offers the following `actions se
    `speed`.
  * ``franka_gripper::GraspAction(width, epsilon_inner, epsilon_outer, speed, force)``: tries to
    grasp at the desired `width` with a desired `force` while closing with the given `speed`. The
-   operation is successful if the distance between the gripper fingers is
-   (width - epsilon_inner) < distance < (width + epsilon_outer).
+   operation is successful if the distance :math:`dist` between the gripper fingers is:
+   :math:`width - \epsilon_{inner} < dist < width + \epsilon_{outer}`.
  * ``franka_gripper::HomingAction()``: homes the gripper and updates the maximum width given the
    mounted fingers.
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
