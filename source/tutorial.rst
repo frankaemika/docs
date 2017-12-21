@@ -26,15 +26,15 @@ Always check the following things before powering on the robot.
 .. hint::
    Activating the external activation device will disconnect the Arm from Control.
    The joint motor controllers will then hold their current position.
-   The *external activation device is not an emergency stop!*
+   **The external activation device is not an emergency stop!**
 
 The manual shipped with your robot describes how to specify the IP address of the Control's
 LAN port during the setup process. In the following sections that address is referred to
 as <fci-ip>.
 
-The workstation PC, which commands your robot using the FCI,
-must always be connected to the LAN port of Control and `not` to the LAN port of Arm.
-
+.. important::
+   The workstation PC which commands your robot using the FCI must always be connected to the LAN
+   port of Control and **not** to the LAN port of the Arm.
 
 Verifying the connection
 ------------------------

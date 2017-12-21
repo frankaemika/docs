@@ -19,13 +19,19 @@ Workstation PC
 
 Network
 -------
-If possible, directly connect your workstation PC to the LAN port of Control.
+If possible, directly connect your workstation PC to the LAN port of Control, i.e. avoid any
+intermediate devices such as switches.
+
+.. important::
+   The workstation PC which commands your robot using the FCI must always be connected to the LAN
+   port of Control and **not** to the LAN port of the Arm.
+
 Having relays in between could lead to delay, jitter or packet loss. This will decrease the
 performance of your controller or make it unusable.
 
 .. hint::
-    The best performance of your robot can be achieved when you directly connect to the LAN port
-    of Control.
+    The best performance can be achieved when connecting directly to the LAN port of Control.
+    This requires setting up a static IP for the robot in the Desk Admin interface beforehand.
 
 To control the robot, it must be guaranteed that the sum of the following time measurements is
 less than 1 ms:
