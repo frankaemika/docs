@@ -31,7 +31,8 @@ performance of your controller or make it unusable.
 
 .. hint::
     The best performance can be achieved when connecting directly to the LAN port of Control.
-    This requires setting up a static IP for the robot in the Desk Admin interface beforehand.
+    This requires setting up a static IP for the shop floor network in the Desk Admin interface
+    beforehand.
 
 To control the robot, it must be guaranteed that the sum of the following time measurements is
 less than 1 ms:
