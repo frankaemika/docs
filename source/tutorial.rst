@@ -34,7 +34,7 @@ as <fci-ip>.
 
 .. important::
    The workstation PC which commands your robot using the FCI must always be connected to the LAN
-   port of Control and **not** to the LAN port of the Arm.
+   port of Control (shop floor network) and **not** to the LAN port of the Arm (robot network).
 
 Verifying the connection
 ------------------------

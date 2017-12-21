@@ -24,7 +24,7 @@ intermediate devices such as switches.
 
 .. important::
    The workstation PC which commands your robot using the FCI must always be connected to the LAN
-   port of Control and **not** to the LAN port of the Arm.
+   port of Control (shop floor network) and **not** to the LAN port of the Arm (robot network).
 
 Having relays in between could lead to delay, jitter or packet loss. This will decrease the
 performance of your controller or make it unusable.
