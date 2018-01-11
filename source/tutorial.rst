@@ -1,15 +1,15 @@
 Getting started
 ===============
 
-After :doc:`setting up the required software <installation>`, your robot needs to be installed and
-tested. **Please read through the documents shipped with your robot and follow the setup
-instructions before continuing any further!**
+After :doc:`setting up the required software <installation>` and
+:doc:`configuring your network <networking>` you can now test the whole setup by
+using FCI to read the current robot state.
 
+Operating the robot
+-------------------
 
-Powering on the robot
----------------------
-
-Always check the following things before powering on the robot.
+Before going further though, here are a few safety considerations.
+Always check the following things before powering on the robot:
 
 1. Make sure that the Arm has been mounted on a stable base and cannot topple over, even
    when performing fast motions or abrupt stops.
@@ -28,9 +28,8 @@ Always check the following things before powering on the robot.
    The joint motor controllers will then hold their current position.
    **The external activation device is not an emergency stop!**
 
-The manual shipped with your robot describes how to specify the IP address of the Control's
-LAN port during the setup process. In the following sections that address is referred to
-as <fci-ip>.
+This list is non-exhaustive! The manual delivered with your robot contains a chapter dedicated
+to safety. Please read it carefully and follow the instructions.
 
 .. important::
    The workstation PC which commands your robot using the FCI must always be connected to the LAN
@@ -39,8 +38,16 @@ as <fci-ip>.
 Verifying the connection
 ------------------------
 
+The :doc:`networking` chapter described how to specify the IP address of the
+Control's LAN port. In the following sections that address is referred to as
+<fci-ip>.
+
 In order to verify that everything is correctly set up, run the ``echo_robot_state``
 example from ``libfranka``.
+
+If you decided to install ``franka_ros`` and ``libfranka`` from the ROS
+repository, you can instead read the instructions for
+:ref:`visualizing the robot in ros <ros_visualization>` .
 
 Change to the build directory of ``libfranka`` and execute the example:
 
@@ -74,7 +81,6 @@ Example output:
       "K_F_ext_hat_K": [-1.26755,0.0424965,-0.493591,0.106515,0.0430354,-0.00899586],
       "current_errors": [], "last_motion_errors": [], "robot_mode": "Idle", "time": 12444112
     }
-
 
 .. hint::
 

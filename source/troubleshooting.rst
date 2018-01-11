@@ -7,15 +7,28 @@ This section lists solutions to a set of possible errors which can happen when u
     Further help is provided in the troubleshooting page of the manual shipped with your robot.
 
 
-Jumps in robot motion
----------------------
+Motion stopped due to discontinuities
+-------------------------------------
 
-Please check the following:
+If the difference between commanded values in subsequent time steps is too large, then the motion
+is stopped with a discontinuity error such as ``joint_motion_generator_velocity_discontinuity``.
 
-* Ubuntu is booted with RT kernel on your workstation PC
-* RT permissions for the process are set according to
-  :ref:`installation instructions<installation-real-time>`
-* Check `Network bandwidth, delay and jitter test`_
+Discontinuities can occur if your code commands actual jumps to the robot, but also because of
+network packet losses. If the issue occurs even when using the provided examples, the problem is
+most likely related to overall communication quality. To ensure best performance, please check the
+following:
+
+ * All source code is compiled with optimizations (``-DCMAKE_BUILD_TYPE=Release``). If you installed
+   ``libfranka`` and ``franka_ros`` from the ROS repositories, this is already the case for these
+   projects. However, your own source code needs to be compiled with optimizations as well.
+ * Verify your network connection by executing the `network bandwidth, delay and jitter test`_.
+ * ``franka::Robot`` is instantiated with ``RealtimeConfig::kEnforce``. This is the default if no
+   ``RealtimeConfig`` is explicitly specified in the constructor.
+ * Power saving features are disabled (cpu frequency scaling, power saving mode,
+   laptop on battery, BIOS power saving features, etc.)
+ * Try to lower the cut-off frequency for commands by running ``franka::Robot::setFilters`` with
+   e.g. 50 Hz. This will mitigate network packet losses, but also decrease the accuracy with which
+   the robot follows the commanded trajectory.
 
 .. _troubleshooting_robot_not_reachable:
 
@@ -69,3 +82,9 @@ ms. The standard deviation `mdev` is around 0.04 ms. As explained in the
 round-trip time and the execution time of the motion generator or control loop is
 **less than 1 ms**. If this constraint is violated for a cycle, the received packet is dropped by
 the FCI.
+
+If the round-trip time is long even with a direct connection, consider
+purchasing a separate, high performance PCI-Express network card for your
+workstation PC. See if there are dedicated drivers for your network card,
+these usually offer better performance. Lastly, the CPU can also be a limiting
+factor for network performance.

@@ -165,6 +165,7 @@ Besides loading the ``franka_control_node``, the launch file also starts a
 external wrenches, configurable transforms and the joint states required for visualization with
 rivz. For visualization purposes, a ``robot_state_publisher`` is started together with RViz.
 
+.. _ros_visualization:
 
 franka_visualization
 --------------------

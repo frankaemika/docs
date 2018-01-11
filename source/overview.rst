@@ -3,7 +3,6 @@ Overview
 
 .. figure:: _static/overview.png
     :align: center
-    :alt: alternate text
     :figclass: align-center
 
     Schematic overview of the components.
