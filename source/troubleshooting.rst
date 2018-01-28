@@ -45,7 +45,6 @@ If this command fails, the robot is not properly connected to the network, or th
 is not correctly assigned during the setup phase. Please set up the network according to the
 documents sent with your robot.
 
-
 .. _network-bandwidth-delay-test:
 
 Network bandwidth, delay and jitter test

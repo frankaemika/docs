@@ -30,8 +30,7 @@ The source code of this documentation is also `available online
    overview
    requirements
    installation
-   networking
-   tutorial
+   getting_started
    libfranka
    ros_introduction
    troubleshooting
