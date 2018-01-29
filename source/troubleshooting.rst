@@ -6,7 +6,6 @@ This section lists solutions to a set of possible errors which can happen when u
 
     Further help is provided in the troubleshooting page of the manual shipped with your robot.
 
-
 Motion stopped due to discontinuities
 -------------------------------------
 
