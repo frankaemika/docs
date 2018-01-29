@@ -13,8 +13,7 @@ Jumps in robot motion
 Please check the following:
 
 * Ubuntu is booted with RT kernel on your workstation PC
-* RT permissions for the process are set according to
-  :ref:`installation instructions<installation-real-time>`
+* RT permissions for the :ref:`process are set<installation-real-time>`
 * Check `Network bandwidth, delay and jitter test`_
 
 .. _troubleshooting_robot_not_reachable:
