@@ -32,7 +32,7 @@ node('python3 && nodejs') {
 
     stage('Run linter') {
       sh 'node $(npm bin)/eclint check source/*.rst'
-      // TODO(FWA): run 'make linkcheck'
+      sh 'make linkcheck'
     }
 
     currentBuild.result = 'SUCCESS'
