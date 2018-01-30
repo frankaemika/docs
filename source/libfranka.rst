@@ -15,7 +15,7 @@ robot will be established when the object is created:
 
     ...
 
-    franka::Robot robot("<control-ip>");
+    franka::Robot robot("<fci-ip>");
 
 The address can be passed either as a hostname or an IP address. In case of any error, either due
 to networking or conflicting library version, an exception of type ``franka::Exception`` will
@@ -67,7 +67,7 @@ command from the ``libfranka`` build directory:
 
 .. code-block:: shell
 
-    ./examples/generate_joint_velocity_motion <control-ip>
+    ./examples/generate_joint_velocity_motion <fci-ip>
 
 The robot is moved by a `controller` which specifies the desired joint level torque. It
 is possible to use a built in `controller`. Alternatively, a self written controller can be

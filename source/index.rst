@@ -1,4 +1,3 @@
-
 Franka Control Interface Documentation
 ======================================
 
@@ -20,10 +19,9 @@ These components are:
 The source code of this documentation is also `available online
 <https://github.com/frankaemika/docs>`_.
 
-
 .. important::
     Before you start using the FCI, please read through the documents shipped with the robot and
-    the :doc:`minimum system and network requirements <requirements>` chapter.
+    the :doc:`requirements` chapter.
 
 .. toctree::
    :maxdepth: 2
@@ -32,7 +30,7 @@ The source code of this documentation is also `available online
    overview
    requirements
    installation
-   tutorial
+   getting_started
    libfranka
    ros_introduction
    troubleshooting
