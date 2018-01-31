@@ -29,7 +29,7 @@ Building libfranka
 
 To build ``libfranka``, install the following dependencies from Ubuntu's package manager::
 
-    sudo apt install build-essential cmake git libpoco-dev
+    sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
 Then, download the source code by cloning ``libfranka`` from
 `GitHub <https://github.com/frankaemika/libfranka>`__::
@@ -207,9 +207,9 @@ Verifying the new kernel
 
 Restart your system. The Grub boot menu should now allow you to choose your
 newly installed kernel. To see which one is currently being used, see the output
-of the ``uname -r`` command. It should contain the string ``PREEMPT_RT`` and the
-version number you chose. Additionally, the file ``/sys/kernel/realtime`` should
-exist and contain the the number ``1``.
+of the ``uname -a`` command. It should contain the string ``PREEMPT RT`` and the
+version number you chose. Additionally, ``/sys/kernel/realtime`` should exist and
+contain the the number ``1``.
 
 .. _installation-real-time:
 
