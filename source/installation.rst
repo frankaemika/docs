@@ -44,14 +44,6 @@ In the source directory, create a build directory and run CMake::
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
 
-.. _libfranka_systemwide:
-
-If a systemwide installation into ``/usr`` is desired, execute the following instructions::
-
-    cd libfranka/build
-    cpack -G DEB
-    sudo dpkg -i libfranka-*.deb
-
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -77,12 +69,9 @@ Then clone the ``franka_ros`` repository from `GitHub <https://github.com/franka
     catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
 
-.. hint::
-    If you compiled and installed ``libfranka`` systemwide as
-    :ref:`described above <libfranka_systemwide>`, specifying ``Franka_DIR`` is not necessary.
-    However, in this case, if you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be
-    picked up from ``/opt/ros/kinetic`` instead of from your custom ``libfranka`` installation in
-    ``/usr``!
+.. warning::
+    If you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be picked up from ``/opt/ros/kinetic``
+    instead of from your custom ``libfranka`` build!
 
 Setting up the real-time kernel
 -------------------------------
