@@ -1,6 +1,8 @@
 libfranka
 =========
 
+Before continuing with this chapter, please :doc:`install or compile libfranka <installation>`.
+
 Connecting libfranka to the robot
 ---------------------------------
 
@@ -13,7 +15,7 @@ robot will be established when the object is created:
 
     ...
 
-    franka::Robot robot("<control-ip>");
+    franka::Robot robot("<fci-ip>");
 
 The address can be passed either as a hostname or an IP address. In case of any error, either due
 to networking or conflicting library version, an exception of type ``franka::Exception`` will
@@ -65,7 +67,7 @@ command from the ``libfranka`` build directory:
 
 .. code-block:: shell
 
-    ./examples/generate_joint_velocity_motion <control-ip>
+    ./examples/generate_joint_velocity_motion <fci-ip>
 
 The robot is moved by a `controller` which specifies the desired joint level torque. It
 is possible to use a built in `controller`. Alternatively, a self written controller can be
@@ -95,19 +97,19 @@ An excerpt from ``examples/generate_joint_velocity_motion.cpp`` is shown in the 
     double time = 0.0;
     robot.control([=, &time](const franka::RobotState&,
                              franka::Duration time_step) -> franka::JointVelocities {
-      time += time_step.s();
-
-      if (time > 2 * time_max) {
-        std::cout << std::endl << "Finished motion, shutting down example" << std::endl;
-        return franka::Stop;
-      }
+      time += time_step.toSec();
 
       double cycle = std::floor(std::pow(-1.0, (time - std::fmod(time, time_max)) / time_max));
       double omega = cycle * omega_max / 2.0 * (1.0 - std::cos(2.0 * M_PI / time_max * time));
 
-      return {{0.0, 0.0, 0.0, omega, omega, omega, omega}};
-    });
+      franka::JointVelocities velocities = {{0.0, 0.0, 0.0, omega, omega, omega, omega}};
 
+      if (time >= 2 * time_max) {
+        std::cout << std::endl << "Finished motion, shutting down example" << std::endl;
+        return franka::MotionFinished(velocities);
+      }
+      return velocities;
+    });
 
 The callback provided to the ``robot.control`` will be executed for each robot state received from
 the robot by the control interface, at 1 kHz frequency. In the callback, read() and readOnce() are

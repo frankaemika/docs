@@ -1,10 +1,9 @@
 franka_ros
 ==========
 
-Before continuing with this chapter, please follow the steps from the
-:ref:`building the ROS packages <installing_ros>` section.
+Before continuing with this chapter, please :doc:`install or compile franka_ros <installation>`.
 
-The ``franka_ros`` repository contains a variety of packages that are briefly introduced here.
+The ``franka_ros`` metapackage comprises a variety of packages that are briefly introduced here.
 We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
 
 All parameters passed to launch files in this section come with default values, so they
@@ -32,8 +31,10 @@ The node publishes the state of the gripper and offers the following `actions se
 
  * ``franka_gripper::MoveAction(width, speed)``: moves to a target `width` with the defined
    `speed`.
- * ``franka_gripper::GraspAction(width, speed, force)``: tries to grasp at the desired
-   `width` with a desired `force` while closing with the given `speed`.
+ * ``franka_gripper::GraspAction(width, epsilon_inner, epsilon_outer, speed, force)``: tries to
+   grasp at the desired `width` with a desired `force` while closing with the given `speed`. The
+   operation is successful if the distance :math:`d` between the gripper fingers is:
+   :math:`\text{width} - \epsilon_\text{inner} < d < \text{width} + \epsilon_\text{outer}`.
  * ``franka_gripper::HomingAction()``: homes the gripper and updates the maximum width given the
    mounted fingers.
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
@@ -144,7 +145,8 @@ That can be done from an action client or by simply publishing on the action goa
 
 .. code-block:: shell
 
-   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_hw/ErrorRecoveryActionGoal "{}"
+   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_control/ErrorRecoveryActionGoal
+     "{}"
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
@@ -163,6 +165,7 @@ Besides loading the ``franka_control_node``, the launch file also starts a
 external wrenches, configurable transforms and the joint states required for visualization with
 rivz. For visualization purposes, a ``robot_state_publisher`` is started together with RViz.
 
+.. _ros_visualization:
 
 franka_visualization
 --------------------

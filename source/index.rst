@@ -1,4 +1,3 @@
-
 Franka Control Interface Documentation
 ======================================
 
@@ -10,21 +9,19 @@ improvements.
 
 These components are:
 
- * ``franka_description``, a collection of URDF models and 3D meshes for Franka Emika research
-   robots and end effectors, available at https://github.com/frankaemika/franka_description.
  * ``libfranka``, a C++ library that provides low-level control of Franka Emika research robots.
    Its source code is available at https://github.com/frankaemika/libfranka.
  * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for
-   ROS Control and MoveIt!. The source code is available at
-   https://github.com/frankaemika/franka_ros.
+   ROS Control and MoveIt!. It also contains ``franka_description``, a collection of URDF models and
+   3D meshes that can be useful outside of ROS.
+   The repository is available at https://github.com/frankaemika/franka_ros.
 
 The source code of this documentation is also `available online
 <https://github.com/frankaemika/docs>`_.
 
-
 .. important::
     Before you start using the FCI, please read through the documents shipped with the robot and
-    the :doc:`minimum system and network requirements <requirements>` chapter.
+    the :doc:`requirements` chapter.
 
 .. toctree::
    :maxdepth: 2
@@ -33,7 +30,7 @@ The source code of this documentation is also `available online
    overview
    requirements
    installation
-   tutorial
+   getting_started
    libfranka
    ros_introduction
    control_parameters

@@ -1,11 +1,13 @@
 #!groovy
 
-node {
+node('python3 && nodejs') {
   step([$class: 'StashNotifier'])
 
   try {
-    stage('Checkout') {
+    stage('Prepare') {
       checkout scm
+      sh 'npm install eclint'
+      sh 'pip3 install --user -r requirements.txt'
       sh 'make clean'
     }
 
@@ -29,9 +31,8 @@ node {
     }
 
     stage('Run linter') {
-      sh 'npm install eclint'
       sh 'node $(npm bin)/eclint check source/*.rst'
-      // TODO(FWA): run 'make linkcheck'
+      sh 'make linkcheck'
     }
 
     currentBuild.result = 'SUCCESS'
