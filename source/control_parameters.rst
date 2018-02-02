@@ -1,4 +1,4 @@
-Control Parameters Specifications
+Control parameters specifications
 =================================
 
 Control parameters fed into the robot should fulfill *recommended* and *necessary* conditions.
@@ -13,15 +13,29 @@ If the necessary conditions are violated, an error will abort the motion: if, fo
 first point of the user defined joint trajectory is very different from :math:`q_{start}` a velocity
 limits violation error will abort the motion.
 
-.. hint::
+.. _limit_table:
 
-  All the variables used in this documentation are robot dependant and can be found in the
-  robot URDF file.
+Limits table
+------------
 
-Joint Trajectory Requirements
+The constants used throughout this chapter have the following values:
+
+===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
+Joint :math:`\tau_{min}` :math:`\tau_{max}` :math:`\ddot{q}_{min}` :math:`\ddot{q}_{max}` :math:`\dot{q}_{min}` :math:`\dot{q}_{max}` :math:`q_{min}` :math:`q_{max}`
+===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
+1     -82.65             82.65              -14.25                 14.25                  -2.375                2.375                 -2.818745       -2.818745
+2     -82.65             82.65              -7.125                 7.125                  -2.375                2.375                 -1.74097        -1.74097
+3     -82.65             82.65              -11.875                11.875                 -2.375                2.375                 -2.818745       -2.818745
+4     -82.65             82.65              -11.875                11.875                 -2.375                2.375                 -2.98452        -2.98452
+5     -11.4              11.4               -14.25                 14.25                  -2.85                 2.85                  -2.818745       -2.818745
+6     -11.4              11.4               -19.0                  19.0                   -2.85                 2.85                  -0.082935       -0.082935
+7     -11.4              11.4               -19.0                  19.0                   -2.85                 2.85                  -2.818745       -2.818745
+===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
+
+Joint trajectory requirements
 -----------------------------
 
-Recommended Conditions
+Recommended conditions
 **********************
 
 1. :math:`q_{min} < q < q_{max}`
@@ -40,7 +54,7 @@ end of trajectory:
 8. :math:`\dot{q} = 0`
 9. :math:`\ddot{q} = 0`
 
-Necessary Conditions
+Necessary conditions
 *********************
 
 1. :math:`q_{min} < q < q_{max}`
@@ -48,10 +62,10 @@ Necessary Conditions
 3. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 4. :math:`\dddot{q}_{min} < \dot{q} < \dddot{q}_{max}`
 
-Cartesian Trajectory Requirements
+Cartesian trajectory requirements
 ---------------------------------
 
-Recommended Conditions
+Recommended conditions
 **********************
 
 1. :math:`q_{min} < q < q_{max}`
@@ -70,7 +84,7 @@ end of trajectory:
 8. :math:`\dot{p} = 0`
 9. :math:`\ddot{p} = 0`
 
-Necessary Conditions
+Necessary conditions
 ********************
 
 1. :math:`T` is proper transformation matrix
@@ -83,10 +97,10 @@ derived from inverse kinematics:
 5. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
 6. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
 
-Controller Requirements
+Controller requirements
 -----------------------
 
-Recommended Conditions
+Recommended conditions
 **********************
 
 1. :math:`\tau_{j, min} < \tau_j < \tau_{j, max}`
@@ -96,9 +110,7 @@ beginning of trajectory:
 
 3. :math:`\tau_j = 0`
 
-Necessary Conditions
+Necessary conditions
 ********************
 
 1. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
-
-
