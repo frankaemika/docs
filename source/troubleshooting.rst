@@ -29,6 +29,8 @@ following:
    e.g. 50 Hz. This will mitigate network packet losses, but also decrease the accuracy with which
    the robot follows the commanded trajectory.
 
+.. _disable_cpu_frequency_scaling:
+
 Disabling CPU frequency scaling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -64,7 +66,7 @@ In this example, the maximum frequency is 3 GHz, but the current one is 500 Mhz 
 ``powersave`` policy. In this case we can benefit by setting the governor to ``performance``.
 
 To change this setting using the Ubuntu GUI, install the ``indicator-cpufreq`` package. A widget in
-the top bar of the Unity user interaface should allow you to set the current policy.
+the top bar of the Unity user interface should allow you to set the current policy.
 
 To change this setting using the terminal, execute the following commands:
 
