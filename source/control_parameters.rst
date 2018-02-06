@@ -13,25 +13,6 @@ If the necessary conditions are violated, an error will abort the motion: if, fo
 first point of the user defined joint trajectory is very different from :math:`q_{start}` a velocity
 limits violation error will abort the motion.
 
-.. _limit_table:
-
-Limits table
-------------
-
-The constants used throughout this chapter have the following values:
-
-===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
-Joint :math:`\tau_{min}` :math:`\tau_{max}` :math:`\ddot{q}_{min}` :math:`\ddot{q}_{max}` :math:`\dot{q}_{min}` :math:`\dot{q}_{max}` :math:`q_{min}` :math:`q_{max}`
-===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
-1     -82.65             82.65              -14.25                 14.25                  -2.375                2.375                 -2.818745       -2.818745
-2     -82.65             82.65              -7.125                 7.125                  -2.375                2.375                 -1.74097        -1.74097
-3     -82.65             82.65              -11.875                11.875                 -2.375                2.375                 -2.818745       -2.818745
-4     -82.65             82.65              -11.875                11.875                 -2.375                2.375                 -2.98452        -2.98452
-5     -11.4              11.4               -14.25                 14.25                  -2.85                 2.85                  -2.818745       -2.818745
-6     -11.4              11.4               -19.0                  19.0                   -2.85                 2.85                  -0.082935       -0.082935
-7     -11.4              11.4               -19.0                  19.0                   -2.85                 2.85                  -2.818745       -2.818745
-===== ================== ================== ====================== ====================== ===================== ===================== =============== ===============
-
 Joint trajectory requirements
 -----------------------------
 
@@ -39,9 +20,9 @@ Recommended conditions
 **********************
 
 1. :math:`q_{min} < q < q_{max}`
-2. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-3. :math:`\tau_{j, min} < \tau_j < \tau_{j, max}`
-4. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+2. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
+3. :math:`-\tau_{j, max} < \tau_j < \tau_{j, max}`
+4. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
 
 beginning of trajectory:
 
@@ -58,9 +39,9 @@ Necessary conditions
 *********************
 
 1. :math:`q_{min} < q < q_{max}`
-2. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-3. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
-4. :math:`\dddot{q}_{min} < \dot{q} < \dddot{q}_{max}`
+2. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
+3. :math:`-\ddot{q}_{max} < \ddot{q} < \ddot{q}_{max}`
+4. :math:`-\dddot{q}_{max} < \dot{q} < \dddot{q}_{max}`
 
 Cartesian trajectory requirements
 ---------------------------------
@@ -69,9 +50,9 @@ Recommended conditions
 **********************
 
 1. :math:`q_{min} < q < q_{max}`
-2. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-3. :math:`\tau_{j, min} < \tau_j < \tau_{j, max}`
-4. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{tau}_{j, max}`
+2. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
+3. :math:`-\tau_{j, max} < \tau_j < \tau_{j, max}`
+4. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
 
 beginning of trajectory:
 
@@ -88,14 +69,14 @@ Necessary conditions
 ********************
 
 1. :math:`T` is proper transformation matrix
-2. :math:`\dot{p}_{min} < \dot{p} < \dot{p}_{max}`
-3. :math:`\ddot{p}_{min} < \ddot{p} < \ddot{p}_{max}`
+2. :math:`-\dot{p}_{max} < \dot{p} < \dot{p}_{max}`
+3. :math:`-\ddot{p}_{max} < \ddot{p} < \ddot{p}_{max}`
 
 derived from inverse kinematics:
 
 4. :math:`q_{min} < q < q_{max}`
-5. :math:`\dot{q}_{min} < \dot{q} < \dot{q}_{max}`
-6. :math:`\ddot{q}_{min} < \ddot{q} < \ddot{q}_{max}`
+5. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
+6. :math:`-\ddot{q}_{max} < \ddot{q} < \ddot{q}_{max}`
 
 Controller requirements
 -----------------------
@@ -103,8 +84,8 @@ Controller requirements
 Recommended conditions
 **********************
 
-1. :math:`\tau_{j, min} < \tau_j < \tau_{j, max}`
-2. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+1. :math:`-\tau_{j, max} < \tau_j < \tau_{j, max}`
+2. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
 
 beginning of trajectory:
 
@@ -113,4 +94,30 @@ beginning of trajectory:
 Necessary conditions
 ********************
 
-1. :math:`\dot{\tau}_{j, min} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+1. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+
+.. _limit_table:
+
+Constants
+---------
+
+Constants used in the above equations have the following values:
+
+.. csv-table:: Limits in Cartesian space
+   :header-rows: 1
+   :file: control-parameters-cart.csv
+
+
+.. csv-table:: Limits in Joint space
+   :header-rows: 1
+   :widths: 1 10 10 10 10 10 10 10 1
+   :file: control-parameters-joint.csv
+
+Denavit–Hartenberg parameters
+-----------------------------
+
+The DH parameters for the Panda's kinematic chain are as follows:
+
+.. csv-table:: DH parameters
+   :header-rows: 1
+   :file: dh-parameters.csv
