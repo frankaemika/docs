@@ -24,6 +24,11 @@ After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`
 Building from source
 --------------------
 
+Before building from source, please uninstall existing installations of ``libfranka`` and
+``franka_ros`` to avoid conflicts::
+
+    sudo apt remove "*libfranka*"
+
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
 
