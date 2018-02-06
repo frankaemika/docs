@@ -15,6 +15,11 @@ Workstation PC
 | Network card      | 100BASE-TX                             |
 +-------------------+----------------------------------------+
 
+Since the robot sends data at 1 kHz frequency, it is important that the workstation PC is configured
+to minimize latencies. For example, we recommend to
+:ref:`disable CPU frequency scaling <disable_cpu_frequency_scaling>`. Other possible optimizations
+will depend on your particular system.
+
 .. _requirement-network:
 
 Network

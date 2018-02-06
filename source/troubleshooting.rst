@@ -24,10 +24,83 @@ following:
  * ``franka::Robot`` is instantiated with ``RealtimeConfig::kEnforce``. This is the default if no
    ``RealtimeConfig`` is explicitly specified in the constructor.
  * Power saving features are disabled (cpu frequency scaling, power saving mode,
-   laptop on battery, BIOS power saving features, etc.)
+   laptop on battery, BIOS power saving features, etc.). See `Disabling CPU frequency scaling`_.
  * Try to lower the cut-off frequency for commands by running ``franka::Robot::setFilters`` with
    e.g. 50 Hz. This will mitigate network packet losses, but also decrease the accuracy with which
    the robot follows the commanded trajectory.
+
+.. _disable_cpu_frequency_scaling:
+
+Disabling CPU frequency scaling
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+CPUs are often configured to use a lower operating frequency when under a light load in order to
+conserve power. We recommend to disable this feature as it leads to higher latencies when using
+``libfranka``. To check and modify the power saving mode, install the ``cpufrequtils`` package:
+
+.. code-block:: shell
+
+    sudo apt install cpufrequtils
+
+Run ``cpufreq-info`` to see available "governors" and the current CPU frequency. Here is an example
+output:
+
+.. code-block:: shell
+
+    $ cpufreq-info
+    ...
+    analyzing CPU 0:
+      driver: intel_pstate
+      CPUs which run at the same hardware frequency: 0
+      CPUs which need to have their frequency coordinated by software: 0
+      maximum transition latency: 0.97 ms.
+      hardware limits: 400 MHz - 3.00 GHz
+      available cpufreq governors: performance, powersave
+      current policy: frequency should be within 400 MHz and 3.00 GHz.
+                      The governor "powersave" may decide which speed to use
+                      within this range.
+      current CPU frequency is 500 MHz.
+    ...
+
+In this example, the maximum frequency is 3 GHz, but the current one is 500 Mhz due to the
+``powersave`` policy. In this case we can benefit by setting the governor to ``performance``.
+
+To change this setting using the Ubuntu GUI, install the ``indicator-cpufreq`` package. A widget in
+the top bar of the Unity user interface should allow you to set the current policy.
+
+To change this setting using the terminal, execute the following commands:
+
+.. code-block:: shell
+
+    sudo systemctl disable ondemand
+    sudo systemctl enable cpufrequtils
+    sudo sh -c 'echo "GOVERNOR=performance > /etc/default/cpufrequtils"'
+    sudo systemctl daemon-reload && sudo systemctl restart cpufrequtils
+
+They will disable the ``ondemand`` CPU scaling daemon, create a ``/etc/default/cpufrequtils``
+configuration file, and then restart the ``cpufrequtils`` service.
+
+After enabling the ``performance`` governor, the ``cpufreq-info`` results are:
+
+.. code-block:: shell
+
+    $ cpufreq-info
+    ...
+    analyzing CPU 0:
+      driver: intel_pstate
+      CPUs which run at the same hardware frequency: 0
+      CPUs which need to have their frequency coordinated by software: 0
+      maximum transition latency: 0.97 ms.
+      hardware limits: 400 MHz - 3.00 GHz
+      available cpufreq governors: performance, powersave
+      current policy: frequency should be within 400 MHz and 3.00 GHz.
+                      The governor "performance" may decide which speed to use
+                      within this range.
+      current CPU frequency is 2.83 GHz.
+    ...
+
+Now the example output shows a CPU frequency close to the maximum one. You can
+also directly verify the current governor using the ``cpufreq-info -p`` command.
 
 .. _troubleshooting_robot_not_reachable:
 
