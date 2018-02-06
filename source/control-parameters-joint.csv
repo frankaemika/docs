@@ -4,5 +4,5 @@ Name, Joint 1, Joint 2, Joint 3, Joint 4, Joint 5 , Joint 6, Joint 7, Unit
 :math:`\dot{q}_{max}`, 2.3925, 2.3925, 2.3925, 2.3925, 2.871, 2.871, 2.871, :math:`\frac{rad}{s}`
 :math:`\ddot{q}_{max}`, 16.5, 8.25, 13.75, 13.75, 16.5, 22, 22, :math:`\frac{rad}{s^2}`
 :math:`\dddot{q}_{max}`, 50000, 50000, 50000, 50000, 50000, 50000, 50000, :math:`\frac{rad}{s^3}`
-:math:`{\tau_j}_{max}`, 87, 87, 87, 87, 12, 12, 12, :math:`Nm`
-:math:`{\dot{\tau}_j}_{max}`, 1000, 1000, 1000, 1000, 1000, 1000, 1000, :math:`\frac{Nm}{s}`
+":math:`\tau_{j,max}`", 87, 87, 87, 87, 12, 12, 12, :math:`Nm`
+":math:`\dot{\tau}_{j,max}`", 1000, 1000, 1000, 1000, 1000, 1000, 1000, :math:`\frac{Nm}{s}`

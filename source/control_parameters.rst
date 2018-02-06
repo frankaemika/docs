@@ -13,6 +13,8 @@ If the necessary conditions are violated, an error will abort the motion: if, fo
 first point of the user defined joint trajectory is very different from :math:`q_{start}` a velocity
 limits violation error will abort the motion.
 
+Values for the constants used in the equations below are shown in the :ref:`following section <limit_table>`.
+
 Joint trajectory requirements
 -----------------------------
 
@@ -57,8 +59,8 @@ Recommended conditions
 beginning of trajectory:
 
 5. :math:`{}^OT_{EE} = {}^OT_{EE, start}` (The most recent O_T_EE_d)
-6. :math:`\dot{p} = 0`
-7. :math:`\ddot{p} = 0`
+6. :math:`\dot{p} = 0` (Cartesian velocity)
+7. :math:`\ddot{p} = 0` (Cartesian acceleration)
 
 end of trajectory:
 
@@ -101,23 +103,52 @@ Necessary conditions
 Constants
 ---------
 
-Constants used in the above equations have the following values:
+Limits in the Cartesian space are as follows:
 
-.. csv-table:: Limits in Cartesian space
++-------------------------+-------------+-----------------------+------------+-----------+-------------------------+
+|          Name           | Translation |         Unit          |  Rotation  |   Elbow   |          Unit           |
++=========================+=============+=======================+============+===========+=========================+
+| :math:`\dot{p}_{max}`   | 1.8700      | :math:`\frac{m}{s}`   | 2.7500     | 2.3925    | :math:`\frac{rad}{s}`   |
++-------------------------+-------------+-----------------------+------------+-----------+-------------------------+
+| :math:`\ddot{p}_{max}`  | 14.3000     | :math:`\frac{m}{s^2}` | 27.5000    | 11.0000   | :math:`\frac{rad}{s^2}` |
++-------------------------+-------------+-----------------------+------------+-----------+-------------------------+
+| :math:`\dddot{p}_{max}` | 6500.0000   | :math:`\frac{m}{s^3}` | 12500.0000 | 5000.0000 | :math:`\frac{rad}{s^3}` |
++-------------------------+-------------+-----------------------+------------+-----------+-------------------------+
+
+Joint space limits are:
+
+.. csv-table::
    :header-rows: 1
-   :file: control-parameters-cart.csv
-
-
-.. csv-table:: Limits in Joint space
-   :header-rows: 1
-   :widths: 1 10 10 10 10 10 10 10 1
    :file: control-parameters-joint.csv
 
 Denavit–Hartenberg parameters
 -----------------------------
 
-The DH parameters for the Panda's kinematic chain are as follows:
+The Denavit–Hartenberg parameters for the Panda's kinematic chain are as follows:
 
-.. csv-table:: DH parameters
-   :header-rows: 1
-   :file: dh-parameters.csv
+.. figure:: _static/dh-diagram.png
+    :align: center
+    :figclass: align-center
+
+    Panda's kinematic chain.
+
++-------------+----------------+----------------+------------------------+-----------------------+
+|  Joint      | :math:`a\;(m)` | :math:`d\;(m)` | :math:`\alpha\;(rad)`  | :math:`\theta\;(rad)` |
++=============+================+================+========================+=======================+
+| Joint 1     | 0              | 0.333          | 0                      | :math:`\theta_1`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 2     | 0              | 0              | :math:`-\frac{\pi}{2}` | :math:`\theta_2`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 3     | 0              | 0.316          | :math:`\frac{\pi}{2}`  | :math:`\theta_3`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 4     | 0.0825         | 0              | :math:`\frac{\pi}{2}`  | :math:`\theta_4`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 5     | -0.0825        | 0.384          | :math:`-\frac{\pi}{2}` | :math:`\theta_5`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 6     | 0              | 0              | :math:`\frac{\pi}{2}`  | :math:`\theta_6`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| Joint 7     | 0.088          | 0              | :math:`\frac{\pi}{2}`  | :math:`\theta_7`      |
++-------------+----------------+----------------+------------------------+-----------------------+
+| flange      | 0              | 0.107          | 0                      | 0                     |
++-------------+----------------+----------------+------------------------+-----------------------+
+
