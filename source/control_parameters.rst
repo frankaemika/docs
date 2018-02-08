@@ -29,9 +29,9 @@ Necessary conditions
 Recommended conditions
 **********************
 
-1. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
-2. :math:`-\tau_{j, max} < \tau_j < \tau_{j, max}`
-3. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+1. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
+2. :math:`-\tau_{j, max} < {\tau_j}_d < \tau_{j, max}`
+3. :math:`-\dot{\tau}_{j, max} < \dot{\tau_j}_d < \dot{\tau}_{j, max}`
 
 beginning of trajectory:
 
@@ -51,14 +51,14 @@ Necessary conditions
 ********************
 
 1. :math:`T` is proper transformation matrix
-2. :math:`-\dot{p}_{max} < \dot{p} < \dot{p}_{max}` (Cartesian velocity)
-3. :math:`-\ddot{p}_{max} < \ddot{p} < \ddot{p}_{max}` (Cartesian acceleration)
+2. :math:`-\dot{p}_{max} < \dot{p_d} < \dot{p}_{max}` (Cartesian velocity)
+3. :math:`-\ddot{p}_{max} < \ddot{p_d} < \ddot{p}_{max}` (Cartesian acceleration)
 
 derived from inverse kinematics:
 
-4. :math:`q_{min} < q < q_{max}`
-5. :math:`-\dot{q}_{max} < \dot{q} < \dot{q}_{max}`
-6. :math:`-\ddot{q}_{max} < \ddot{q} < \ddot{q}_{max}`
+4. :math:`q_{min} < q_d < q_{max}`
+5. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
+6. :math:`-\ddot{q}_{max} < \ddot{q_d} < \ddot{q}_{max}`
 
 Recommended conditions
 **********************
@@ -70,7 +70,7 @@ Recommended conditions
 
 beginning of trajectory:
 
-5. :math:`{}^OT_{EE} = {}^OT_{EE, start}` (The most recent O_T_EE_d)
+5. :math:`{}^OT_{EE} = {{}^OT_{EE}}_d`
 6. :math:`\dot{p} = 0` (Cartesian velocity)
 7. :math:`\ddot{p} = 0` (Cartesian acceleration)
 
@@ -85,17 +85,16 @@ Controller requirements
 Necessary conditions
 ********************
 
-1. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+1. :math:`-\dot{\tau}_{j, max} < \dot{{\tau_j}_d} < \dot{\tau}_{j, max}`
 
 Recommended conditions
 **********************
 
-1. :math:`-\tau_{j, max} < \tau_j < \tau_{j, max}`
-2. :math:`-\dot{\tau}_{j, max} < \dot{\tau}_j < \dot{\tau}_{j, max}`
+1. :math:`-\tau_{j, max} < {\tau_j}_d < \tau_{j, max}`
 
 beginning of trajectory:
 
-3. :math:`\tau_j = 0`
+2. :math:`\tau_j = 0`
 
 .. _limit_table:
 
