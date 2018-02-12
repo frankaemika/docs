@@ -9,8 +9,9 @@ This section lists solutions to a set of possible errors which can happen when u
 Motion stopped due to discontinuities
 -------------------------------------
 
-If the difference between commanded values in subsequent time steps is too large, then the motion
-is stopped with a discontinuity error such as ``joint_motion_generator_velocity_discontinuity``.
+If the difference between commanded values in subsequent time steps is too large, then the motion is
+stopped with a discontinuity error such as ``joint_motion_generator_velocity_discontinuity``. See if
+the commanded values do not exceed the :ref:`limits <limit_table>`.
 
 Discontinuities can occur if your code commands actual jumps to the robot, but also because of
 network packet losses. If the issue occurs even when using the provided examples, the problem is

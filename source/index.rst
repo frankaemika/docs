@@ -33,4 +33,5 @@ The source code of this documentation is also `available online
    getting_started
    libfranka
    ros_introduction
+   control_parameters
    troubleshooting
