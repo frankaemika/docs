@@ -15,11 +15,19 @@ using `ROS <http://www.ros.org/>`_.
 Installing from the ROS repositories
 ------------------------------------
 
+.. hint::
+
+    These packages might not always be up-to-date, as they are only synced at certain intervals.
+    Read the changelog at https://frankaemika.github.io to find out which ``libfranka`` version is required for
+    a particular robot software version. If this doesn't match the ``ros-kinetic-libfranka`` version from the
+    repositories, you need to :ref:`build from source <installation-build-from-source>`.
+
 Binary packages for ``libfranka`` and ``franka_ros`` are available from the ROS repositories.
 After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`__, execute::
 
     sudo apt install ros-kinetic-libfranka ros-kinetic-franka-ros
 
+.. _installation-build-from-source:
 
 Building from source
 --------------------
@@ -36,13 +44,22 @@ To build ``libfranka``, install the following dependencies from Ubuntu's package
 
     sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-Then, download the source code by cloning ``libfranka`` from
-`GitHub <https://github.com/frankaemika/libfranka>`__::
+Then, download the source code by cloning ``libfranka`` from `GitHub <https://github.com/frankaemika/libfranka>`__:
+
+.. code-block:: shell
 
     git clone --recursive https://github.com/frankaemika/libfranka
     cd libfranka
 
-In the source directory, create a build directory and run CMake::
+By default, this will check out the newest release of ``libfranka``. If you want to build a particular version of
+``libfranka`` instead, check out the corresponding Git tag::
+
+    git checkout <version>
+    git submodule update
+
+In the source directory, create a build directory and run CMake:
+
+.. code-block:: shell
 
     mkdir build
     cd build
@@ -63,13 +80,19 @@ workspace in a directory of your choice:
     source /opt/ros/kinetic/setup.sh
     catkin_init_workspace src
 
-Then clone the ``franka_ros`` repository from `GitHub <https://github.com/frankaemika/franka_ros>`__
-, install any missing dependencies and build the packages:
+Then clone the ``franka_ros`` repository from `GitHub <https://github.com/frankaemika/franka_ros>`__::
+
+    git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
+
+By default, this will check out the newest release of ``franka_ros``. If you want to build a particular version of
+``franka_ros`` instead, check out the corresponding Git tag::
+
+    git checkout <version>
+
+Install any missing dependencies and build the packages:
 
 .. code-block:: shell
 
-    git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
-    # Install all missing dependencies
     rosdep install --from-paths src --ignore-src --rosdistro kinetic -y --skip-keys libfranka
     catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
@@ -85,6 +108,10 @@ In order to control your robot using ``libfranka``, the controller program on
 the workstation PC must run with `real-time priority` under a ``PREEMPT_RT``
 kernel. This section describes the procedure of patching a kernel to support
 ``PREEMPT_RT`` and creating an installation package.
+
+.. note::
+
+    NVIDIA binary drivers are not supported on ``PREEMPT_RT`` kernels.
 
 First, install the necessary dependencies::
 

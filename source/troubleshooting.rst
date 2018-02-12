@@ -74,7 +74,7 @@ To change this setting using the terminal, execute the following commands:
 
     sudo systemctl disable ondemand
     sudo systemctl enable cpufrequtils
-    sudo sh -c 'echo "GOVERNOR=performance > /etc/default/cpufrequtils"'
+    sudo sh -c 'echo "GOVERNOR=performance" > /etc/default/cpufrequtils'
     sudo systemctl daemon-reload && sudo systemctl restart cpufrequtils
 
 They will disable the ``ondemand`` CPU scaling daemon, create a ``/etc/default/cpufrequtils``
