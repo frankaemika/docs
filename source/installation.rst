@@ -93,7 +93,6 @@ Install any missing dependencies and build the packages:
 
 .. code-block:: shell
 
-    # Install all missing dependencies
     rosdep install --from-paths src --ignore-src --rosdistro kinetic -y --skip-keys libfranka
     catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
