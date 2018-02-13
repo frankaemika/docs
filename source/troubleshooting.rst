@@ -6,17 +6,19 @@ This section lists solutions to a set of possible errors which can happen when u
 
     Further help is provided in the troubleshooting page of the manual shipped with your robot.
 
-Motion stopped due to discontinuities
--------------------------------------
+.. _motion-stopped-due-to-discontinuities:
+
+Motion stopped due to discontinuities or ``communication_constraints_violation``
+--------------------------------------------------------------------------------
 
 If the difference between commanded values in subsequent time steps is too large, then the motion is
 stopped with a discontinuity error such as ``joint_motion_generator_velocity_discontinuity``. See if
 the commanded values do not exceed the :ref:`limits <limit_table>`.
 
 Discontinuities can occur if your code commands actual jumps to the robot, but also because of
-network packet losses. If the issue occurs even when using the provided examples, the problem is
-most likely related to overall communication quality. To ensure best performance, please check the
-following:
+network packet losses. This is also the reason for ``communication_constraints_violation`` errors.
+If the issue occurs even when using the provided examples, the problem is most likely related to
+overall communication quality. To ensure best performance, please check the following:
 
  * All source code is compiled with optimizations (``-DCMAKE_BUILD_TYPE=Release``). If you installed
    ``libfranka`` and ``franka_ros`` from the ROS repositories, this is already the case for these
