@@ -67,6 +67,10 @@ for the purpose of this tutorial:
 
 The Control's address (172.16.0.2) is called ``<fci-ip>`` in the following chapters.
 
+.. hint::
+    With this network configuration, Desk can be accessed via ``https://<fci-ip>``, although
+    you will see a certificate warning in your browser.
+
 The configuration process consists of two steps:
 
   * Configuring Control's network settings.
