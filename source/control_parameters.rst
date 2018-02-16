@@ -29,9 +29,10 @@ Necessary conditions
 Recommended conditions
 **********************
 
-1. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
-2. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-3. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
+1. :math:`q_{min soft} < q_d < q_{max soft}`
+2. :math:`-\dot{q}_{max soft} < \dot{q_d} < \dot{q}_{max soft}`
+3. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+4. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
@@ -53,18 +54,19 @@ Necessary conditions
 1. :math:`T` is proper transformation matrix
 2. :math:`-\dot{p}_{max} < \dot{p_d} < \dot{p}_{max}` (Cartesian velocity)
 3. :math:`-\ddot{p}_{max} < \ddot{p_d} < \ddot{p}_{max}` (Cartesian acceleration)
+4. :math:`-\dddot{p}_{max} < \dddot{p_d} < \dddot{p}_{max}` (Cartesian jerk)
 
 Conditions derived from inverse kinematics:
 
-4. :math:`q_{min} < q_d < q_{max}`
-5. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
-6. :math:`-\ddot{q}_{max} < \ddot{q_d} < \ddot{q}_{max}`
+5. :math:`q_{min} < q_d < q_{max}`
+6. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
+7. :math:`-\ddot{q}_{max} < \ddot{q_d} < \ddot{q}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`q_{min} < q_d < q_{max}`
-2. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
+1. :math:`q_{min soft} < q_d < q_{max soft}`
+2. :math:`-\dot{q}_{max soft} < \dot{q_d} < \dot{q}_{max soft}`
 3. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
 4. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
@@ -103,13 +105,15 @@ Constants
 
 Limits in the Cartesian space are as follows:
 
-+------------------------+---------------------------------------------+-----------------------------------------------+------------------------------------------+
-|          Name          |                 Translation                 |                   Rotation                    |                  Elbow                   |
-+========================+=============================================+===============================================+==========================================+
-| :math:`\dot{p}_{max}`  | 1.8700 :math:`\frac{\text{m}}{\text{s}}`    | 2.7500 :math:`\frac{\text{rad}}{\text{s}}`    | 2.3925 :math:`\frac{rad}{\text{s}}`      |
-+------------------------+---------------------------------------------+-----------------------------------------------+------------------------------------------+
-| :math:`\ddot{p}_{max}` | 14.3000 :math:`\frac{\text{m}}{\text{s}^2}` | 27.5000 :math:`\frac{\text{rad}}{\text{s}^2}` | 11.0000 :math:`\;\frac{rad}{\text{s}^2}` |
-+------------------------+---------------------------------------------+-----------------------------------------------+------------------------------------------+
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+|          Name          |                 Translation                   |                   Rotation                       |                  Elbow                     |
++========================+===============================================+==================================================+============================================+
+| :math:`\dot{p}_{max}`  | 1.8700 :math:`\frac{\text{m}}{\text{s}}`      | 2.7500 :math:`\frac{\text{rad}}{\text{s}}`       | 2.3925 :math:`\frac{rad}{\text{s}}`        |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+| :math:`\ddot{p}_{max}` | 14.3000 :math:`\frac{\text{m}}{\text{s}^2}`   | 27.5000 :math:`\frac{\text{rad}}{\text{s}^2}`    | 11.0000 :math:`\;\frac{rad}{\text{s}^2}`   |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+| :math:`\dddot{p}_{max}`| 6500.3000 :math:`\frac{\text{m}}{\text{s}^2}` | 12500.0000 :math:`\frac{\text{rad}}{\text{s}^2}` | 5000.0000 :math:`\;\frac{rad}{\text{s}^2}` |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
 
 Joint space limits are:
 
