@@ -65,6 +65,8 @@ Conditions derived from inverse kinematics:
 Recommended conditions
 **********************
 
+Conditions derived from inverse kinematics:
+
 1. :math:`q_{min,soft} < q_d < q_{max,soft}`
 2. :math:`-\dot{q}_{max,soft} < \dot{q_d} < \dot{q}_{max,soft}`
 3. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
