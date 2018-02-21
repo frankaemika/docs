@@ -169,8 +169,8 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started togethe
 
 franka_visualization
 --------------------
-This package contains the ``franka_joint_state_publisher`` which connects to the robot using
-the ``libfranka`` API and visualizes it in RViz. To run this package launch:
+This package contains publishers that connect to a robot and publish the robot and
+gripper joint states for visualization in RViz. To run this package launch:
 
 .. code-block:: shell
 
@@ -178,7 +178,7 @@ the ``libfranka`` API and visualizes it in RViz. To run this package launch:
       load_gripper:=<true/false>
 
 
-This is pure visualization - no commands are sent to the robot. It can be useful to check the
+This is purely for visualization - no commands are sent to the robot. It can be useful to check the
 connection to the robot.
 
 .. important::
