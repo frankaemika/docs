@@ -2,6 +2,8 @@ libfranka
 =========
 
 Before continuing with this chapter, please :doc:`install or compile libfranka <installation>`.
+API documentation for the latest version of ``libfranka`` is available at
+https://frankaemika.github.io/libfranka.
 
 Connecting libfranka to the robot
 ---------------------------------
