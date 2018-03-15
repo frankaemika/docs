@@ -23,6 +23,8 @@ overall communication quality. To ensure best performance, please check the foll
  * All source code is compiled with optimizations (``-DCMAKE_BUILD_TYPE=Release``). If you installed
    ``libfranka`` and ``franka_ros`` from the ROS repositories, this is already the case for these
    projects. However, your own source code needs to be compiled with optimizations as well.
+ * Connect your PC directly to Control, without using any intermediate switches. The
+   :ref:`network setup instructions <setting-up-the-network>` describe how to do this.
  * Verify your network connection by executing the `network bandwidth, delay and jitter test`_.
  * ``franka::Robot`` is instantiated with ``RealtimeConfig::kEnforce``. This is the default if no
    ``RealtimeConfig`` is explicitly specified in the constructor.
