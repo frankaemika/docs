@@ -159,11 +159,11 @@ You have to first download the public key of the person who signed the above
 file. As you can  see from the above output, it has the ID ``6092693E``. You can
 obtain it from the key server::
 
-    gpg2  --keyserver hkp://keys.gnupg.net --recv-keys 6092693E
+    gpg2  --keyserver hkp://keys.gnupg.net --recv-keys 0x6092693E
 
 Similarly for the patch::
 
-    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 2872E4CC
+    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 0x2872E4CC
 
 Note that keys for other kernel version might have different IDs, you will have to
 adapt accordingly.
