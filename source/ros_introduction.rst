@@ -222,12 +222,12 @@ To control the robot with MoveIt! launch the following three files:
     # Bring up the controller manager and connect to the robot
     roslaunch franka_control franka_control.launch robot_ip:=<fci-ip> load_gripper:=<true|false>
 
+    # (Optional) If load_gripper:=true was used, start the gripper node as well
+    roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
+
     # Start a joint trajectory controller of type <controller>
     roslaunch panda_moveit_config panda_moveit.launch controller:=<effort/position> \
       load_gripper:=<true|false>
-
-    # (Optional) If load_gripper:=true was used, start the gripper node as well
-    roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
 
     # Launch RViz for visualization and GUI-based motion planning and execution
     roslaunch panda_moveit_config moveit_rviz.launch
