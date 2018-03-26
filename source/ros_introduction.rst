@@ -48,7 +48,6 @@ You can launch the ``franka_gripper_node`` with:
 .. code-block:: shell
 
     roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
-      arm_id:=<your_robot_namespace>
 
 
 .. _franka_hw:
@@ -107,6 +106,10 @@ To use ROS control interfaces, you have to retrieve resource handles by name:
 | ``franka_hw::FrankaModelInterface``             | "<arm_id>_robot"                       |
 +-------------------------------------------------+----------------------------------------+
 
+.. hint::
+
+    By default, <arm_id> is set to "panda".
+
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
 controllers.
 
@@ -139,14 +142,14 @@ API in the ROS ecosystem. The following services are provided:
     of the internal Cartesian impedance. It also serves as a reference frame for external
     wrenches. *Neither the <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be
     changed at run time*.
+    By default, <arm_id> is set to "panda".
 
 To recover from errors and reflexes the ``franka_control::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
 
 .. code-block:: shell
 
-   rostopic pub /<your_robot_namespace>/error_recovery/goal franka_control/ErrorRecoveryActionGoal
-     "{}"
+   rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
@@ -156,8 +159,7 @@ with the following command:
 
 .. code-block:: shell
 
-    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip>
-      arm_id:=<your_robot_namespace> load_gripper:=<true/false>
+    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip> load_gripper:=<true|false>
 
 
 Besides loading the ``franka_control_node``, the launch file also starts a
@@ -174,8 +176,8 @@ gripper joint states for visualization in RViz. To run this package launch:
 
 .. code-block:: shell
 
-    roslaunch franka_visualization franka_visualization.launch robot_ip:=<fci-ip>
-      load_gripper:=<true/false>
+    roslaunch franka_visualization franka_visualization.launch robot_ip:=<fci-ip> \
+      load_gripper:=<true|false>
 
 
 This is purely for visualization - no commands are sent to the robot. It can be useful to check the
@@ -202,8 +204,8 @@ To launch the joint impedance example, execute the following command:
 
 .. code-block:: shell
 
-    roslaunch franka_example_controllers joint_impedance_example_controller.launch
-      robot_ip:=<fci-ip> load_gripper:=<true/false> arm_id:=<your_robot_namespace>
+    roslaunch franka_example_controllers joint_impedance_example_controller.launch \
+      robot_ip:=<fci-ip> load_gripper:=<true|false>
 
 Other examples are started in the same way.
 
@@ -217,15 +219,17 @@ To control the robot with MoveIt! launch the following three files:
 
 .. code-block:: shell
 
-    # bring up hardware
-    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip>
-      arm_id:=<your_robot_namespace>  load_gripper:=<true/false>
+    # Bring up the controller manager and connect to the robot
+    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip> load_gripper:=<true|false>
 
-    # start a joint_trajectory_controller of type <controller>
-    roslaunch panda_moveit_config panda_moveit.launch  arm_id:=<your_robot_namespace>
-      controller:=<effort/position>
+    # (Optional) If load_gripper:=true was used, start the gripper node as well
+    roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
 
-    # for visualization and GUI-based motion planning and execution
+    # Start a joint trajectory controller of type <controller>
+    roslaunch panda_moveit_config panda_moveit.launch controller:=<effort/position> \
+      load_gripper:=<true|false>
+
+    # Launch RViz for visualization and GUI-based motion planning and execution
     roslaunch panda_moveit_config moveit_rviz.launch
 
 For more details, documentation and tutorials, please have a look at the
