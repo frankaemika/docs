@@ -3,6 +3,12 @@ franka_ros
 
 Before continuing with this chapter, please :doc:`install or compile franka_ros <installation>`.
 
+.. figure:: _static/ros-architecture.png
+    :align: center
+    :figclass: align-center
+
+    Schematic overview of the ``franka_ros`` packages.
+
 The ``franka_ros`` metapackage comprises a variety of packages that are briefly introduced here.
 We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
 
