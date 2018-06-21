@@ -2,9 +2,17 @@
 
 Robot and interface specifications
 ===================================
-Realtime control commands sent to the robot should fulfill *recommended* and *necessary* conditions. Recommended conditions should be fulfilled to ensure optimal operation of the robot. If necessary conditions are not met then the motion will be aborted.
+Realtime control commands sent to the robot should fulfill *recommended* and *necessary* 
+conditions. Recommended conditions should be fulfilled to ensure optimal operation of the 
+robot. If necessary conditions are not met then the motion will be aborted.
 
-The final robot trajectory is the result of processing the user-specified trajectory ensuring that recommended conditions are fulfilled. As long as necessary conditions are met, the robot will try to follow the user-provided trajectory but it will only match the final trajectory if it also fulfills recommended conditions. If the necessary conditions are violated, an error will abort the motion: if, for instance, the first point of the user defined joint trajectory is very different from robot start position (:math:`q_start`) a ``start_pose_invalid`` error will abort the motion.
+The final robot trajectory is the result of processing the user-specified trajectory ensuring 
+that recommended conditions are fulfilled. As long as necessary conditions are met, the robot 
+will try to follow the user-provided trajectory but it will only match the final trajectory 
+if it also fulfills recommended conditions. If the necessary conditions are violated, an error 
+will abort the motion: if, for instance, the first point of the user defined joint trajectory 
+is very different from robot start position (:math:`q_start`) a ``start_pose_invalid`` error 
+will abort the motion.
 
 Values for the constants used in the equations below are shown in the `Constants`_ section.
 
@@ -27,14 +35,14 @@ Recommended conditions
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-4. :math:`q = q_c`
-5. :math:`\dot{q}_{c} = 0`
-6. :math:`\ddot{q}_{c} = 0`
+3. :math:`q = q_c`
+4. :math:`\dot{q}_{c} = 0`
+5. :math:`\ddot{q}_{c} = 0`
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-8. :math:`\dot{q}_{c} = 0`
-9. :math:`\ddot{q}_{c} = 0`
+6. :math:`\dot{q}_{c} = 0`
+7. :math:`\ddot{q}_{c} = 0`
 
 Cartesian trajectory requirements
 ---------------------------------
@@ -63,14 +71,14 @@ Conditions derived from inverse kinematics:
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-5. :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
-6. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-7. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+3. :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
+4. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+5. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-8. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-9. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+6. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+7. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 Controller requirements
 -----------------------
