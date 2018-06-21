@@ -251,7 +251,7 @@ Note that, on the Control side, there are two things that could modify your sign
 * An optional `low pass filter`. You can set the cutoff frequency with the non-realtime command 
   ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.4.0`` it is 
   deactivated by default. 
-* ``Packet losses``, which may occur if you don't have a very good connection. 
+* `Packet losses`, which may occur if you don't have a very good connection. 
   In this case, Control assumes a constant acceleration model or a constant torque to extrapolate 
   your signals. If ``>20`` packets are lost in a row the control loop is stopped with the 
   ``communication_constraints_violation`` exception.
