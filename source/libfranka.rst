@@ -116,11 +116,11 @@ as shown in this example
 
 .. code-block:: c++
 
-   std::function<franka::Torques(const franka::RobotState&, franka::Duration)>
-      my_external_controller_callback;
-   // Define my_external_controller_callback
-   ...
-  
+  std::function<franka::Torques(const franka::RobotState&, franka::Duration)>
+     my_external_controller_callback;
+  // Define my_external_controller_callback
+  ...
+
   std::function<franka::JointVelocities(const franka::RobotState&, franka::Duration)>
       my_external_motion_generator_callback;
   // Define my_external_motion_generator_callback
@@ -251,13 +251,21 @@ Note that, on the Control side, there are two things that could modify your sign
 * An optional `low pass filter`. You can set the cutoff frequency with the non-realtime command
   ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.4.0`` it is
   deactivated by default.
-* `Packet losses`, which may occur if you don't have a very good connection.
+* `Packet losses`, which may occur if you:
+
+   * don't have a very good connection due to the performance of your PC + network card.  
+   * your control loop is taking too long to compute (you have, depending on you network card and
+     PC configuration, approx. < 300 :math:`\mu s` for your own control loop).
+
   In this case, Control assumes a constant acceleration model or a constant torque to extrapolate
-  your signals. If ``>20`` packets are lost in a row the control loop is stopped with the
+  your signals. If ``>=20`` packets are lost in a row the control loop is stopped with the
   ``communication_constraints_violation`` exception.
 
-If you are not sure if your signals are being filtered or extrapolated, you can always check the
-last commanded values that you sent and compare them with the values on the robot state.
+.. hint::
+
+    If you are not sure if your signals are being filtered or extrapolated, you can always check the
+    last commanded values that you sent and compare them with the values you receive on the robot
+    state in the next sample.
 
 Rate limiters
 *******************
@@ -367,4 +375,4 @@ realtime fashion, e.g. in an optimzation loop. The libfranka examples include ex
 `printing joint poses
 <https://frankaemika.github.io/libfranka/print_joint_poses_8cpp-example.html>`_
 or `computing jacobians and dynamic parameters
-<https://frankaemika.github.io/libfranka/cartesian_impedance_control_8cpp-example.html>`_
+<https://frankaemika.github.io/libfranka/cartesian_impedance_control_8cpp-example.html>`_.

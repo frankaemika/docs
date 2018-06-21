@@ -5,7 +5,7 @@ Overview
     :align: center
     :figclass: align-center
 
-    
+
     Schematic overview.
 
 The Franka Control Interface (FCI) allows a fast and direct low-level bidirectional connection
