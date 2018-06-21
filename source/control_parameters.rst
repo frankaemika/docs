@@ -2,16 +2,16 @@
 
 Robot and interface specifications
 ===================================
-Realtime control commands sent to the robot should fulfill *recommended* and *necessary* 
-conditions. Recommended conditions should be fulfilled to ensure optimal operation of the 
+Realtime control commands sent to the robot should fulfill *recommended* and *necessary*
+conditions. Recommended conditions should be fulfilled to ensure optimal operation of the
 robot. If necessary conditions are not met then the motion will be aborted.
 
-The final robot trajectory is the result of processing the user-specified trajectory ensuring 
-that recommended conditions are fulfilled. As long as necessary conditions are met, the robot 
-will try to follow the user-provided trajectory but it will only match the final trajectory 
-if it also fulfills recommended conditions. If the necessary conditions are violated, an error 
-will abort the motion: if, for instance, the first point of the user defined joint trajectory 
-is very different from robot start position (:math:`q_start`) a ``start_pose_invalid`` error 
+The final robot trajectory is the result of processing the user-specified trajectory ensuring
+that recommended conditions are fulfilled. As long as necessary conditions are met, the robot
+will try to follow the user-provided trajectory but it will only match the final trajectory
+if it also fulfills recommended conditions. If the necessary conditions are violated, an error
+will abort the motion: if, for instance, the first point of the user defined joint trajectory
+is very different from robot start position (:math:`q_start`) a ``start_pose_invalid`` error
 will abort the motion.
 
 Values for the constants used in the equations below are shown in the `Constants`_ section.

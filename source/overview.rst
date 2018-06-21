@@ -11,7 +11,7 @@ Overview
 The Franka Control Interface (FCI) allows a fast and direct low-level bidirectional connection
 to the Arm and Hand. It provides the current status of the robot and enables its direct control
 with an external workstation PC connected via Ethernet.
-By using ``libfranka``, our open source C++ interface, you can send real-time control values 
+By using ``libfranka``, our open source C++ interface, you can send real-time control values
 at 1 kHz with 5 different interfaces:
 
  * Gravity & friction compensated joint level torque commands.
@@ -30,7 +30,7 @@ You get also access robot model library which provides:
  * Jacobian matrix of all robot joints.
  * Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
-In addition, ``franka_ros`` connects Franka Emika research robots with the entire ROS ecosystem. 
+In addition, ``franka_ros`` connects Franka Emika research robots with the entire ROS ecosystem.
 It integrates ``libfranka`` into  `ROS Control <https://wiki.ros.org/ros_control>`_.
 Additionally, it includes `URDF <https://wiki.ros.org/urdf>`_ models and detailed 3D meshes of our
 robots and end effectors, which allows visualization (e.g. RViz) and kinematic simulations.
