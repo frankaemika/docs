@@ -1,17 +1,18 @@
-Control parameters specifications
-=================================
+.. _control_parameters_specifications:
 
-Control parameters fed into the robot should fulfill *necessary* and *recommended* conditions. If
-necessary conditions are not met then the motion will be aborted. Recommended conditions should be
-fulfilled to ensure optimal operation of the robot.
+Robot and interface specifications
+===================================
+Realtime control commands sent to the robot should fulfill *recommended* and *necessary*
+conditions. Recommended conditions should be fulfilled to ensure optimal operation of the
+robot. If necessary conditions are not met then the motion will be aborted.
 
-The final robot trajectory is the result of processing the user-specified trajectory ensuring that
-recommended conditions are fulfilled. As long as the necessary conditions are met, the robot
-will try to follow the user-provided trajectory, but it will only match the desired trajectory if it
-also fulfills the recommended conditions.
-If the necessary conditions are violated, an error will abort the motion: if, for instance, the
-first point of the user defined joint trajectory is very different from :math:`q_{start}`, a velocity
-limits violation error will abort the motion.
+The final robot trajectory is the result of processing the user-specified trajectory ensuring
+that recommended conditions are fulfilled. As long as necessary conditions are met, the robot
+will try to follow the user-provided trajectory but it will only match the final trajectory
+if it also fulfills recommended conditions. If the necessary conditions are violated, an error
+will abort the motion: if, for instance, the first point of the user defined joint trajectory
+is very different from robot start position (:math:`q(t=0) \neq q_c(t=0)`) a ``start_pose_invalid`` error
+will abort the motion.
 
 Values for the constants used in the equations below are shown in the `Constants`_ section.
 
@@ -21,29 +22,27 @@ Joint trajectory requirements
 Necessary conditions
 ********************
 
-1. :math:`q_{min} < q_d < q_{max}`
-2. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
-3. :math:`-\ddot{q}_{max} < \ddot{q_d} < \ddot{q}_{max}`
-4. :math:`-\dddot{q}_{max} < \dddot{q_d} < \dddot{q}_{max}`
+1. :math:`q_{min} < q_c < q_{max}`
+2. :math:`-\dot{q}_{max} < \dot{q}_c < \dot{q}_{max}`
+3. :math:`-\ddot{q}_{max} < \ddot{q}_c < \ddot{q}_{max}`
+4. :math:`-\dddot{q}_{max} < \dddot{q}_c < \dddot{q}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`q_{min,soft} < q_d < q_{max,soft}`
-2. :math:`-\dot{q}_{max,soft} < \dot{q_d} < \dot{q}_{max,soft}`
-3. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-4. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
+1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+2. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-4. :math:`q = q_d`
-5. :math:`\dot{q} = 0`
-6. :math:`\ddot{q} = 0`
+3. :math:`q = q_c`
+4. :math:`\dot{q}_{c} = 0`
+5. :math:`\ddot{q}_{c} = 0`
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-8. :math:`\dot{q} = 0`
-9. :math:`\ddot{q} = 0`
+6. :math:`\dot{q}_{c} = 0`
+7. :math:`\ddot{q}_{c} = 0`
 
 Cartesian trajectory requirements
 ---------------------------------
@@ -52,36 +51,34 @@ Necessary conditions
 ********************
 
 1. :math:`T` is proper transformation matrix
-2. :math:`-\dot{p}_{max} < \dot{p_d} < \dot{p}_{max}` (Cartesian velocity)
-3. :math:`-\ddot{p}_{max} < \ddot{p_d} < \ddot{p}_{max}` (Cartesian acceleration)
-4. :math:`-\dddot{p}_{max} < \dddot{p_d} < \dddot{p}_{max}` (Cartesian jerk)
+2. :math:`-\dot{p}_{max} < \dot{p_c} < \dot{p}_{max}` (Cartesian velocity)
+3. :math:`-\ddot{p}_{max} < \ddot{p_c} < \ddot{p}_{max}` (Cartesian acceleration)
+4. :math:`-\dddot{p}_{max} < \dddot{p_c} < \dddot{p}_{max}` (Cartesian jerk)
 
 Conditions derived from inverse kinematics:
 
-5. :math:`q_{min} < q_d < q_{max}`
-6. :math:`-\dot{q}_{max} < \dot{q_d} < \dot{q}_{max}`
-7. :math:`-\ddot{q}_{max} < \ddot{q_d} < \ddot{q}_{max}`
+5. :math:`q_{min} < q_c < q_{max}`
+6. :math:`-\dot{q}_{max} < \dot{q_c} < \dot{q}_{max}`
+7. :math:`-\ddot{q}_{max} < \ddot{q_c} < \ddot{q}_{max}`
 
 Recommended conditions
 **********************
 
 Conditions derived from inverse kinematics:
 
-1. :math:`q_{min,soft} < q_d < q_{max,soft}`
-2. :math:`-\dot{q}_{max,soft} < \dot{q_d} < \dot{q}_{max,soft}`
-3. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-4. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
+1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+2. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-5. :math:`{}^OT_{EE} = {{}^OT_{EE}}_d`
-6. :math:`\dot{p} = 0` (Cartesian velocity)
-7. :math:`\ddot{p} = 0` (Cartesian acceleration)
+3. :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
+4. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+5. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-8. :math:`\dot{p} = 0` (Cartesian velocity)
-9. :math:`\ddot{p} = 0` (Cartesian acceleration)
+6. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+7. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 Controller requirements
 -----------------------
@@ -98,23 +95,23 @@ Recommended conditions
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-2. :math:`\tau_j = 0`
+2. :math:`{\tau_j}_{d} = 0`
 
 .. _limit_table:
 
 Constants
 ---------
 
-Limits in the Cartesian space are as follows:
+Limits in the Cartesian space are as follows:\
 
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
 |          Name          |                 Translation                   |                   Rotation                       |                  Elbow                     |
 +========================+===============================================+==================================================+============================================+
-| :math:`\dot{p}_{max}`  | 1.8700 :math:`\frac{\text{m}}{\text{s}}`      | 2.7500 :math:`\frac{\text{rad}}{\text{s}}`       | 2.3925 :math:`\frac{rad}{\text{s}}`        |
+| :math:`\dot{p}_{max}`  | 1.7000 :math:`\frac{\text{m}}{\text{s}}`      | 2.5000 :math:`\frac{\text{rad}}{\text{s}}`       | 2.1750 :math:`\frac{rad}{\text{s}}`        |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
-| :math:`\ddot{p}_{max}` | 14.3000 :math:`\frac{\text{m}}{\text{s}^2}`   | 27.5000 :math:`\frac{\text{rad}}{\text{s}^2}`    | 11.0000 :math:`\;\frac{rad}{\text{s}^2}`   |
+| :math:`\ddot{p}_{max}` | 13.0000 :math:`\frac{\text{m}}{\text{s}^2}`   | 25.0000 :math:`\frac{\text{rad}}{\text{s}^2}`    | 10.0000 :math:`\;\frac{rad}{\text{s}^2}`   |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
-| :math:`\dddot{p}_{max}`| 6500.3000 :math:`\frac{\text{m}}{\text{s}^2}` | 12500.0000 :math:`\frac{\text{rad}}{\text{s}^2}` | 5000.0000 :math:`\;\frac{rad}{\text{s}^2}` |
+| :math:`\dddot{p}_{max}`| 6500.0000 :math:`\frac{\text{m}}{\text{s}^2}` | 12500.0000 :math:`\frac{\text{rad}}{\text{s}^2}` | 5000.0000 :math:`\;\frac{rad}{\text{s}^2}` |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
 
 Joint space limits are:
