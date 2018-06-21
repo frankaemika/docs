@@ -11,7 +11,7 @@ that recommended conditions are fulfilled. As long as necessary conditions are m
 will try to follow the user-provided trajectory but it will only match the final trajectory
 if it also fulfills recommended conditions. If the necessary conditions are violated, an error
 will abort the motion: if, for instance, the first point of the user defined joint trajectory
-is very different from robot start position (:math:`q_start`) a ``start_pose_invalid`` error
+is very different from robot start position (:math:`q(t=0) \neq q_c(t=0)`) a ``start_pose_invalid`` error
 will abort the motion.
 
 Values for the constants used in the equations below are shown in the `Constants`_ section.
