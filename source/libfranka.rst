@@ -253,7 +253,7 @@ Note that, on the Control side, there are two things that could modify your sign
   deactivated by default.
 * `Packet losses`, which may occur if you:
 
-   * don't have a very good connection due to the performance of your PC + network card.  
+   * don't have a very good connection due to the performance of your PC + network card.
    * your control loop is taking too long to compute (you have, depending on you network card and
      PC configuration, approx. < 300 :math:`\mu s` for your own control loop).
 
