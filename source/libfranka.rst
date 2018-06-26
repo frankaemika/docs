@@ -267,6 +267,8 @@ Note that, on the Control side, there are two things that could modify your sign
     last commanded values that you sent and compare them with the values you receive on the robot
     state in the next sample.
 
+.. _rate-limiters:
+
 Rate limiters
 *******************
 As of version ``0.4.0``, libfranka includes rate limiters for all realtime interfaces running by
@@ -376,3 +378,169 @@ realtime fashion, e.g. in an optimzation loop. The libfranka examples include ex
 <https://frankaemika.github.io/libfranka/print_joint_poses_8cpp-example.html>`_
 or `computing jacobians and dynamic parameters
 <https://frankaemika.github.io/libfranka/cartesian_impedance_control_8cpp-example.html>`_.
+
+
+Errors
+-------
+
+Using the FCI you will encounter several errors that happen either due to noncompliant
+commands sent by the user, due to communication problems or due to safety features that
+the robot includes. The most relevant ones are detailed in the following subsections.
+For a complete list please check the `API documentation
+<https://frankaemika.github.io/libfranka/structfranka_1_1Errors.html>`_.
+
+.. hint::
+
+    Note that, after an error occurs, you can automatically clear it and continue running your
+    program with the ``robot.automaticErrorRecovery()`` command without user intervention.
+    Check the exception string before continuing to make sure that the error is not a critical
+    one.
+
+Errors due to noncompliant commanded values
+********************************************
+If the commanded values sent by the user do not comply with the
+:ref:`interface requirements<control_parameters_specifications>`, one of the following errors
+will occur:
+
+* Errors due to **wrong initial values of a motion generator**:
+
+ - ``joint_motion_generator_start pose_invalid``
+ - ``cartesian_position_motion_generator_start_pose_invalid``
+ - ``cartesian_motion_generator_start_elbow_invalid``
+ - ``cartesian_motion_generator_elbow_sign_inconsistent``
+
+ These errors indicate a discrepancy between the current robot values and the initial values sent
+ by the user. To fix these errors, make sure that your control loop starts with the last commanded
+ value observed in the robot state. For instance, for the joint position interface
+
+ .. code-block:: c++
+
+   double time{0.0};
+   robot.control(
+    [=, &time](const franka::RobotState& robot_state, franka::Duration period) -> franka::JointPositions {
+      time += period.toSec();
+      if (time == 0) {
+        // Send the last commanded q_c as the initial value
+        return franka::JointPositions(robot_state.q_c);
+      } else {
+        // The rest of your control loop
+        ...
+      }
+    });
+
+
+* Errors due to a **position limit** violation using a joint position/velocity motion generator,
+  which will produce a ``joint_motion_generator_position_limits_violation``. Solving this error
+  should be simple: make sure that the values that you send are in the limits. Cartesian
+  interfaces also have limits on the joint signals that result after the inverse kinematics: the
+  ``cartesian_motion_generator_joint_position_limits_violation`` will be triggered if the inverse
+  kinematics solver of Control yields a joint configuration out of the limits.
+
+* Errors due to **velocity** limits violation and **discontinuity errors**, which refer to
+  **acceleration** and/or **jerk** limits violation. If you use a joint motion generator the
+  possible errors are
+
+ - ``joint_motion_generator_velocity_limits_violation``
+ - ``joint_motion_generator_velocity_discontinuity``  (acceleration limit violation)
+ - ``joint_motion_generator_acceleration_discontinuity`` (jerk limit violation)
+
+ If you use a Cartesian one, the possible errors are
+
+ - Cartesian limits:
+
+    - ``cartesian_motion_generator_velocity_limits_violation``
+    - ``cartesian_motion_generator_velocity_discontinuity`` (acceleration limit violation)
+    - ``cartesian_motion_generator_acceleration_discontinuity`` (jerk limit violation)
+
+ - Joint limits after the inverse kinematics
+
+    - ``cartesian_motion_generator_joint_velocity_limits_violation``
+    - ``cartesian_motion_generator_joint_velocity_discontinuity``
+      (acceleration limit violation)
+    - ``cartesian_motion_generator_joint_acceleration_discontinuity`` (jerk limit violation)
+
+ To mitigate velocity violations or discontinuity errors, make sure that the signals that
+ you command do not violate the :ref:`limits<control_parameters_specifications>`. For every
+ motion generator, Control differentiates the signals sent by the user with backwards Euler.
+ For instance, if, using a joint position motion generator, at time :math:`k` the user sends
+ the command :math:`q_{c,k}`, the resulting velocity, acceleration and jerk will be
+
+ - Velocity :math:`\dot{q}_{c,k} = \frac{(q_{c,k} - q_{c,k-1})}{0.001}`.
+ - Acceleration :math:`\ddot{q}_{c,k} = \frac{\dot{q}_{c,k} - \dot{q}_{c,k-1}}{0.001}`
+ - Jerk :math:`\dddot{q}_{c,k} = \frac{\ddot{q}_{c,k} - \ddot{q}_{c,k-1}}{0.001}`
+
+ Note that :math:`q_{c,k-1}, \dot{q}_{c,k-1}` and :math:`\ddot{q}_{c,k-1}` are always sent back
+ to the user in the robot state.
+
+ Finally, for the torque interface a **torque rate** limit violation triggers the error
+ 
+ - ``controller_torque_discontinuity``
+
+ Control also computes the torque rate with backwards Euler, i.e.
+ :math:`\dot{\tau}_{d,k} = \frac{(\tau_{d,k} - \tau_{d,k-1})}{0.001}` and the previous desired
+ torque commanded by the user is also sent back in the robot state so you will be able to
+ compute all of this in advance.
+
+.. hint::
+
+    The rate limiters included in ``libfranka`` since version ``0.4.0`` modify the signals
+    sent by the user to make them conform with all these limits except for the joint limits
+    after the inverse kinematics. You can check the ``include/franka/rate_limiting.h`` and
+    ``src/rate_limiting.cpp`` for exemplary code on how to compute resulting velocity,
+    acceleration and jerk for all interfaces. We emphasize again that using rate limiting on a
+    discontinuous signal can easily yield to unstable behavior, so please make sure that
+    your signal is smooth enough before enabling this *robustness* feature.
+
+
+Errors due to communication problems
+************************************
+If during a realtime loop Control does not receive any packets during 20 cycles, i.e. 20 ms, you
+will receive a ``communication_constraints_violation`` error.
+Note that if your connection has intermittent packet drops, it might not stop, but it could
+trigger discontinuity errors even when your source signals are conform with the interface
+specification.
+In that case, check our :ref:`troubleshooting section <motion-stopped-due-to-discontinuities>`
+and consider enabling the :ref:`rate limiters <rate-limiters>` to increase the robustness
+of your control loop.
+
+
+Safety-related errors
+*********************
+.. warning::
+
+    These monitoring features are by no means conform with any safety norm and do not
+    guarantee any safety to the user. They only aim for helping researchers during the
+    development and testing of their control algorithms.
+
+* **Reflex errors**. If the estimated external torques :math:`\hat{\tau}_{ext}` or forces
+  :math:`{}^O\hat{F}_{ext}` surpass the configured thresholds, a ``cartesian_reflex`` or
+  ``joint_reflex`` error will be triggered respectively. You can configure the thresholds
+  with the ``franka::Robot::setCollisionBehavior`` non realtime command.
+
+  .. hint::
+
+      If you wish to have contacts with the environment you will have to set the
+      collision threshold to higher values. Otherwise once you grasp an object or push
+      against a surface, you will get an error. Also, very fast or abrupt motions could
+      trigger a reflex; the external torques and forces are only estimated values that
+      might get unnacurate during high acceleration phases. You can monitor their values
+      observing  :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}` in the robot state.
+
+* **Self-collision avoidance**. If the robot reaches a configuration which is close to a
+  self-collision, it will trigger a ``self_collision_avoidance_violation`` error.
+
+  .. warning::
+      This error does not guarantee that the robot will prevent a self collision at any
+      configuration and speed. If, using the torque interface, you drive the robot at
+      full speed against itself the robot might self-collide.
+
+
+* If the **torque sensor limit** is reached, a ``tau_j_range_violation``
+  will be triggered. This does not guarantee that the sensor will not be damaged after any
+  high-torque interactions or motions but aims for preventing some of it.
+
+* If the **maximum allowed power** is reached, the ``power_limit_violation`` will prevent
+  the robot from stopping  and engaging the brakes during the control loop.
+
+* If using an external controller you reach the joint or the Cartesian limits you will get
+  a ``joint_velocity_violation`` or a ``cartesian_velocity_violation`` error respectively.
