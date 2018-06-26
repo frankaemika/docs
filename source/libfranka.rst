@@ -19,6 +19,8 @@ communication with Control and provides interfaces to easily:
  * read the **robot state** to get sensor data at 1 kHz.
  * access the **model library** to compute your desired kinematic and dynamic parameters.
 
+During operation you might also encounter several **errors** that we detaill at the end of
+this section.
 
 Non-realtime commands
 ---------------------
