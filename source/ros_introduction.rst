@@ -9,7 +9,8 @@ Before continuing with this chapter, please :doc:`install or compile franka_ros 
 
     Schematic overview of the ``franka_ros`` packages.
 
-The ``franka_ros`` metapackage comprises a variety of packages that are briefly introduced here.
+``franka_ros`` integrates ``libfranka`` into ROS and ROS control.
+It consists of a metapackage that comprises a variety of packages that are briefly introduced here.
 We also give a short how-to for :ref:`writing controllers <write_own_controller>`.
 
 All parameters passed to launch files in this section come with default values, so they
