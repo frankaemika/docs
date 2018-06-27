@@ -19,7 +19,7 @@ communication with Control and provides interfaces to easily:
  * read the **robot state** to get sensor data at 1 kHz.
  * access the **model library** to compute your desired kinematic and dynamic parameters.
 
-During operation you might also encounter several **errors** that we detaill at the end of
+During operation you might also encounter several **errors** that we detail at the end of
 this section.
 
 Non-realtime commands
@@ -406,7 +406,7 @@ will occur:
 
 * Errors due to **wrong initial values of a motion generator**:
 
- - ``joint_motion_generator_start pose_invalid``
+ - ``joint_motion_generator_start_pose_invalid``
  - ``cartesian_position_motion_generator_start_pose_invalid``
  - ``cartesian_motion_generator_start_elbow_invalid``
  - ``cartesian_motion_generator_elbow_sign_inconsistent``
@@ -433,7 +433,8 @@ will occur:
 
 * Errors due to a **position limit** violation using a joint position/velocity motion generator,
   which will produce a ``joint_motion_generator_position_limits_violation``. Solving this error
-  should be simple: make sure that the values that you send are in the limits. Cartesian
+  should be simple: make sure that the values that you send are in the
+  :ref:`limits<control_parameters_specifications>`. Cartesian
   interfaces also have limits on the joint signals that result after the inverse kinematics: the
   ``cartesian_motion_generator_joint_position_limits_violation`` will be triggered if the inverse
   kinematics solver of Control yields a joint configuration out of the limits.
@@ -467,7 +468,7 @@ will occur:
  For instance, if, using a joint position motion generator, at time :math:`k` the user sends
  the command :math:`q_{c,k}`, the resulting velocity, acceleration and jerk will be
 
- - Velocity :math:`\dot{q}_{c,k} = \frac{(q_{c,k} - q_{c,k-1})}{0.001}`.
+ - Velocity :math:`\dot{q}_{c,k} = \frac{q_{c,k} - q_{c,k-1}}{0.001}`
  - Acceleration :math:`\ddot{q}_{c,k} = \frac{\dot{q}_{c,k} - \dot{q}_{c,k-1}}{0.001}`
  - Jerk :math:`\dddot{q}_{c,k} = \frac{\ddot{q}_{c,k} - \ddot{q}_{c,k-1}}{0.001}`
 
@@ -475,11 +476,11 @@ will occur:
  to the user in the robot state.
 
  Finally, for the torque interface a **torque rate** limit violation triggers the error
- 
+
  - ``controller_torque_discontinuity``
 
  Control also computes the torque rate with backwards Euler, i.e.
- :math:`\dot{\tau}_{d,k} = \frac{(\tau_{d,k} - \tau_{d,k-1})}{0.001}` and the previous desired
+ :math:`\dot{\tau}_{d,k} = \frac{\tau_{d,k} - \tau_{d,k-1}}{0.001}` and the previous desired
  torque commanded by the user is also sent back in the robot state so you will be able to
  compute all of this in advance.
 
@@ -506,8 +507,8 @@ and consider enabling the :ref:`rate limiters <rate-limiters>` to increase the r
 of your control loop.
 
 
-Safety-related errors
-*********************
+Behavioral errors
+******************
 .. warning::
 
     These monitoring features are by no means conform with any safety norm and do not
@@ -521,12 +522,14 @@ Safety-related errors
 
   .. hint::
 
-      If you wish to have contacts with the environment you will have to set the
-      collision threshold to higher values. Otherwise once you grasp an object or push
-      against a surface, you will get an error. Also, very fast or abrupt motions could
-      trigger a reflex; the external torques and forces are only estimated values that
-      might get unnacurate during high acceleration phases. You can monitor their values
-      observing  :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}` in the robot state.
+      If you wish the robot to have contacts with the environment you must set the
+      collision thresholds to higher values. Otherwise, once you grasp an object or push
+      against a surface, a reflex will be triggered. Also, very fast or abrupt motions could
+      trigger a reflex; the external torques and forces are only *estimated* values that
+      could get innacurate, especially during
+      high acceleration phases. You can monitor their values observing 
+      :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}`
+      in the robot state.
 
 * **Self-collision avoidance**. If the robot reaches a configuration which is close to a
   self-collision, it will trigger a ``self_collision_avoidance_violation`` error.
@@ -541,8 +544,8 @@ Safety-related errors
   will be triggered. This does not guarantee that the sensor will not be damaged after any
   high-torque interactions or motions but aims for preventing some of it.
 
-* If the **maximum allowed power** is reached, the ``power_limit_violation`` will prevent
-  the robot from stopping  and engaging the brakes during the control loop.
+* If the **maximum allowed power** is reached, the ``power_limit_violation`` will trigger
+  and will prevent the robot from stopping and engaging the brakes during the control loop.
 
-* If using an external controller you reach the joint or the Cartesian limits you will get
+* If, using an external controller, you reach the joint or the Cartesian limits you will get
   a ``joint_velocity_violation`` or a ``cartesian_velocity_violation`` error respectively.
