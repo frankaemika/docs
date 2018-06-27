@@ -526,9 +526,8 @@ Behavioral errors
       collision thresholds to higher values. Otherwise, once you grasp an object or push
       against a surface, a reflex will be triggered. Also, very fast or abrupt motions could
       trigger a reflex; the external torques and forces are only *estimated* values that
-      could get innacurate, especially during
-      high acceleration phases. You can monitor their values observing 
-      :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}`
+      could get innacurate, especially during high acceleration phases. You can monitor
+      their values observing :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}`
       in the robot state.
 
 * **Self-collision avoidance**. If the robot reaches a configuration which is close to a
