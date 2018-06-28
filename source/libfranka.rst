@@ -273,13 +273,19 @@ Note that, on the Control side, there are two things that could modify your sign
 
 Rate limiters
 *******************
-As of version ``0.4.0``, libfranka includes rate limiters for all realtime interfaces running by
-default. `Rate limiters`, also called `safe controllers`, will limit the rate of change of the
+As of version ``0.4.0``, libfranka includes rate limiters for all realtime interfaces **running by
+default**. `Rate limiters`, also called `safe controllers`, will limit the rate of change of the
 signals sent by the user to prevent the violation of the
 :ref:`limits of the interface<control_parameters_specifications>`. For motion generators, it
 will limit the acceleration and jerk, while, for an external controller, it will limit the
-torque derivative. Rate limiters are part of libfranka so you can have a look at the code or even
-change the limits to more conservative values for a less abrupt behavior.
+torque rate. Rate limiters are part of libfranka so you can have a look at the code or even
+change the limits to more conservative values for a less abrupt behavior. Their main purpose is
+to increase the robustness of your control loop. In case of packet losses, even when the signals
+that you send are conform with the interface limits, Control might detect a jump in velocity,
+acceleration or jerk. Rate limiting will adapt your commands to make sure that this does not
+happen (it will make sure no limits are violated except for the joint limits after inverse
+kinematics while using a Cartesian interface).
+Check the :ref:`nocompliant errors section<noncompliant-errors>` for more details.
 
 You can deactivate the rate limiters of motion generators by specifying the second optional
 parameter of the ``control`` function:
@@ -386,8 +392,8 @@ Errors
 -------
 
 Using the FCI you will encounter several errors that happen either due to noncompliant
-commands sent by the user, due to communication problems or due to safety features that
-the robot includes. The most relevant ones are detailed in the following subsections.
+commands sent by the user, due to communication problems or due to the robot behavior.
+The most relevant ones are detailed in the following subsections.
 For a complete list please check the `API documentation
 <https://frankaemika.github.io/libfranka/structfranka_1_1Errors.html>`_.
 
@@ -397,6 +403,8 @@ For a complete list please check the `API documentation
     program with the ``robot.automaticErrorRecovery()`` command without user intervention.
     Check the exception string before continuing to make sure that the error is not a critical
     one.
+
+.. _noncompliant-errors:
 
 Errors due to noncompliant commanded values
 ********************************************
@@ -468,21 +476,24 @@ will occur:
  For instance, if, using a joint position motion generator, at time :math:`k` the user sends
  the command :math:`q_{c,k}`, the resulting velocity, acceleration and jerk will be
 
- - Velocity :math:`\dot{q}_{c,k} = \frac{q_{c,k} - q_{c,k-1}}{0.001}`
- - Acceleration :math:`\ddot{q}_{c,k} = \frac{\dot{q}_{c,k} - \dot{q}_{c,k-1}}{0.001}`
- - Jerk :math:`\dddot{q}_{c,k} = \frac{\ddot{q}_{c,k} - \ddot{q}_{c,k-1}}{0.001}`
+ - Velocity :math:`\dot{q}_{c,k} = \frac{q_{c,k} - q_{c,k-1}}{\Delta t}`
+ - Acceleration :math:`\ddot{q}_{c,k} = \frac{\dot{q}_{c,k} - \dot{q}_{c,k-1}}{\Delta t}`
+ - Jerk :math:`\dddot{q}_{c,k} = \frac{\ddot{q}_{c,k} - \ddot{q}_{c,k-1}}{\Delta t}` ,
 
- Note that :math:`q_{c,k-1}, \dot{q}_{c,k-1}` and :math:`\ddot{q}_{c,k-1}` are always sent back
- to the user in the robot state.
+ where :math:`\Delta t = 0.001`. Note that :math:`q_{c,k-1}, \dot{q}_{c,k-1}` and
+ :math:`\ddot{q}_{c,k-1}` are always sent back
+ to the user in the robot state so you will be able to
+ compute the resulting derivatives in advance, even in case of packet losses.
 
  Finally, for the torque interface a **torque rate** limit violation triggers the error
 
  - ``controller_torque_discontinuity``
 
  Control also computes the torque rate with backwards Euler, i.e.
- :math:`\dot{\tau}_{d,k} = \frac{\tau_{d,k} - \tau_{d,k-1}}{0.001}` and the previous desired
- torque commanded by the user is also sent back in the robot state so you will be able to
- compute all of this in advance.
+ :math:`\dot{\tau}_{d,k} = \frac{\tau_{d,k} - \tau_{d,k-1}}{\Delta t}`. The previous desired
+ torque commanded by the user is also sent back in the robot state as :math:`\tau_d`
+ so you will also be able to compute the resulting torque rate in advance,
+ even in case of packet losses.
 
 .. hint::
 
@@ -524,9 +535,11 @@ Behavioral errors
 
       If you wish the robot to have contacts with the environment you must set the
       collision thresholds to higher values. Otherwise, once you grasp an object or push
-      against a surface, a reflex will be triggered. Also, very fast or abrupt motions could
-      trigger a reflex; the external torques and forces are only *estimated* values that
-      could get innacurate, especially during high acceleration phases. You can monitor
+      against a surface, a reflex will be triggered. Also, very fast or abrupt motions
+      without contacts could
+      trigger a reflex if thresholds are low; the external torques and forces are
+      only *estimated* values that could be innacurate depending on the robot
+      configuration, especially during high acceleration phases. You can monitor
       their values observing :math:`\hat{\tau}_{ext}` and :math:`{}^O\hat{F}_{ext}`
       in the robot state.
 
