@@ -218,6 +218,7 @@ the ``libfranka`` build directory:
     make the robot unstable. Check the :ref:`interface specifications
     <control_parameters_specifications>` before starting.
 
+.. _control-side:
 
 Under the hood
 ********************
@@ -239,11 +240,24 @@ necessary torques :math:`\tau_{d}` to track the corresponding computed `d` signa
 joint impedance controller will follow the joint signals :math:`q_{d}, \dot{q}_{d}` and the
 internal Cartesian impedance controller the Cartesian ones
 :math:`{}^OT_{EE,d}, {}^O\dot{P}_{EE,d}`) and send them to the robot joints.
-All the variables in the figure, i.e. the last received `c` values, the computed `d` values
+All the variables on the Control side of the figure, i.e. the last received `c` values
+(after the low pass filter and the extrapolation due to packet losses,
+read below for an explanation), the computed `d` values
 and their time derivatives are sent back to the user in the robot state. This way you can
 take advantage of the inverse kinematics in your own external controller and, at the same time,
 it will offer you `full transparency`: you will always know the exact values
 and derivatives that the robot received and tracked in the last sample.
+
+.. hint::
+
+    When you are using a *joint* motion generator, the `Robot kinematics completion` block will
+    not modify the commanded *joint* values and therefore :math:`q_d, \dot{q}_d, \ddot{q}_d` and
+    :math:`q_c, \dot{q}_c, \ddot{q}_c` are equivalent. Note that you will only find the
+    `d` signals in the robot state. If you use a *Cartesian* motion generator, the `Robot
+    kinematics completion` block might modify the user-commanded values to avoid singularities
+    and therefore the desired signals :math:`{}^OT_{EE,d}, {}^O\dot{P}_{EE,d}` and the commanded
+    signals :math:`{}^OT_{EE,c}, {}^O\dot{P}_{EE,c}, {}^O\ddot{P}_{EE,c}` might differ.
+    You will find both the `d` and the `c` signals in the robot state.
 
 **External controller**: if an external controller is sent, the desired joint torques commanded
 by the user :math:`\tau_{d}` are directly fed to the robot joints.
@@ -408,9 +422,9 @@ For a complete list please check the `API documentation
 
 Errors due to noncompliant commanded values
 ********************************************
-If the commanded values sent by the user do not comply with the
-:ref:`interface requirements<control_parameters_specifications>`, one of the following errors
-will occur:
+If the :ref:`commanded values<control-side>` sent by the user
+do not comply with the :ref:`interface requirements<control_parameters_specifications>`,
+one of the following errors will occur:
 
 * Errors due to **wrong initial values of a motion generator**:
 
@@ -482,8 +496,11 @@ will occur:
 
  where :math:`\Delta t = 0.001`. Note that :math:`q_{c,k-1}, \dot{q}_{c,k-1}` and
  :math:`\ddot{q}_{c,k-1}` are always sent back
- to the user in the robot state so you will be able to
- compute the resulting derivatives in advance, even in case of packet losses.
+ to the user in the robot state as :math:`q_{d}, \dot{q}_{d}` and
+ :math:`\ddot{q}_{d}` so you will be able to
+ compute the resulting derivatives in advance, even in case of packet losses. Check the
+ :ref:`section about the details of the Control side of the interface<control-side>`
+ for more details.
 
  Finally, for the torque interface a **torque rate** limit violation triggers the error
 
