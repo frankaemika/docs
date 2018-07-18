@@ -57,7 +57,7 @@ By default, this will check out the newest release of ``libfranka``. If you want
     git checkout <version>
     git submodule update
 
-In the source directory, create a build directory and run CMake:
+In the source directory, create a build directory, run CMake and install ``libfranka``:
 
 .. code-block:: shell
 
@@ -65,6 +65,7 @@ In the source directory, create a build directory and run CMake:
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
+    sudo make install
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
