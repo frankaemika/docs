@@ -220,10 +220,10 @@ the ``libfranka`` build directory:
 
 Signal processing
 *******************
-To facilitate the control of the robot under non ideal network connections, libfranka includes
+To facilitate the control of the robot under non-ideal network connections, libfranka includes
 signal processing functions that will modify the user-commanded values to make them conform
 with the :ref:`limits of the interface<control_parameters_specifications>`.
-There are two *optional* functions included in the all realtime control loops:
+There are two *optional* functions included in all realtime control loops:
 
  * A first-order **low-pass filter** to smooth the user-commanded signal.
  * A **rate limiter**, that saturates the time derivatives of the user-commanded values.
@@ -256,7 +256,7 @@ There are two *optional* functions included in the all realtime control loops:
 
     The limits used in the rate limiter are defined in ``franka/rate_limiting.h``
     and are set to the interface limits. If this produces a jerky or unstable behavior
-    you can set the limits to lower values or activate the low-pass filter/reduce its cutoff
+    you can set the limits to lower values, activate the low-pass filter or reduce its cutoff
     frequency.
 
 To control the signal processing functions, all ``robot.control()`` function calls
@@ -321,7 +321,7 @@ necessary torques :math:`\tau_{d}` to track the corresponding computed `d` signa
 joint impedance controller will follow the joint signals :math:`q_{d}, \dot{q}_{d}` and the
 internal Cartesian impedance controller the Cartesian ones
 :math:`{}^OT_{EE,d}, {}^O\dot{P}_{EE,d}`) and send them to the robot joints.
-All the variables on the Control side of the figure, i.e. the last received `c` values
+All variables on the Control side of the figure, i.e. the last received `c` values
 (after the low pass filter and the extrapolation due to packet losses,
 read below for an explanation), the computed `d` values
 and their time derivatives are sent back to the user in the robot state. This way you can
@@ -345,9 +345,6 @@ by the user :math:`\tau_{d}` are directly fed to the robot joints.
 
 Note that, on the Control side, there are two things that could modify your signals:
 
-* An optional `low pass filter`. You can set the cutoff frequency with the non-realtime command
-  ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.4.0`` it is
-  deactivated by default and since version ``0.5.0`` it's use is deprecated.
 * `Packet losses`, which may occur if you:
 
    * don't have a very good connection due to the performance of your PC + network card.
@@ -357,12 +354,16 @@ Note that, on the Control side, there are two things that could modify your sign
   In this case, Control assumes a constant acceleration model or a constant torque to extrapolate
   your signals. If ``>=20`` packets are lost in a row the control loop is stopped with the
   ``communication_constraints_violation`` exception.
+* An optional `low-pass filter`. You can set the cutoff frequency with the non-realtime command
+  ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.5.0`` it's
+  use is deprecated.
 
 .. hint::
 
     If you are not sure if your signals are being filtered or extrapolated, you can always check the
     last commanded values that you sent and compare them with the values you receive on the robot
-    state in the next sample.
+    state in the next sample. You will also find these values after an exception occurs in the
+    ``franka::ControlException::log`` member of the exception.
 
 
 Robot state
