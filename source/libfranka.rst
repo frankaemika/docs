@@ -304,6 +304,8 @@ Or similarly for an external controller
     features.
     Filtering and limiting the rate of a nonsmooth signal can yield instabilities or
     unexpected behavior. Too many packet losses can also generate unstable behavior.
+    Check your communication quality by monitoring the ``control_command_success_rate``
+    signal of the robot state.
 
 .. _control-side:
 
