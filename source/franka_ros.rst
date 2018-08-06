@@ -56,6 +56,11 @@ You can launch the ``franka_gripper_node`` with:
 
     roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
 
+.. hint::
+
+    When specifying ``load_gripper:=true`` for ``roslaunch franka_control franka_control.launch``,
+    a ``franka_gripper_node`` is started as well.
+
 
 .. _franka_hw:
 
