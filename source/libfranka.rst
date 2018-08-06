@@ -245,12 +245,17 @@ There are two *optional* functions included in all realtime control loops:
   :ref:`limits of the interface<control_parameters_specifications>`. For motion generators, it
   will limit the acceleration and jerk, while, for an external controller, it will limit the
   torque rate. Their main purpose is to increase the robustness of your control loop.
-  In case of packet losses, even when the signals that you send are conform with the
+  In case of packet losses, even when the signals that you send conform with the
   interface limits, Control might detect a violation of velocity, acceleration or jerk limits.
-  Rate limiting will adapt your commands to make sure that this does not happen
-  (it will make sure no limits are violated except for the joint limits after inverse
-  kinematics while using a Cartesian interface).
+  Rate limiting will adapt your commands to make sure that this does not happen.
   Check the :ref:`noncompliant errors section<noncompliant-errors>` for more details.
+
+  .. caution::
+
+    Rate limiting will ensure no limits are violated except for the joint limits after
+    inverse kinematics, whose violation produces the family of errors starting with
+    ``cartesian_motion_generator_joint_*``. Check the
+    :ref:`noncompliant errors section<noncompliant-errors>` for more details.
 
   .. hint::
 
@@ -551,7 +556,7 @@ Errors due to communication problems
 If during a realtime loop Control does not receive any packets during 20 cycles, i.e. 20 ms, you
 will receive a ``communication_constraints_violation`` error.
 Note that if your connection has intermittent packet drops, it might not stop, but it could
-trigger `discontinuity` errors even when your source signals are conform with the interface
+trigger `discontinuity` errors even when your source signals conform with the interface
 specification.
 In that case, check our :ref:`troubleshooting section <motion-stopped-due-to-discontinuities>`
 and consider enabling the :ref:`signal processing functions <signal-processing>`
