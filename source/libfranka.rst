@@ -231,7 +231,7 @@ There are two *optional* functions included in all realtime control loops:
 * As of version ``0.5.0``, libfranka includes a **low-pass filter** for all realtime
   interfaces **running by default** with a 100 Hz cutoff frequency.
   The filter smooths commanded signals
-  to provide more stable robot motions but does not guarantee the violation of the
+  to provide more stable robot motions but does not prevent the violation of the
   :ref:`limits of the interface<control_parameters_specifications>`.
 
   .. important::
@@ -295,7 +295,8 @@ Or similarly for an external controller
 
     The low-pass filter and the rate limiter are robustness features against packet losses
     to be used **after** you have already designed a smooth motion generator or controller.
-    For the first tests of a new control loop we strongly recommend to deactivate this features.
+    For the first tests of a new control loop we strongly recommend to deactivate these
+    features.
     Filtering and limiting the rate of a nonsmooth signal can yield instabilities or
     unexpected behavior. Too many packet losses can also generate unstable behavior.
 
