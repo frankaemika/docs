@@ -58,8 +58,8 @@ You can launch the ``franka_gripper_node`` with:
 
 .. hint::
 
-    When specifying ``load_gripper:=true`` for ``roslaunch franka_control franka_control.launch``,
-    a ``franka_gripper_node`` is started as well.
+    Starting with ``franka_ros`` 0.6.0, specifying ``load_gripper:=true`` for
+    ``roslaunch franka_control franka_control.launch`` will start a ``franka_gripper_node`` as well.
 
 
 .. _franka_hw:
