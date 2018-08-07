@@ -49,8 +49,6 @@ Concerning the Arm, some useful non-realtime commands are:
  * ``setEE``, ``setK`` and ``setLoad`` which set end effector and load parameters.
  * ``automaticErrorRecovery`` that clears any command or control exception that previously
    happened in the robot.
- * ``setFilters`` which sets the cutoff frequency of the lowpass filter for the realtime
-   interfaces.
 
 For a complete and fully specified list check the API documentation for the
 `Arm <https://frankaemika.github.io/libfranka/classfranka_1_1Robot.html>`__
@@ -218,13 +216,104 @@ the ``libfranka`` build directory:
     make the robot unstable. Check the :ref:`interface specifications
     <control_parameters_specifications>` before starting.
 
+.. _signal-processing:
+
+Signal processing
+*******************
+To facilitate the control of the robot under non-ideal network connections, libfranka includes
+signal processing functions that will modify the user-commanded values to make them conform
+with the :ref:`limits of the interface<control_parameters_specifications>`.
+There are two *optional* functions included in all realtime control loops:
+
+ * A first-order **low-pass filter** to smooth the user-commanded signal.
+ * A **rate limiter**, that saturates the time derivatives of the user-commanded values.
+
+* As of version ``0.5.0``, libfranka includes a **low-pass filter** for all realtime
+  interfaces **running by default** with a 100 Hz cutoff frequency.
+  The filter smooths commanded signals
+  to provide more stable robot motions but does not prevent the violation of the
+  :ref:`limits of the interface<control_parameters_specifications>`.
+
+  .. important::
+
+    As of version ``0.5.0`` the ``Robot::setFilters`` command is deprecated in favor of
+    the low-pass filter functionality of the ``Robot::control`` function.
+
+* As of version ``0.4.0``, **rate limiters** for all realtime interfaces are
+  **running by default**. `Rate limiters`, also called `safe controllers`, will limit the
+  rate of change of the signals sent by the user to prevent the violation of the
+  :ref:`limits of the interface<control_parameters_specifications>`. For motion generators, it
+  will limit the acceleration and jerk, while, for an external controller, it will limit the
+  torque rate. Their main purpose is to increase the robustness of your control loop.
+  In case of packet losses, even when the signals that you send conform with the
+  interface limits, Control might detect a violation of velocity, acceleration or jerk limits.
+  Rate limiting will adapt your commands to make sure that this does not happen.
+  Check the :ref:`noncompliant errors section<noncompliant-errors>` for more details.
+
+  .. caution::
+
+    Rate limiting will ensure no limits are violated except for the joint limits after
+    inverse kinematics, whose violation produces the family of errors starting with
+    ``cartesian_motion_generator_joint_*``. Check the
+    :ref:`noncompliant errors section<noncompliant-errors>` for more details.
+
+  .. hint::
+
+    The limits used in the rate limiter are defined in ``franka/rate_limiting.h``
+    and are set to the interface limits. If this produces a jerky or unstable behavior
+    you can set the limits to lower values, activate the low-pass filter or reduce its cutoff
+    frequency.
+
+To control the signal processing functions, all ``robot.control()`` function calls
+have two additional optional parameters. The first one is a flag to activate or
+deactivate the rate limiter while the second one
+specifies the cutoff frequency of the first-order low-pass filter. If the cutoff frequency
+``>=1000.0`` the filter will be deactivated. For instance
+
+.. code-block:: c++
+
+    // Set Cartesian impedance (optional)
+    robot.setCartesianImpedance({{2000, 2000, 2000, 100, 100, 100}});
+    // Runs my_external_motion_generator_callback with the Cartesian impedance controller,
+    // rate limiters on and low-pass filter with 100 Hz cutoff
+    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance);
+    // Identical to the previous line (default true, 100.0 Hz cutoff)
+    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance, true, 100.0);
+    // Runs my_external_motion_generator_callback with the Cartesian impedance controller,
+    // rate limiters off and low-pass filter off
+    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance, false, 1000.0);
+
+Or similarly for an external controller
+
+.. code-block:: c++
+
+    // With rate limiting and filter
+    robot.control(my_external_controller);
+    // Identical to the previous line (default true, 100.0 Hz cutoff)
+    robot.control(my_external_controller, true, 100.0);
+    // Without rate limiting but with low-pass filter (100.0 Hz)
+    robot.control(my_external_controller, false);
+    // Without rate limiting and without low-pass filter
+    robot.control(my_external_controller, false, 1000.0);
+
+.. danger::
+
+    The low-pass filter and the rate limiter are robustness features against packet losses
+    to be used **after** you have already designed a smooth motion generator or controller.
+    For the first tests of a new control loop we strongly recommend to deactivate these
+    features.
+    Filtering and limiting the rate of a nonsmooth signal can yield instabilities or
+    unexpected behavior. Too many packet losses can also generate unstable behavior.
+    Check your communication quality by monitoring the ``control_command_success_rate``
+    signal of the robot state.
+
 .. _control-side:
 
 Under the hood
 ********************
 Until now we have covered details of the interface running on the client side, i.e your own
-workstation PC. The behavior of the Control side of the realtime interface is shown in the
-following figure
+workstation PC. The behavior of the full control loop including the Control side of the
+realtime interface is shown in the following figure
 
 .. figure:: _static/rt-loop.png
     :align: center
@@ -240,7 +329,7 @@ necessary torques :math:`\tau_{d}` to track the corresponding computed `d` signa
 joint impedance controller will follow the joint signals :math:`q_{d}, \dot{q}_{d}` and the
 internal Cartesian impedance controller the Cartesian ones
 :math:`{}^OT_{EE,d}, {}^O\dot{P}_{EE,d}`) and send them to the robot joints.
-All the variables on the Control side of the figure, i.e. the last received `c` values
+All variables on the Control side of the figure, i.e. the last received `c` values
 (after the low pass filter and the extrapolation due to packet losses,
 read below for an explanation), the computed `d` values
 and their time derivatives are sent back to the user in the robot state. This way you can
@@ -264,9 +353,6 @@ by the user :math:`\tau_{d}` are directly fed to the robot joints.
 
 Note that, on the Control side, there are two things that could modify your signals:
 
-* An optional `low pass filter`. You can set the cutoff frequency with the non-realtime command
-  ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.4.0`` it is
-  deactivated by default.
 * `Packet losses`, which may occur if you:
 
    * don't have a very good connection due to the performance of your PC + network card.
@@ -276,73 +362,17 @@ Note that, on the Control side, there are two things that could modify your sign
   In this case, Control assumes a constant acceleration model or a constant torque to extrapolate
   your signals. If ``>=20`` packets are lost in a row the control loop is stopped with the
   ``communication_constraints_violation`` exception.
+* An optional `low-pass filter`. You can set the cutoff frequency with the non-realtime command
+  ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.5.0`` it's
+  use is deprecated.
 
 .. hint::
 
     If you are not sure if your signals are being filtered or extrapolated, you can always check the
     last commanded values that you sent and compare them with the values you receive on the robot
-    state in the next sample.
+    state in the next sample. You will also find these values after an exception occurs in the
+    ``franka::ControlException::log`` member of the exception.
 
-.. _rate-limiters:
-
-Rate limiters
-*******************
-As of version ``0.4.0``, libfranka includes rate limiters for all realtime interfaces **running by
-default**. `Rate limiters`, also called `safe controllers`, will limit the rate of change of the
-signals sent by the user to prevent the violation of the
-:ref:`limits of the interface<control_parameters_specifications>`. For motion generators, it
-will limit the acceleration and jerk, while, for an external controller, it will limit the
-torque rate. Rate limiters are part of libfranka so you can have a look at the code or even
-change the limits to more conservative values for a less abrupt behavior. Their main purpose is
-to increase the robustness of your control loop. In case of packet losses, even when the signals
-that you send are conform with the interface limits, Control might detect a jump in velocity,
-acceleration or jerk. Rate limiting will adapt your commands to make sure that this does not
-happen (it will make sure no limits are violated except for the joint limits after inverse
-kinematics while using a Cartesian interface).
-Check the :ref:`nocompliant errors section<noncompliant-errors>` for more details.
-
-You can deactivate the rate limiters of motion generators by specifying the second optional
-parameter of the ``control`` function:
-
-.. code-block:: c++
-
-    // Set Cartesian impedance (optional)
-    robot.setCartesianImpedance({{2000, 2000, 2000, 100, 100, 100}});
-    // Turn off lowpass filter (off by default)
-    robot.setFilters(1000, 1000, 1000, 1000, 1000);
-    // Runs my_external_motion_generator_callback with the Cartesian impedance controller
-    // and rate limiters on
-    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance);
-    // Identical to the previous line (default true)
-    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance, true);
-    // Runs my_external_motion_generator_callback with the Cartesian impedance controller
-    // and rate limiters off
-    robot.control(my_external_motion_generator_callback, franka::ControllerMode::kCartesianImpedance, false);
-
-Or similarly for an external controller
-
-.. code-block:: c++
-
-    // Turn off lowpass filter
-    robot.setFilters(1000, 1000, 1000, 1000, 1000);
-    // With rate limiting
-    robot.control(my_external_controller);
-    // Without rate limiting
-    robot.control(my_external_controller, false);
-
-.. important::
-
-    Rate limiters require the lowpass filter to be deactivated. You can easily do that by
-    executing the non realtime command ``robot.setFilters(1000, 1000, 1000, 1000, 1000);`` before
-    your control loop.
-
-.. danger::
-
-    Rate limiters are a robustness feature against packet losses to be used **after** you have
-    already designed a smooth motion generator or controller. For the first tests of a new control
-    loop we strongly recommend to deactivate this feature. Limiting the rate of a nonsmooth
-    signal can easily yield instabilities or unexpected behavior. Too many packet losses can
-    also generate unstable behavior.
 
 Robot state
 -----------------------
@@ -528,11 +558,11 @@ Errors due to communication problems
 If during a realtime loop Control does not receive any packets during 20 cycles, i.e. 20 ms, you
 will receive a ``communication_constraints_violation`` error.
 Note that if your connection has intermittent packet drops, it might not stop, but it could
-trigger discontinuity errors even when your source signals are conform with the interface
+trigger `discontinuity` errors even when your source signals conform with the interface
 specification.
 In that case, check our :ref:`troubleshooting section <motion-stopped-due-to-discontinuities>`
-and consider enabling the :ref:`rate limiters <rate-limiters>` to increase the robustness
-of your control loop.
+and consider enabling the :ref:`signal processing functions <signal-processing>`
+to increase the robustness of your control loop.
 
 
 Behavioral errors
@@ -576,5 +606,5 @@ Behavioral errors
 * If the **maximum allowed power** is reached, the ``power_limit_violation`` will trigger
   and will prevent the robot from stopping and engaging the brakes during the control loop.
 
-* If, using an external controller, you reach the joint or the Cartesian limits you will get
+* If you reach the joint or the Cartesian limits you will get
   a ``joint_velocity_violation`` or a ``cartesian_velocity_violation`` error respectively.

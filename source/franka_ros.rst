@@ -56,6 +56,11 @@ You can launch the ``franka_gripper_node`` with:
 
     roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
 
+.. hint::
+
+    Starting with ``franka_ros`` 0.6.0, specifying ``load_gripper:=true`` for
+    ``roslaunch franka_control franka_control.launch`` will start a ``franka_gripper_node`` as well.
+
 
 .. _franka_hw:
 
@@ -222,22 +227,12 @@ panda_moveit_config
 This package contains partly auto generated files that provide an out-of-the-box MoveIt!
 configuration for Panda Arm and Hand.
 
-To control the robot with MoveIt! launch the following three files:
+To control the robot with MoveIt! and RViz launch the following file:
 
 .. code-block:: shell
 
-    # Bring up the controller manager and connect to the robot
-    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip> load_gripper:=<true|false>
-
-    # (Optional) If load_gripper:=true was used, start the gripper node as well
-    roslaunch franka_gripper franka_gripper.launch robot_ip:=<fci-ip>
-
-    # Start a joint trajectory controller of type <controller>
-    roslaunch panda_moveit_config panda_moveit.launch controller:=<effort/position> \
-      load_gripper:=<true|false>
-
-    # Launch RViz for visualization and GUI-based motion planning and execution
-    roslaunch panda_moveit_config moveit_rviz.launch
+    roslaunch panda_moveit_config panda_control_moveit_rviz.launch load_gripper:=<true|false> \
+    robot_ip:=<fci-ip>
 
 For more details, documentation and tutorials, please have a look at the
 `MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.

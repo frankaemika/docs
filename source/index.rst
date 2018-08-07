@@ -33,7 +33,7 @@ The source code of this documentation is also `available online
    installation
    getting_started
    libfranka
-   ros_introduction
+   franka_ros
    control_parameters
    troubleshooting
    faq
