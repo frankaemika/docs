@@ -30,9 +30,6 @@ overall communication quality. To ensure best performance, please check the foll
    ``RealtimeConfig`` is explicitly specified in the constructor.
  * Power saving features are disabled (cpu frequency scaling, power saving mode,
    laptop on battery, BIOS power saving features, etc.). See `Disabling CPU frequency scaling`_.
- * Try to lower the cut-off frequency for commands by running ``franka::Robot::setFilters`` with
-   e.g. 50 Hz. This will mitigate network packet losses, but also decrease the accuracy with which
-   the robot follows the commanded trajectory.
 
 .. _disable_cpu_frequency_scaling:
 
@@ -127,6 +124,15 @@ documents sent with your robot.
 Network bandwidth, delay and jitter test
 ----------------------------------------
 
+In order to evaluate the network performance of your (possible) control PC we've developed two
+tests. The first, a ping test, can be executed without the need of libfranka or franka_ros
+installed on your system. If your system passes the first ping test, you can run the
+advanced UDP network performance analysis.
+
+
+Simple ping-tests
+^^^^^^^^^^^^^^^^^
+
 The following command will simulate a network load which is equivalent to a scenario where the
 robot is controlled by the FCI:
 
@@ -164,3 +170,17 @@ purchasing a separate, high performance PCI-Express network card for your
 workstation PC. See if there are dedicated drivers for your network card,
 these usually offer better performance. Lastly, the CPU can also be a limiting
 factor for network performance.
+
+
+Advanced UDP network performance analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following libfranka example executes a control loop and provides feedback about the lost robot
+states as well as the maximum, minimum and average control command success rate.
+
+If you installed the ``ros-kinetic-libfranka`` package, the executable will be available in your
+``PATH`` after setting up ROS.
+
+.. code-block:: shell
+
+    ./examples/communication_test <fci-ip>
