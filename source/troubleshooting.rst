@@ -30,9 +30,6 @@ overall communication quality. To ensure best performance, please check the foll
    ``RealtimeConfig`` is explicitly specified in the constructor.
  * Power saving features are disabled (cpu frequency scaling, power saving mode,
    laptop on battery, BIOS power saving features, etc.). See `Disabling CPU frequency scaling`_.
- * Try to lower the cut-off frequency for commands by running ``franka::Robot::setFilters`` with
-   e.g. 50 Hz. This will mitigate network packet losses, but also decrease the accuracy with which
-   the robot follows the commanded trajectory.
 
 .. _disable_cpu_frequency_scaling:
 
