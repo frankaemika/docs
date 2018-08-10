@@ -178,8 +178,13 @@ Advanced UDP network performance analysis
 The following libfranka example executes a control loop and provides feedback about the lost robot
 states as well as the maximum, minimum and average control command success rate.
 
-If you installed the ``ros-kinetic-libfranka`` package, the executable will be available in your
-``PATH`` after setting up ROS.
+If you installed the ``ros-kinetic-libfranka`` package, you can execute the test with:
+
+.. code-block:: shell
+
+    rosrun libfranka communication_test <fci-ip>
+
+To run the test after compiling ``libfranka`` from source, execute:
 
 .. code-block:: shell
 
