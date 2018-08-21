@@ -431,6 +431,7 @@ realtime fashion, e.g. in an optimzation loop. The libfranka examples include ex
 or `computing jacobians and dynamic parameters
 <https://frankaemika.github.io/libfranka/cartesian_impedance_control_8cpp-example.html>`_.
 
+.. _control-errors:
 
 Errors
 -------
@@ -444,9 +445,12 @@ For a complete list please check the `API documentation
 .. hint::
 
     Note that, after an error occurs, you can automatically clear it and continue running your
-    program with the ``robot.automaticErrorRecovery()`` command without user intervention.
+    program with the ``franka::Robot::automaticErrorRecovery()`` command without user intervention.
     Check the exception string before continuing to make sure that the error is not a critical
     one.
+
+    Some errors can also be cleared manually by toggling the external activation device or by
+    using the error recovery button in Desk.
 
 .. _noncompliant-errors:
 
