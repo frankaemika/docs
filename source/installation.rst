@@ -115,7 +115,7 @@ kernel. This section describes the procedure of patching a kernel to support
 
 First, install the necessary dependencies::
 
-    apt-get install build-essential bc curl ca-certificates fakeroot gnupg2 libssl-dev lsb-release
+    apt-get install build-essential bc curl ca-certificates fakeroot gnupg2 libssl-dev lsb-release libelf-dev
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
