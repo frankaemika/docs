@@ -64,7 +64,7 @@ In the source directory, create a build directory and run CMake:
     mkdir build
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
-    cmake --build .
+    cmake --build . -- -j $(nproc --all)
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
