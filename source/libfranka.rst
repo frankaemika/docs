@@ -379,7 +379,7 @@ Robot state
 The robot state delivers the robot sensor readings and estimated values at a 1 kHz rate.
 It provides:
 
- * *Joint level signals*: motor and extimated joint angles and their derivatives,
+ * *Joint level signals*: motor and estimated joint angles and their derivatives,
    joint torque and derivatives, estimated external torque, joint collision/contacts.
  * *Cartesian level signals*: Cartesian pose, configured endeffector and load parameters,
    external wrench acting on the endeffector, Cartesian collision
