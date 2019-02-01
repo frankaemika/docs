@@ -1,7 +1,7 @@
 franka_ros
 ==========
 
-Before continuing with this chapter, please :doc:`install or compile franka_ros <installation>`.
+Before continuing with this chapter, please :doc:`install or compile franka_ros <install_linux>`.
 
 .. figure:: _static/ros-architecture.png
     :align: center
