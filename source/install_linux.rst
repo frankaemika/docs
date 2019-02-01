@@ -1,4 +1,4 @@
-Installation instructions
+Installation Linux
 =========================
 
 This chapter describes how to install ``libfranka`` and ``franka_ros``, either
@@ -61,7 +61,7 @@ In the source directory, create a build directory and run CMake:
 
 .. code-block:: shell
 
-    mkdir build
+    mkdir build`GitHub <https://github.com/frankaemika/franka_ros>`
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .

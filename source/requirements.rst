@@ -7,13 +7,13 @@ Additional requirements are specified in the documents that you have received wi
 Workstation PC
 --------------
 
-+------------------------------------------------------------+
-| Minimum System Requirements                                |
-+===================+========================================+
-| Operating System  | Linux with PREEMPT_RT patched kernel   |
-+-------------------+----------------------------------------+
-| Network card      | 100BASE-TX                             |
-+-------------------+----------------------------------------+
++-----------------------------------------------------------------------------+
+| Minimum System Requirements                                |                |
++===================+=========================================================+
+| Operating System  | Linux with PREEMPT_RT patched kernel **OR** Windows 10  |
++-------------------+---------------------------------------------------------+
+| Network card      | 100BASE-TX                                              |
++-------------------+---------------------------------------------------------+
 
 Since the robot sends data at 1 kHz frequency, it is important that the workstation PC is configured
 to minimize latencies. For example, we recommend to

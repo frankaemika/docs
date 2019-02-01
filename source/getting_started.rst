@@ -1,7 +1,7 @@
 Getting started
 ===============
 
-After :doc:`setting up the required software <installation>`, it is time to
+After setting up the required software for :doc:`Linux <install_linux>` or :doc:`Windows <install_windows>`, it is time to
 connect to the robot, and test the whole setup by using FCI to read the current
 robot state.
 
@@ -106,8 +106,8 @@ To set up a static address, enter the following values in the `Network` section:
 Press `Apply`. After the settings are successfully applied, connect your
 workstation's LAN port to the robot's control unit.
 
-Workstation network configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Linux workstation network configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes how to set up a static IP address on Ubuntu 16.04
 using the GUI. Follow the official Ubuntu guide_ if you prefer to use the
@@ -148,6 +148,11 @@ the robot from your workstation. To verify this, perform the
 :ref:`network-bandwidth-delay-test`. From now on, you can also access Desk
 through this address in your browser.
 
+Windows workstation network configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Check out the official `Microsoft networking documentation <https://docs.microsoft.com/en-us/windows-server/networking/networking>`__
+to configure your network.
+
 Verifying the connection
 ------------------------
 
@@ -161,9 +166,22 @@ repository, you can instead read the instructions for
 
 Change to the build directory of ``libfranka`` and execute the example:
 
+*Linux*:
+
 .. code-block:: shell
 
     ./examples/echo_robot_state <fci-ip>
+
+*Windows*:
+
+.. code-block:: shell
+
+    cd /path/to/libfranka/build/examples/
+    echo_robot_state.exe <fci-ip>
+
+.. hint::
+    Before executing libfranka programms, make sure that the executables are able to find their runtime libraries. This is only possible on windows,
+    when the needed libraries are in the same directory as the executable.
 
 The program will print the current state of the robot to the console and terminate after a few
 iterations. The fields are explained in the
