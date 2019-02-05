@@ -64,7 +64,7 @@ Open **CMake** > **Change CMake settings** > **libfranka** and add
 
  {
  "..."
- "cmakeCommandArgs": "-DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake",
+ "cmakeCommandArgs": "-DPoco_DIR=/Path/To/Poco/CMake/Config -DEigen3_DIR=/Path/To/Eigen/CMake/Config",
  "..."
  }
 
