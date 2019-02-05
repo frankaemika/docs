@@ -49,15 +49,16 @@ By default, this will check out the newest release of ``libfranka``. If you want
 .. important::
  Only libfranka from release 0.5.0 has Windows support! 
 
-To build ``libfranka`` with Visiual Studio open it as a CMake Project. Choose **File** > **Open** > **CMake** > **/path/to/libfranka/CMakeLists.txt**.
+To build ``libfranka`` with Visiual Studio open it as a CMake Project.
+Choose **File** > **Open** > **CMake** > **/path/to/libfranka/CMakeLists.txt**.
 
 Generate the ``CMakeSettings.json``, which contains the CMake project settings.
 Select **CMake** > **Cache** > **Generate** > **CMakeSettings.json**. The file will be placed in your
 main ``libfranka`` directory.
 
 The next step is to solve the build dependencies. Since Windows does not have default binary directories, make sure the compiler is able to find the dependencies.
-We did this either by copying all needed .dll libries into the chosen build root determined by ``CMakeSettings.json`` or using
-the vcpkg toolchain with cmakeCommandArgs. Open **CMake** > **Change CMake settings** > **libfranka** and add
+We did this either by copying all needed .dll libries into the chosen build root determined by ``CMakeSettings.json`` or using cmakeCommandArgs.
+Open **CMake** > **Change CMake settings** > **libfranka** and add
 
 .. code-block:: json
 
