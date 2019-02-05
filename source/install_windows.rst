@@ -69,3 +69,15 @@ Open **CMake** > **Change CMake settings** > **libfranka** and add
  }
 
 Choose **CMake** > **Build** to build ``libfranka`` into the build directory, determined in ``CMakeSettings.json``
+
+.. hint::
+
+ Alternatively you can build libfranka on ``Developer Command Propmpt for VS XXXX``
+
+ .. code-block:: shell
+
+    cd /path/to/libfranka
+    mkdir build
+    cd build
+    cmake -DPoco_DIR=/Path/To/Poco/CMake/Config -DEigen3_DIR=/Path/To/Eigen/CMake/Config -G Ninja ..
+    ninja
