@@ -30,9 +30,9 @@ To build ``libfranka``, install the following dependencies:
 
  .. code-block:: shell
 
- cd /path/to/vcpkg
- vcpkg install eigen3
- vcpkg install poco
+        cd /path/to/vcpkg
+        vcpkg install eigen3
+        vcpkg install poco
 
 Download the source code by cloning ``libfranka`` from `GitHub <https://github.com/frankaemika/libfranka>`__:
 
