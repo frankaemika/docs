@@ -61,7 +61,7 @@ In the source directory, create a build directory and run CMake:
 
 .. code-block:: shell
 
-    mkdir build`GitHub <https://github.com/frankaemika/franka_ros>`
+    mkdir build
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
