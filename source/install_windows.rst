@@ -1,18 +1,14 @@
 ﻿Installation on Windows
 =======================
 
-This chapter describes how to install ``libfranka``, either
-as binary packages or by building from source. Since ROS is not supported for Windows, you 
-wont be able to use ``franka_ros`` on a Windwos workstation.
+Starting from ``libfranka`` >= 0.5.0, **experimental** Windows support is provided.
+This chapter describes how to install ``libfranka`` on Windows.
+``franka_ros`` is not supported on Windows.
 
 .. note::
 
- ``libfranka`` is currently only provided for Windwos 10 and Visual Studio Professional/Express 2014 or higher.
-
-Binary package setup
---------------------
-
-**TODO**
+ ``libfranka`` is currently only supported for Windows 10 and
+ Visual Studio Professional/Express 2014 or higher.
 
 
 Building from source
@@ -40,24 +36,26 @@ Download the source code by cloning ``libfranka`` from `GitHub <https://github.c
 
  git clone --recursive https://github.com/frankaemika/libfranka
 
-By default, this will check out the newest release of ``libfranka``. If you want to build a particular version of
-``libfranka`` instead, check out the corresponding Git tag::
+By default, this will check out the newest release of ``libfranka``. If you want to build
+a particular version of ``libfranka`` instead, check out the corresponding Git tag::
 
  git checkout <version>
  git submodule update
 
 .. important::
- Only libfranka from release 0.5.0 has Windows support! 
+ Only ``libfranka`` >= 0.5.0 has Windows support!
 
-To build ``libfranka`` with Visiual Studio open it as a CMake Project.
+To build ``libfranka`` with Visual Studio open it as a CMake Project.
 Choose **File** > **Open** > **CMake** > **/path/to/libfranka/CMakeLists.txt**.
 
 Generate the ``CMakeSettings.json``, which contains the CMake project settings.
-Select **CMake** > **Cache** > **Generate** > **CMakeSettings.json**. The file will be placed in your
-main ``libfranka`` directory.
+Select **CMake** > **Cache** > **Generate** > **CMakeSettings.json**. The file will be placed in
+your main ``libfranka`` directory.
 
-The next step is to solve the build dependencies. Since Windows does not have default binary directories, make sure the compiler is able to find the dependencies.
-We did this either by copying all needed .dll libries into the chosen build root determined by ``CMakeSettings.json`` or using cmakeCommandArgs.
+The next step is to solve the build dependencies.
+Since Windows does not have default binary directories, make sure the compiler is able to find
+the required dependencies. This could be done either by copying all needed .dll libries into
+the chosen build root determined by ``CMakeSettings.json`` or using cmakeCommandArgs.
 Open **CMake** > **Change CMake settings** > **libfranka** and add
 
 .. code-block:: json
@@ -68,11 +66,12 @@ Open **CMake** > **Change CMake settings** > **libfranka** and add
  "..."
  }
 
-Choose **CMake** > **Build** to build ``libfranka`` into the build directory, determined in ``CMakeSettings.json``
+Choose **CMake** > **Build** to build ``libfranka`` into the build directory,
+determined in ``CMakeSettings.json``
 
 .. hint::
 
- Alternatively you can build libfranka on ``Developer Command Propmpt for VS XXXX``
+ Alternatively you can build libfranka on `Developer Command Propmpt for VS`:
 
  .. code-block:: shell
 
