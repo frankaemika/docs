@@ -1,5 +1,5 @@
-﻿Installation Windows
-====================
+﻿Installation on Windows
+=======================
 
 This chapter describes how to install ``libfranka``, either
 as binary packages or by building from source. Since ROS is not supported for Windows, you 
