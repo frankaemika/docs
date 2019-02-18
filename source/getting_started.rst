@@ -149,8 +149,10 @@ through this address in your browser.
 
 Windows workstation network configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Check out the official `Microsoft networking documentation <https://docs.microsoft.com/en-us/windows-server/networking/networking>`__
-to configure your network.
+Setup a static IP address on the Windows workstation. Therefore, open **Control Panel** and go to
+**Network and Internet** > **Network and Sharing Center** > **Change adapter settings**.
+Right-click the network adapter and open **Properties**. Use the same example address and netmask
+as in the Linux workstation network configuration.
 
 Verifying the connection
 ------------------------
