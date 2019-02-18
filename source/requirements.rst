@@ -8,9 +8,10 @@ Workstation PC
 --------------
 
 +-----------------------------------------------------------------------------+
-| Minimum System Requirements                                |                |
+| Minimum System Requirements                                                 |
 +===================+=========================================================+
-| Operating System  | Linux with PREEMPT_RT patched kernel **OR** Windows 10  |
+| Operating System  | Linux with PREEMPT_RT patched kernel                    |
+|                   | **OR** Windows 10 (experimental)                        |
 +-------------------+---------------------------------------------------------+
 | Network card      | 100BASE-TX                                              |
 +-------------------+---------------------------------------------------------+
