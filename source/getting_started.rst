@@ -1,8 +1,9 @@
 Getting started
 ===============
 
-After setting up the required software for :doc:`Linux <install_linux>` or :doc:`Windows <install_windows>`, it is time
-to connect to the robot and test the whole setup by using FCI to read the current robot state.
+After setting up the required software for :doc:`Linux <install_linux>` or
+:doc:`Windows <install_windows>`, it is time to connect to the robot and test the whole setup
+by using FCI to read the current robot state.
 
 Operating the robot
 -------------------
@@ -181,8 +182,8 @@ Change to the build directory of ``libfranka`` and execute the example:
     echo_robot_state.exe <fci-ip>
 
 .. hint::
-    Before executing libfranka programms, make sure that the executables are able to find their runtime libraries. This is only possible on windows,
-    when the needed libraries are in the same directory as the executable.
+    Before executing libfranka programms, make sure that the executables are able to find their runtime libraries.
+    On Windows, the easiest way is to copy the needed libraries into the same directory as the executable.
 
 The program will print the current state of the robot to the console and terminate after a few
 iterations. The fields are explained in the
