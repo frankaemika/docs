@@ -302,6 +302,12 @@ are claimed by name and follow the same naming conventions as described in
 :ref:`franka_hw <franka_hw>`. Every instance of ``FrankaCombinableHW`` offers the complete set
 of service and action interfaces as ``FrankaHW`` (see :ref:`franka_control <franka_control>`).
 
+.. note::
+
+   The ``FrankaCombinedHW`` class offers an additional action server in the control node namespace
+   to recover all robots. Also, for the sake of safety, if a reflex or error accurs on any of the
+   robots, the control loop of all robots stops until they are recovered.
+
 
 .. _franka_combined_control:
 
