@@ -432,13 +432,21 @@ The available interfaces are described in Section :ref:`franka_hw <franka_hw>`.
     *FrankaModelInterface* can always be claimed and are not subject to restrictions.
 
 
-Possible claims are:
+Possible claims to command interfaces are:
 
- * all possible single interface claims
- * *EffortJointInterface* + *PositionJointInterface*
- * *EffortJointInterface* + *VelocityJointInterface*
- * *EffortJointInterface* + *FrankaCartesianPoseInterface*
- * *EffortJointInterface* + *FrankaCartesianVelocityInterface*
++-------------------------------------------------+----------------------------------------------+
+|          ``franka_hw::FrankaHW``                | ``franka_combinable_hw::FrankaCombinableHW`` |
++=================================================+==============================================+
+|     - all possible single interface claims      |     - ``EffortJointInterface``               |
+|     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
+|       ``PositionJointInterface``                |       ``FrankaCartesianPoseInterface``       |
+|     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
+|       ``VelocityJointInterface``                |       ``FrankaCartesianVelocityInterface``   |
+|     - ``EffortJointInterface`` +                |                                              |
+|       ``FrankaCartesianPoseInterface``          |                                              |
+|     - ``EffortJointInterface`` +                |                                              |
+|       ``FrankaCartesianVelocityInterface``      |                                              |
++-------------------------------------------------+----------------------------------------------+
 
 The idea behind offering the *EffortJointInterface* in combination with a motion generator
 interface is to expose the internal motion generators to the user. The calculated desired joint
