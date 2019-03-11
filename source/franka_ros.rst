@@ -364,10 +364,10 @@ together with a default set of parameters. You can launch it with
 .. code-block:: shell
 
     roslaunch franka_combined_control franka_combined_control.launch \
-    robot:=<path_to_your_robot_description> \
-    args:=<xacro_args_passed_to_the_robot_description>  # if needed \
-    robot_id:=<name_of_your_multi_robot_setup> \
-    robot_ip_left:=<left_ip> robot_ip_right:=<right_ip>
+        robot:=<path_to_your_robot_description> \
+        args:=<xacro_args_passed_to_the_robot_description> \ # if needed
+        robot_id:=<name_of_your_multi_robot_setup> \
+        robot_ip_left:=<left_ip> robot_ip_right:=<right_ip>
     
 This launch file can easily be extended to run more than 2 robots.
 
@@ -386,10 +386,10 @@ The example controller can be launched with
 .. code-block:: shell
 
   roslaunch franka_combined_example_controllers \
-  dual_arm_cartesian_impedance_example_controller.launch \
-  robot_id:=<name_of_the_2_arm_setup> \
-  robot_left_ip:=<ip_of_the_left_panda> \ robot_right_ip:=<ip_of_the_right_panda> \
-  rviz:=<true/false> rqt:=<true/false> 
+      dual_arm_cartesian_impedance_example_controller.launch \
+      robot_id:=<name_of_the_2_arm_setup> \
+      robot_left_ip:=<ip_of_the_left_panda> robot_right_ip:=<ip_of_the_right_panda> \
+      rviz:=<true/false> rqt:=<true/false> 
 
 The example assumes a robot configuration according to `dual_panda_example.urdf.xacro` where two
 Pandas are mounted at 1 meter distance on top of a box. Feel free to replace this robot description
