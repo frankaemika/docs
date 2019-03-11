@@ -242,21 +242,21 @@ For more details, documentation and tutorials, please have a look at the
 
 franka_combinable_hw
 --------------------
-This package implements hardware classes that can be used to control an arbitrary number of Panda
-robots from a single realtime controller with full state feedback based on libfranka's force
-control methods via ``ros_control`` interfaces. This enables the user to develop coordinated
-controllers, where realtime state feedback from all robots is required. One instance of the class
-``FrankaCombinableHW`` force-controls a single Panda robot and can be combined with others in the
-scope of the ``FrankaCombinedHW`` class which organizes the combination and serves as the main
-hardware class for ``ros_control``. ``FrankaCombinedHW`` derives from ``CombinedRobotHW`` of the
-``ros_control`` framework (see `<https://github.com/ros-controls/ros_control>`_). Which robots are
-loaded in the combined class is parameterized via the ROS parameter server and thus determined at
-runtime. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node
-see :ref:`franka_combined_control <franka_combined_control>`. The main difference of
+This package implements hardware classes that can be used to simultaneously control an arbitrary
+number of Panda robots with a single realtime controller with full state feedback. It is based on
+libfranka's force control methods and uses ``ros_control`` interfaces. This enables the user to
+develop coordinated controllers that require realtime state feedback from all robots. One instance
+of the class ``FrankaCombinableHW`` force-controls a single Panda robot and can be combined with
+other robots in the scope of the ``FrankaCombinedHW`` class, which organizes them and serves as the
+main hardware class for ``ros_control``. ``FrankaCombinedHW`` derives from ``CombinedRobotHW`` of
+the ``ros_control`` framework (see `<https://github.com/ros-controls/ros_control>`_). The ROS
+parameter server is used to determine which robots are loaded in the combined class at runtime. For
+an example on how to configure the ``FrankaCombinedHW`` in the according hardware node, see
+:ref:`franka_combined_control <franka_combined_control>`. The main difference of
 ``FrankaCombinableHW`` compared to ``FrankaHW`` is its integration with libfranka. To combine
 multiple robots, the spinning of the ``ros_control`` controllers must be decoupled from the spinning
 of multiple non-synchronized libfranka threads connecting to the various master controller devices,
-as is not the case for ``FrankaHW``.
+which is not the case of ``FrankaHW``.
 
 .. note::
 
@@ -296,7 +296,7 @@ Admissible combinations of command interface claims by controllers are:
  * *EffortJointInterface* + *FrankaCartesianPoseInterface*
  * *EffortJointInterface* + *FrankaCartesianVelocityInterface*
 
-which can be combined with any set of read-only-interfaces (``FrankaModelInterface``, 
+which can be combined with any set of read-only-interfaces (``FrankaModelInterface``,
 ``JointStateInterface``, ``FrankaStateInterface``). The resource handles offered by all interfaces
 are claimed by name and follow the same naming conventions as described in
 :ref:`franka_hw <franka_hw>`. Every instance of ``FrankaCombinableHW`` offers the complete set
@@ -305,8 +305,8 @@ of service and action interfaces as ``FrankaHW`` (see :ref:`franka_control <fran
 .. note::
 
    The ``FrankaCombinedHW`` class offers an additional action server in the control node namespace
-   to recover all robots. Also, for the sake of safety, if a reflex or error accurs on any of the
-   robots, the control loop of all robots stops until they are recovered.
+   to recover all robots. Also, for the sake of safety, if a reflex or error occurs on any of the
+   robots, the control loop of all robots will stop until they are recovered.
 
 
 .. _franka_combined_control:
@@ -379,7 +379,7 @@ franka_combined_example_controllers
 This package serves to show exemplary usage of the classes and nodes provided in
 :ref:`franka_combinable_hw <franka_combinable_hw>` and
 :ref:`franka_combined_control <franka_combined_control>`. The
-`dual_arm_cartesian_impedance_example_controller` showcases the control of two Panda robots from
+`dual_arm_cartesian_impedance_example_controller` showcases the control of two Panda robots using
 one realtime controller for fulfilling Cartesian tasks with an impedance-based control approach.
 The example controller can be launched with
 
@@ -396,7 +396,7 @@ Pandas are mounted at 1 meter distance on top of a box. Feel free to replace thi
 with one that matches your setup.
 The option `rviz` allows to choose whether a visualization should be launched. With `rqt` the user
 can choose to launch an rqt-gui which allows an online adaption of the rendered end-effector
-impedances at runtime via dynamic reconfigure.  
+impedances at runtime via dynamic reconfigure.
 
 
 .. _write_own_controller:
