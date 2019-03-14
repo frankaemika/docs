@@ -125,6 +125,11 @@ To use ROS control interfaces, you have to retrieve resource handles by name:
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
 controllers.
 
+.. important::
+
+    franka_hw makes use of the ROS `joint_limit_interface <http://wiki.ros.org/ros_control#Joint_limits_interface>`_
+    to `enforce position, velocity and effort safety limits <http://wiki.ros.org/pr2_controller_manager/safety_limits>`_.
+    Approaching the limits results in the (unannounced) modification of the commanded torques.
 
 .. _franka_control:
 
