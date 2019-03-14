@@ -243,16 +243,16 @@ For more details, documentation and tutorials, please have a look at the
 franka_combinable_hw
 --------------------
 This package implements hardware classes that can be used to simultaneously control an arbitrary
-number of Panda robots with a single realtime controller with full state feedback. It is based on
-libfranka's force control methods and uses ``ros_control`` interfaces. This enables the user to
-develop coordinated controllers that require realtime state feedback from all robots. One instance
-of the class ``FrankaCombinableHW`` force-controls a single Panda robot and can be combined with
-other robots in the scope of the ``FrankaCombinedHW`` class, which organizes them and serves as the
-main hardware class for ``ros_control``. ``FrankaCombinedHW`` derives from ``CombinedRobotHW`` of
-the ``ros_control`` framework (see `<https://github.com/ros-controls/ros_control>`_). The ROS
-parameter server is used to determine which robots are loaded in the combined class at runtime. For
-an example on how to configure the ``FrankaCombinedHW`` in the according hardware node, see
-:ref:`franka_combined_control <franka_combined_control>`. The main difference of
+number of Panda robots with a single realtime controller. It is based on libfranka's force control
+methods and uses ``ros_control`` interfaces. This enables the user to develop coordinated
+controllers that require realtime state feedback from all robots. One instance of the class
+``FrankaCombinableHW`` force-controls a single Panda robot and can be combined with other robots
+in the scope of the ``FrankaCombinedHW`` class, which organizes them and serves as the main
+hardware class for ``ros_control``. ``FrankaCombinedHW`` derives from ``CombinedRobotHW`` of
+the ``ros_control`` framework (see `<https://github.com/ros-controls/ros_control>`_).
+The ROS parameter server is used to determine which robots are loaded in the combined class at
+runtime. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node,
+see :ref:`franka_combined_control <franka_combined_control>`. The main difference of
 ``FrankaCombinableHW`` compared to ``FrankaHW`` is its integration with libfranka. To combine
 multiple robots, the spinning of the ``ros_control`` controllers must be decoupled from the spinning
 of multiple non-synchronized libfranka threads connecting to the various master controller devices,
