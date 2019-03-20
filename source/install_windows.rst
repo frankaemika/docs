@@ -1,7 +1,7 @@
-﻿Installation on Windows
+Installation on Windows
 =======================
 
-Starting from ``libfranka`` >= 0.5.0, **experimental** Windows support is provided.
+Starting from ``libfranka`` >= 0.6.0, **experimental** Windows support is provided.
 This chapter describes how to install ``libfranka`` on Windows.
 ``franka_ros`` is not supported on Windows.
 
@@ -18,7 +18,7 @@ To build ``libfranka``, install the following dependencies:
 
 * `Eigen3 <http://eigen.tuxfamily.org/index.php?title=Main_Page>`__
 
-* `Poco <https://pocoproject.org/>`__ 
+* `Poco <https://pocoproject.org/>`__
 
 .. hint::
 
