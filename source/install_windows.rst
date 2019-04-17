@@ -8,7 +8,7 @@ This chapter describes how to install ``libfranka`` on Windows.
 .. note::
 
  ``libfranka`` is currently only supported for Windows 10 and
- Visual Studio Professional/Express 2014 or higher.
+ Visual Studio 2017.
 
 
 Building from source
@@ -43,7 +43,7 @@ a particular version of ``libfranka`` instead, check out the corresponding Git t
  git submodule update
 
 .. important::
- Only ``libfranka`` >= 0.5.0 has Windows support!
+ Only ``libfranka`` >= 0.6.0 has Windows support!
 
 To build ``libfranka`` with Visual Studio open it as a CMake Project.
 Choose **File** > **Open** > **CMake** > **/path/to/libfranka/CMakeLists.txt**.
