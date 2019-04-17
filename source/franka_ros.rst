@@ -1,5 +1,8 @@
 franka_ros
 ==========
+.. note::
+
+ ``franka_ros`` is not supported on Windows.
 
 Before continuing with this chapter, please :doc:`install or compile franka_ros <install_linux>`.
 
