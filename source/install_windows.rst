@@ -53,8 +53,8 @@ Select **CMake** > **Cache** > **Generate** > **CMakeSettings.json**. The file w
 your main ``libfranka`` directory.
 
 The next step is to solve the build dependencies.
-Since Windows does not have default binary directories, make sure the compiler is able to find
-the required dependencies. This could be done either by copying all needed .dll libries into
+Make sure the compiler is able to find
+the required dependencies. This can be done either by copying all needed .dll libries into
 the chosen build root determined by ``CMakeSettings.json`` or using cmakeCommandArgs.
 Open **CMake** > **Change CMake settings** > **libfranka** and add
 
