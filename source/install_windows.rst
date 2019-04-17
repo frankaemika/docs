@@ -16,13 +16,13 @@ Building from source
 
 To build ``libfranka``, install the following dependencies:
 
-* `Eigen3 <http://eigen.tuxfamily.org/index.php?title=Main_Page>`__
+* `Eigen3 <http://eigen.tuxfamily.org>`__
 
 * `Poco <https://pocoproject.org/>`__
 
 .. hint::
 
- Both can be easily installed with `vcpkg <https://docs.microsoft.com/en-us/cpp/vcpkg?view=vs-2017>`__ via cmd prompt:
+ Both can be easily installed with `vcpkg <https://docs.microsoft.com/en-us/cpp/vcpkg>`__ via cmd prompt:
 
  .. code-block:: shell
 
