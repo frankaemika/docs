@@ -1,5 +1,5 @@
-Installation on Linux Systems
-=============================
+Installation on Linux
+=====================
 
 This chapter describes how to install ``libfranka`` and ``franka_ros``, either
 as binary packages or by building from source, and how to install a real-time
