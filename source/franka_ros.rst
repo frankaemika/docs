@@ -240,8 +240,15 @@ For more details, documentation and tutorials, please have a look at the
 
 .. _franka_combinable_hw:
 
-franka_combinable_hw
---------------------
+franka_combinable_hw (beta version)
+-----------------------------------
+
+.. note::
+
+    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
+    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
+    us your feedback.
+
 This package implements hardware classes that can be used to simultaneously control an arbitrary
 number of Panda robots with a single realtime controller. It is based on libfranka's force control
 methods and uses ``ros_control`` interfaces. This enables the user to develop coordinated
@@ -311,8 +318,15 @@ of service and action interfaces as ``FrankaHW`` (see :ref:`franka_control <fran
 
 .. _franka_combined_control:
 
-franka_combined_control
------------------------
+franka_combined_control (beta version)
+--------------------------------------
+
+.. note::
+
+    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
+    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
+    us your feedback.
+
 The ``franka_combined_control`` package implements the ``franka_combined_control_node``,
 a hardware node for ``ros_control`` based on the ``franka_combinable_hw::FrankaCombinedHW`` class.
 The set of robots loaded are configured via the ROS parameter server. These parameters have to be
@@ -374,8 +388,15 @@ This launch file can easily be extended to run more than 2 robots.
 
 .. _franka_combined_example_controllers:
 
-franka_combined_example_controllers
------------------------------------
+franka_combined_example_controllers (beta version)
+---------------------------------------------------
+
+.. note::
+
+    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
+    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
+    us your feedback.
+
 This package serves to show exemplary usage of the classes and nodes provided in
 :ref:`franka_combinable_hw <franka_combinable_hw>` and
 :ref:`franka_combined_control <franka_combined_control>`. The
