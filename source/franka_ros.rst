@@ -128,7 +128,8 @@ controllers.
 .. important::
 
     franka_hw makes use of the ROS `joint_limits_interface <http://wiki.ros.org/ros_control#Joint_limits_interface>`_
-    to `enforce position, velocity and effort safety limits <http://wiki.ros.org/pr2_controller_manager/safety_limits>`_.
+    to `enforce position, velocity and effort safety limits
+    <http://wiki.ros.org/pr2_controller_manager/safety_limits>`_.
     The utilized interfaces are listed below:
 
      * joint_limits_interface::PositionJointSoftLimitsInterface
