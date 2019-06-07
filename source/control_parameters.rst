@@ -151,3 +151,9 @@ The Denavit–Hartenberg parameters for the Panda's kinematic chain are as follo
 | Flange      | 0                     | 0.107                 | 0                            | 0                            |
 +-------------+-----------------------+-----------------------+------------------------------+------------------------------+
 
+
+.. note::
+
+    :math:`{}^0T_{1}` is the transformation matrix which describes the position and orientation of
+    `frame 1` in `frame 0`. A kinematic chain can be calculated like the following:
+    :math:`{}^0T_{2} = {}^0T_{1} * {}^1T_{2}`
