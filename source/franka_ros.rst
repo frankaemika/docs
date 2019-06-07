@@ -1,7 +1,10 @@
 franka_ros
 ==========
+.. note::
 
-Before continuing with this chapter, please :doc:`install or compile franka_ros <installation>`.
+ ``franka_ros`` is not supported on Windows.
+
+Before continuing with this chapter, please :doc:`install or compile franka_ros <install_linux>`.
 
 .. figure:: _static/ros-architecture.png
     :align: center

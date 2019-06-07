@@ -1,5 +1,5 @@
-Installation instructions
-=========================
+Installation on Linux
+=====================
 
 This chapter describes how to install ``libfranka`` and ``franka_ros``, either
 as binary packages or by building from source, and how to install a real-time
@@ -9,8 +9,13 @@ using `ROS <http://www.ros.org/>`_.
 .. note::
 
    While ``libfranka`` and the ``franka_ros`` packages should work on different Linux distributions,
-   official support is currently only provided for Ubuntu 16.04 LTS `Xenial Xerus` and ROS
-   `Kinetic Kame`. The following instructions might therefore only work in this environment.
+   official support is currently only provided for:
+
+   * Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`
+   * Ubuntu 18.04 LTS `Bionic Beaver` and ROS `Melodic Morenia` (requires at least ``libfranka`` 0.6.0)
+
+   The following instructions are exemplary for Ubuntu 16.04 LTS system and ROS `Kinetic Kame`.
+   They only work in the supported environments.
 
 Installing from the ROS repositories
 ------------------------------------
