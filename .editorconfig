@@ -19,5 +19,5 @@ max_line_length = 120
 [control_parameters.rst]
 max_line_length = 170
 
-[install_windows.rst]
+[installation_windows.rst]
 max_line_length = 140

@@ -25,11 +25,6 @@ node('python3 && nodejs') {
       }
     }
 
-    stage('Build PDF') {
-      sh 'make latexpdf'
-      archive 'build/latex/fci.pdf'
-    }
-
     stage('Run linter') {
       sh 'node $(npm bin)/eclint check source/*.rst'
       sh 'make linkcheck'

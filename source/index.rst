@@ -30,8 +30,8 @@ The source code of this documentation is also `available online
 
    overview
    requirements
-   install_linux
-   install_windows
+   installation_linux
+   installation_windows
    getting_started
    libfranka
    franka_ros
