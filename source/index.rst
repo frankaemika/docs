@@ -34,7 +34,9 @@ The source code of this documentation is also `available online
    installation_windows
    getting_started
    libfranka
+   libfranka_changelog
    franka_ros
+   franka_ros_changelog
    control_parameters
    troubleshooting
    faq

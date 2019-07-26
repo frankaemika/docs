@@ -33,7 +33,8 @@
 extensions = [
   'sphinx.ext.mathjax',
   'sphinx.ext.todo',
-  'sphinxcontrib.redirects'
+  'sphinxcontrib.redirects',
+  'm2r'
 ]
 
 # TODO: set mathjax_path for offline support
