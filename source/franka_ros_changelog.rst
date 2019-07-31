@@ -1,5 +1,5 @@
-Changelog for franka_ros
-========================
+franka_ros changelog
+====================
 
 .. mdinclude:: ../franka_ros/CHANGELOG.md
    :start-line: 2
