@@ -1,3 +1,4 @@
 sphinx==1.6.7
 sphinx_rtd_theme==0.2.4
 git+https://github.com/sphinx-contrib/redirects@c25afdc3d812c983560750916c9616f4cb6f98eb
+m2r==0.2.1
