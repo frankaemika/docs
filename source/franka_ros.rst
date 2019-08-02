@@ -128,9 +128,60 @@ To use ROS control interfaces, you have to retrieve resource handles by name:
 The ``franka_hw::FrankaHW`` class also implements the starting, stopping and switching of
 controllers.
 
+The ``FrankaHW`` class also serves as base class for ``FrankaCombinableHW``, a hardware class that
+can be combined with others to control multiple robots from a single controller. The combination of
+an arbitrary number of Panda robots (number configured by parameters) based on ``FrankaCombinableHW``
+for the ROS control framework (see `<https://github.com/ros-controls/ros_control>`_) is implemented
+in ``FrankaCombinedHW``. The key-difference between ``FrankaHW`` and ``FrankaCombinedHW`` is
+that the latter supports torque control only.
+
+.. note::
+
+  The ``FrankaCombinableHW`` class only allows torque/effort control. The motion generator
+  interfaces for positions and velocities are not supported due to the lack of synchronisation
+  between master controllers.
+
+The ROS parameter server is used to determine at runtime which robots are loaded in the combined
+class. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node,
+see :ref:`franka_control <franka_control>`.
+
+.. note::
+
+   The approach of ``FrankaHW`` is optimal for controlling single robots. Thus we recommend using
+   the ``FrankaCombinableHW``/``FrankaCombinedHW`` classes only for controlling multiple robots.
+
+The interfaces offered by the ``FrankaCombinableHW``/``FrankaCombinedHW`` classes are the following:
+
++-------------------------------------------------+----------------------------------------------+
+|                    Interface                    |                   Function                   |
++=================================================+==============================================+
+| ``hardware_interface::EffortJointInterface``    | Commands joint-level torques and reads       |
+|                                                 | joint states.                                |
++-------------------------------------------------+----------------------------------------------+
+| ``hardware_interface::JointStateInterface``     | Reads joint states.                          |
++-------------------------------------------------+----------------------------------------------+
+| ``franka_hw::FrankaStateInterface``             | Reads the full robot state.                  |
++-------------------------------------------------+----------------------------------------------+
+| ``franka_hw::FrankaModelInterface``             | Reads the dynamic and kinematic model of the |
+|                                                 | robot.                                       |
++-------------------------------------------------+----------------------------------------------+
+
+The only admissible command interface claim is the ``EffortJointInterface`` which can be combined
+with any set of read-only-interfaces (``FrankaModelInterface``, ``JointStateInterface``,
+``FrankaStateInterface``). The resource handles offered by all interfaces are claimed by name and
+follow the same naming conventions as described for `FrankaHW`. Every instance of
+``FrankaCombinableHW`` offers the complete set of service and action interfaces
+(see :ref:`franka_control <franka_control>`).
+
+.. note::
+
+   The ``FrankaCombinedHW`` class offers an additional action server in the control node namespace
+   to recover all robots. Also, for the sake of safety, if a reflex or error occurs on any of the
+   robots, the control loop of all robots will stop until they are recovered.
+
 .. important::
 
-    franka_hw makes use of the ROS `joint_limits_interface <http://wiki.ros.org/ros_control#Joint_limits_interface>`_
+    ``FrankaHW`` makes use of the ROS `joint_limits_interface <http://wiki.ros.org/ros_control#Joint_limits_interface>`_
     to `enforce position, velocity and effort safety limits
     <http://wiki.ros.org/pr2_controller_manager/safety_limits>`_.
     The utilized interfaces are listed below:
@@ -139,28 +190,30 @@ controllers.
      * joint_limits_interface::VelocityJointSoftLimitsInterface
      * joint_limits_interface::EffortJointSoftLimitsInterface
 
-    Approaching the limits will result in the (unannounced) modification of the commanded torques.
+    Approaching the limits will result in the (unannounced) modification of the commands.
 
 .. _franka_control:
 
 franka_control
 --------------
 
-``franka_control`` provides a variety of ROS services to expose the full ``libfranka``
-API in the ROS ecosystem. The following services are provided:
+The ROS nodes ``franka_control_node`` and ``franka_combined_control_node`` are hardware nodes
+for ROS control that use according hardware classes from ``franka_hw``. They provide a variety
+of ROS services to expose the full ``libfranka`` API in the ROS ecosystem. The following services
+are provided:
 
- * ``franka_control::SetJointImpedance`` specifies joint stiffness for the internal controller
+ * ``franka_msgs::SetJointImpedance`` specifies joint stiffness for the internal controller
    (damping is automatically derived from the stiffness).
- * ``franka_control::SetCartesianImpedance`` specifies Cartesian stiffness for the internal
+ * ``franka_msgs::SetCartesianImpedance`` specifies Cartesian stiffness for the internal
    controller (damping is automatically derived from the stiffness).
- * ``franka_control::SetEEFrame`` specifies the transformation from <arm_id>_EE to <arm_id>_link8
+ * ``franka_msgs::SetEEFrame`` specifies the transformation from <arm_id>_EE to <arm_id>_link8
    frame.
- * ``franka_control::SetKFrame`` specifies the transformation from <arm_id>_K to <arm_id>_EE frame.
- * ``franka_control::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian
+ * ``franka_msgs::SetKFrame`` specifies the transformation from <arm_id>_K to <arm_id>_EE frame.
+ * ``franka_msgs::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian
    wrenches to configure the collision reflex.
- * ``franka_control::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian
+ * ``franka_msgs::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian
    and joint level to configure the collision reflex.
- * ``franka_control::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
+ * ``franka_msgs::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
 
 .. important::
 
@@ -171,7 +224,7 @@ API in the ROS ecosystem. The following services are provided:
     changed at run time*.
     By default, <arm_id> is set to "panda".
 
-To recover from errors and reflexes the ``franka_control::ErrorRecoveryAction`` can be called.
+To recover from errors and reflexes the ``franka_msgs::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
 
 .. code-block:: shell
@@ -192,7 +245,105 @@ with the following command:
 Besides loading the ``franka_control_node``, the launch file also starts a
 ``franka_control::FrankaStateController`` for reading and publishing the robot states, including
 external wrenches, configurable transforms and the joint states required for visualization with
-rivz. For visualization purposes, a ``robot_state_publisher`` is started together with RViz.
+rivz. For visualization purposes, a ``robot_state_publisher`` is started.
+
+This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
+on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
+server. These parameters have to be in the hardware node's namespace and can look like this:
+
+.. code-block:: yaml
+
+    robot_hardware:
+      - panda_1
+      - panda_2
+      # (...)
+
+    panda_1:
+      type: franka_hw/FrankaCombinableHW
+      arm_id: panda_1
+      joint_names:
+        - panda_1_joint1
+        - panda_1_joint2
+        - panda_1_joint3
+        - panda_1_joint4
+        - panda_1_joint5
+        - panda_1_joint6
+        - panda_1_joint7
+      # Configure the threshold angle for printing joint limit warnings.
+      joint_limit_warning_threshold: 0.1 # [rad]
+      # Activate rate limiter? [true|false]
+      rate_limiting: true
+      # Cutoff frequency of the low-pass filter. Set to >= 1000 to deactivate.
+      cutoff_frequency: 100
+      # Internal controller for motion generators [joint_impedance|cartesian_impedance]
+      internal_controller: joint_impedance
+      # Configure the initial defaults for the collision behavior reflexes.
+      collision_config:
+        lower_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        upper_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        lower_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        upper_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        lower_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        upper_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        lower_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        upper_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+
+    panda_2:
+      type: franka_hw/FrankaCombinableHW
+      arm_id: panda_2
+      joint_names:
+        - panda_2_joint1
+        - panda_2_joint2
+        - panda_2_joint3
+        - panda_2_joint4
+        - panda_2_joint5
+        - panda_2_joint6
+        - panda_2_joint7
+      # Configure the threshold angle for printing joint limit warnings.
+      joint_limit_warning_threshold: 0.1 # [rad]
+      # Activate rate limiter? [true|false]
+      rate_limiting: true
+      # Cutoff frequency of the low-pass filter. Set to >= 1000 to deactivate.
+      cutoff_frequency: 100
+      # Internal controller for motion generators [joint_impedance|cartesian_impedance]
+      internal_controller: joint_impedance
+      # Configure the initial defaults for the collision behavior reflexes.
+      collision_config:
+        lower_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        upper_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        lower_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        upper_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+        lower_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        upper_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        lower_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+        upper_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+
+    # (...)
+
+.. note::
+
+    Be sure to choose unique and consistent ``arm_id`` parameters. The IDs must match the prefixes
+    in the joint names and should be according to the robot description loaded to the control
+    node's namespace.
+
+For more information on the parameter based loading of hardware classes, please refer to the
+official documentation of ``combined_robot_hw::CombinedRobotHW`` from
+`<https://github.com/ros-controls/ros_control>`_.
+
+We provide a default launch file to run the ``franka_combined_control_node`` for 2 robots
+together with a default set of parameters. You can launch it with
+
+.. code-block:: shell
+
+    roslaunch franka_control franka_combined_control.launch \
+        robot:=<path_to_your_robot_description> \
+        args:=<xacro_args_passed_to_the_robot_description> \ # if needed
+        robot_id:=<name_of_your_multi_robot_setup> \
+        robot_1_ip:=<ip_1> robot_2_ip:=<ip_2>
+        hw_config_file:=<path_to_your_hw_config_file>
+
+This launch file can easily be extended to run more than 2 robots.
+
 
 .. _ros_visualization:
 
@@ -234,194 +385,15 @@ To launch the joint impedance example, execute the following command:
     roslaunch franka_example_controllers joint_impedance_example_controller.launch \
       robot_ip:=<fci-ip> load_gripper:=<true|false>
 
-Other examples are started in the same way.
+Other single Panda examples are started in the same way.
 
-
-panda_moveit_config
---------------------
-This package contains partly auto generated files that provide an out-of-the-box MoveIt!
-configuration for Panda Arm and Hand.
-
-To control the robot with MoveIt! and RViz launch the following file:
+The ``dual_arm_cartesian_impedance_example_controller`` showcases the control of two Panda robots
+based on ``FrankaCombinedHW`` using one realtime controller for fulfilling Cartesian tasks with
+an impedance-based control approach. The example controller can be launched with
 
 .. code-block:: shell
 
-    roslaunch panda_moveit_config panda_control_moveit_rviz.launch load_gripper:=<true|false> \
-    robot_ip:=<fci-ip>
-
-For more details, documentation and tutorials, please have a look at the
-`MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
-
-
-.. _franka_combinable_hw:
-
-franka_combinable_hw (beta version)
------------------------------------
-
-.. note::
-
-    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
-    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
-    us your feedback.
-
-This package implements hardware classes that can be used to simultaneously control an arbitrary
-number of Panda robots with a single realtime controller. It is based on libfranka's force control
-methods and uses ``ros_control`` interfaces. This enables the user to develop coordinated
-controllers that require realtime state feedback from all robots. One instance of the class
-``FrankaCombinableHW`` force-controls a single Panda robot and can be combined with other robots
-in the scope of the ``FrankaCombinedHW`` class, which organizes them and serves as the main
-hardware class for ``ros_control``. ``FrankaCombinedHW`` derives from ``CombinedRobotHW`` of
-the ``ros_control`` framework (see `<https://github.com/ros-controls/ros_control>`_).
-The ROS parameter server is used to determine which robots are loaded in the combined class at
-runtime. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node,
-see :ref:`franka_combined_control <franka_combined_control>`. The main difference of
-``FrankaCombinableHW`` compared to ``FrankaHW`` is its integration with libfranka. To combine
-multiple robots, the spinning of the ``ros_control`` controllers must be decoupled from the spinning
-of multiple non-synchronized libfranka threads connecting to the various master controller devices,
-which is not the case of ``FrankaHW``.
-
-.. note::
-
-    The synchronized and coupled approach of ``FrankaHW`` is optimal for controlling single robots.
-    Thus we recommend using the ``FrankaCombinableHW`` class only for controlling multiple robots.
-
-The interfaces offered by the ``FrankaCombinableHW`` class are the following:
-
-+-------------------------------------------------+----------------------------------------------+
-|                    Interface                    |                   Function                   |
-+=================================================+==============================================+
-| ``hardware_interface::JointStateInterface``     | Reads joint states.                          |
-+-------------------------------------------------+----------------------------------------------+
-| ``hardware_interface::EffortJointInterface``    | Commands joint-level torques and reads       |
-|                                                 | joint states.                                |
-+-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaStateInterface``             | Reads the full robot state.                  |
-+-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaPoseCartesianInterface``     | Commands Cartesian poses and reads the full  |
-|                                                 | robot state.                                 |
-+-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaVelocityCartesianInterface`` | Commands Cartesian velocities and reads the  |
-|                                                 | full robot state.                            |
-+-------------------------------------------------+----------------------------------------------+
-| ``franka_hw::FrankaModelInterface``             | Reads the dynamic and kinematic model of the |
-|                                                 | robot.                                       |
-+-------------------------------------------------+----------------------------------------------+
-
-.. note::
-
-    The ``FrankaCombinableHW`` class only allows force control. Thus the Cartesian interfaces can
-    only be claimed in combination with the ``hardware_interface::EffortJointInterface`` for the
-    purpose of inverse kinematics.
-
-Admissible combinations of command interface claims by controllers are:
- * *EffortJointInterface*
- * *EffortJointInterface* + *FrankaCartesianPoseInterface*
- * *EffortJointInterface* + *FrankaCartesianVelocityInterface*
-
-which can be combined with any set of read-only-interfaces (``FrankaModelInterface``,
-``JointStateInterface``, ``FrankaStateInterface``). The resource handles offered by all interfaces
-are claimed by name and follow the same naming conventions as described in
-:ref:`franka_hw <franka_hw>`. Every instance of ``FrankaCombinableHW`` offers the complete set
-of service and action interfaces as ``FrankaHW`` (see :ref:`franka_control <franka_control>`).
-
-.. note::
-
-   The ``FrankaCombinedHW`` class offers an additional action server in the control node namespace
-   to recover all robots. Also, for the sake of safety, if a reflex or error occurs on any of the
-   robots, the control loop of all robots will stop until they are recovered.
-
-
-.. _franka_combined_control:
-
-franka_combined_control (beta version)
---------------------------------------
-
-.. note::
-
-    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
-    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
-    us your feedback.
-
-The ``franka_combined_control`` package implements the ``franka_combined_control_node``,
-a hardware node for ``ros_control`` based on the ``franka_combinable_hw::FrankaCombinedHW`` class.
-The set of robots loaded are configured via the ROS parameter server. These parameters have to be
-in the hardware node's namespace and can look like this:
-
-.. code-block:: yaml
-
-    robot_hardware:
-      - panda_1
-      - panda_2
-      # (...)
-    panda_1:
-      type: franka_combinable_hw/FrankaCombinableHW
-      arm_id: panda_1
-      joint_names:
-        - panda_1_joint1
-        - panda_1_joint2
-        - panda_1_joint3
-        - panda_1_joint4
-        - panda_1_joint5
-        - panda_1_joint6
-        - panda_1_joint7
-    panda_2:
-      type: franka_combinable_hw/FrankaCombinableHW
-      arm_id: panda_2
-      joint_names:
-        - panda_2_joint1
-        - panda_2_joint2
-        - panda_2_joint3
-        - panda_2_joint4
-        - panda_2_joint5
-        - panda_2_joint6
-        - panda_2_joint7
-    # (...)
-
-.. note::
-
-    Be sure to put unique and consistent ``arm_id`` parameters. The IDs must match the prefixes
-    in the ``joint_names`` and should be according to the robot description loaded to the control
-    node's namespace.
-
-For more information on the parameter based loading of hardware classes, please refer to the
-official documentation of ``combined_robot_hw::CombinedRobotHW`` from
-`<https://github.com/ros-controls/ros_control>`_.
-
-We provide a default launch file to run the ``franka_combined_control_node`` for 2 robots
-together with a default set of parameters. You can launch it with
-
-.. code-block:: shell
-
-    roslaunch franka_combined_control franka_combined_control.launch \
-        robot:=<path_to_your_robot_description> \
-        args:=<xacro_args_passed_to_the_robot_description> \ # if needed
-        robot_id:=<name_of_your_multi_robot_setup> \
-        robot_ip_left:=<left_ip> robot_ip_right:=<right_ip>
-
-This launch file can easily be extended to run more than 2 robots.
-
-
-.. _franka_combined_example_controllers:
-
-franka_combined_example_controllers (beta version)
----------------------------------------------------
-
-.. note::
-
-    This package is still a beta version which is only available in the ``multi_panda_beta`` branch
-    of ``franka_ros``. We are currently looking into finalizing it. Feel free to test it and give
-    us your feedback.
-
-This package serves to show exemplary usage of the classes and nodes provided in
-:ref:`franka_combinable_hw <franka_combinable_hw>` and
-:ref:`franka_combined_control <franka_combined_control>`. The
-`dual_arm_cartesian_impedance_example_controller` showcases the control of two Panda robots using
-one realtime controller for fulfilling Cartesian tasks with an impedance-based control approach.
-The example controller can be launched with
-
-.. code-block:: shell
-
-  roslaunch franka_combined_example_controllers \
+  roslaunch franka_example_controllers \
       dual_arm_cartesian_impedance_example_controller.launch \
       robot_id:=<name_of_the_2_arm_setup> \
       robot_left_ip:=<ip_of_the_left_panda> robot_right_ip:=<ip_of_the_right_panda> \
@@ -433,6 +405,24 @@ with one that matches your setup.
 The option `rviz` allows to choose whether a visualization should be launched. With `rqt` the user
 can choose to launch an rqt-gui which allows an online adaption of the rendered end-effector
 impedances at runtime via dynamic reconfigure.
+
+franka_msgs
+-----------
+This package contains message, service and action types that are primarily used the packages
+``franka_hw`` and ``franka_control`` to publish robot states or to expose the libfranka API
+in the ROS ecosystem. For more information about the services and actions offered in this
+package, please refer to :ref:`franka_control <franka_control>`.
+
+
+panda_moveit_config
+--------------------
+
+.. note::
+
+    This package was moved to the `ros_planning repos <https://github.com/ros-planning/panda_moveit_config>`_.
+
+For more details, documentation and tutorials, please have a look at the
+`MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
 
 
 .. _write_own_controller:
