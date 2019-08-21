@@ -121,6 +121,20 @@ documents sent with your robot.
 
 .. _network-bandwidth-delay-test:
 
+.. _udp_timeout:
+
+Running a libfranka executable fails with "UDP receive: Timeout"
+----------------------------------------------------------------
+
+This error occurs if the robot state can not be received by ``libfranka``. Please check the
+following:
+
+ * Your workstation is directly connected to Control, not the LAN port of the Arm (see
+   :ref:`requirement-network`).
+ * The robot can be pinged (see :ref:`network-ping-test`).
+ * The FCI feature file is installed on the robot (see "Settings -> System -> Installed Features").
+ * Your workstation's firewall does not block incoming UDP packets (see ``sudo iptables -L``).
+
 Network bandwidth, delay and jitter test
 ----------------------------------------
 
@@ -129,6 +143,7 @@ tests. The first, a ping test, can be executed without the need of libfranka or 
 installed on your system. If your system passes the first ping test, you can run the
 advanced UDP network performance analysis.
 
+.. _network-ping-test:
 
 Simple ping tests
 ^^^^^^^^^^^^^^^^^
