@@ -119,6 +119,26 @@ If this command fails, the robot is not properly connected to the network, or th
 is not correctly assigned during the setup phase. Please set up the network according to the
 documents sent with your robot.
 
+.. _troubleshooting_connection_timeout:
+
+Running a libfranka executable fails with "Connection timeout"
+----------------------------------------------------------------
+
+This error occurs if ``libfranka`` cannot connect to the robot at all. Please check that:
+
+ * Your workstation is directly connected to Control, not the LAN port of the Arm (see
+   :ref:`requirement-network`).
+ * The robot can be reached from your workstation (see :ref:`troubleshooting_robot_not_reachable`).
+ * The FCI feature file is installed on the robot (see "Settings -> System -> Installed Features").
+
+.. _troubleshooting_udp_timeout:
+
+Running a libfranka executable fails with "UDP receive: Timeout"
+----------------------------------------------------------------
+
+This error occurs if the robot state can not be received by ``libfranka``. Please check that
+your workstation's firewall does not block incoming UDP packets (see ``sudo iptables -L``).
+
 .. _network-bandwidth-delay-test:
 
 Network bandwidth, delay and jitter test
@@ -129,6 +149,7 @@ tests. The first, a ping test, can be executed without the need of libfranka or 
 installed on your system. If your system passes the first ping test, you can run the
 advanced UDP network performance analysis.
 
+.. _network-ping-test:
 
 Simple ping tests
 ^^^^^^^^^^^^^^^^^
