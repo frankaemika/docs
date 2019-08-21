@@ -119,7 +119,7 @@ If this command fails, the robot is not properly connected to the network, or th
 is not correctly assigned during the setup phase. Please set up the network according to the
 documents sent with your robot.
 
-.. _connection_timeout:
+.. _troubleshooting_connection_timeout:
 
 Running a libfranka executable fails with "Connection timeout"
 ----------------------------------------------------------------
@@ -128,10 +128,10 @@ This error occurs if ``libfranka`` cannot connect to the robot at all. Please ch
 
  * Your workstation is directly connected to Control, not the LAN port of the Arm (see
    :ref:`requirement-network`).
- * The robot can be pinged (see :ref:`network-ping-test`).
+ * The robot can be reached from your workstation (see :ref:`troubleshooting_robot_not_reachable`).
  * The FCI feature file is installed on the robot (see "Settings -> System -> Installed Features").
 
-.. _udp_timeout:
+.. _troubleshooting_udp_timeout:
 
 Running a libfranka executable fails with "UDP receive: Timeout"
 ----------------------------------------------------------------
