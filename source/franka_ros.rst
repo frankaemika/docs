@@ -249,7 +249,8 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
-server. These parameters have to be in the hardware node's namespace and can look like this:
+server. These parameters have to be in the hardware node's namespace 
+(see franka_control/config/franka_combined_control_node.yaml as a reference) and look like this:
 
 .. code-block:: yaml
 
@@ -261,6 +262,7 @@ server. These parameters have to be in the hardware node's namespace and can loo
     panda_1:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_1
+      robot_ip: robot_1.franka.de
       joint_names:
         - panda_1_joint1
         - panda_1_joint2
@@ -291,6 +293,7 @@ server. These parameters have to be in the hardware node's namespace and can loo
     panda_2:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_2
+      robot_ip: robot_2.franka.de
       joint_names:
         - panda_2_joint1
         - panda_2_joint2
@@ -318,20 +321,55 @@ server. These parameters have to be in the hardware node's namespace and can loo
         lower_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
         upper_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
 
-    # (...)
+    # (+ more robots ...)
 
 .. note::
 
     Be sure to choose unique and consistent ``arm_id`` parameters. The IDs must match the prefixes
     in the joint names and should be according to the robot description loaded to the control
-    node's namespace.
+    node's namespace. Also: Make sure the ``robot_ip`` are correct.
 
 For more information on the parameter based loading of hardware classes, please refer to the
 official documentation of ``combined_robot_hw::CombinedRobotHW`` from
 `<https://github.com/ros-controls/ros_control>`_.
 
-We provide a default launch file to run the ``franka_combined_control_node`` for 2 robots
-together with a default set of parameters. You can launch it with
+A second important parameter file
+(see franka_ros/franka_control/config/default_combined_controllers.yaml as a reference) configures
+a set of default controllers that can be started with the hardware node. The controllers have to match
+the launched hardware. The provided default parameterization (here for 2 robots) looks like:
+
+.. code-block:: yaml
+
+    panda_1_state_controller:
+      type: franka_control/FrankaStateController
+      arm_id: panda_1
+      joint_names:
+        - panda_1_joint1
+        - panda_1_joint2
+        - panda_1_joint3
+        - panda_1_joint4
+        - panda_1_joint5
+        - panda_1_joint6
+        - panda_1_joint7
+      publish_rate: 30  # [Hz]
+
+    panda_2_state_controller:
+      type: franka_control/FrankaStateController
+      arm_id: panda_2
+      joint_names:
+        - panda_2_joint1
+        - panda_2_joint2
+        - panda_2_joint3
+        - panda_2_joint4
+        - panda_2_joint5
+        - panda_2_joint6
+        - panda_2_joint7
+      publish_rate: 30  # [Hz]
+
+    # (+ more controllers ...)
+ 
+We provide a launch file to run the ``franka_combined_control_node`` with user specified configuration
+files for hardware and controllers which default to a configuration with 2 robots. Launch it with:
 
 .. code-block:: shell
 
@@ -339,10 +377,16 @@ together with a default set of parameters. You can launch it with
         robot:=<path_to_your_robot_description> \
         args:=<xacro_args_passed_to_the_robot_description> \ # if needed
         robot_id:=<name_of_your_multi_robot_setup> \
-        robot_1_ip:=<ip_1> robot_2_ip:=<ip_2>
-        hw_config_file:=<path_to_your_hw_config_file>
+        hw_config_file:=<path_to_your_hw_config_file>\       # includes the robot ips!
+        controllers_file:=<path_to_your_default_controller_parameterization>\
+        controllers_to_start:=<list_of_default_controllers_to_start>\
+        joint_states_source_list:=<list_of_sources_to_fuse_a_complete_joint_states_topic>
 
-This launch file can easily be extended to run more than 2 robots.
+With according parameter files, this launch file can be used to run an arbitrary number of robots.
+To do so just write your own configuration files in the style of
+franka_control/config/franka_combined_control_node.yaml and
+franka_ros/franka_control/config/default_combined_controllers.yaml.
+
 
 
 .. _ros_visualization:
