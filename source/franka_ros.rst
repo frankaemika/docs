@@ -249,7 +249,7 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
-server. These parameters have to be in the hardware node's namespace 
+server. These parameters have to be in the hardware node's namespace
 (see franka_control/config/franka_combined_control_node.yaml as a reference) and look like this:
 
 .. code-block:: yaml
@@ -367,7 +367,7 @@ the launched hardware. The provided default parameterization (here for 2 robots)
       publish_rate: 30  # [Hz]
 
     # (+ more controllers ...)
- 
+
 We provide a launch file to run the ``franka_combined_control_node`` with user specified configuration
 files for hardware and controllers which default to a configuration with 2 robots. Launch it with:
 
