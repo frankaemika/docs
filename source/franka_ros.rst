@@ -382,7 +382,7 @@ files for hardware and controllers which default to a configuration with 2 robot
         controllers_to_start:=<list_of_default_controllers_to_start>\
         joint_states_source_list:=<list_of_sources_to_fuse_a_complete_joint_states_topic>
 
-With according parameter files, this launch file can be used to run an arbitrary number of robots.
+This launch file can be parameterized to run an arbitrary number of robots.
 To do so just write your own configuration files in the style of
 franka_control/config/franka_combined_control_node.yaml and
 franka_ros/franka_control/config/default_combined_controllers.yaml.
