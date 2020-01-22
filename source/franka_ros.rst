@@ -131,15 +131,13 @@ controllers.
 The ``FrankaHW`` class also serves as base class for ``FrankaCombinableHW``, a hardware class that
 can be combined with others to control multiple robots from a single controller. The combination of
 an arbitrary number of Panda robots (number configured by parameters) based on ``FrankaCombinableHW``
-for the ROS control framework (see `<https://github.com/ros-controls/ros_control>`_) is implemented
+for the ROS control framework `<https://github.com/ros-controls/ros_control>`_ is implemented
 in ``FrankaCombinedHW``. The key-difference between ``FrankaHW`` and ``FrankaCombinedHW`` is
 that the latter supports torque control only.
 
-.. note::
+.. important::
 
-  The ``FrankaCombinableHW`` class only allows torque/effort control. The motion generator
-  interfaces for positions and velocities are not supported due to the lack of synchronisation
-  between master controllers.
+  The ``FrankaCombinableHW`` class allows torque/effort control only.
 
 The ROS parameter server is used to determine at runtime which robots are loaded in the combined
 class. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node,
@@ -176,8 +174,8 @@ follow the same naming conventions as described for `FrankaHW`. Every instance o
 .. note::
 
    The ``FrankaCombinedHW`` class offers an additional action server in the control node namespace
-   to recover all robots. Also, for the sake of safety, if a reflex or error occurs on any of the
-   robots, the control loop of all robots will stop until they are recovered.
+   to recover all robots. If a reflex or error occurs on any of the robots, the control loop of all
+   robots stops until they are recovered.
 
 .. important::
 
@@ -250,7 +248,8 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
 server. These parameters have to be in the hardware node's namespace
-(see franka_control/config/franka_combined_control_node.yaml as a reference) and look like this:
+(see <https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/franka_combined_control_node.yaml>`_
+as a reference) and look like this:
 
 .. code-block:: yaml
 
