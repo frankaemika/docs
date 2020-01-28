@@ -248,8 +248,8 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
 server. These parameters have to be in the hardware node's namespace
-(see <https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/franka_combined_control_node.yaml>`_
-as a reference) and look like this:
+(see <https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/
+franka_combined_control_node.yaml>`_ as a reference) and look like this:
 
 .. code-block:: yaml
 
@@ -261,7 +261,7 @@ as a reference) and look like this:
     panda_1:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_1
-      robot_ip: robot_1.franka.de
+      robot_ip: robot_1_ip
       joint_names:
         - panda_1_joint1
         - panda_1_joint2
@@ -275,7 +275,7 @@ as a reference) and look like this:
       # Activate rate limiter? [true|false]
       rate_limiting: true
       # Cutoff frequency of the low-pass filter. Set to >= 1000 to deactivate.
-      cutoff_frequency: 100
+      cutoff_frequency: 1000
       # Internal controller for motion generators [joint_impedance|cartesian_impedance]
       internal_controller: joint_impedance
       # Configure the initial defaults for the collision behavior reflexes.
@@ -292,7 +292,7 @@ as a reference) and look like this:
     panda_2:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_2
-      robot_ip: robot_2.franka.de
+      robot_ip: robot_2_ip
       joint_names:
         - panda_2_joint1
         - panda_2_joint2
@@ -306,7 +306,7 @@ as a reference) and look like this:
       # Activate rate limiter? [true|false]
       rate_limiting: true
       # Cutoff frequency of the low-pass filter. Set to >= 1000 to deactivate.
-      cutoff_frequency: 100
+      cutoff_frequency: 1000
       # Internal controller for motion generators [joint_impedance|cartesian_impedance]
       internal_controller: joint_impedance
       # Configure the initial defaults for the collision behavior reflexes.
