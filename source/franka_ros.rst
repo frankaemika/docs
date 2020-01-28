@@ -247,8 +247,9 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
-server. These parameters have to be in the hardware node's namespace (see `franka_combined_control_node.yaml 
-<https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/franka_combined_control_node.yaml>`__
+server. These parameters have to be in the hardware node's namespace (see `franka_combined_control_node.yaml
+<https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/franka_combined_control\
+_node.yaml>`__
 as a reference) and look like this:
 
 .. code-block:: yaml
