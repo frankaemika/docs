@@ -262,7 +262,6 @@ as a reference) and look like this:
     panda_1:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_1
-      robot_ip: robot_1_ip
       joint_names:
         - panda_1_joint1
         - panda_1_joint2
@@ -293,7 +292,6 @@ as a reference) and look like this:
     panda_2:
       type: franka_hw/FrankaCombinableHW
       arm_id: panda_2
-      robot_ip: robot_2_ip
       joint_names:
         - panda_2_joint1
         - panda_2_joint2
@@ -327,7 +325,7 @@ as a reference) and look like this:
 
     Be sure to choose unique and consistent ``arm_id`` parameters. The IDs must match the prefixes
     in the joint names and should be according to the robot description loaded to the control
-    node's namespace. Also: Make sure the ``robot_ip`` are correct.
+    node's namespace.
 
 For more information on the parameter based loading of hardware classes, please refer to the
 official documentation of ``combined_robot_hw::CombinedRobotHW`` from
@@ -374,6 +372,7 @@ files for hardware and controllers which default to a configuration with 2 robot
 .. code-block:: shell
 
     roslaunch franka_control franka_combined_control.launch \
+        robot_ips:=<your_robot_ips_as_a_map>                 # mandatory
         robot:=<path_to_your_robot_description> \
         args:=<xacro_args_passed_to_the_robot_description> \ # if needed
         robot_id:=<name_of_your_multi_robot_setup> \
@@ -387,6 +386,11 @@ To do so just write your own configuration files in the style of
 franka_control/config/franka_combined_control_node.yaml and
 franka_ros/franka_control/config/default_combined_controllers.yaml.
 
+.. important::
+
+    Be sure to pass the correct IPs of your robots to `franka_combined_control.launch` as a map.
+    This looks like: `{<arm_id_1>/robot_ip: <my_ip_1>, <arm_id_2>/robot_ip: <my_ip_2>, ...}`
+    
 
 
 .. _ros_visualization:
@@ -440,7 +444,7 @@ an impedance-based control approach. The example controller can be launched with
   roslaunch franka_example_controllers \
       dual_arm_cartesian_impedance_example_controller.launch \
       robot_id:=<name_of_the_2_arm_setup> \
-      robot_left_ip:=<ip_of_the_left_panda> robot_right_ip:=<ip_of_the_right_panda> \
+      robot_ips:=<your_robot_ips_as_a_map> \
       rviz:=<true/false> rqt:=<true/false>
 
 The example assumes a robot configuration according to `dual_panda_example.urdf.xacro` where two
