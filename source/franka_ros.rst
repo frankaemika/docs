@@ -137,7 +137,7 @@ that the latter supports torque control only.
 
 .. important::
 
-  The ``FrankaCombinableHW`` class allows torque/effort control only.
+  The ``FrankaCombinableHW`` class is available from version 0.7.0 and allows torque/effort control only.
 
 The ROS parameter server is used to determine at runtime which robots are loaded in the combined
 class. For an example on how to configure the ``FrankaCombinedHW`` in the according hardware node,
@@ -227,7 +227,7 @@ That can be done from an action client or by simply publishing on the action goa
 
 .. code-block:: shell
 
-   rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"
+   rostopic pub -1 /franka_control/error_recovery/goal franka_msgs/ErrorRecoveryActionGoal "{}"
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
@@ -248,8 +248,7 @@ rivz. For visualization purposes, a ``robot_state_publisher`` is started.
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
 server. These parameters have to be in the hardware node's namespace (see `franka_combined_control_node.yaml
-<https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_control/config/franka_combined_control\
-_node.yaml>`__
+<https://github.com/frankaemika/franka_ros/tree/develop/franka_control/config/franka_combined_control_node.yaml>`__
 as a reference) and look like this:
 
 .. code-block:: yaml
