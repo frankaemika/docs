@@ -390,7 +390,7 @@ franka_ros/franka_control/config/default_combined_controllers.yaml.
 
     Be sure to pass the correct IPs of your robots to `franka_combined_control.launch` as a map.
     This looks like: `{<arm_id_1>/robot_ip: <my_ip_1>, <arm_id_2>/robot_ip: <my_ip_2>, ...}`
-    
+
 
 
 .. _ros_visualization:
