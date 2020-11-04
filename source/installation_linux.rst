@@ -71,6 +71,14 @@ In the source directory, create a build directory and run CMake:
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
 
+Optionally, a ``libfranka`` Debian package can be built using the following command:
+
+.. code-block:: shell
+
+    make package
+
+This creates `libfranka-<version>-<architecture>.deb`.
+
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
