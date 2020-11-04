@@ -75,7 +75,7 @@ Optionally, a ``libfranka`` Debian package can be built using the following comm
 
 .. code-block:: shell
 
-    make package
+    cpack -G DEB
 
 This creates `libfranka-<version>-<architecture>.deb`.
 
