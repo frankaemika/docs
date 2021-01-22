@@ -212,6 +212,10 @@ are provided:
  * ``franka_msgs::SetFullCollisionBehavior`` sets thresholds for external forces on Cartesian
    and joint level to configure the collision reflex.
  * ``franka_msgs::SetLoad`` sets an external load to compensate (e.g. of a grasped object).
+ * ``std_srvs::Trigger`` services allow to connect and disconnect your hardware node. When no active
+   (commanding) controller is running, you can disconnect the hardware node, freeing the respective
+   robots for non-fci applications like e.g. Desk-based operations. Once you want to resume fci
+   operations you can call connect and start your ros_control based controllers again.
 
 .. important::
 
