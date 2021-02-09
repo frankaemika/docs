@@ -123,7 +123,7 @@ Joint space limits are:
 Denavit–Hartenberg parameters
 -----------------------------
 
-The Denavit–Hartenberg parameters for the Panda's kinematic chain are as follows:
+The Denavit–Hartenberg parameters for the Panda's kinematic chain are derived following Craig's convention and are as follows:
 
 .. figure:: _static/dh-diagram.png
     :align: center
