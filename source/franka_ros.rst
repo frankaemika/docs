@@ -204,8 +204,11 @@ are provided:
    (damping is automatically derived from the stiffness).
  * ``franka_msgs::SetCartesianImpedance`` specifies Cartesian stiffness for the internal
    controller (damping is automatically derived from the stiffness).
- * ``franka_msgs::SetEEFrame`` specifies the transformation from <arm_id>_EE to <arm_id>_link8
-   frame.
+ * ``franka_msgs::SetEEFrame`` specifies the transformation from <arm_id>_EE (end effector) to
+   <arm_id>_NE (nominal end effector) frame. The transformation from flange to end effector frame
+   is split into two transformations: <arm_id>_EE to <arm_id>_NE frame and <arm_id>_NE to
+   <arm_id>_link8 frame. The transformation from <arm_id>_NE to <arm_id>_link8 frame can only be
+   set through the administrator's interface.
  * ``franka_msgs::SetKFrame`` specifies the transformation from <arm_id>_K to <arm_id>_EE frame.
  * ``franka_msgs::SetForceTorqueCollisionBehavior`` sets thresholds for external Cartesian
    wrenches to configure the collision reflex.
