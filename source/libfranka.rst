@@ -50,7 +50,7 @@ Concerning the Arm, some useful non-realtime commands are:
  * ``setEE`` sets the transformation *NE_T_EE* from nominal end effector to end effector
    frame. The transformation from flange to end effector frame *F_T_EE* is split into two
    transformations: *F_T_NE* and *NE_T_EE*. The transformation from flange to nominal end
-   effector frame *F_T_EE* can only be set through the administrator's interface.
+   effector frame *F_T_NE* can only be set through the administrator's interface.
  * ``setK`` sets the transformation *EE_T_K* from end effector frame to stiffness frame.
  * ``setLoad`` sets the dynamic parameters of a payload.
  * ``automaticErrorRecovery`` that clears any command or control exception that previously

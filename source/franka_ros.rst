@@ -218,11 +218,11 @@ are provided:
 
 .. important::
 
-    The <arm_id>_EE frame is a child of the <arm_id>_link8 frame and denotes the configurable
-    end effector frame. The <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center
-    of the internal Cartesian impedance. It also serves as a reference frame for external
-    wrenches. *Neither the <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be
-    changed at run time*.
+    The <arm_id>_EE frame is a child of the <arm_id>_NE frame and denotes the part of the
+    configurable end effector frame which can be adjusted during run time through `franka_ros`. The
+    <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center of the internal
+    Cartesian impedance. It also serves as a reference frame for external wrenches. *Neither the
+    <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be changed at run time*.
     By default, <arm_id> is set to "panda".
 
 To recover from errors and reflexes the ``franka_msgs::ErrorRecoveryAction`` can be called.
