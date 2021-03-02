@@ -234,7 +234,7 @@ That can be done from an action client or by simply publishing on the action goa
 
 
 After recovery, the ``franka_control_node`` restarts the controllers that were running. That is
-possible as the node does not die when robot reflexes are triggered or errors are occurred.
+possible as the node does not die when robot reflexes are triggered or when errors have occurred.
 All of these functionalities are provided by the ``franka_control_node`` which can be launched
 with the following command:
 
