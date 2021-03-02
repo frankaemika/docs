@@ -24,7 +24,7 @@ At the same time, you get access to 1 kHz measurements of:
  * Estimation of externally applied torques and forces.
  * Various collision and contact information.
 
-You get also access robot model library which provides:
+You also get access to the robot model library which provides:
 
  * Forward kinematics of all robot joints.
  * Jacobian matrix of all robot joints.
