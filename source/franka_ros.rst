@@ -246,7 +246,7 @@ with the following command:
 Besides loading the ``franka_control_node``, the launch file also starts a
 ``franka_control::FrankaStateController`` for reading and publishing the robot states, including
 external wrenches, configurable transforms and the joint states required for visualization with
-rivz. For visualization purposes, a ``robot_state_publisher`` is started.
+rviz. For visualization purposes, a ``robot_state_publisher`` is started.
 
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
