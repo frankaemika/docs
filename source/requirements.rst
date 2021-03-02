@@ -1,7 +1,7 @@
 Minimum system and network requirements
 =======================================
 
-This page only specifies the requirements for running the Franka Control Interface (FCI)
+This page only specifies the requirements for running the Franka Control Interface (FCI).
 Additional requirements are specified in the documents that you have received with your robot.
 
 Workstation PC
