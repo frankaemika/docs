@@ -33,6 +33,14 @@ limits, visual surfaces and collision space. The collision space is a simplified
 visual description used to improve performance of collision checks. The descriptions are based on
 the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ .
 
+In case you want to simulate the Panda robot, you can pass a ``gazebo`` argument to the XACRO file.
+Then the URDF will contain *estimated* inertias values, i.e. link masses and inertia tensors based
+on the `Dynamic Identification of the Franka Emika Panda Robot With Retrieval of Feasible Parameters Using
+Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda.pdf>`_.
+
+.. code-block:: shell
+
+   xacro $(rospack find franka_description)/robots/panda_arm.urdf.xacro gazebo:=true
 
 franka_gripper
 --------------
