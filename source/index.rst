@@ -26,7 +26,7 @@ The source code of this documentation is also `available online
 
 .. note::
     Using a robot with system version 4.2.0 or higher requires to enable the FCI mode. To do that
-    open Desk -> expanse the menu in the sidebar -> press `'Activate FCI'`. Further information
+    open Desk -> expand the menu in the sidebar -> press `'Activate FCI'`. Further information
     about Single Point of Control (SPoC) can be found in the manual shipped with the robot.
 
 .. toctree::
