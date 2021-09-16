@@ -224,6 +224,19 @@ the Fully Preemptible Kernel::
         4. Preemptible Kernel (Basic RT) (PREEMPT_RTB) (NEW)
         > 5. Fully Preemptible Kernel (RT) (PREEMPT_RT_FULL) (NEW)
 
+.. warning::
+    If you you have ``Ubuntu 20.04 LTS`` installed:
+    You have to change your ``.config`` file! 
+
+from::
+   
+    CONFIG_SYSTEM_TRUSTED_KEYS="debian/canonical-certs.pem" 
+
+to::
+
+    CONFIG_SYSTEM_TRUSTED_KEYS=""
+
+
 We recommend keeping other options at their default values.
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
