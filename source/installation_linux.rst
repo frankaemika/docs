@@ -144,6 +144,15 @@ use ``curl`` to download the source files::
     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
 
+.. note::
+
+   For different ubuntu versions you need to use different kernel versions. The following versions were tested:
+
+   * Ubuntu 16.04: Kernel version 4.14.12
+   * Ubuntu 18.04: Kernel version 5.4.19
+   * Ubuntu 20.04: Kernel version 5.9.1
+
+
 And decompress them with::
 
     xz -d linux-4.14.12.tar.xz
