@@ -134,29 +134,43 @@ Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
 select kernel versions, see
 https://www.kernel.org/pub/linux/kernel/projects/rt/. We recommend choosing the
-version closest to the one you currently use. The following commands assume the
-``4.14.12`` kernel version with the ``4.14.12-rt10`` patch. If you choose a
+version closest to the one you currently use. If you choose a
 different version, simply substitute the numbers. Having decided on a version,
-use ``curl`` to download the source files::
-
-    curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
-    curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
-    curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
-    curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
+use ``curl`` to download the source files:
 
 .. note::
+   For Ubuntu 16.04 tested with the kernel version 4.14.12:
 
-   For different ubuntu versions you need to use different kernel versions. The following versions were tested:
+   .. code::
 
-   * Ubuntu 16.04: Kernel version 4.14.12
-   * Ubuntu 18.04: Kernel version 5.4.19
-   * Ubuntu 20.04: Kernel version 5.9.1
+      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
+      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
+      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
+      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
 
+.. note::
+   For Ubuntu 18.04 tested with the kernel version 5.4.19:
+
+   .. code::
+
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.sign
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.sign
+
+.. note::
+   For Ubuntu 20.04 tested with the kernel version 5.9.1:
+
+   .. code::
+
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.sign
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.sign
 
 And decompress them with::
 
-    xz -d linux-4.14.12.tar.xz
-    xz -d patch-4.14.12-rt10.patch.xz
+    xz -d *.xz
 
 Verifying file integrity
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -168,11 +182,11 @@ linked page for more details about the process.
 
 You can use ``gpg2`` to verify the ``.tar`` archives::
 
-    gpg2 --verify linux-4.14.12.tar.sign
+    gpg2 --verify linux-*.tar.sign
 
 If your output is similar to the following::
 
-    $ gpg2 --verify linux-4.14.12.tar.sign
+    $ gpg2 --verify linux-*.tar.sign
     gpg: assuming signed data in 'linux-4.14.12.tar'
     gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
     gpg: Can't check signature: No public key
@@ -193,7 +207,7 @@ adapt accordingly.
 Having downloaded the keys, you can now verify the sources. Here is an example of
 a correct output::
 
-    $ gpg2 --verify linux-4.14.12.tar.sign
+    $ gpg2 --verify linux-*.tar.sign
     gpg: assuming signed data in 'linux-4.14.12.tar'
     gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
     gpg: Good signature from "Greg Kroah-Hartman <gregkh@linuxfoundation.org>" [unknown]
@@ -206,7 +220,7 @@ a correct output::
 See `Linux Kernel Archive <https://www.kernel.org/signature.html>`_
 for more information about the warning. To verify the patch, use::
 
-    gpg2 --verify patch-4.14.12-rt10.patch.sign
+    gpg2 --verify patch-*.patch.sign
 
 
 Compiling the kernel
@@ -215,9 +229,9 @@ Compiling the kernel
 Once you are sure the files were downloaded properly, you can extract the source
 code and apply the patch::
 
-    tar xf linux-4.14.12.tar
-    cd linux-4.14.12
-    patch -p1 < ../patch-4.14.12-rt10.patch
+    tar xf linux-*.tar
+    cd linux-*/
+    patch -p1 < ../patch-*.patch
 
 The next step is to configure your kernel::
 
@@ -256,7 +270,7 @@ Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
 packages without the ``dbg`` suffix. To install::
 
-    sudo dpkg -i ../linux-headers-4.14.12-rt10_*.deb ../linux-image-4.14.12-rt10_*.deb
+    sudo dpkg -i ../linux-headers-*.deb ../linux-image-*.deb
 
 Verifying the new kernel
 ^^^^^^^^^^^^^^^^^^^^^^^^
