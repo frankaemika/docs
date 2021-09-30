@@ -175,6 +175,9 @@ And decompress them with::
 Verifying file integrity
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+   This step is optional but recommended!
+
 The ``.sign`` files can be used to verify that the downloaded files were not
 corrupted or tampered with. The steps shown here are adapted from the
 `Linux Kernel Archive <https://www.kernel.org/signature.html>`_ , see the
@@ -183,6 +186,7 @@ linked page for more details about the process.
 You can use ``gpg2`` to verify the ``.tar`` archives::
 
     gpg2 --verify linux-*.tar.sign
+    gpg2 --verify patch-*.patch.sign
 
 If your output is similar to the following::
 
@@ -195,11 +199,11 @@ You have to first download the public key of the person who signed the above
 file. As you can  see from the above output, it has the ID ``6092693E``. You can
 obtain it from the key server::
 
-    gpg2  --keyserver hkp://keys.gnupg.net --recv-keys 0x6092693E
+    gpg2  --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6092693E
 
 Similarly for the patch::
 
-    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 0x2872E4CC
+    gpg2 --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 2872E4CC
 
 Note that keys for other kernel version might have different IDs, you will have to
 adapt accordingly.
@@ -218,9 +222,8 @@ a correct output::
     Primary key fingerprint: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
 
 See `Linux Kernel Archive <https://www.kernel.org/signature.html>`_
-for more information about the warning. To verify the patch, use::
+for more information about the warning.
 
-    gpg2 --verify patch-*.patch.sign
 
 
 Compiling the kernel
