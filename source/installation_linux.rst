@@ -258,7 +258,7 @@ configuration to ``.config`` and exit the TUI.
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
-    make -j4 deb-pkg
+    make -j$(nproc) deb-pkg
 
 Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
