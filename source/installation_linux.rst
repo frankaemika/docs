@@ -128,7 +128,7 @@ kernel. This section describes the procedure of patching a kernel to support
 
 First, install the necessary dependencies::
 
-    apt-get install build-essential bc curl ca-certificates fakeroot gnupg2 libssl-dev lsb-release libelf-dev bison flex
+    apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
@@ -255,7 +255,7 @@ configuration to ``.config`` and exit the TUI.
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
-    fakeroot make -j4 deb-pkg
+    make -j4 deb-pkg
 
 Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
