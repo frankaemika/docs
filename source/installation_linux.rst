@@ -233,34 +233,25 @@ code and apply the patch::
     cd linux-*/
     patch -p1 < ../patch-*.patch
 
-The next step is to configure your kernel::
+Next copy your currently booted kernel configuration as the default config for the new real time kernel::
 
-    make oldconfig
+    cp -v /boot/config-$(uname -r) .config
 
-This opens a text-based configuration menu. When asked for the Preemption Model, choose
-the Fully Preemptible Kernel::
+Now you can use this config as the default to configure the build::
 
-    Preemption Model
-        1. No Forced Preemption (Server) (PREEMPT_NONE)
-        2. Voluntary Kernel Preemption (Desktop) (PREEMPT_VOLUNTARY)
-        3. Preemptible Kernel (Low-Latency Desktop) (PREEMPT__LL) (NEW)
-        4. Preemptible Kernel (Basic RT) (PREEMPT_RTB) (NEW)
-        > 5. Fully Preemptible Kernel (RT) (PREEMPT_RT_FULL) (NEW)
+    make olddefconfig
+    make menuconfig
 
-.. warning::
-    If you you have ``Ubuntu 20.04 LTS`` installed:
-    You have to change your ``.config`` file! 
+The second command brings up a terminal interface in which you can configure the preemption model. Navigate with the
+arrow keys to *General Setup* > *Preemption Model* and select *Fully Preemptible Kernel (Real-Time)*.
 
-from::
-   
-    CONFIG_SYSTEM_TRUSTED_KEYS="debian/canonical-certs.pem" 
+After that navigate to *Cryptographic API* > *Certificates for signature checking*
+(at the very bottom of the list) > *Provide system-wide ring of trusted keys* >
+*Additional X.509 keys for default system keyring*
 
-to::
+Remove the "debian/canonical-certs.pem" from the prompt and press Ok. Save this
+configuration to ``.config`` and exit the TUI.
 
-    CONFIG_SYSTEM_TRUSTED_KEYS=""
-
-
-We recommend keeping other options at their default values.
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
