@@ -128,29 +128,55 @@ kernel. This section describes the procedure of patching a kernel to support
 
 First, install the necessary dependencies::
 
-    apt-get install build-essential bc curl ca-certificates fakeroot gnupg2 libssl-dev lsb-release libelf-dev bison flex
+    sudo apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
 select kernel versions, see
 https://www.kernel.org/pub/linux/kernel/projects/rt/. We recommend choosing the
-version closest to the one you currently use. The following commands assume the
-``4.14.12`` kernel version with the ``4.14.12-rt10`` patch. If you choose a
+version closest to the one you currently use. If you choose a
 different version, simply substitute the numbers. Having decided on a version,
-use ``curl`` to download the source files::
+use ``curl`` to download the source files:
 
-    curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
-    curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
-    curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
-    curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
+.. note::
+   For Ubuntu 16.04 tested with the kernel version 4.14.12:
+
+   .. code::
+
+      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
+      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
+      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
+      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
+
+.. note::
+   For Ubuntu 18.04 tested with the kernel version 5.4.19:
+
+   .. code::
+
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.sign
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.sign
+
+.. note::
+   For Ubuntu 20.04 tested with the kernel version 5.9.1:
+
+   .. code::
+
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.sign
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.xz
+     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.sign
 
 And decompress them with::
 
-    xz -d linux-4.14.12.tar.xz
-    xz -d patch-4.14.12-rt10.patch.xz
+    xz -d *.xz
 
 Verifying file integrity
 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+   This step is optional but recommended!
 
 The ``.sign`` files can be used to verify that the downloaded files were not
 corrupted or tampered with. The steps shown here are adapted from the
@@ -159,11 +185,12 @@ linked page for more details about the process.
 
 You can use ``gpg2`` to verify the ``.tar`` archives::
 
-    gpg2 --verify linux-4.14.12.tar.sign
+    gpg2 --verify linux-*.tar.sign
+    gpg2 --verify patch-*.patch.sign
 
 If your output is similar to the following::
 
-    $ gpg2 --verify linux-4.14.12.tar.sign
+    $ gpg2 --verify linux-*.tar.sign
     gpg: assuming signed data in 'linux-4.14.12.tar'
     gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
     gpg: Can't check signature: No public key
@@ -172,11 +199,11 @@ You have to first download the public key of the person who signed the above
 file. As you can  see from the above output, it has the ID ``6092693E``. You can
 obtain it from the key server::
 
-    gpg2  --keyserver hkp://keys.gnupg.net --recv-keys 0x6092693E
+    gpg2  --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 6092693E
 
 Similarly for the patch::
 
-    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 0x2872E4CC
+    gpg2 --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 2872E4CC
 
 Note that keys for other kernel version might have different IDs, you will have to
 adapt accordingly.
@@ -184,7 +211,7 @@ adapt accordingly.
 Having downloaded the keys, you can now verify the sources. Here is an example of
 a correct output::
 
-    $ gpg2 --verify linux-4.14.12.tar.sign
+    $ gpg2 --verify linux-*.tar.sign
     gpg: assuming signed data in 'linux-4.14.12.tar'
     gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
     gpg: Good signature from "Greg Kroah-Hartman <gregkh@linuxfoundation.org>" [unknown]
@@ -195,9 +222,8 @@ a correct output::
     Primary key fingerprint: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
 
 See `Linux Kernel Archive <https://www.kernel.org/signature.html>`_
-for more information about the warning. To verify the patch, use::
+for more information about the warning.
 
-    gpg2 --verify patch-4.14.12-rt10.patch.sign
 
 
 Compiling the kernel
@@ -206,35 +232,42 @@ Compiling the kernel
 Once you are sure the files were downloaded properly, you can extract the source
 code and apply the patch::
 
-    tar xf linux-4.14.12.tar
-    cd linux-4.14.12
-    patch -p1 < ../patch-4.14.12-rt10.patch
+    tar xf linux-*.tar
+    cd linux-*/
+    patch -p1 < ../patch-*.patch
 
-The next step is to configure your kernel::
+Next copy your currently booted kernel configuration as the default config for the new real time kernel::
 
-    make oldconfig
+    cp -v /boot/config-$(uname -r) .config
 
-This opens a text-based configuration menu. When asked for the Preemption Model, choose
-the Fully Preemptible Kernel::
+Now you can use this config as the default to configure the build::
 
-    Preemption Model
-        1. No Forced Preemption (Server) (PREEMPT_NONE)
-        2. Voluntary Kernel Preemption (Desktop) (PREEMPT_VOLUNTARY)
-        3. Preemptible Kernel (Low-Latency Desktop) (PREEMPT__LL) (NEW)
-        4. Preemptible Kernel (Basic RT) (PREEMPT_RTB) (NEW)
-        > 5. Fully Preemptible Kernel (RT) (PREEMPT_RT_FULL) (NEW)
+    make olddefconfig
+    make menuconfig
 
-We recommend keeping other options at their default values.
+The second command brings up a terminal interface in which you can configure the preemption model. Navigate with the
+arrow keys to *General Setup* > *Preemption Model* and select *Fully Preemptible Kernel (Real-Time)*.
+
+After that navigate to *Cryptographic API* > *Certificates for signature checking*
+(at the very bottom of the list) > *Provide system-wide ring of trusted keys* >
+*Additional X.509 keys for default system keyring*
+
+Remove the "debian/canonical-certs.pem" from the prompt and press Ok. Save this
+configuration to ``.config`` and exit the TUI.
+
+.. note::
+   If you prefer GUIs over TUIs use ``make xconfig`` instead of ``make menuconfig``
+
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
-    fakeroot make -j4 deb-pkg
+    make -j$(nproc) deb-pkg
 
 Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
 packages without the ``dbg`` suffix. To install::
 
-    sudo dpkg -i ../linux-headers-4.14.12-rt10_*.deb ../linux-image-4.14.12-rt10_*.deb
+    sudo dpkg -i ../linux-headers-*.deb ../linux-image-*.deb
 
 Verifying the new kernel
 ^^^^^^^^^^^^^^^^^^^^^^^^
