@@ -255,6 +255,9 @@ After that navigate to *Cryptographic API* > *Certificates for signature checkin
 Remove the "debian/canonical-certs.pem" from the prompt and press Ok. Save this
 configuration to ``.config`` and exit the TUI.
 
+.. note::
+   If you prefer GUIs over TUIs use ``make xconfig`` instead of ``make menuconfig``
+
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
