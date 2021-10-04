@@ -725,12 +725,12 @@ It is assumed that the URDF contains two finger joints which can be force contro
 * ``finger2/gains/p`` (double, required): The proportional gain for the position-force controller of the second finger
 * ``finger2/gains/i`` (double, default: 0): The integral gain for the position-force controller of the second finger
 * ``finger2/gains/d`` (double, default: 0): The differential gain for the position-force controller of the second finger
+* ``resting_threshold`` (double, default :math:`1\:\frac{mm}{s}`):  Below which speed the target width should
+  be checked to abort or succeed the grasp/gripper action
+* ``consecutive_samples`` (double, default: 3): How many times the speed has to be consecutively below ``resting_threshold``
+  before the grasping/gripper action will be evaluated
 * ``move/width_tolerance`` (double, default :math:`5\:mm`): The move action succeeds, when the finger width becomes
   below this threshold
-* ``grasp/resting_threshold`` (double, default :math:`1\:\frac{mm}{s}`):  Below which speed the target width should
-  be checked to abort or succeed the grasp action
-* ``grasp/consecutive_samples`` (double, default: 3): How many times the speed has to be consecutively below
-  ``resting_threshold`` before the grasping will be evaluated
 * ``gripper_action/width_tolerance`` (double, default :math:`5\:mm`): The gripper action succeeds, when the finger
   width becomes below this threshold
 * ``gripper_action/speed`` (double, default :math:`10\:\frac{cm}{s}`): The speed to use during the gripper action
