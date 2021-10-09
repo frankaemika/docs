@@ -766,7 +766,7 @@ that :ref:`franka_control <franka_control>` supports:
 |   |                                           | was specified or defines a rotation around Z by :math:`45\:°`|
 |   |                                           | and an offset by :math:`10.34\:cm` (same as Desk for the     |
 |   |                                           | hand). You can always overwrite this value by setting the ROS|
-|   |                                           | parameter ``/<arm_id>/NE_T_EE`` manually.                    |
+|   |                                           | parameter ``/<arm_id>/F_T_NE`` manually.                     |
 +---+-------------------------------------------+--------------------------------------------------------------+
 | ✔ | ``set_K_frame`` /                         | Sets the :math:`{}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}` i.e.|
 |   | `SetKFrame`_                              | the homogenous transformation from end-effector to stiffness |
