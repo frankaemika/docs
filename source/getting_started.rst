@@ -29,7 +29,7 @@ Always check the following things before powering on the robot:
    **The external activation device is not an emergency stop!**
 
 This list is non-exhaustive! The manual delivered with your robot contains a chapter dedicated
-to safety. Please read it carefully and follow the instructions.
+to safety. Please read it carefully and follow the instructions. The manual can also be found in our `Franka World Hub <https://world.franka.de/resources>`_.
 
 .. important::
    The workstation PC which commands your robot using the FCI must always be connected to the LAN

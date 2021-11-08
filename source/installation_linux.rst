@@ -13,6 +13,7 @@ using `ROS <http://www.ros.org/>`_.
 
    * Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`
    * Ubuntu 18.04 LTS `Bionic Beaver` and ROS `Melodic Morenia` (requires at least ``libfranka`` 0.6.0)
+   * Ubuntu 20.04 LTS `Focal Fossa` and ROS `Noetic Ninjemys` (requires at least ``libfranka`` 0.8.0)
 
    The following instructions are exemplary for Ubuntu 16.04 LTS system and ROS `Kinetic Kame`.
    They only work in the supported environments.
