@@ -29,11 +29,24 @@ Always check the following things before powering on the robot:
    **The external activation device is not an emergency stop!**
 
 This list is non-exhaustive! The manual delivered with your robot contains a chapter dedicated
-to safety. Please read it carefully and follow the instructions. The manual can also be found in our `Franka World Hub <https://world.franka.de/resources>`_.
+to safety. Please read it carefully and follow the instructions. The manual can also be found in 
+our `Franka World Hub <https://world.franka.de/resources>`_.
 
 .. important::
    The workstation PC which commands your robot using the FCI must always be connected to the LAN
    port of Control (shop floor network) and **not** to the LAN port of the Arm (robot network).
+
+Installing the FCI Feature
+--------------------------
+In order to be able to operate the robot through the Franka Control Interface, the corresponding 
+Feature needs to be installed on your device. If it is already installed to the controller, it 
+will be listed under Desk --> Settings --> System --> Installed Features.
+If FCI is not installed yet, you can synchronize it from your Franka World account to your 
+controller. Therefore, you must have a free FCI license in your company/university account and have
+your controller registered in this account. The software (offline or online) synchronization 
+process is described in more detail in the 
+`Franka World user manual <https://download.franka.de/franka-world-manual/>`_.
+
 
 .. _setting-up-the-network:
 
