@@ -42,7 +42,7 @@ In order to be able to operate the robot through the Franka Control Interface, t
 Feature needs to be installed on your device. If it is already installed to the controller, it 
 will be listed under Desk --> Settings --> System --> Installed Features.
 If FCI is not installed yet, you can synchronize it from your Franka World account to your 
-controller. Therefore, you must have a free FCI license in your company/university account and have
+controller. Therefore, you must have an available FCI license in your company/university account and have
 your controller registered in this account. The software (offline or online) synchronization 
 process is described in more detail in the 
 `Franka World user manual <https://download.franka.de/franka-world-manual/>`_.
