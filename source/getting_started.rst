@@ -206,7 +206,8 @@ Verifying the connection
 The previous sections described how to specify the IP address of the Control's
 LAN port. In the following sections that address is referred to as ``<fci-ip>``.
 
-In order to verify that everything is correctly set up, be sure :ref:`the robot is prepared for FCI usage in Desk <preparing_robot_in_desk>` and run the ``echo_robot_state``
+In order to verify that everything is correctly set up, be sure :ref:`the robot is prepared for FCI 
+usage in Desk <preparing_robot_in_desk>` and run the ``echo_robot_state``
 example from ``libfranka``. If you decided to install ``franka_ros`` and ``libfranka`` from the ROS
 repository, you can instead read the instructions for
 :ref:`visualizing the robot in ros <ros_visualization>` .
