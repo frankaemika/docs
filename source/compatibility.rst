@@ -13,7 +13,7 @@ system version 4.0.0). The robot system versions 2.x.x are not listed in the tab
 but are included compatible with the robot system version >= 1.3.0. Therefore, these are
 compatile with the libfranka version 0.4.0 and 0.5.0. Libfranka version 0.8.0 was also
 tested against Ubuntu 18.04 and therefore, is compatible with ROS Melodic.
- 
+
 +-------------------+-----------------------+--------------+----------------------+-------------+
 | libfranka version | Robot system version  | Release date | Ubuntu               | ROS version |
 +===================+=======================+==============+======================+=============+
