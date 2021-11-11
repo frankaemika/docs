@@ -35,6 +35,7 @@ The source code of this documentation is also `available online
 
    overview
    requirements
+   compatibility
    installation_linux
    installation_windows
    getting_started
