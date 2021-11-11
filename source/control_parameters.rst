@@ -120,7 +120,8 @@ Joint space limits are:
    :header-rows: 1
    :file: control-parameters-joint.csv
 
-The arm can reach its maximum extension when joint 4 has angle :math:`q_{elbow-flip}`, where :math:`q_{elbow-flip} = -0.467002423653011\:rad`. This parameter is used to determine the flip direction of the elbow.
+The arm can reach its maximum extension when joint 4 has angle :math:`q_{elbow-flip}`, where :math:`q_{elbow-flip} = -0.467002423653011\:rad`.
+This parameter is used to determine the flip direction of the elbow.
 
 Denavit–Hartenberg parameters
 -----------------------------

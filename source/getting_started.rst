@@ -29,7 +29,7 @@ Always check the following things before powering on the robot:
    **The external activation device is not an emergency stop!**
 
 This list is non-exhaustive! The manual delivered with your robot contains a chapter dedicated
-to safety. Please read it carefully and follow the instructions. The manual can also be found in 
+to safety. Please read it carefully and follow the instructions. The manual can also be found in
 our `Franka World Hub <https://world.franka.de/resources>`_.
 
 .. important::
@@ -38,13 +38,13 @@ our `Franka World Hub <https://world.franka.de/resources>`_.
 
 Installing the FCI Feature
 --------------------------
-In order to be able to operate the robot through the Franka Control Interface, the corresponding 
-Feature needs to be installed on your device. If it is already installed to the controller, it 
+In order to be able to operate the robot through the Franka Control Interface, the corresponding
+Feature needs to be installed on your device. If it is already installed to the controller, it
 will be listed under Desk --> Settings --> System --> Installed Features.
-If FCI is not installed yet, you can synchronize it from your Franka World account to your 
+If FCI is not installed yet, you can synchronize it from your Franka World account to your
 controller. Therefore, you must have an available FCI license in your company/university account and have
-your controller registered in this account. The software (offline or online) synchronization 
-process is described in more detail in the 
+your controller registered in this account. The software (offline or online) synchronization
+process is described in more detail in the
 `Franka World user manual <https://download.franka.de/franka-world-manual/>`_.
 
 
@@ -176,10 +176,10 @@ Preparing the robot for FCI usage in Desk
 In order to verify the connection, the robot's brakes need to be unlocked in Desk and the activation
 device needs to be relased so that the robot is ready for execution indicated by blue LED mode.
 
-Enabling the FCI mode 
+Enabling the FCI mode
 ^^^^^^^^^^^^^^^^^^^^^
 
-Using a robot with system version >= 4.2.0 requires to enable the FCI mode. To do that open Desk, 
+Using a robot with system version >= 4.2.0 requires to enable the FCI mode. To do that open Desk,
 expand the menu in the sidebar and press 'Activate FCI'.
 
 .. figure:: _static/activate_fci.png
@@ -188,10 +188,10 @@ expand the menu in the sidebar and press 'Activate FCI'.
 
     Enabling the FCI mode in the Desk sidebar menu
 
-After enabling the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode 
-is currently active and that Desk interactions are not allowed while it is active. This pop-up needs to 
-remain open while working with FCI. Further information about Single Point of Control (SPoC) can be found 
-in the manual shipped with the robot which can also be found in our 
+After enabling the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode
+is currently active and that Desk interactions are not allowed while it is active. This pop-up needs to
+remain open while working with FCI. Further information about Single Point of Control (SPoC) can be found
+in the manual shipped with the robot which can also be found in our
 `Franka World Hub <https://world.franka.de/resources>`_.
 
 .. figure:: _static/pop_up_fci.png
@@ -206,7 +206,7 @@ Verifying the connection
 The previous sections described how to specify the IP address of the Control's
 LAN port. In the following sections that address is referred to as ``<fci-ip>``.
 
-In order to verify that everything is correctly set up, be sure :ref:`the robot is prepared for FCI 
+In order to verify that everything is correctly set up, be sure :ref:`the robot is prepared for FCI
 usage in Desk <preparing_robot_in_desk>` and run the ``echo_robot_state``
 example from ``libfranka``. If you decided to install ``franka_ros`` and ``libfranka`` from the ROS
 repository, you can instead read the instructions for
