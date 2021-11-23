@@ -43,6 +43,8 @@ The source code of this documentation is also `available online
    libfranka_changelog
    franka_ros
    franka_ros_changelog
+   franka_ros2
+   franka_ros2_changelog
    control_parameters
    troubleshooting
    faq

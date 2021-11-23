@@ -43,6 +43,10 @@ Before building from source, please uninstall existing installations of ``libfra
 
     sudo apt remove "*libfranka*"
 
+
+
+.. _build-libfranka:
+
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
 
@@ -114,6 +118,8 @@ Install any missing dependencies and build the packages:
 .. warning::
     If you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be picked up from ``/opt/ros/kinetic``
     instead of from your custom ``libfranka`` build!
+
+.. _preempt:
 
 Setting up the real-time kernel
 -------------------------------
