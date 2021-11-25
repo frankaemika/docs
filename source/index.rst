@@ -4,9 +4,9 @@ Franka Control Interface Documentation
 .. note::
 
     There is an
-    `inofficial Chinese translation of this page <http://www.franka.cn/FCI/>`_ .
+    `unofficial Chinese translation of this page <http://www.franka.cn/FCI/>`_ .
     The Chinese version is not officially maintained by Franka Emika and might
-    thus contain errors and/or be outdated. 
+    thus contain errors and/or be outdated.
 
 
 .. todolist::
