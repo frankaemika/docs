@@ -60,7 +60,14 @@ The node publishes the state of the gripper and offers the following `actions se
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
    forces after grasping.
  * ``control_msgs::GripperCommandAction(width, max_effort)``: A standard gripper action
-   recognized by MoveIt!.
+   recognized by MoveIt!. If the argument `max_effort` is greater than zero, the gripper 
+   will try to grasp an object of the desired `width`. On the other hand, if `max_effort` is 
+   zero (:math:`\text{max\_effort} < 1^{-4}`), the gripper will move at the desired `width`.
+  
+  .. note::
+    
+      Use the argument `max_effort` only when grasping an object, otherwise, the gripper will
+      close ignoring the `width` argument.
 
 
 You can launch the ``franka_gripper_node`` with:
