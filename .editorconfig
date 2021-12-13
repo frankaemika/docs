@@ -21,3 +21,6 @@ max_line_length = 170
 
 [installation_windows.rst]
 max_line_length = 140
+
+[franka_ros2.rst]
+max_line_length = 151
