@@ -240,6 +240,13 @@ are provided:
     <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be changed at run time*.
     By default, <arm_id> is set to "panda".
 
+    .. figure:: _static/frames.svg
+        :align: center
+        :figclass: align-center
+
+        Overview of the end-effector frames.
+
+
 To recover from errors and reflexes the ``franka_msgs::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
 
