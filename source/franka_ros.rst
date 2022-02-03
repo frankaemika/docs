@@ -901,6 +901,10 @@ expect the following values to be simulated:
 | ✔ | ``cartesian_collision``          | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thres}_{upper}` where  |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
+| ✔ | ``tau_ext_hat_filtered``         | :math:`\hat{\tau}_{ext}` i.e. estimated external torques and forces at |
+|   |                                  | the end-effector, filtered with a exponential moving average filter    |
+|   |                                  | (EMA). This filtering :math:`\alpha` can be set in by ROS parameter    |
++---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``O_F_ext_hat_K``                | :math:`{}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``K_F_ext_hat_K``                | :math:`{}^K\hat{F}_{K,ext} = J_K^{\top +} \cdot \hat{\tau}_{ext}`      |
