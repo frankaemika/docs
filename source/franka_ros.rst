@@ -881,13 +881,13 @@ expect the following values to be simulated:
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``q``                            | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``q_d``                          | Same as ``q``, since we don't simulate soft joints in Gazebo           |
+| ✔ | ``q_d``                          | Same as ``q``                                                          |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``dq``                           | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``dq_d``                         | Same as ``dq``, since we don't simulate soft joints in Gazebo          |
+| ✘ | ``dq_d``                         | Zero, since position-/velocity interfaces not yet supported            |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``ddq_d``                        | Numerical derivative of of ``dq_d``                                    |
+| ✘ | ``ddq_d``                        | Zero, since position-/velocity interfaces not yet supported            |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thres}_{lower}` where the  |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
