@@ -903,7 +903,9 @@ expect the following values to be simulated:
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``tau_ext_hat_filtered``         | :math:`\hat{\tau}_{ext}` i.e. estimated external torques and forces at |
 |   |                                  | the end-effector, filtered with a exponential moving average filter    |
-|   |                                  | (EMA). This filtering :math:`\alpha` can be set in by ROS parameter    |
+|   |                                  | (EMA). This filtering :math:`\alpha` can be configured via a ROS       |
+|   |                                  | parameter. This field does not contain any gravity, i.e.               |
+|   |                                  | :math:`\tau_ext = \tau_J - \tau_J_d - \tau_gravity`                    |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``O_F_ext_hat_K``                | :math:`{}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
