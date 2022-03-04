@@ -136,7 +136,7 @@ Package Descriptions
 
 This section contains more detailed descriptions of what each package does. In general the package structure tries to
 adhere to the structure that is proposed
-`here <https://stoglrobotics.github.io/ros_team_workspace/guidelines/robot_package_structure.html>`_.
+`here <https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html>`_.
 
 
 franka_bringup
