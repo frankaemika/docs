@@ -889,16 +889,16 @@ expect the following values to be simulated:
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✘ | ``ddq_d``                        | Zero, since position-/velocity interfaces not yet supported            |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thres}_{lower}` where the  |
+| ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thresh}_{lower}` where the |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``joint_collision``              | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thres}_{upper}` where the  |
+| ✔ | ``joint_collision``              | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thresh}_{upper}` where the |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``cartesian_contact``            | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thres}_{lower}` where  |
+| ✔ | ``cartesian_contact``            | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thresh}_{lower}` where |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``cartesian_collision``          | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thres}_{upper}` where  |
+| ✔ | ``cartesian_collision``          | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thresh}_{upper}` where |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``tau_ext_hat_filtered``         | :math:`\hat{\tau}_{ext}` i.e. estimated external torques and forces at |
