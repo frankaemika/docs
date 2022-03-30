@@ -1,6 +1,10 @@
 Installation on Windows
 =======================
 
+.. caution::
+    Windows support is very experimental and only intended for experienced users. Since Windows is not real-time capable,
+    communication errors are very likely. Further, these instructions are may not up-to-date and adjustments might be necessary.
+
 Starting from ``libfranka`` >= 0.6.0, **experimental** Windows support is provided.
 This chapter describes how to install ``libfranka`` on Windows.
 ``franka_ros`` is not supported on Windows.

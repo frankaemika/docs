@@ -641,10 +641,10 @@ only some of the interfaces provided by :ref:`franka_hw <franka_hw>` are support
 | ✔ | ``hardware_interface::EffortJointInterface``    | Commands joint-level torques and reads       |
 |   |                                                 | joint states.                                |
 +---+-------------------------------------------------+----------------------------------------------+
-| ✘ | ``hardware_interface::VelocityJointInterface``  | Commands joint velocities and reads joint    |
+| ✔ | ``hardware_interface::VelocityJointInterface``  | Commands joint velocities and reads joint    |
 |   |                                                 | states.                                      |
 +---+-------------------------------------------------+----------------------------------------------+
-| ✘ | ``hardware_interface::PositionJointInterface``  | Commands joint positions and reads joint     |
+| ✔ | ``hardware_interface::PositionJointInterface``  | Commands joint positions and reads joint     |
 |   |                                                 | states.                                      |
 +---+-------------------------------------------------+----------------------------------------------+
 | ✔ | ``franka_hw::FrankaStateInterface``             | Reads the full robot state.                  |
@@ -875,19 +875,24 @@ expect the following values to be simulated:
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``tau_J``                        | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``tau_J_d``                      | The values send by your controller                                     |
+| ✔ | ``tau_J_d``                      | The values send by your effort controller. Zero otherwise.             |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``dtau_J``                       | Numerical derivative of ``tau_J``                                      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``q``                            | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``q_d``                          | Same as ``q``                                                          |
+| ✔ | ``q_d``                          | The last commanded joint position when using the position interface.   |
+|   |                                  | Same as ``q`` when using the velocity interface. However,              |
+|   |                                  | the value will not be updated when using the effort interface.         |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``dq``                           | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✘ | ``dq_d``                         | Zero, since position-/velocity interfaces not yet supported            |
+| ✔ | ``dq_d``                         | The last commanded joint velocity when using the velocity interface.   |
+|   |                                  | Same as ``dq`` when using the position interface. However,             |
+|   |                                  | the value will be zero when using the effort interface.                |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✘ | ``ddq_d``                        | Zero, since position-/velocity interfaces not yet supported            |
+| ✔ | ``ddq_d``                        | Current acceleration when using the position or velocity interface.    |
+|   |                                  | However, the value will be zero when using the effort interface.       |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thresh}_{lower}` where the |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
@@ -912,6 +917,9 @@ expect the following values to be simulated:
 | ✔ | ``K_F_ext_hat_K``                | :math:`{}^K\hat{F}_{K,ext} = J_K^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✘ | ``O_dP_EE_d``                    |                                                                        |
++---+----------------------------------+------------------------------------------------------------------------+
+| ✔ | ``O_ddP_0``                      | Will be the same as the ``gravity_vector`` ROS parameter.              |
+|   |                                  | By  default it is {0,0,-9.8}                                           |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✘ | ``O_T_EE_c``                     |                                                                        |
 +---+----------------------------------+------------------------------------------------------------------------+
