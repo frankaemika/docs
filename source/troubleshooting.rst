@@ -214,3 +214,10 @@ To run the test after compiling ``libfranka`` from source, execute:
 .. code-block:: shell
 
     ./examples/communication_test <fci-ip>
+
+Running a libfranka executable fails with "Incompatible Library Version"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This happens when your version of libfranka is incompatible with the system version of your robot.
+The error contains the server version of the robot. You can use that number to
+:ref:`choose the correct libfranka version for your robot<compatibility-libfranka>`.
