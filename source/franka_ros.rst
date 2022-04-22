@@ -42,6 +42,67 @@ Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda
 
    xacro $(rospack find franka_description)/robots/panda_arm.urdf.xacro gazebo:=true
 
+
+Collisions Volumes
+""""""""""""""""""
+
+The URDF defines two types of collision types:
+
+ * **Fine**: These collision volumes are made from convex meshes which are approximated and
+   drastically simplified versions of the visual meshes (.dae) of each link. The fine volumes
+   should be used for simulating robot collisions in :ref:`Gazebo <franka_gazebo>`
+ * **Coarse**: These collision volumes are simply capsules (a cylinder with two semispherical
+   end caps) attached to each link and inflated by a certain safety distance. These volumes
+   are more efficient to compute and are used internally in the robot for self-collision
+   avoidance. Use these geometries when you are planning motions e.g. with `MoveIt <https://moveit.ros.org/>`_.
+
+
+.. table::
+   :widths: 1 1 1
+
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   |   Visual                      |   Collision (Fine)                    | Collision (Coarse)                      |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   | .. image:: _static/visual.png | .. image:: _static/collision-fine.png | .. image:: _static/collision-coarse.png |
+   |    :scale: 100%               |    :scale: 100%                       |    :scale: 100%                         |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+
+To distinguish between the two types of collision models artificial links are inserted in the URDF
+with an ``*_sc`` suffix (for self-collision):
+
+| **panda_link0**
+| ├─ **panda_link0_sc**
+| └─ **panda_link1**
+|    ├─ **panda_link1_sc**
+|    └─ **panda_link2**
+|       ├─ **panda_link2_sc**
+|       └─ **panda_link3**
+|          ├─ **panda_link3_sc**
+|          └─ **panda_link4**
+|             ├─ **panda_link4_sc**
+|             └─ **panda_link5**
+|                ├─ **panda_link5_sc**
+|                └─ **panda_link6**
+|                   ├─ **panda_link6_sc**
+|                   └─ **panda_link7**
+|                      ├─ **panda_link7_sc**
+|                      └─ **panda_link8**
+|                         ├─ **panda_link8_sc**
+|                         └─ **panda_hand**
+|                            ├─ **panda_leftfinger**
+|                            ├─ **panda_rightfinger**
+|                            ├─ **panda_hand_sc**
+|                            └─ **panda_hand_tcp**
+
+You can control which collision model is loaded into your URDF via the ``gazebo`` XACRO argument:
+
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
+   This is also the default if you omit the arg entirely. Use this when you want to use MoveIt
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
+   this when you want a simulatable URDF i.e. for Gazebo. When using the coarse collision model the robot
+   will of course be in constant collision with the capsules of the next link.
+
+
 .. _franka_gripper:
 
 franka_gripper
@@ -478,6 +539,8 @@ The option `rviz` allows to choose whether a visualization should be launched. W
 can choose to launch an rqt-gui which allows an online adaption of the rendered end-effector
 impedances at runtime via dynamic reconfigure.
 
+
+.. _franka_gazebo:
 
 franka_gazebo
 -------------
