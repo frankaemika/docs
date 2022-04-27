@@ -43,6 +43,10 @@ Before building from source, please uninstall existing installations of ``libfra
 
     sudo apt remove "*libfranka*"
 
+
+
+.. _build-libfranka:
+
 Building libfranka
 ^^^^^^^^^^^^^^^^^^
 
@@ -115,6 +119,8 @@ Install any missing dependencies and build the packages:
     If you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be picked up from ``/opt/ros/kinetic``
     instead of from your custom ``libfranka`` build!
 
+.. _preempt:
+
 Setting up the real-time kernel
 -------------------------------
 
@@ -129,7 +135,7 @@ kernel. This section describes the procedure of patching a kernel to support
 
 First, install the necessary dependencies::
 
-    sudo apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex
+    sudo apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex dwarves zstd libncurses-dev
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for

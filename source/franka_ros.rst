@@ -42,6 +42,67 @@ Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda
 
    xacro $(rospack find franka_description)/robots/panda_arm.urdf.xacro gazebo:=true
 
+
+Collisions Volumes
+""""""""""""""""""
+
+The URDF defines two types of collision types:
+
+ * **Fine**: These collision volumes are made from convex meshes which are approximated and
+   drastically simplified versions of the visual meshes (.dae) of each link. The fine volumes
+   should be used for simulating robot collisions in :ref:`Gazebo <franka_gazebo>`
+ * **Coarse**: These collision volumes are simply capsules (a cylinder with two semispherical
+   end caps) attached to each link and inflated by a certain safety distance. These volumes
+   are more efficient to compute and are used internally in the robot for self-collision
+   avoidance. Use these geometries when you are planning motions e.g. with `MoveIt <https://moveit.ros.org/>`_.
+
+
+.. table::
+   :widths: 1 1 1
+
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   |   Visual                      |   Collision (Fine)                    | Collision (Coarse)                      |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   | .. image:: _static/visual.png | .. image:: _static/collision-fine.png | .. image:: _static/collision-coarse.png |
+   |    :scale: 100%               |    :scale: 100%                       |    :scale: 100%                         |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+
+To distinguish between the two types of collision models artificial links are inserted in the URDF
+with an ``*_sc`` suffix (for self-collision):
+
+| **panda_link0**
+| ├─ **panda_link0_sc**
+| └─ **panda_link1**
+|    ├─ **panda_link1_sc**
+|    └─ **panda_link2**
+|       ├─ **panda_link2_sc**
+|       └─ **panda_link3**
+|          ├─ **panda_link3_sc**
+|          └─ **panda_link4**
+|             ├─ **panda_link4_sc**
+|             └─ **panda_link5**
+|                ├─ **panda_link5_sc**
+|                └─ **panda_link6**
+|                   ├─ **panda_link6_sc**
+|                   └─ **panda_link7**
+|                      ├─ **panda_link7_sc**
+|                      └─ **panda_link8**
+|                         ├─ **panda_link8_sc**
+|                         └─ **panda_hand**
+|                            ├─ **panda_leftfinger**
+|                            ├─ **panda_rightfinger**
+|                            ├─ **panda_hand_sc**
+|                            └─ **panda_hand_tcp**
+
+You can control which collision model is loaded into your URDF via the ``gazebo`` XACRO argument:
+
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
+   This is also the default if you omit the arg entirely. Use this when you want to use MoveIt
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
+   this when you want a simulatable URDF i.e. for Gazebo. When using the coarse collision model the robot
+   will of course be in constant collision with the capsules of the next link.
+
+
 .. _franka_gripper:
 
 franka_gripper
@@ -240,12 +301,19 @@ are provided:
 
 .. important::
 
-    The <arm_id>_EE frame is a child of the <arm_id>_NE frame and denotes the part of the
+    The <arm_id>_EE frame denotes the part of the
     configurable end effector frame which can be adjusted during run time through `franka_ros`. The
-    <arm_id>_K frame is a child frame of <arm_id>_EE and marks the center of the internal
+    <arm_id>_K frame marks the center of the internal
     Cartesian impedance. It also serves as a reference frame for external wrenches. *Neither the
     <arm_id>_EE nor the <arm_id>_K are contained in the URDF as they can be changed at run time*.
     By default, <arm_id> is set to "panda".
+
+    .. figure:: _static/frames.svg
+        :align: center
+        :figclass: align-center
+
+        Overview of the end-effector frames.
+
 
 To recover from errors and reflexes the ``franka_msgs::ErrorRecoveryAction`` can be called.
 That can be done from an action client or by simply publishing on the action goal topic:
@@ -479,6 +547,8 @@ can choose to launch an rqt-gui which allows an online adaption of the rendered 
 impedances at runtime via dynamic reconfigure.
 
 
+.. _franka_gazebo:
+
 franka_gazebo
 -------------
 This package allows you to simulate our robot in `Gazebo <http://gazebosim.org/>`_. This is possible
@@ -514,7 +584,7 @@ works. Let's move the gripper to a width of :math:`8\:cm` between the fingers wi
 
 .. code-block:: shell
 
-  rostopic pub --once /panda/franka_gripper/move/goal franka_gripper/MoveActionGoal "goal: { width: 0.08, speed: 0.1 }"
+  rostopic pub --once /franka_gripper/move/goal franka_gripper/MoveActionGoal "goal: { width: 0.08, speed: 0.1 }"
 
 
 Since we launched our robot with the Cartesian Impedance controller from
@@ -534,7 +604,7 @@ Let's grasp it with :math:`5\:N`:
 
 .. code-block:: shell
 
-   rostopic pub --once /panda/franka_gripper/grasp/goal \
+   rostopic pub --once /franka_gripper/grasp/goal \
                 franka_gripper/GraspActionGoal \
                 "goal: { width: 0.03, epsilon:{ inner: 0.005, outer: 0.005 }, speed: 0.1, force: 5.0}"
 .. note::
@@ -554,7 +624,7 @@ After you placed it gently on the red pad, stop the grasp with the ``stop`` acti
 
 .. code-block:: shell
 
-   rostopic pub --once /panda/franka_gripper/stop/goal franka_gripper/StopActionGoal {}
+   rostopic pub --once /franka_gripper/stop/goal franka_gripper/StopActionGoal {}
 
 Note that the contact forces disappear now, since no force is applied anymore. Alternatively you can also use
 the ``move`` action.
@@ -576,23 +646,27 @@ of the simulation. For example to spawn two pandas in one simulation you can use
       <arg name="use_sim_time" value="true"/>
     </include>
 
-   <include file="$(find franka_gazebo)/launch/panda.launch">
-     <arg name="arm_id"     value="panda_1" />
-     <arg name="y"          value="-0.5" />
-     <arg name="controller" value="cartesian_impedance_example_controller" />
-     <arg name="rviz"       value="false" />
-     <arg name="gazebo"     value="false" />
-     <arg name="paused"     value="true" />
-   </include>
+    <group ns="panda_1">
+      <include file="$(find franka_gazebo)/launch/panda.launch">
+        <arg name="arm_id"     value="panda_1" />
+        <arg name="y"          value="-0.5" />
+        <arg name="controller" value="cartesian_impedance_example_controller" />
+        <arg name="rviz"       value="false" />
+        <arg name="gazebo"     value="false" />
+        <arg name="paused"     value="true" />
+      </include>
+    </group>
 
-   <include file="$(find franka_gazebo)/launch/panda.launch">
-     <arg name="arm_id"     value="panda_2" />
-     <arg name="y"          value="0.5" />
-     <arg name="controller" value="force_example_controller" />
-     <arg name="rviz"       value="false" />
-     <arg name="gazebo"     value="false" />
-     <arg name="paused"     value="false" />
-   </include>
+    <group ns="panda_2">
+      <include file="$(find franka_gazebo)/launch/panda.launch">
+        <arg name="arm_id"     value="panda_2" />
+        <arg name="y"          value="0.5" />
+        <arg name="controller" value="force_example_controller" />
+        <arg name="rviz"       value="false" />
+        <arg name="gazebo"     value="false" />
+        <arg name="paused"     value="false" />
+      </include>
+    </group>
 
   </launch>
 
@@ -637,10 +711,10 @@ only some of the interfaces provided by :ref:`franka_hw <franka_hw>` are support
 | ✔ | ``hardware_interface::EffortJointInterface``    | Commands joint-level torques and reads       |
 |   |                                                 | joint states.                                |
 +---+-------------------------------------------------+----------------------------------------------+
-| ✘ | ``hardware_interface::VelocityJointInterface``  | Commands joint velocities and reads joint    |
+| ✔ | ``hardware_interface::VelocityJointInterface``  | Commands joint velocities and reads joint    |
 |   |                                                 | states.                                      |
 +---+-------------------------------------------------+----------------------------------------------+
-| ✘ | ``hardware_interface::PositionJointInterface``  | Commands joint positions and reads joint     |
+| ✔ | ``hardware_interface::PositionJointInterface``  | Commands joint positions and reads joint     |
 |   |                                                 | states.                                      |
 +---+-------------------------------------------------+----------------------------------------------+
 | ✔ | ``franka_hw::FrankaStateInterface``             | Reads the full robot state.                  |
@@ -871,37 +945,51 @@ expect the following values to be simulated:
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``tau_J``                        | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``tau_J_d``                      | The values send by your controller                                     |
+| ✔ | ``tau_J_d``                      | The values send by your effort controller. Zero otherwise.             |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``dtau_J``                       | Numerical derivative of ``tau_J``                                      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``q``                            | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``q_d``                          | Same as ``q``, since we don't simulate soft joints in Gazebo           |
+| ✔ | ``q_d``                          | The last commanded joint position when using the position interface.   |
+|   |                                  | Same as ``q`` when using the velocity interface. However,              |
+|   |                                  | the value will not be updated when using the effort interface.         |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``dq``                           | Comes directly from Gazebo                                             |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``dq_d``                         | Same as ``dq``, since we don't simulate soft joints in Gazebo          |
+| ✔ | ``dq_d``                         | The last commanded joint velocity when using the velocity interface.   |
+|   |                                  | Same as ``dq`` when using the position interface. However,             |
+|   |                                  | the value will be zero when using the effort interface.                |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``ddq_d``                        | Numerical derivative of of ``dq_d``                                    |
+| ✔ | ``ddq_d``                        | Current acceleration when using the position or velocity interface.    |
+|   |                                  | However, the value will be zero when using the effort interface.       |
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thres}_{lower}` where the  |
+| ✔ | ``joint_contact``                | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thresh}_{lower}` where the |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``joint_collision``              | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thres}_{upper}` where the  |
+| ✔ | ``joint_collision``              | :math:`\mid \hat{\tau}_{ext} \mid > \mathrm{thresh}_{upper}` where the |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``cartesian_contact``            | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thres}_{lower}` where  |
+| ✔ | ``cartesian_contact``            | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thresh}_{lower}` where |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
 +---+----------------------------------+------------------------------------------------------------------------+
-| ✔ | ``cartesian_collision``          | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thres}_{upper}` where  |
+| ✔ | ``cartesian_collision``          | :math:`\mid {}^K \hat{F}_{K,ext} \mid > \mathrm{thresh}_{upper}` where |
 |   |                                  | threshold can be set by calling ``set_force_torque_collision_behavior``|
++---+----------------------------------+------------------------------------------------------------------------+
+| ✔ | ``tau_ext_hat_filtered``         | :math:`\hat{\tau}_{ext}` i.e. estimated external torques and forces at |
+|   |                                  | the end-effector, filtered with a exponential moving average filter    |
+|   |                                  | (EMA). This filtering :math:`\alpha` can be configured via a ROS       |
+|   |                                  | parameter. This field does not contain any gravity, i.e.               |
+|   |                                  | :math:`\tau_ext = \tau_J - \tau_J_d - \tau_gravity`                    |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``O_F_ext_hat_K``                | :math:`{}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``K_F_ext_hat_K``                | :math:`{}^K\hat{F}_{K,ext} = J_K^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✘ | ``O_dP_EE_d``                    |                                                                        |
++---+----------------------------------+------------------------------------------------------------------------+
+| ✔ | ``O_ddP_0``                      | Will be the same as the ``gravity_vector`` ROS parameter.              |
+|   |                                  | By  default it is {0,0,-9.8}                                           |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✘ | ``O_T_EE_c``                     |                                                                        |
 +---+----------------------------------+------------------------------------------------------------------------+

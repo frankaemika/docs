@@ -4,3 +4,6 @@
 [submodule "franka_ros"]
 	path = franka_ros
 	url = https://github.com/frankaemika/franka_ros
+[submodule "franka_ros2"]
+	path = franka_ros2
+	url = https://github.com/frankaemika/franka_ros2.git
