@@ -62,7 +62,7 @@ The node publishes the state of the gripper and offers the following `actions se
  * ``control_msgs::GripperCommandAction(width, max_effort)``: A standard gripper action
    recognized by MoveIt!. If the argument ``max_effort`` is greater than zero, the gripper
    will try to grasp an object of the desired ``width``. On the other hand, if ``max_effort`` is
-   zero (:math:`\text{max_effort} < 1^{-4}`), the gripper will move at the desired ``width``.
+   zero (:math:`\text{max_effort} < 1^{-4}`), the gripper will move to the desired ``width``.
 
   .. note::
 
