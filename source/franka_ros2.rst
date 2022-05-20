@@ -213,10 +213,8 @@ The ``franka_gripper_node`` provides the following actions:
 
 * ``homing`` - homes the gripper and updates the maximum width given the mounted fingers.
 * ``move`` - moves to a target width with the defined speed.
-* ``grasp`` - tries to grasp at the desired width with the desired force while closing with the given speed.
-
-The operation is successful if the distance ``d`` between the gripper fingers is
-``width - epsilon.inner < d < width + epsilon.outer``
+* ``grasp`` - tries to grasp at the desired width with the desired force while closing with the given speed. The operation is successful if the
+  distance ``d`` between the gripper fingers is ``width - epsilon.inner < d < width + epsilon.outer``
 * ``gripper_action`` - a special grasping action for MoveIt.
 
 Also, there is a ``stop`` service that aborts gripper actions and stops grasping.
@@ -264,7 +262,7 @@ franka_moveit_config
 ^^^^^^^^^^^^^^^^^^^^
 
 This package contains the configuration for MoveIt2. There is a new move group called
-``panda_manipulator`` that has its tip between the fingers of the gripper and has its Z-axis rotated by 45 degrees, so
+``panda_manipulator`` that has its tip between the fingers of the gripper and has its Z-axis rotated by -45 degrees, so
 that the X-axis is now facing forward, making it easier to use. The ``panda_arm`` move group is still available
 for backward compatibility. New applications should use the new ``panda_manipulator`` move group instead.
 
