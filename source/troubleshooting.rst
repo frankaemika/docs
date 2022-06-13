@@ -203,7 +203,7 @@ The ``communication_test`` executable, which is part of the ``libfranka`` exampl
 version 0.5, executes a control loop and provides feedback about the lost robot
 states as well as the maximum, minimum and average control command success rate.
 
-If you installed the ``ros-kinetic-libfranka`` package, you can execute the test with:
+If you installed the ``ros-noetic-libfranka`` package, you can execute the test with:
 
 .. code-block:: shell
 
