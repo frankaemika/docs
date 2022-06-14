@@ -1095,7 +1095,7 @@ panda_moveit_config
     This package was moved to the `ros_planning repos <https://github.com/ros-planning/panda_moveit_config>`_.
 
 For more details, documentation and tutorials, please have a look at the
-`MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
+`MoveIt! tutorials website <https://ros-planning.github.io/moveit_tutorials/>`_.
 
 
 .. _write_own_controller:
