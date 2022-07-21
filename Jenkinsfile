@@ -45,6 +45,7 @@ pipeline {
   }
   post {
     always {
+      cleanWs()
       script {
         notifyBitbucket()
       }
