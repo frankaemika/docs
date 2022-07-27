@@ -46,7 +46,7 @@ Concerning the Arm, some useful non-realtime commands are:
 
  * ``setCollisionBehavior`` which sets the contact and collision detection thresholds.
  * ``setCartesianImpedance`` and ``setJointImpedance`` which set the impedance parameters
-   for the internal Cartesian impedance and internal joint impendace controllers.
+   for the internal Cartesian impedance and internal joint impedance controllers.
  * ``setEE`` sets the transformation *NE_T_EE* from nominal end effector to end effector
    frame. The transformation from flange to end effector frame *F_T_EE* is split into two
    transformations: *F_T_NE* and *NE_T_EE*. The transformation from flange to nominal end
