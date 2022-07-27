@@ -235,3 +235,11 @@ Running a libfranka executable fails with "Incompatible Library Version"
 This happens when your version of libfranka is incompatible with the system version of your robot.
 The error contains the server version of the robot. You can use that number to
 :ref:`choose the correct libfranka version for your robot<compatibility-libfranka>`.
+
+Running a libfranka executable fails with "command rejected due to activated safety function!" or "command preempted due to activated safety function!"
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This error occurs when a safety function defined in Watchman (the safety configurator area of the Desk webpage) is active.
+For example, there could be an active safety function limiting the robot's speed to 0.2 m/s. As this cannot be guaranteed when using FCI, the
+robot will not move. However, you can still read the robot state. In order to command movements to the robot again,
+you either need to disable the safety function or delete the corresponding safety rule in Watchman.
