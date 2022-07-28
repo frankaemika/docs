@@ -778,7 +778,7 @@ that :ref:`franka_control <franka_control>` supports:
 +---+-------------------------------------------+--------------------------------------------------------------+
 | ✔ | ``set_user_stop`` /                       | This is a special service only available in ``franka_gazebo``|
 |   | `std_srvs::SetBool`_                      | to simulate the user stop. Pressing the user stop (a.k.a     |
-|   |                                           | publishing a ``true`` via this service) will *disconnect*    |
+|   | (since 0.10.0)                            | publishing a ``true`` via this service) will *disconnect*    |
 |   |                                           | all command signals from ROS controllers to be fed to the    |
 |   |                                           | joints. To connect them again call the ``error_recovery``    |
 |   |                                           | action.                                                      |
