@@ -740,41 +740,60 @@ Next to the realtime hardware interfaces the ``FrankaHWSim`` plugin supports som
 that :ref:`franka_control <franka_control>` supports:
 
 
-+---+-------------------------------------------------+--------------------------------------------------------------+
-|   |                    Service                      |                Explanation                                   |
-+===+=================================================+==============================================================+
-| ✘ | ``franka_msgs::SetJointImpedance``              | Gazebo does not simulate an internal impedance               |
-|   |                                                 | controller, but sets commanded torques directly              |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✘ | ``franka_msgs::SetCartesianImpedance``          | Gazebo does not simulate an internal impedance               |
-|   |                                                 | controller, but sets commanded torques directly              |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetEEFrame``                     | Sets the :math:`{}^{\mathrm{NE}}\mathbf{T}_{\mathrm{EE}}`    |
-|   |                                                 | i.e. the homogenous transformation from nominal end-effector |
-|   |                                                 | to end-effector. You can also initialize this by setting the |
-|   |                                                 | ROS parameter ``/<arm_id>/NE_T_EE``. Normally you would set  |
-|   |                                                 | :math:`{}^{\mathrm{F}}\mathbf{T}_{\mathrm{NE}}` in Desk, but |
-|   |                                                 | in ``franka_gazebo`` it's assumed as identity if no gripper  |
-|   |                                                 | was specified or defines a rotation around Z by :math:`45\:°`|
-|   |                                                 | and an offset by :math:`10.34\:cm` (same as Desk for the     |
-|   |                                                 | hand). You can always overwrite this value by setting the ROS|
-|   |                                                 | parameter ``/<arm_id>/NE_T_EE`` manually.                    |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetKFrame``                      | Sets the :math:`{}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}` i.e.|
-|   |                                                 | the homogenous transformation from end-effector to stiffness |
-|   |                                                 | frame.                                                       |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetForceTorqueCollisionBehavior``| Sets thresholds above which external wrenches are treated as |
-|   |                                                 | contacts and collisions.                                     |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✘ | ``franka_msgs::SetFullCollisionBehavior``       | Not yet implemented                                          |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetLoad``                        | Sets an external load to compensate its gravity for, e.g. of |
-|   |                                                 | a grasped object. You can also initialize this by setting    |
-|   |                                                 | the ROS parameters ``/<arm_id>/{m_load,I_load,F_x_load}``    |
-|   |                                                 | for mass, inertia tensor and center of mass for the load,    |
-|   |                                                 | respectively.                                                |
-+---+-------------------------------------------------+--------------------------------------------------------------+
++---+-------------------------------------------+--------------------------------------------------------------+
+|   |         Service / Type                    |              Explanation                                     |
++===+===========================================+==============================================================+
+| ✘ | ``set_joint_impedance`` /                 | Gazebo does not simulate an internal impedance               |
+|   | `SetJointImpedance`_                      | controller, but sets commanded torques directly              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✘ | ``set_cartesian_impedance`` /             | Gazebo does not simulate an internal impedance               |
+|   | `SetCartesianImpedance`_                  | controller, but sets commanded torques directly              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_EE_frame`` /                        | Sets the :math:`{}^{\mathrm{NE}}\mathbf{T}_{\mathrm{EE}}`    |
+|   | `SetEEFrame`_                             | i.e. the homogenous transformation from nominal end-effector |
+|   |                                           | to end-effector. You can also initialize this by setting the |
+|   |                                           | ROS parameter ``/<arm_id>/NE_T_EE``. Normally you would set  |
+|   |                                           | :math:`{}^{\mathrm{F}}\mathbf{T}_{\mathrm{NE}}` in Desk, but |
+|   |                                           | in ``franka_gazebo`` it's assumed as identity if no gripper  |
+|   |                                           | was specified or defines a rotation around Z by :math:`45\:°`|
+|   |                                           | and an offset by :math:`10.34\:cm` (same as Desk for the     |
+|   |                                           | hand). You can always overwrite this value by setting the ROS|
+|   |                                           | parameter ``/<arm_id>/NE_T_EE`` manually.                    |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_K_frame`` /                         | Sets the :math:`{}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}` i.e.|
+|   | `SetKFrame`_                              | the homogenous transformation from end-effector to stiffness |
+|   |                                           | frame.                                                       |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_force_torque_collision_behavior`` / | Sets thresholds above which external wrenches are treated as |
+|   | `SetForceTorqueCollisionBehavior`_        | contacts and collisions.                                     |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✘ | ``set_full_collision_behavior`` /         | Not yet implemented                                          |
+|   | `SetFullCollisionBehavior`_               |                                                              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_load`` /                            | Sets an external load to compensate its gravity for, e.g. of |
+|   | `SetLoad`_                                | a grasped object. You can also initialize this by setting    |
+|   |                                           | the ROS parameters ``/<arm_id>/{m_load,I_load,F_x_load}``    |
+|   |                                           | for mass, inertia tensor and center of mass for the load,    |
+|   |                                           | respectively.                                                |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_user_stop`` /                       | This is a special service only available in ``franka_gazebo``|
+|   | `std_srvs::SetBool`_                      | to simulate the user stop. Pressing the user stop (a.k.a     |
+|   | (since 0.10.0)                            | publishing a ``true`` via this service) will *disconnect*    |
+|   |                                           | all command signals from ROS controllers to be fed to the    |
+|   |                                           | joints. To connect them again call the ``error_recovery``    |
+|   |                                           | action.                                                      |
++---+-------------------------------------------+--------------------------------------------------------------+
+
+.. _SetJointImpedance:               http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetJointImpedance.html
+.. _SetCartesianImpedance:           http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetCartesianImpedance.html
+.. _SetEEFrame:                      http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetEEFrame.html
+.. _SetKFrame:                       http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetKFrame.html
+.. _SetForceTorqueCollisionBehavior:
+        http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetForceTorqueCollisionBehavior.html
+.. _SetFullCollisionBehavior:
+        http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetFullCollisionBehavior.html
+.. _SetLoad:                         http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetLoad.html
+.. _std_srvs::SetBool:               http://docs.ros.org/en/noetic/api/std_srvs/html/srv/SetBool.html
 
 FrankaGripperSim
 """"""""""""""""
