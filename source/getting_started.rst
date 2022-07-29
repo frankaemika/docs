@@ -188,17 +188,13 @@ expand the menu in the sidebar and press 'Activate FCI'.
 
     Enabling the FCI mode in the Desk sidebar menu
 
-After enabling the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode
-is currently active and that Desk interactions are not allowed while it is active. This pop-up needs to
-remain open while working with FCI. Further information about Single Point of Control (SPoC) can be found
-in the manual shipped with the robot which can also be found in our
-`Franka World Hub <https://world.franka.de/resources>`_.
+After enabling the FCI mode, the sidebar shows that FCI is on.
 
-.. figure:: _static/pop_up_fci.png
+.. figure:: _static/fci-on.png
     :align: center
     :figclass: align-center
 
-    Pop-up when the FCI mode is enabled
+    Sidebar when the FCI mode is enabled
 
 Verifying the connection
 ------------------------
