@@ -31,10 +31,10 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'sphinx.ext.mathjax',
-  'sphinx.ext.todo',
-  'sphinxcontrib.redirects',
-  'm2r'
+    'sphinx.ext.mathjax',
+    'sphinx.ext.todo',
+    'sphinx_reredirects',
+    'myst_parser'
 ]
 
 # TODO: set mathjax_path for offline support
@@ -70,7 +70,7 @@ author = 'Franka Emika GmbH'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -78,7 +78,7 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'default'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -102,11 +102,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_context = {
-    'css_files': [
-        '_static/style_override.css',
-        ],
-     }
+html_css_files = ['style_override.css']
 
 html_favicon = '_static/favicon.png'
 html_logo = '_static/logo.svg'
