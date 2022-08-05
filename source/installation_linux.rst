@@ -285,6 +285,9 @@ of the ``uname -a`` command. It should contain the string ``PREEMPT RT`` and the
 version number you chose. Additionally, ``/sys/kernel/realtime`` should exist and
 contain the the number ``1``.
 
+.. note::
+   If you encounter errors that you fail to boot the new kernel see :ref:`troubleshooting_realtime_kernel`
+
 .. _installation-real-time:
 
 Allow a user to set real-time permissions for its processes
