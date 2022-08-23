@@ -14,7 +14,7 @@ Cannot boot realtime kernel because of "Invalid Signature"
 When you have successfully installed the real-time kernel and try to boot it you might encounter
 that Linux is not booting at all. This can happen when you have installed Ubuntu alongside with
 Windows (e.g. Dual Boot). Usually then the UEFI boot loader will have *Secure Boot* activated,
-which will don't allow the unsigned real-time kernel to load.
+which will not allow the unsigned real-time kernel to load.
 
 The easiest solution is to **disable "Secure Boot"** in your boot loader. This highly depends on your
 system, but usually you can enter the boot loader by pressing F2, F3, F12 or DEL key during boot.
