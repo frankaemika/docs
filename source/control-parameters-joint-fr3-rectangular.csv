@@ -1,0 +1,4 @@
+Name, Joint 1, Joint 2, Joint 3, Joint 4, Joint 5 , Joint 6, Joint 7, Unit
+":math:`q_{max}`", 2.3091, 1.5132, 2.2148, -0.5515, 2.2532, 4.2080, 2.4627, :math:`\text{rad}`
+":math:`q_{min}`", -2.3091, -1.5132, -2.2148, -2.6424, -2.2532, 0.8535, -2.4627, :math:`\text{rad}`
+":math:`\dot{q}_{max}`", 2, 1, 2, 1.5, 4, 1.5, 4, :math:`\frac{\text{rad}}{\text{s}}`
