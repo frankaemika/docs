@@ -56,5 +56,6 @@ The source code of this documentation is also `available online
    franka_matlab/franka_matlab
    franka_matlab/franka_matlab_changelog
    control_parameters
+   fr3-certification-remarks
    troubleshooting
    faq
