@@ -11,12 +11,15 @@ using `ROS <http://www.ros.org/>`_.
    While ``libfranka`` and the ``franka_ros`` packages should work on different Linux distributions,
    official support is currently only provided for:
 
-   * Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame`
    * Ubuntu 18.04 LTS `Bionic Beaver` and ROS `Melodic Morenia` (requires at least ``libfranka`` 0.6.0)
    * Ubuntu 20.04 LTS `Focal Fossa` and ROS `Noetic Ninjemys` (requires at least ``libfranka`` 0.8.0)
 
-   The following instructions are exemplary for Ubuntu 16.04 LTS system and ROS `Kinetic Kame`.
+   The following instructions are exemplary for Ubuntu 20.04 LTS system and ROS `Noetic Ninjemys`.
    They only work in the supported environments.
+
+.. warning::
+    We do not offer support for Ubuntu 16.04 LTS `Xenial Xerus` and ROS `Kinetic Kame` anymore, as they have reached their
+    end-of-life.
 
 Installing from the ROS repositories
 ------------------------------------
@@ -25,13 +28,13 @@ Installing from the ROS repositories
 
     These packages might not always be up-to-date, as they are only synced at certain intervals.
     Read the changelog at https://frankaemika.github.io to find out which ``libfranka`` version is required for
-    a particular robot software version. If this doesn't match the ``ros-kinetic-libfranka`` version from the
+    a particular robot software version. If this doesn't match the ``ros-noetic-libfranka`` version from the
     repositories, you need to :ref:`build from source <installation-build-from-source>`.
 
 Binary packages for ``libfranka`` and ``franka_ros`` are available from the ROS repositories.
-After `setting up ROS Kinetic <http://wiki.ros.org/kinetic/Installation/Ubuntu>`__, execute::
+After `setting up ROS Noetic <http://wiki.ros.org/noetic/Installation/Ubuntu>`__, execute::
 
-    sudo apt install ros-kinetic-libfranka ros-kinetic-franka-ros
+    sudo apt install ros-noetic-libfranka ros-noetic-franka-ros
 
 .. _installation-build-from-source:
 
@@ -87,7 +90,7 @@ This creates `libfranka-<version>-<architecture>.deb`.
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After `setting up ROS Kinetic <https://wiki.ros.org/kinetic/Installation/Ubuntu>`__, create a Catkin
+After `setting up ROS Noetic <https://wiki.ros.org/noetic/Installation/Ubuntu>`__, create a Catkin
 workspace in a directory of your choice:
 
 .. code-block:: shell
@@ -95,7 +98,7 @@ workspace in a directory of your choice:
     cd /path/to/desired/folder
     mkdir -p catkin_ws/src
     cd catkin_ws
-    source /opt/ros/kinetic/setup.sh
+    source /opt/ros/noetic/setup.sh
     catkin_init_workspace src
 
 Then clone the ``franka_ros`` repository from `GitHub <https://github.com/frankaemika/franka_ros>`__::
@@ -111,12 +114,12 @@ Install any missing dependencies and build the packages:
 
 .. code-block:: shell
 
-    rosdep install --from-paths src --ignore-src --rosdistro kinetic -y --skip-keys libfranka
+    rosdep install --from-paths src --ignore-src --rosdistro noetic -y --skip-keys libfranka
     catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
     source devel/setup.sh
 
 .. warning::
-    If you also installed ``ros-kinetic-libfranka``, ``libfranka`` might be picked up from ``/opt/ros/kinetic``
+    If you also installed ``ros-noetic-libfranka``, ``libfranka`` might be picked up from ``/opt/ros/noetic``
     instead of from your custom ``libfranka`` build!
 
 .. _preempt:

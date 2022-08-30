@@ -42,6 +42,67 @@ Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda
 
    xacro $(rospack find franka_description)/robots/panda_arm.urdf.xacro gazebo:=true
 
+
+Collisions Volumes
+""""""""""""""""""
+
+The URDF defines two types of collision types:
+
+ * **Fine**: These collision volumes are made from convex meshes which are approximated and
+   drastically simplified versions of the visual meshes (.dae) of each link. The fine volumes
+   should be used for simulating robot collisions in :ref:`Gazebo <franka_gazebo>`
+ * **Coarse**: These collision volumes are simply capsules (a cylinder with two semispherical
+   end caps) attached to each link and inflated by a certain safety distance. These volumes
+   are more efficient to compute and are used internally in the robot for self-collision
+   avoidance. Use these geometries when you are planning motions e.g. with `MoveIt <https://moveit.ros.org/>`_.
+
+
+.. table::
+   :widths: 1 1 1
+
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   |   Visual                      |   Collision (Fine)                    | Collision (Coarse)                      |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+   | .. image:: _static/visual.png | .. image:: _static/collision-fine.png | .. image:: _static/collision-coarse.png |
+   |    :scale: 100%               |    :scale: 100%                       |    :scale: 100%                         |
+   +-------------------------------+---------------------------------------+-----------------------------------------+
+
+To distinguish between the two types of collision models artificial links are inserted in the URDF
+with an ``*_sc`` suffix (for self-collision):
+
+| **panda_link0**
+| ├─ **panda_link0_sc**
+| └─ **panda_link1**
+|    ├─ **panda_link1_sc**
+|    └─ **panda_link2**
+|       ├─ **panda_link2_sc**
+|       └─ **panda_link3**
+|          ├─ **panda_link3_sc**
+|          └─ **panda_link4**
+|             ├─ **panda_link4_sc**
+|             └─ **panda_link5**
+|                ├─ **panda_link5_sc**
+|                └─ **panda_link6**
+|                   ├─ **panda_link6_sc**
+|                   └─ **panda_link7**
+|                      ├─ **panda_link7_sc**
+|                      └─ **panda_link8**
+|                         ├─ **panda_link8_sc**
+|                         └─ **panda_hand**
+|                            ├─ **panda_leftfinger**
+|                            ├─ **panda_rightfinger**
+|                            ├─ **panda_hand_sc**
+|                            └─ **panda_hand_tcp**
+
+You can control which collision model is loaded into your URDF via the ``gazebo`` XACRO argument:
+
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
+   This is also the default if you omit the arg entirely. Use this when you want to use MoveIt
+ * ``xacro ... panda_arm.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
+   this when you want a simulatable URDF i.e. for Gazebo. When using the coarse collision model the robot
+   will of course be in constant collision with the capsules of the next link.
+
+
 .. _franka_gripper:
 
 franka_gripper
@@ -49,10 +110,10 @@ franka_gripper
 This package implements the ``franka_gripper_node`` for interfacing a gripper from ROS.
 The node publishes the state of the gripper and offers the following `actions servers`:
 
- * ``franka_gripper::MoveAction(width, speed)``: moves to a target `width` with the defined
-   `speed`.
+ * ``franka_gripper::MoveAction(width, speed)``: moves to a target ``width`` with the defined
+   ``speed``.
  * ``franka_gripper::GraspAction(width, epsilon_inner, epsilon_outer, speed, force)``: tries to
-   grasp at the desired `width` with a desired `force` while closing with the given `speed`. The
+   grasp at the desired ``width`` with a desired ``force`` while closing with the given ``speed``. The
    operation is successful if the distance :math:`d` between the gripper fingers is:
    :math:`\text{width} - \epsilon_\text{inner} < d < \text{width} + \epsilon_\text{outer}`.
  * ``franka_gripper::HomingAction()``: homes the gripper and updates the maximum width given the
@@ -60,7 +121,14 @@ The node publishes the state of the gripper and offers the following `actions se
  * ``franka_gripper::StopAction()``: aborts a running action. This can be used to stop applying
    forces after grasping.
  * ``control_msgs::GripperCommandAction(width, max_effort)``: A standard gripper action
-   recognized by MoveIt!.
+   recognized by MoveIt!. If the argument ``max_effort`` is greater than zero, the gripper
+   will try to grasp an object of the desired ``width``. On the other hand, if ``max_effort`` is
+   zero (:math:`\text{max_effort} < 1^{-4}`), the gripper will move to the desired ``width``.
+
+  .. note::
+
+      Use the argument ``max_effort`` only when grasping an object, otherwise, the gripper will
+      close ignoring the ``width`` argument.
 
 
 You can launch the ``franka_gripper_node`` with:
@@ -479,6 +547,8 @@ can choose to launch an rqt-gui which allows an online adaption of the rendered 
 impedances at runtime via dynamic reconfigure.
 
 
+.. _franka_gazebo:
+
 franka_gazebo
 -------------
 This package allows you to simulate our robot in `Gazebo <http://gazebosim.org/>`_. This is possible
@@ -670,41 +740,60 @@ Next to the realtime hardware interfaces the ``FrankaHWSim`` plugin supports som
 that :ref:`franka_control <franka_control>` supports:
 
 
-+---+-------------------------------------------------+--------------------------------------------------------------+
-|   |                    Service                      |                Explanation                                   |
-+===+=================================================+==============================================================+
-| ✘ | ``franka_msgs::SetJointImpedance``              | Gazebo does not simulate an internal impedance               |
-|   |                                                 | controller, but sets commanded torques directly              |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✘ | ``franka_msgs::SetCartesianImpedance``          | Gazebo does not simulate an internal impedance               |
-|   |                                                 | controller, but sets commanded torques directly              |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetEEFrame``                     | Sets the :math:`{}^{\mathrm{NE}}\mathbf{T}_{\mathrm{EE}}`    |
-|   |                                                 | i.e. the homogenous transformation from nominal end-effector |
-|   |                                                 | to end-effector. You can also initialize this by setting the |
-|   |                                                 | ROS parameter ``/<arm_id>/NE_T_EE``. Normally you would set  |
-|   |                                                 | :math:`{}^{\mathrm{F}}\mathbf{T}_{\mathrm{NE}}` in Desk, but |
-|   |                                                 | in ``franka_gazebo`` it's assumed as identity if no gripper  |
-|   |                                                 | was specified or defines a rotation around Z by :math:`45\:°`|
-|   |                                                 | and an offset by :math:`10.34\:cm` (same as Desk for the     |
-|   |                                                 | hand). You can always overwrite this value by setting the ROS|
-|   |                                                 | parameter ``/<arm_id>/NE_T_EE`` manually.                    |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetKFrame``                      | Sets the :math:`{}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}` i.e.|
-|   |                                                 | the homogenous transformation from end-effector to stiffness |
-|   |                                                 | frame.                                                       |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetForceTorqueCollisionBehavior``| Sets thresholds above which external wrenches are treated as |
-|   |                                                 | contacts and collisions.                                     |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✘ | ``franka_msgs::SetFullCollisionBehavior``       | Not yet implemented                                          |
-+---+-------------------------------------------------+--------------------------------------------------------------+
-| ✔ | ``franka_msgs::SetLoad``                        | Sets an external load to compensate its gravity for, e.g. of |
-|   |                                                 | a grasped object. You can also initialize this by setting    |
-|   |                                                 | the ROS parameters ``/<arm_id>/{m_load,I_load,F_x_load}``    |
-|   |                                                 | for mass, inertia tensor and center of mass for the load,    |
-|   |                                                 | respectively.                                                |
-+---+-------------------------------------------------+--------------------------------------------------------------+
++---+-------------------------------------------+--------------------------------------------------------------+
+|   |         Service / Type                    |              Explanation                                     |
++===+===========================================+==============================================================+
+| ✘ | ``set_joint_impedance`` /                 | Gazebo does not simulate an internal impedance               |
+|   | `SetJointImpedance`_                      | controller, but sets commanded torques directly              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✘ | ``set_cartesian_impedance`` /             | Gazebo does not simulate an internal impedance               |
+|   | `SetCartesianImpedance`_                  | controller, but sets commanded torques directly              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_EE_frame`` /                        | Sets the :math:`{}^{\mathrm{NE}}\mathbf{T}_{\mathrm{EE}}`    |
+|   | `SetEEFrame`_                             | i.e. the homogenous transformation from nominal end-effector |
+|   |                                           | to end-effector. You can also initialize this by setting the |
+|   |                                           | ROS parameter ``/<arm_id>/NE_T_EE``. Normally you would set  |
+|   |                                           | :math:`{}^{\mathrm{F}}\mathbf{T}_{\mathrm{NE}}` in Desk, but |
+|   |                                           | in ``franka_gazebo`` it's assumed as identity if no gripper  |
+|   |                                           | was specified or defines a rotation around Z by :math:`45\:°`|
+|   |                                           | and an offset by :math:`10.34\:cm` (same as Desk for the     |
+|   |                                           | hand). You can always overwrite this value by setting the ROS|
+|   |                                           | parameter ``/<arm_id>/NE_T_EE`` manually.                    |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_K_frame`` /                         | Sets the :math:`{}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}` i.e.|
+|   | `SetKFrame`_                              | the homogenous transformation from end-effector to stiffness |
+|   |                                           | frame.                                                       |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_force_torque_collision_behavior`` / | Sets thresholds above which external wrenches are treated as |
+|   | `SetForceTorqueCollisionBehavior`_        | contacts and collisions.                                     |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✘ | ``set_full_collision_behavior`` /         | Not yet implemented                                          |
+|   | `SetFullCollisionBehavior`_               |                                                              |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_load`` /                            | Sets an external load to compensate its gravity for, e.g. of |
+|   | `SetLoad`_                                | a grasped object. You can also initialize this by setting    |
+|   |                                           | the ROS parameters ``/<arm_id>/{m_load,I_load,F_x_load}``    |
+|   |                                           | for mass, inertia tensor and center of mass for the load,    |
+|   |                                           | respectively.                                                |
++---+-------------------------------------------+--------------------------------------------------------------+
+| ✔ | ``set_user_stop`` /                       | This is a special service only available in ``franka_gazebo``|
+|   | `std_srvs::SetBool`_                      | to simulate the user stop. Pressing the user stop (a.k.a     |
+|   | (since 0.10.0)                            | publishing a ``true`` via this service) will *disconnect*    |
+|   |                                           | all command signals from ROS controllers to be fed to the    |
+|   |                                           | joints. To connect them again call the ``error_recovery``    |
+|   |                                           | action.                                                      |
++---+-------------------------------------------+--------------------------------------------------------------+
+
+.. _SetJointImpedance:               http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetJointImpedance.html
+.. _SetCartesianImpedance:           http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetCartesianImpedance.html
+.. _SetEEFrame:                      http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetEEFrame.html
+.. _SetKFrame:                       http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetKFrame.html
+.. _SetForceTorqueCollisionBehavior:
+        http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetForceTorqueCollisionBehavior.html
+.. _SetFullCollisionBehavior:
+        http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetFullCollisionBehavior.html
+.. _SetLoad:                         http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetLoad.html
+.. _std_srvs::SetBool:               http://docs.ros.org/en/noetic/api/std_srvs/html/srv/SetBool.html
 
 FrankaGripperSim
 """"""""""""""""
@@ -1025,7 +1114,7 @@ panda_moveit_config
     This package was moved to the `ros_planning repos <https://github.com/ros-planning/panda_moveit_config>`_.
 
 For more details, documentation and tutorials, please have a look at the
-`MoveIt! tutorials website <http://docs.ros.org/kinetic/api/moveit_tutorials/html/>`_.
+`MoveIt! tutorials website <https://ros-planning.github.io/moveit_tutorials/>`_.
 
 
 .. _write_own_controller:

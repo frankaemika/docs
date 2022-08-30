@@ -1,5 +1,6 @@
 franka_ros2 changelog
 =====================
 
-.. mdinclude:: ../franka_ros2/CHANGELOG.md
+.. include:: ../franka_ros2/CHANGELOG.md
+   :parser: myst_parser.sphinx_
    :start-line: 2

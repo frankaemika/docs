@@ -240,11 +240,6 @@ There are two *optional* functions included in all realtime control loops:
   to provide more stable robot motions but does not prevent the violation of the
   :ref:`limits of the interface<control_parameters_specifications>`.
 
-  .. important::
-
-    As of version ``0.5.0`` the ``Robot::setFilters`` command is deprecated in favor of
-    the low-pass filter functionality of the ``Robot::control`` function.
-
 * As of version ``0.4.0``, **rate limiters** for all realtime interfaces are
   **running by default**. `Rate limiters`, also called `safe controllers`, will limit the
   rate of change of the signals sent by the user to prevent the violation of the
@@ -368,9 +363,6 @@ Note that, on the Control side, there are two things that could modify your sign
   In this case, Control assumes a constant acceleration model or a constant torque to extrapolate
   your signals. If ``>=20`` packets are lost in a row the control loop is stopped with the
   ``communication_constraints_violation`` exception.
-* An optional `low-pass filter`. You can set the cutoff frequency with the non-realtime command
-  ``setFilters``. Set it to ``1000`` to deactivate it. Since version ``0.5.0`` it's
-  use is deprecated.
 
 .. hint::
 
