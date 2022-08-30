@@ -57,11 +57,13 @@ To build ``libfranka``, install the following dependencies from Ubuntu's package
 
     sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-Then, download the source code by cloning ``libfranka`` from `GitHub <https://github.com/frankaemika/libfranka>`__:
+Then, download the source code by cloning ``libfranka`` from `GitHub <https://github.com/frankaemika/libfranka>`__.
+
+For Panda you need to clone:
 
 .. code-block:: shell
 
-    git clone --recursive https://github.com/frankaemika/libfranka
+    git clone --recursive https://github.com/frankaemika/libfranka # only for panda
     cd libfranka
 
 By default, this will check out the newest release of ``libfranka``. If you want to build a particular version of
@@ -70,22 +72,35 @@ By default, this will check out the newest release of ``libfranka``. If you want
     git checkout <version>
     git submodule update
 
+
+
+The above instructions for cloning libfranka only work for Panda. For Franka Research 3 you have to clone:
+
+.. code-block::
+
+    git clone --recursive https://github.com/frankaemika/libfranka --branch 0.10.0 # only for FR3
+    cd libfranka
+
 In the source directory, create a build directory and run CMake:
 
 .. code-block:: shell
 
     mkdir build
     cd build
-    cmake -DCMAKE_BUILD_TYPE=Release ..
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
     cmake --build .
 
-Optionally, a ``libfranka`` Debian package can be built using the following command:
+Optionally (but recommended), a ``libfranka`` Debian package can be built using the following command in the same directory:
 
 .. code-block:: shell
 
     cpack -G DEB
 
-This creates `libfranka-<version>-<architecture>.deb`.
+This creates `libfranka-<version>-<architecture>.deb`. This package can then be installed with:
+
+.. code-block:: shell
+
+    sudo dpkg -i libfranka*.deb
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
