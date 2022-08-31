@@ -150,7 +150,7 @@ This parameter is used to determine the flip direction of the elbow.
 
 .. important::
 
-    Note that the maximum joint velocity depends on the joint position. The maximum and minimum joint velocities at a certain joint position is calculated as:
+    Note that the maximum joint velocity depends on the joint position. The maximum and minimum joint velocities at a certain joint position are calculated as:
 
     :math:`\dot{q}_1(q_1)_{max} = min( 2.62, \max(0, -0.3  + \sqrt{\max(0, 12   * ( 2.7501  - q_1))}))`
     :math:`\dot{q}_2(q_2)_{max} = min( 2.62, \max(0, -0.2  + \sqrt{\max(0, 5.17 * ( 1.7918  - q_2))}))`
@@ -168,11 +168,54 @@ This parameter is used to determine the flip direction of the elbow.
     :math:`\dot{q}_6(q_6)_{min} = max(-4.18, \min(0,  0.35 - \sqrt{\max(0, 11   * (-0.54092 + q_6))}))`
     :math:`\dot{q}_7(q_7)_{min} = max(-5.26, \min(0,  0.35 - \sqrt{\max(0, 34   * ( 3.0196  + q_7))}))`
 
-.. figure:: _static/fci-velocity-limits.png
-    :align: center
-    :figclass: align-center
+.. list-table:: Visualization of the joint limits of FR3
+   :class: borderless
 
-    Velocity limits of FR3
+   * - .. figure:: _static/pbv_limits_j1.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 1
+
+     - .. figure:: _static/pbv_limits_j2.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 2
+
+   * - .. figure:: _static/pbv_limits_j3.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 3
+
+     - .. figure:: _static/pbv_limits_j4.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 4
+
+   * - .. figure:: _static/pbv_limits_j5.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 5
+
+     - .. figure:: _static/pbv_limits_j6.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 6
+
+   * - .. figure:: _static/pbv_limits_j7.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 7
+     -
+
+
+
 
 
 As most motion planners can only deal with fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.
@@ -181,7 +224,7 @@ As most motion planners can only deal with fixed velocity limits (rectangular li
    :header-rows: 1
    :file: control-parameters-joint-fr3-rectangular.csv
 
-These limits are only a suggestion, you are free to define you own rectangles within the specification. However, these are the values that are
+These limits are only a suggestion, you are free to define your own rectangles within the specification. However, these are the values that are
 used in the rate limiter and in the URDF inside :doc:`franka_ros`.
 
 Denavit–Hartenberg parameters
