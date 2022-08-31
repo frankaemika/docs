@@ -605,8 +605,8 @@ Behavioral errors
   will be triggered. This does not guarantee that the sensor will not be damaged after any
   high-torque interactions or motions but aims for preventing some of it.
 
-* If the **maximum allowed power** is reached, the ``power_limit_violation`` will trigger
-  and will prevent the robot from stopping and engaging the brakes during the control loop.
+* If the **maximum allowed power** is reached, the ``power_limit_violation`` will be triggered.
+  It will prevent the robot from moving and continuing the control loop.
 
 * If you reach the joint or the Cartesian limits you will get
   a ``joint_velocity_violation`` or a ``cartesian_velocity_violation`` error respectively.
