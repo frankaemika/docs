@@ -152,21 +152,20 @@ This parameter is used to determine the flip direction of the elbow.
 
     Note that the maximum joint velocity depends on the joint position. The maximum and minimum joint velocities at a certain joint position are calculated as:
 
-    :math:`\dot{q}_1(q_1)_{max} = min( 2.62, \max(0, -0.3  + \sqrt{\max(0, 12   * ( 2.7501  - q_1))}))`
-    :math:`\dot{q}_2(q_2)_{max} = min( 2.62, \max(0, -0.2  + \sqrt{\max(0, 5.17 * ( 1.7918  - q_2))}))`
-    :math:`\dot{q}_3(q_3)_{max} = min( 2.62, \max(0, -0.2  + \sqrt{\max(0, 7    * ( 2.9065  - q_3))}))`
-    :math:`\dot{q}_4(q_4)_{max} = min( 2.62, \max(0, -0.3  + \sqrt{\max(0, 8    * (-0.1458  - q_4))}))`
-    :math:`\dot{q}_5(q_5)_{max} = min( 5.26, \max(0, -0.35 + \sqrt{\max(0, 34   * ( 2.8101  - q_5))}))`
-    :math:`\dot{q}_6(q_6)_{max} = min( 4.18, \max(0, -0.35 + \sqrt{\max(0, 11   * ( 4.5205  - q_6))}))`
-    :math:`\dot{q}_7(q_7)_{max} = min( 5.26, \max(0, -0.35 + \sqrt{\max(0, 34   * ( 3.0196  - q_7))}))`
+    .. list-table::
+       :class: borderless
 
-    :math:`\dot{q}_1(q_1)_{min} = max(-2.62, \min(0,  0.3  - \sqrt{\max(0, 12   * ( 2.7501  + q_1))}))`
-    :math:`\dot{q}_2(q_2)_{min} = max(-2.62, \min(0,  0.2  - \sqrt{\max(0, 5.17 * ( 1.7918  + q_2))}))`
-    :math:`\dot{q}_3(q_3)_{min} = max(-2.62, \min(0,  0.2  - \sqrt{\max(0, 7    * ( 2.9065  + q_3))}))`
-    :math:`\dot{q}_4(q_4)_{min} = max(-2.62, \min(0,  0.3  - \sqrt{\max(0, 8    * ( 3.0481  + q_4))}))`
-    :math:`\dot{q}_5(q_5)_{min} = max(-5.26, \min(0,  0.35 - \sqrt{\max(0, 34   * ( 2.8101  + q_5))}))`
-    :math:`\dot{q}_6(q_6)_{min} = max(-4.18, \min(0,  0.35 - \sqrt{\max(0, 11   * (-0.54092 + q_6))}))`
-    :math:`\dot{q}_7(q_7)_{min} = max(-5.26, \min(0,  0.35 - \sqrt{\max(0, 34   * ( 3.0196  + q_7))}))`
+       * - .. figure:: _static/pbv_equations_max.svg
+                :align: center
+                :figclass: align-center
+
+                Maximum velocities
+
+       * - .. figure:: _static/pbv_equations_min.svg
+                :align: center
+                :figclass: align-center
+
+                Minimum velocities
 
 .. list-table:: Visualization of the joint limits of FR3
    :class: borderless
