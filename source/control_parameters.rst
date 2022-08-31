@@ -22,27 +22,27 @@ Joint trajectory requirements
 Necessary conditions
 ********************
 
-1. :math:`q_{min} < q_c < q_{max}`
-2. :math:`-\dot{q}_{max} < \dot{q}_c < \dot{q}_{max}`
-3. :math:`-\ddot{q}_{max} < \ddot{q}_c < \ddot{q}_{max}`
-4. :math:`-\dddot{q}_{max} < \dddot{q}_c < \dddot{q}_{max}`
+- :math:`q_{min} < q_c < q_{max}`
+- :math:`-\dot{q}_{max} < \dot{q}_c < \dot{q}_{max}`
+- :math:`-\ddot{q}_{max} < \ddot{q}_c < \ddot{q}_{max}`
+- :math:`-\dddot{q}_{max} < \dddot{q}_c < \dddot{q}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-2. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-3. :math:`q = q_c`
-4. :math:`\dot{q}_{c} = 0`
-5. :math:`\ddot{q}_{c} = 0`
+- :math:`q = q_c`
+- :math:`\dot{q}_{c} = 0`
+- :math:`\ddot{q}_{c} = 0`
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-6. :math:`\dot{q}_{c} = 0`
-7. :math:`\ddot{q}_{c} = 0`
+- :math:`\dot{q}_{c} = 0`
+- :math:`\ddot{q}_{c} = 0`
 
 Cartesian trajectory requirements
 ---------------------------------
@@ -50,35 +50,35 @@ Cartesian trajectory requirements
 Necessary conditions
 ********************
 
-1. :math:`T` is proper transformation matrix
-2. :math:`-\dot{p}_{max} < \dot{p_c} < \dot{p}_{max}` (Cartesian velocity)
-3. :math:`-\ddot{p}_{max} < \ddot{p_c} < \ddot{p}_{max}` (Cartesian acceleration)
-4. :math:`-\dddot{p}_{max} < \dddot{p_c} < \dddot{p}_{max}` (Cartesian jerk)
+- :math:`T` is proper transformation matrix
+- :math:`-\dot{p}_{max} < \dot{p_c} < \dot{p}_{max}` (Cartesian velocity)
+- :math:`-\ddot{p}_{max} < \ddot{p_c} < \ddot{p}_{max}` (Cartesian acceleration)
+- :math:`-\dddot{p}_{max} < \dddot{p_c} < \dddot{p}_{max}` (Cartesian jerk)
 
 Conditions derived from inverse kinematics:
 
-5. :math:`q_{min} < q_c < q_{max}`
-6. :math:`-\dot{q}_{max} < \dot{q_c} < \dot{q}_{max}`
-7. :math:`-\ddot{q}_{max} < \ddot{q_c} < \ddot{q}_{max}`
+- :math:`q_{min} < q_c < q_{max}`
+- :math:`-\dot{q}_{max} < \dot{q_c} < \dot{q}_{max}`
+- :math:`-\ddot{q}_{max} < \ddot{q_c} < \ddot{q}_{max}`
 
 Recommended conditions
 **********************
 
 Conditions derived from inverse kinematics:
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-2. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-3. :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
-4. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-5. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+- :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
+- :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+- :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-6. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-7. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+- :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+- :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 Controller requirements
 -----------------------
@@ -86,16 +86,16 @@ Controller requirements
 Necessary conditions
 ********************
 
-1. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-2. :math:`{\tau_j}_{d} = 0`
+- :math:`{\tau_j}_{d} = 0`
 
 .. _limit_table:
 
