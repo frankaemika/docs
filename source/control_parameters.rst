@@ -14,7 +14,7 @@ will abort the motion: if, for instance, the first point of the user defined joi
 is very different from robot start position (:math:`q(t=0) \neq q_c(t=0)`) a ``start_pose_invalid`` error
 will abort the motion.
 
-Values for the constants used in the equations below are shown in the `Constants`_ section.
+Values for the constants used in the equations below are shown in the `Limits for Panda`_  and `Limits for Franka Research 3`_ section.
 
 Joint trajectory requirements
 -----------------------------
@@ -22,27 +22,27 @@ Joint trajectory requirements
 Necessary conditions
 ********************
 
-1. :math:`q_{min} < q_c < q_{max}`
-2. :math:`-\dot{q}_{max} < \dot{q}_c < \dot{q}_{max}`
-3. :math:`-\ddot{q}_{max} < \ddot{q}_c < \ddot{q}_{max}`
-4. :math:`-\dddot{q}_{max} < \dddot{q}_c < \dddot{q}_{max}`
+- :math:`q_{min} < q_c < q_{max}`
+- :math:`-\dot{q}_{max} < \dot{q}_c < \dot{q}_{max}`
+- :math:`-\ddot{q}_{max} < \ddot{q}_c < \ddot{q}_{max}`
+- :math:`-\dddot{q}_{max} < \dddot{q}_c < \dddot{q}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-2. :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{\tau_j}_d < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-3. :math:`q = q_c`
-4. :math:`\dot{q}_{c} = 0`
-5. :math:`\ddot{q}_{c} = 0`
+- :math:`q = q_c`
+- :math:`\dot{q}_{c} = 0`
+- :math:`\ddot{q}_{c} = 0`
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-6. :math:`\dot{q}_{c} = 0`
-7. :math:`\ddot{q}_{c} = 0`
+- :math:`\dot{q}_{c} = 0`
+- :math:`\ddot{q}_{c} = 0`
 
 Cartesian trajectory requirements
 ---------------------------------
@@ -50,35 +50,35 @@ Cartesian trajectory requirements
 Necessary conditions
 ********************
 
-1. :math:`T` is proper transformation matrix
-2. :math:`-\dot{p}_{max} < \dot{p_c} < \dot{p}_{max}` (Cartesian velocity)
-3. :math:`-\ddot{p}_{max} < \ddot{p_c} < \ddot{p}_{max}` (Cartesian acceleration)
-4. :math:`-\dddot{p}_{max} < \dddot{p_c} < \dddot{p}_{max}` (Cartesian jerk)
+- :math:`T` is proper transformation matrix
+- :math:`-\dot{p}_{max} < \dot{p_c} < \dot{p}_{max}` (Cartesian velocity)
+- :math:`-\ddot{p}_{max} < \ddot{p_c} < \ddot{p}_{max}` (Cartesian acceleration)
+- :math:`-\dddot{p}_{max} < \dddot{p_c} < \dddot{p}_{max}` (Cartesian jerk)
 
 Conditions derived from inverse kinematics:
 
-5. :math:`q_{min} < q_c < q_{max}`
-6. :math:`-\dot{q}_{max} < \dot{q_c} < \dot{q}_{max}`
-7. :math:`-\ddot{q}_{max} < \ddot{q_c} < \ddot{q}_{max}`
+- :math:`q_{min} < q_c < q_{max}`
+- :math:`-\dot{q}_{max} < \dot{q_c} < \dot{q}_{max}`
+- :math:`-\ddot{q}_{max} < \ddot{q_c} < \ddot{q}_{max}`
 
 Recommended conditions
 **********************
 
 Conditions derived from inverse kinematics:
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
-2. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-3. :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
-4. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-5. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+- :math:`{}^OT_{EE} = {{}^OT_{EE}}_c`
+- :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+- :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 At the end of the trajectory, the following conditions should be fulfilled:
 
-6. :math:`\dot{p}_{c} = 0` (Cartesian velocity)
-7. :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
+- :math:`\dot{p}_{c} = 0` (Cartesian velocity)
+- :math:`\ddot{p}_{c} = 0` (Cartesian acceleration)
 
 Controller requirements
 -----------------------
@@ -86,42 +86,145 @@ Controller requirements
 Necessary conditions
 ********************
 
-1. :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
+- :math:`-\dot{\tau_j}_{max} < \dot{{\tau_j}_d} < \dot{\tau_j}_{max}`
 
 Recommended conditions
 **********************
 
-1. :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
+- :math:`-{\tau_j}_{max} < {\tau_j}_d < {\tau_j}_{max}`
 
 At the beginning of the trajectory, the following conditions should be fulfilled:
 
-2. :math:`{\tau_j}_{d} = 0`
+- :math:`{\tau_j}_{d} = 0`
 
 .. _limit_table:
 
-Constants
----------
+Limits for Panda
+----------------
 
 Limits in the Cartesian space are as follows:\
 
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
 |          Name          |                 Translation                   |                   Rotation                       |                  Elbow                     |
 +========================+===============================================+==================================================+============================================+
-| :math:`\dot{p}_{max}`  | 1.7000 :math:`\frac{\text{m}}{\text{s}}`      | 2.5000 :math:`\frac{\text{rad}}{\text{s}}`       | 2.1750 :math:`\frac{rad}{\text{s}}`        |
+| :math:`\dot{p}_{max}`  | 1.7 :math:`\frac{\text{m}}{\text{s}}`         | 2.5 :math:`\frac{\text{rad}}{\text{s}}`          | 2.1750 :math:`\frac{rad}{\text{s}}`        |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
-| :math:`\ddot{p}_{max}` | 13.0000 :math:`\frac{\text{m}}{\text{s}^2}`   | 25.0000 :math:`\frac{\text{rad}}{\text{s}^2}`    | 10.0000 :math:`\;\frac{rad}{\text{s}^2}`   |
+| :math:`\ddot{p}_{max}` | 13.0 :math:`\frac{\text{m}}{\text{s}^2}`      | 25.0 :math:`\frac{\text{rad}}{\text{s}^2}`       | 10.0 :math:`\;\frac{rad}{\text{s}^2}`      |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
-| :math:`\dddot{p}_{max}`| 6500.0000 :math:`\frac{\text{m}}{\text{s}^3}` | 12500.0000 :math:`\frac{\text{rad}}{\text{s}^3}` | 5000.0000 :math:`\;\frac{rad}{\text{s}^3}` |
+| :math:`\dddot{p}_{max}`| 6500.0 :math:`\frac{\text{m}}{\text{s}^3}`    | 12500.0 :math:`\frac{\text{rad}}{\text{s}^3}`    | 5000.0 :math:`\;\frac{rad}{\text{s}^3}`    |
 +------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
 
 Joint space limits are:
 
 .. csv-table::
    :header-rows: 1
-   :file: control-parameters-joint.csv
+   :file: control-parameters-joint-panda.csv
 
 The arm can reach its maximum extension when joint 4 has angle :math:`q_{elbow-flip}`, where :math:`q_{elbow-flip} = -0.467002423653011\:rad`.
 This parameter is used to determine the flip direction of the elbow.
+
+Limits for Franka Research 3
+----------------------------
+
+Limits in the Cartesian space are as follows:\
+
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+|          Name          |                 Translation                   |                   Rotation                       |                  Elbow                     |
++========================+===============================================+==================================================+============================================+
+| :math:`\dot{p}_{max}`  | 3.0 :math:`\frac{\text{m}}{\text{s}}`         | 2.5 :math:`\frac{\text{rad}}{\text{s}}`          | 2.620 :math:`\frac{rad}{\text{s}}`         |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+| :math:`\ddot{p}_{max}` | 9.0 :math:`\frac{\text{m}}{\text{s}^2}`       | 17.0 :math:`\frac{\text{rad}}{\text{s}^2}`       | 10.0 :math:`\;\frac{rad}{\text{s}^2}`      |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+| :math:`\dddot{p}_{max}`| 4500.0 :math:`\frac{\text{m}}{\text{s}^3}`    | 8500.0 :math:`\frac{\text{rad}}{\text{s}^3}`     | 5000.0 :math:`\;\frac{rad}{\text{s}^3}`    |
++------------------------+-----------------------------------------------+--------------------------------------------------+--------------------------------------------+
+
+Joint space limits are:
+
+.. csv-table::
+   :header-rows: 1
+   :file: control-parameters-joint-fr3.csv
+
+The arm can reach its maximum extension when joint 4 has angle :math:`q_{elbow-flip}`, where :math:`q_{elbow-flip} = -0.467002423653011\:rad`.
+This parameter is used to determine the flip direction of the elbow.
+
+
+.. important::
+
+    Note that the maximum joint velocity depends on the joint position. The maximum and minimum joint velocities at a certain joint position are calculated as:
+
+    .. list-table::
+       :class: borderless
+
+       * - .. figure:: _static/pbv_equations_max.svg
+                :align: center
+                :figclass: align-center
+
+                Maximum velocities
+
+       * - .. figure:: _static/pbv_equations_min.svg
+                :align: center
+                :figclass: align-center
+
+                Minimum velocities
+
+.. list-table:: Visualization of the joint limits of FR3
+   :class: borderless
+
+   * - .. figure:: _static/pbv_limits_j1.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 1
+
+     - .. figure:: _static/pbv_limits_j2.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 2
+
+   * - .. figure:: _static/pbv_limits_j3.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 3
+
+     - .. figure:: _static/pbv_limits_j4.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 4
+
+   * - .. figure:: _static/pbv_limits_j5.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 5
+
+     - .. figure:: _static/pbv_limits_j6.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 6
+
+   * - .. figure:: _static/pbv_limits_j7.svg
+            :align: center
+            :figclass: align-center
+
+            Velocity limits of Joint 7
+     -
+
+
+
+
+
+As most motion planners can only deal with fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.
+
+.. csv-table::
+   :header-rows: 1
+   :file: control-parameters-joint-fr3-rectangular.csv
+
+These limits are only a suggestion, you are free to define your own rectangles within the specification. However, these are the values that are
+used in the rate limiter and in the URDF inside :doc:`franka_ros`.
 
 Denavit–Hartenberg parameters
 -----------------------------
