@@ -46,7 +46,7 @@ Concerning the Arm, some useful non-realtime commands are:
 
  * ``setCollisionBehavior`` which sets the contact and collision detection thresholds.
  * ``setCartesianImpedance`` and ``setJointImpedance`` which set the impedance parameters
-   for the internal Cartesian impedance and internal joint impendace controllers.
+   for the internal Cartesian impedance and internal joint impedance controllers.
  * ``setEE`` sets the transformation *NE_T_EE* from nominal end effector to end effector
    frame. The transformation from flange to end effector frame *F_T_EE* is split into two
    transformations: *F_T_NE* and *NE_T_EE*. The transformation from flange to nominal end
@@ -605,8 +605,8 @@ Behavioral errors
   will be triggered. This does not guarantee that the sensor will not be damaged after any
   high-torque interactions or motions but aims for preventing some of it.
 
-* If the **maximum allowed power** is reached, the ``power_limit_violation`` will trigger
-  and will prevent the robot from stopping and engaging the brakes during the control loop.
+* If the **maximum allowed power** is reached, the ``power_limit_violation`` will be triggered.
+  It will prevent the robot from moving and continuing the control loop.
 
 * If you reach the joint or the Cartesian limits you will get
   a ``joint_velocity_violation`` or a ``cartesian_velocity_violation`` error respectively.

@@ -40,7 +40,13 @@ Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda
 
 .. code-block:: shell
 
-   xacro $(rospack find franka_description)/robots/panda_arm.urdf.xacro gazebo:=true
+   xacro $(rospack find franka_description)/robots/panda/panda.urdf.xacro gazebo:=true
+
+The same works for FR3:
+
+.. code-block:: shell
+
+   xacro $(rospack find franka_description)/robots/fr3/fr3.urdf.xacro gazebo:=true
 
 
 Collisions Volumes
@@ -64,7 +70,6 @@ The URDF defines two types of collision types:
    |   Visual                      |   Collision (Fine)                    | Collision (Coarse)                      |
    +-------------------------------+---------------------------------------+-----------------------------------------+
    | .. image:: _static/visual.png | .. image:: _static/collision-fine.png | .. image:: _static/collision-coarse.png |
-   |    :scale: 100%               |    :scale: 100%                       |    :scale: 100%                         |
    +-------------------------------+---------------------------------------+-----------------------------------------+
 
 To distinguish between the two types of collision models artificial links are inserted in the URDF
@@ -96,9 +101,9 @@ with an ``*_sc`` suffix (for self-collision):
 
 You can control which collision model is loaded into your URDF via the ``gazebo`` XACRO argument:
 
- * ``xacro ... panda_arm.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
+ * ``xacro ... panda.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
    This is also the default if you omit the arg entirely. Use this when you want to use MoveIt
- * ``xacro ... panda_arm.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
+ * ``xacro ... panda.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
    this when you want a simulatable URDF i.e. for Gazebo. When using the coarse collision model the robot
    will of course be in constant collision with the capsules of the next link.
 
@@ -330,7 +335,10 @@ with the following command:
 
 .. code-block:: shell
 
-    roslaunch franka_control franka_control.launch robot_ip:=<fci-ip> load_gripper:=<true|false>
+    roslaunch franka_control franka_control.launch \
+    robot_ip:=<fci-ip> # mandatory \
+    load_gripper:=<true|false> # default: true \
+    robot:=<panda|fr3> # default: panda
 
 
 Besides loading the ``franka_control_node``, the launch file also starts a
@@ -495,7 +503,7 @@ gripper joint states for visualization in RViz. To run this package launch:
 .. code-block:: shell
 
     roslaunch franka_visualization franka_visualization.launch robot_ip:=<fci-ip> \
-      load_gripper:=<true|false>
+      load_gripper:=<true|false> robot:=<panda|fr3>
 
 
 This is purely for visualization - no commands are sent to the robot. It can be useful to check the
@@ -523,7 +531,7 @@ To launch the joint impedance example, execute the following command:
 .. code-block:: shell
 
     roslaunch franka_example_controllers joint_impedance_example_controller.launch \
-      robot_ip:=<fci-ip> load_gripper:=<true|false>
+      robot_ip:=<fci-ip> load_gripper:=<true|false> robot:=<panda|fr3>
 
 Other single Panda examples are started in the same way.
 
@@ -778,7 +786,7 @@ that :ref:`franka_control <franka_control>` supports:
 +---+-------------------------------------------+--------------------------------------------------------------+
 | ✔ | ``set_user_stop`` /                       | This is a special service only available in ``franka_gazebo``|
 |   | `std_srvs::SetBool`_                      | to simulate the user stop. Pressing the user stop (a.k.a     |
-|   | (since 0.10.0)                            | publishing a ``true`` via this service) will *disconnect*    |
+|   | (since 0.9.1)                             | publishing a ``true`` via this service) will *disconnect*    |
 |   |                                           | all command signals from ROS controllers to be fed to the    |
 |   |                                           | joints. To connect them again call the ``error_recovery``    |
 |   |                                           | action.                                                      |
@@ -999,7 +1007,7 @@ expect the following values to be simulated:
 |   |                                  | the end-effector, filtered with a exponential moving average filter    |
 |   |                                  | (EMA). This filtering :math:`\alpha` can be configured via a ROS       |
 |   |                                  | parameter. This field does not contain any gravity, i.e.               |
-|   |                                  | :math:`\tau_ext = \tau_J - \tau_J_d - \tau_gravity`                    |
+|   |                                  | :math:`\tau_ext = \tau_J - \tau_{J_d} - \tau_{gravity}`                |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``O_F_ext_hat_K``                | :math:`{}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+

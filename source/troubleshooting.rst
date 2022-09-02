@@ -14,7 +14,7 @@ Cannot boot realtime kernel because of "Invalid Signature"
 When you have successfully installed the real-time kernel and try to boot it you might encounter
 that Linux is not booting at all. This can happen when you have installed Ubuntu alongside with
 Windows (e.g. Dual Boot). Usually then the UEFI boot loader will have *Secure Boot* activated,
-which will don't allow the unsigned real-time kernel to load.
+which will not allow the unsigned real-time kernel to load.
 
 The easiest solution is to **disable "Secure Boot"** in your boot loader. This highly depends on your
 system, but usually you can enter the boot loader by pressing F2, F3, F12 or DEL key during boot.
@@ -230,8 +230,16 @@ To run the test after compiling ``libfranka`` from source, execute:
     ./examples/communication_test <fci-ip>
 
 Running a libfranka executable fails with "Incompatible Library Version"
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------------------------
 
 This happens when your version of libfranka is incompatible with the system version of your robot.
 The error contains the server version of the robot. You can use that number to
 :ref:`choose the correct libfranka version for your robot<compatibility-libfranka>`.
+
+Running a libfranka executable fails with "command rejected due to activated safety function!" or "command preempted due to activated safety function!"
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This error occurs when a safety function defined in Watchman (the safety configurator area of the Desk webpage) is active.
+For example, there could be an active safety function limiting the robot's speed to 0.2 m/s. As this cannot be guaranteed when using FCI, the
+robot will not move. However, you can still read the robot state. In order to command movements to the robot again,
+you either need to disable the safety function or delete the corresponding safety rule in Watchman.

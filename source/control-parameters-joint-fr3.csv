@@ -1,0 +1,8 @@
+Name, Joint 1, Joint 2, Joint 3, Joint 4, Joint 5 , Joint 6, Joint 7, Unit
+":math:`q_{max}`", 2.7437, 1.7837, 2.9007, -0.1518, 2.8065, 4.5169, 3.0159, :math:`\text{rad}`
+":math:`q_{min}`", -2.7437, -1.7837, -2.9007, -3.0421, -2.8065, 0.5445, -3.0159, :math:`\text{rad}`
+":math:`\dot{q}_{max}`", 2.62, 2.62, 2.62, 2.62, 5.26, 4.18, 5.26, :math:`\frac{\text{rad}}{\text{s}}`
+:math:`\ddot{q}_{max}`, 10, 10, 10, 10, 10, 10, 10, :math:`\frac{\text{rad}}{\text{s}^2}`
+:math:`\dddot{q}_{max}`, 5000, 5000, 5000, 5000, 5000, 5000, 5000, :math:`\frac{\text{rad}}{\text{s}^3}`
+":math:`{\tau_j}_{max}`", 87, 87, 87, 87, 12, 12, 12, :math:`\text{Nm}`
+":math:`\dot{\tau_j}_{max}`", 1000, 1000, 1000, 1000, 1000, 1000, 1000, :math:`\frac{\text{Nm}}{\text{s}}`
