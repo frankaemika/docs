@@ -3,6 +3,11 @@ Franka Control Interface Documentation
 
 .. note::
 
+  The software and its documentation support two different robots, the
+  `Franka Research 3 (FR3) <https://www.franka.de/research>`_ and an older Franka Emika Robot (FER or Panda).
+
+.. note::
+
     There is an
     `unofficial Chinese translation of this page <http://www.franka.cn/FCI/>`_ .
     The Chinese version is not officially maintained by Franka Emika and might
@@ -24,6 +29,11 @@ These components are:
    ROS Control and MoveIt!. It also contains ``franka_description``, a collection of URDF models and
    3D meshes that can be useful outside of ROS.
    The repository is available at https://github.com/frankaemika/franka_ros.
+ * ``franka_ros2`` is currently released only as beta software.
+   The repository is available at https://github.com/frankaemika/franka_ros2.
+ * ``Franka Matlab`` provides a Simulink and a Matlab API, together with helper functions and tools,
+   for rapid-prototyping in Real-Time on the Franka Robot"
+   Franka Matlab artifacts can be obtained at `Franka World <https://franka.world/>`_.
 
 The source code of this documentation is also `available online
 <https://github.com/frankaemika/docs>`_.
@@ -53,7 +63,7 @@ The source code of this documentation is also `available online
    franka_ros_changelog
    franka_ros2
    franka_ros2_changelog
-   franka_matlab/franka_matlab
+   franka_matlab/index
    franka_matlab/franka_matlab_changelog
    control_parameters
    fr3-certification-remarks

@@ -103,7 +103,7 @@ You can control which collision model is loaded into your URDF via the ``gazebo`
 
  * ``xacro ... panda.urdf.xacro gazebo:=false``: This will use *both* the fine and coarse collision model.
    This is also the default if you omit the arg entirely. Use this when you want to use MoveIt
- * ``xacro ... panda.urdf.xacro gazebo:=true``: This will use *only* the fine collision model model. Use
+ * ``xacro ... panda.urdf.xacro gazebo:=true``: This will use *only* the fine collision model. Use
    this when you want a simulatable URDF i.e. for Gazebo. When using the coarse collision model the robot
    will of course be in constant collision with the capsules of the next link.
 
@@ -937,13 +937,13 @@ expect the following values to be simulated:
 |   |                                  | to ``set_K_frame``                                                     |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``m_ee``                         | Will be set from the mass in the inertial tag of URDF, if a hand can   |
-|   |                                  | be found, otherwise zero. Can be overritten by parameter ``m_ee``      |
+|   |                                  | be found, otherwise zero. Can be overwritten by parameter ``m_ee``     |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``I_ee``                         | Will be set from the inertia in the inertial tag of URDF, if a hand    |
-|   |                                  | be found, otherwise zero. Can be overritten by parameter ``I_ee``      |
+|   |                                  | be found, otherwise zero. Can be overwritten by parameter ``I_ee``     |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``F_x_Cee``                      | Will be set from the origin in the inertial tag of URDF, if a hand can |
-|   |                                  | be found, otherwise zero. Can be overritten by parameter ``F_x_Cee``   |
+|   |                                  | be found, otherwise zero. Can be overwritten by parameter ``F_x_Cee``  |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``m_load``                       | Can be configured via parameter ``m_load`` and/or service calls to     |
 |   |                                  | ``set_load``                                                           |
@@ -1007,7 +1007,7 @@ expect the following values to be simulated:
 |   |                                  | the end-effector, filtered with a exponential moving average filter    |
 |   |                                  | (EMA). This filtering :math:`\alpha` can be configured via a ROS       |
 |   |                                  | parameter. This field does not contain any gravity, i.e.               |
-|   |                                  | :math:`\tau_ext = \tau_J - \tau_{J_d} - \tau_{gravity}`                |
+|   |                                  | :math:`\tau_{ext} = \tau_J - \tau_{J_d} - \tau_{gravity}`              |
 +---+----------------------------------+------------------------------------------------------------------------+
 | ✔ | ``O_F_ext_hat_K``                | :math:`{}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}`      |
 +---+----------------------------------+------------------------------------------------------------------------+
