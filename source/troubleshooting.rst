@@ -34,6 +34,8 @@ This error occurs if ``libfranka`` cannot connect to the robot at all. Please ch
    :ref:`requirement-network`).
  * The robot can be reached from your workstation (see :ref:`troubleshooting_robot_not_reachable`).
  * The FCI feature file is installed on the robot (see "Settings -> System -> Installed Features").
+   If you do not have this feature, please install it. Please reach out to `support@franka.de` with
+   your serial number if you need to obtain the feature.
 
 .. _motion-stopped-due-to-discontinuities:
 
