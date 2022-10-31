@@ -423,7 +423,7 @@ The robot model library provides
 
 Note that after you load the model library, you can compute kinematic and dynamic parameters for
 an arbitrary robot state, not just the current one. You can also use the model library in a non
-realtime fashion, e.g. in an optimzation loop. The libfranka examples include exemplary code
+realtime fashion, e.g. in an optimization loop. The libfranka examples include exemplary code
 `printing joint poses
 <https://frankaemika.github.io/libfranka/print_joint_poses_8cpp-example.html>`_
 or `computing jacobians and dynamic parameters

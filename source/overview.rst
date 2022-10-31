@@ -21,10 +21,10 @@ at 1 kHz with 5 different interfaces:
 At the same time, you get access to 1 kHz measurements of:
 
  * Measured joint data, such as the position, velocity and link side torque sensor signals.
- * Estimation of externally applied torques and wrenches.
+ * Estimation of externally applied torques and forces.
  * Various collision and contact information.
 
-You get also access robot model library which provides:
+You also get access to the robot model library which provides:
 
  * Forward kinematics of all robot joints.
  * Jacobian matrix of all robot joints.
