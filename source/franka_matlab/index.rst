@@ -1,15 +1,12 @@
-Franka Matlab
-=============
+Franka Matlab Documentation
+===========================
 
 .. todolist::
 
 .. important::
-    Franka Matlab artifacts can be obtained at `Franka World <https://franka.world/>`_.
-
-.. important::
-    Franka Matlab is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and
-    specifically the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_,
-    therefore all the same
+    Franka Matlab is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and 
+    specifically the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_, 
+    therefore all the same 
     `system and network requirements <https://frankaemika.github.io/docs/requirements.html>`_  apply.
 
 .. hint::
@@ -32,7 +29,7 @@ Franka Matlab contains the following main components for interfacing the Franka 
    :maxdepth: 2
    :caption: Contents:
 
-   requirements
+   matlab_toolbox_dependencies
    compatibility
    installation
    getting_started
