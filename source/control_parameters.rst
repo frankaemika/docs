@@ -167,6 +167,13 @@ This parameter is used to determine the flip direction of the elbow.
 
                 Minimum velocities
 
+
+As most motion planners cannot deal with those functions for describing the velocity limits of each joint but they only deal with
+fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.
+
+In the figures below the system velocity limits are visualized by the red and blue thresholds while the suggested
+"position-velocity rectangular limits" are visualized in black.
+
 .. list-table:: Visualization of the joint limits of FR3
    :class: borderless
 
@@ -214,17 +221,20 @@ This parameter is used to determine the flip direction of the elbow.
      -
 
 
-
-
-
-As most motion planners can only deal with fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.
+Here are the parameters describing the suggested position-velocity rectangular limits:
 
 .. csv-table::
    :header-rows: 1
    :file: control-parameters-joint-fr3-rectangular.csv
 
-These limits are only a suggestion, you are free to define your own rectangles within the specification. However, these are the values that are
-used in the rate limiter and in the URDF inside :doc:`franka_ros`.
+.. important::
+
+   These limits are the values that are used by default in the rate limiter and in the URDF inside :doc:`franka_ros`.
+   However, these are only a suggestion, you are free to define your own rectangles within the specification accordingly to your needs.
+
+   Since FR3 does not inherently implement any restriction to the system limits (red and blue line in the plots above), you are also free
+   to implement your own motion generator to exploit the HW capabilities of FR3 beyond the rectangular limits imposed by existing motion generators.
+
 
 Denavit–Hartenberg parameters
 -----------------------------
