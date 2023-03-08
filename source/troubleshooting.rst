@@ -219,13 +219,15 @@ The ``communication_test`` executable, which is part of the ``libfranka`` exampl
 version 0.5, executes a control loop and provides feedback about the lost robot
 states as well as the maximum, minimum and average control command success rate.
 
-If you installed the ``ros-noetic-libfranka`` package, you can execute the test with:
+If you installed the ``ros-noetic-libfranka`` package or installed ``libfranka`` from source, you can execute the test with:
 
 .. code-block:: shell
 
-    rosrun libfranka communication_test <fci-ip>
+    source /opt/ros/noetic/setup.sh # only needed when installed with ROS
+    communication_test <fci-ip>
 
-To run the test after compiling ``libfranka`` from source, execute:
+If you do not want to install ``libfranka`` system-wide you can  execute the following command inside your build folder after compiling ``libfranka``
+from source:
 
 .. code-block:: shell
 
