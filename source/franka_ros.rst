@@ -320,8 +320,9 @@ are provided:
         Overview of the end-effector frames.
 
 
-To recover from errors and reflexes the ``franka_msgs::ErrorRecoveryAction`` can be called.
-That can be done from an action client or by simply publishing on the action goal topic:
+To recover from errors and reflexes when the robot is in reflex mode, you can utilize the
+``franka_msgs::ErrorRecoveryAction``. This can be achieved through either an action client or by publishing on the
+action goal topic.
 
 .. code-block:: shell
 
