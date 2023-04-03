@@ -130,7 +130,7 @@ Automatic error recovery
 
     Error message displayed in terminal in case of manual execution.
 
-In case the robot reaches an error state you can try to recover by running the `franka_automatic_error_recovery` matlab command:
+If the robot encounters an error state and transitions to reflex mode, you may attempt to recover by executing the `franka_automatic_error_recovery` command in Matlab.
 
 .. code-block:: shell
 
