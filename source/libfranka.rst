@@ -353,7 +353,7 @@ and derivatives that the robot received and tracked in the last sample.
 by the user :math:`\tau_{d}` are directly fed to the robot joints with the additional compensation
 of gravity and motor friction, resulting in the following equation:
 
-  :math:`\tau_{c} = \tau_{d} + \tau_{d} + \tau_{g}`
+  :math:`\tau_{c} = \tau_{d} + \tau_{f} + \tau_{g}`
 
 Where:
 
