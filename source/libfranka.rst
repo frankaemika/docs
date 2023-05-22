@@ -350,7 +350,17 @@ and derivatives that the robot received and tracked in the last sample.
     You will find both the `d` and the `c` signals in the robot state.
 
 **External controller**: if an external controller is sent, the desired joint torques commanded
-by the user :math:`\tau_{d}` are directly fed to the robot joints.
+by the user :math:`\tau_{d}` are directly fed to the robot joints with the additional compensation
+of gravity and motor friction, resulting in the following equation:
+
+  :math:`\tau_{c} = \tau_{d} + \tau_{f} + \tau_{g}`
+
+Where:
+
+* :math:`\tau_{d}` is the desired torque given as input by the libfranka user,
+* :math:`\tau_{c}` is the torque effectively commanded to the joint,
+* :math:`\tau_{f}` is the torque to compensate the motor friction,
+* :math:`\tau_{g}` is the torque required for compensating the gravity of the whole kinematic chain.
 
 Note that, on the Control side, there are two things that could modify your signals:
 
