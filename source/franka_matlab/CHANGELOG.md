@@ -1,6 +1,6 @@
 # Franka Matlab changelog
 
-## 0.3.1 (23-03-2023)
+## 0.3.1 (07-06-2023)
 
    - Bugfix. Properly setting the collision threshold values in Simulink.
 
