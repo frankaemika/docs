@@ -1,5 +1,9 @@
 # Franka Matlab changelog
 
+## 0.3.1 (07-06-2023)
+
+   - Bugfix. Properly setting the collision threshold values in Simulink.
+
 ## 0.3.0 (31-09-2022)
 
    - Windows 10 support (Experimental mainly due to the non Real-Time nature of the default Windows system).
