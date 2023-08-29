@@ -4,10 +4,16 @@ Getting started
 Overview
 --------
 
-In the demos folder a set of Simulink examples with various implementations is located. Feel free to experiment, adjust 
+A set of Simulink & Matlab examples is included within the Franka Matlab Toolbox. Feel free to experiment, adjust 
 them and expand them to fit your project needs!
 
-.. figure:: _static/demos_files.png
+You can navigate through the examples by typing: 
+
+.. code-block:: shell
+
+    >> uiopen(fullfile(franka_matlab_installation_path_get(),'examples','franka_matlab_toolbox_examples.slx'),1);
+
+.. figure:: _static/franka_matlab_toolbox_examples.png
     :align: center
     :figclass: align-center
 
