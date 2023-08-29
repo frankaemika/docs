@@ -27,8 +27,8 @@ Compatibility with Matlab & libfranka
 `libfranka and robot system compatibility <https://frankaemika.github.io/docs/compatibility.html>`_
 
 .. important::
-    Make sure that you've installed and set up Matlab with a compatible compiler version! You can find the list of 
-    compatible compilers to Matlab in `this link <https://www.mathworks.com/support/requirements/supported-compilers.html>`_.
+    Make sure that you've installed and set up Matlab with a compatible compiler version! You can find the list of Matlab 
+    compatible compilers in `this link <https://www.mathworks.com/support/requirements/supported-compilers.html>`_.
 
 .. hint::
     The `pick_and_place_with_RRT.mlx` Matlab demo is compatible with Matlab :math:`\geq` R2021b.
