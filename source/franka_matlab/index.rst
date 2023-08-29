@@ -3,13 +3,7 @@ Franka Matlab Documentation
 
 .. todolist::
 
-.. important::
-    Franka Matlab is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and 
-    the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_. 
-    All the same 
-    `system and network requirements <https://frankaemika.github.io/docs/requirements.html>`_  do therefore apply.
-
-Franka Matlab contains the following main components for interfacing the Franka Emika Robot through Matlab & Simulink:
+Franka Matlab Toolbox contains the following main components for interfacing the Franka Emika Robot through Matlab & Simulink:
 
 * ``Simulink Franka Library``, a set of simulink blocks interfacing the Franka Emika Robot through automatic C++ code gen with Simulink Coder, for rapid-prototyping of robot control algorithms.
 
