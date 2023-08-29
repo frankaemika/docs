@@ -6,7 +6,7 @@ Matlab Library
 Matlab Demo Pick & Place with RRT 
 ---------------------------------
 
-For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is an good starting point. 
+For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is a good starting point. 
 
 .. figure:: _static/matlab_pick_and_place_with_RRT_demo.png
     :align: center
@@ -32,15 +32,6 @@ Automatic Error Recovery
     >> fr.automatic_error_recovery();
 
 Will attempt an automatic error recovery .
-
-Communication Test
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: shell
-
-    >> tr = fr.communication_test();
-
-Will return a struct with the communication test results.
 
 Get Joint Poses
 ^^^^^^^^^^^^^^^

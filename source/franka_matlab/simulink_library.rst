@@ -22,7 +22,7 @@ control signals to the robot.
 Additionally a set of parameters for the robot can be applied through this block main pane based mostly
 on the desired control mode that is selected from the drop-down list `Control Mode`. 
 
-.. figure:: _static/apply_control_settings.png
+.. figure:: _static/block_parameters_apply_control.png
     :align: center
     :figclass: align-center
 

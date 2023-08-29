@@ -32,20 +32,15 @@ You can mex the libraries by running:
     >> mex_simulink_library();
     >> mex_matlab_library();
 
-Issues with libstdc++.so
-------------------------
+Issues with libstdc++.so and other system dynamic libraries
+-----------------------------------------------------------
 
-It could be that Matlab throws an error related to libstdc++.so.6 after calling one of the matlab scripts of the franka-matlab library in a 
-Linux environment. If that's the case our current working solution involves renaming the precompiled libstdc++ library in the Matlab installation, 
-which forces Matlab to look in the system for the proper dynamic standard library.
-
-This can be performed with e.g:
+Make sure that you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ for your system, in order for Matlab to reference the system dynamic libraries
+instead of the precompiled ones that it ships with:
 
 .. code-block:: shell
 
-    $ mv matlabroot/sys/os/glnx64/libstdc++.so.6 matlabroot/sys/os/glnx64/libstdc++.so.6.off
-
-Restarting Matlab is then recommended.
+    sudo apt install matlab-support
 
 Franka Simulink library number of block instances
 -------------------------------------------------
