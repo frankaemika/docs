@@ -25,5 +25,4 @@ Franka Matlab Toolbox contains the following main components for interfacing the
    getting_started
    simulink_library
    matlab_library
-   franka_matlab_changelog
    troubleshooting

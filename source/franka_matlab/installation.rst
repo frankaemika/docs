@@ -11,7 +11,7 @@ Linux System Setup
 ------------------
 
 .. important::
-    Make sure that you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ for you system with:
+    Make sure that you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ for your system with:
 
     .. code-block:: shell
 
