@@ -17,7 +17,7 @@ You can navigate through the examples by typing:
     :align: center
     :figclass: align-center
 
-    Simulink Demos in franka_matlab.
+    Franka Matlab Toolbox Examples Navigator.
 
 Initialization
 --------------
@@ -57,11 +57,15 @@ Execution
 
 Let's start by selecting the `Run on custom hardware` App from the Apps pane in Simulink.
 
-.. figure:: _static/simulink_apps_pane.png
+.. figure:: _static/cartesian_impedance_control_apps.png
     :align: center
     :figclass: align-center
 
-    Run on custom hardware Simulink App.
+    "Run on custom hardware" Simulink App.
+
+.. note::
+
+    The Franka Simulink Library has been tested with the Generic Real-Time Target (grt.tlc) as well as with the Embedded Coder Target (ert.tlc) in the context of the NVIDIA's Jetson Nano Hardware support package for Simulink.
 
 .. important::
 
@@ -70,20 +74,11 @@ Let's start by selecting the `Run on custom hardware` App from the Apps pane in 
 You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is 
 desired or `Build, Deploy & Start` for just executing the application without monitoring.
 
-.. figure:: _static/simulink_hardware_pane.png
+.. figure:: _static/cartesian_impedance_control_hardware.png
     :align: center
     :figclass: align-center
 
     Hardware Simulink App.
-
-For running the generated executable manually from a terminal make sure that you've first exported the full libfranka 
-build path, in case of Linux:
-
-.. code-block:: shell
-
-    >> $ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<libfranka build folder full path>
-
-or in case of Windows, that you've included the full path of libfranka build directory in the PATH environment variable.
 
 .. hint::
 
@@ -93,7 +88,7 @@ or in case of Windows, that you've included the full path of libfranka build dir
 
     The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!
 
-You can then run the executable, which is located in the current working space. 
+Alternatively you can run the executable, which is located in the current working space, manually.
 
 In case of Linux:
 
@@ -107,8 +102,6 @@ or in case of Windows:
 
     > <simulink_model_name>.exe
 
-You can manually choose the simple tcpip from the Simulink model settings.
-
 Automatic error recovery
 ------------------------
 
@@ -116,19 +109,7 @@ Automatic error recovery
     :align: center
     :figclass: align-center
 
-    View diagnostic messages during runtime in Simulink.
-
-.. figure:: _static/simulink_view_errors.png
-    :align: center
-    :figclass: align-center
-
-    View error messages in Simulink.
-
-.. figure:: _static/matlab_command_window_error_message.png
-    :align: center
-    :figclass: align-center
-
-    Error message displayed in Matlab Command Window.
+    View error and other diagnostic messages in Simulink during the build, deployment and execution phases.
 
 .. figure:: _static/terminal_error_message.png
     :align: center
