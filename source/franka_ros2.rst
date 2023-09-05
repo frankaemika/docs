@@ -15,8 +15,8 @@ The `franka_ros2 repo <https://github.com/frankaemika/franka_ros2>`_ contains a 
 Prerequisites
 -------------
 
-* A `ROS 2 Foxy installation <https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html>`_
-  (ros-foxy-desktop)
+* A `ROS 2 Humble installation <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html>`_
+  (ros-humble-desktop)
 * A :ref:`PREEMPT_RT kernel <preempt>` (optional, but strongly recommended).
 * A system-wide :ref:`libfranka installation <build-libfranka>`. Here is a minimal example:
 
@@ -46,17 +46,17 @@ Setup
 1. Install requirements::
 
     sudo apt install -y \
-    ros-foxy-control-msgs \
-    ros-foxy-xacro \
-    ros-foxy-angles \
-    ros-foxy-ros2-control \
-    ros-foxy-realtime-tools \
-    ros-foxy-control-toolbox \
-    ros-foxy-moveit \
-    ros-foxy-ros2-controllers \
-    ros-foxy-joint-state-publisher \
-    ros-foxy-joint-state-publisher-gui \
-    ros-foxy-ament-cmake-clang-format \
+    ros-humble-control-msgs \
+    ros-humble-xacro \
+    ros-humble-angles \
+    ros-humble-ros2-control \
+    ros-humble-realtime-tools \
+    ros-humble-control-toolbox \
+    ros-humble-moveit \
+    ros-humble-ros2-controllers \
+    ros-humble-joint-state-publisher \
+    ros-humble-joint-state-publisher-gui \
+    ros-humble-ament-cmake-clang-format \
     python3-colcon-common-extensions
 
 2. Create a ROS 2 workspace::
@@ -65,7 +65,7 @@ Setup
 
 3. Clone repo and build packages::
 
-    source /opt/ros/foxy/setup.bash
+    source /opt/ros/humble/setup.bash
     cd ~/franka_ros2_ws
     git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
     colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
@@ -286,7 +286,7 @@ joint_effort_trajectory_controller
 
 This package contains a modified joint_trajectory_controller that can use the effort interface of the
 ``franka_hardware::FrankaHardwareInterface``. It is based on this
-`Pull request <https://github.com/ros-controls/ros2_controllers/pull/225>`_ and backported to Foxy. It offers
+`Pull request <https://github.com/ros-controls/ros2_controllers/pull/225>`_ and backported to Humble. It offers
 a ``FollowJointTrajectory`` action that is needed for MoveIt.
 
 
