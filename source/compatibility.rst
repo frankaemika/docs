@@ -35,10 +35,10 @@ compatible with the libfranka version 0.4.0 and 0.5.0.
 | >= 1.1.0 (FER)       | 0.2.0             | 2 / 1           |                    |                 |
 +----------------------+-------------------+-----------------+--------------------+-----------------+
 
-`Robot version
-<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/robot/service_types.h#L17>`_
-and `Gripper version
-<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/gripper/types.h#L17>`_
+`Robot version line 17
+<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/robot/service_types.h>`_
+and `Gripper version line 17
+<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/gripper/types.h>`_
 are part of libfranka-common repository, a submodule of libfranka repository.
 
 Franka Matlab compatible versions are located :ref:`here<compatibility-franka-matlab>`.
