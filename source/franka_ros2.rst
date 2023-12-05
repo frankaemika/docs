@@ -27,7 +27,7 @@ Prerequisites
    sudo apt install -y libpoco-dev libeigen3-dev
    git clone https://github.com/frankaemika/libfranka.git --recursive
    cd libfranka
-   git switch 0.13.0
+   git switch 0.13.2
    mkdir build && cd build
    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF  ..
    cmake --build . -j$(nproc)
