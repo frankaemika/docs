@@ -18,7 +18,8 @@ Prerequisites
 * A `ROS 2 Humble installation <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html>`_
   (ros-humble-desktop) or a VSCode IDE with DevContainer.
 * A :ref:`PREEMPT_RT kernel <preempt>` (optional, but strongly recommended).
-* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.11.0.
+* For ``cartesian_pose``, ``joint_position`` and ``elbow_position`` command interfaces realtime-kernel is absolutely necessary.
+* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.0.
   Here is a minimal example:
 
 .. code-block:: shell
@@ -26,7 +27,7 @@ Prerequisites
    sudo apt install -y libpoco-dev libeigen3-dev
    git clone https://github.com/frankaemika/libfranka.git --recursive
    cd libfranka
-   git switch 0.11.0
+   git switch 0.13.2
    mkdir build && cd build
    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF  ..
    cmake --build . -j$(nproc)
@@ -101,7 +102,7 @@ VSCode DevContainer working schematic is shown in the below image:
 
     git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
 
-4. Move the .devcontainer folder to the frnaka_ros2_ws parent folder::
+4. Move the .devcontainer folder to the franka_ros2_ws parent folder::
 
     mv franka_ros2/.devcontainer .
 
@@ -115,7 +116,7 @@ VSCode DevContainer working schematic is shown in the below image:
 
    Write in the command prompt bar::
 
-    open folder in container
+    Dev Containers: Rebuild and Reopen in Container
 
    and click this option in the search results
 
@@ -198,6 +199,78 @@ Joint4 body jacobian and end-effector jacobian with respect to the base frame.
 .. code-block:: shell
 
     ros2 launch franka_bringup model_example_controller.launch.py robot_ip:=<fci-ip>
+
+Joint Position Example
+^^^^^^^^^^^^^^^^^^^^^^
+This example sends periodic position commands to the robot.
+
+.. important::
+    The position trajectory needs to start from the initial position of the robot.
+
+To read the start position of the robot, you can read claim the `initial_joint_position`.
+state interface values before starting to send any commands.
+
+.. code-block:: cpp
+
+  if (initialization_flag_) {
+    for (size_t i = 0; i < 7; ++i) {
+      initial_q_.at(i) = state_interface[i].get_value();
+    }
+    initialization_flag_ = false;
+  }
+
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup joint_position_example_controller.launch.py robot_ip:=<fci-ip>
+
+Joint Velocity Example
+^^^^^^^^^^^^^^^^^^^^^^
+This example sends periodic velocity commands to the 4th and 5th joint of the robot.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup joint_velocity_example_controller.launch.py robot_ip:=<fci-ip>
+
+Cartesian Pose Example
+^^^^^^^^^^^^^^^^^^^^^^
+This example uses the CartesianPose interface to send periodic pose commands to the robot.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup cartesian_pose_example_controller.launch.py robot_ip:=<fci-ip>
+
+Cartesian Orientation Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This example uses CartesianOrientation interface to send periodic orientation commands around X axis of the end effector of the robot.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py robot_ip:=<fci-ip>
+
+Cartesian Pose Elbow Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This example sends periodic elbow commands while keeping the end effector pose constant.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py robot_ip:=<fci-ip>
+
+Cartesian Velocity Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+This example uses the CartesianVelocity interface to send periodic velocity commands to the robot.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py robot_ip:=<fci-ip>
+
+Cartesian Elbow Example
+^^^^^^^^^^^^^^^^^^^^^^^
+This example uses the CartesianElbow interface to send periodic elbow commands to the robot while keeping the end effector velocity constant.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup elbow_example_controller.launch.py robot_ip:=<fci-ip>
 
 
 Package Descriptions
@@ -305,13 +378,16 @@ franka_hardware
 ^^^^^^^^^^^^^^^
 
 This package contains the ``franka_hardware`` plugin needed for `ros2_control <https://control.ros.org/humble/index.html>`_.
-The plugin is loaded from the URDF of the robot and passed to the controller manger via the robot description.
+The plugin is loaded from the URDF of the robot and passed to the controller manager via the robot description.
 It provides for each joint:
 
 * a ``position state interface`` that contains the measured joint position.
 * a ``velocity state interface`` that contains the measured joint velocity.
 * an ``effort state interface`` that contains the measured link-side joint torques including gravity.
+* an ``initial_position state interface`` that contains the initial joint position of the robot.
 * an ``effort command interface`` that contains the desired joint torques without gravity.
+* a  ``position command interface`` that contains the desired joint position.
+* a  ``velocity command interface`` that contains the desired joint velocity.
 
 In addition
 
@@ -324,15 +400,11 @@ In addition
 
 The IP of the robot is read over a parameter from the URDF.
 
-.. hint::
-    Joint Position and Velocity controllers will be soon available
-
 .. _franka_semantic_components:
 
 franka_semantic_components
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This package contains franka_robot_model and franka_robot_state classes.
+This package contains franka_robot_model, franka_robot_state and cartesian command classes.
 These classes are used to convert franka_robot_model object and franka_robot_state objects,
 which are stored in the hardware_state_interface as a double pointer.
 
@@ -341,6 +413,83 @@ For further reference on how to use these classes:
 and
 `Franka Example Controllers(model_example_controller)
 <https://github.com/frankaemika/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp>`_
+
+- Cartesian Pose Interface:
+
+This interface is used to send Cartesian pose commands to the robot by using the loaned command interfaces.
+FrankaSemanticComponentInterface class is handling the loaned command interfaces and state interfaces.
+While starting the cartesian pose interface, the user needs to pass a boolean flag to the constructor
+to indicate whether the interface is for the elbow or not.
+
+.. code-block:: cpp
+
+   auto is_elbow_active = false;
+   CartesianPoseInterface cartesian_pose_interface(is_elbow_active);
+
+This interface allows users to read the current pose command interface values set by the franka hardware interface.
+
+.. code-block:: cpp
+
+   std::array<double, 16> pose;
+   pose = cartesian_pose_interface.getInitialPoseMatrix();
+
+One could also read quaternion and translation values in Eigen format.
+
+.. code-block:: cpp
+
+    Eigen::Quaterniond quaternion;
+    Eigen::Vector3d translation;
+    std::tie(quaternion, translation) = cartesian_pose_interface.getInitialOrientationAndTranslation();
+
+After setting up the cartesian interface, you need to ``assign_loaned_command_interfaces`` and ``assign_loaned_state_interfaces`` in your controller.
+This needs to be done in the on_activate() function of the controller. Examples can be found in the
+`assign loaned comamand interface example
+<https://t.ly/u-NFk>`_
+
+.. code-block:: cpp
+
+    cartesian_pose_interface.assign_loaned_command_interfaces(command_interfaces_);
+    cartesian_pose_interface.assign_loaned_state_interfaces(state_interfaces_);
+
+In the update function of the controller you can send pose commands to the robot.
+
+.. code-block:: cpp
+
+    std::array<double, 16> pose;
+    pose = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.5, 0, 0.5, 1};
+    cartesian_pose_interface.setCommanded(pose);
+
+Or you can send quaternion, translation values in Eigen format.
+
+.. code-block:: cpp
+
+    Eigen::Quaterniond quaternion(1, 0, 0, 0);
+    Eigen::Vector3d translation(0.5, 0, 0.5);
+    cartesian_pose_interface.setCommand(quaternion, translation);
+
+- Cartesian Velocity Interface:
+
+This interface is used to send Cartesian velocity commands to the robot by using the loaned command interfaces.
+FrankaSemanticComponentInterface class is handling the loaned command interfaces and state interfaces.
+
+.. code-block:: cpp
+
+    auto is_elbow_active = false;
+    CartesianVelocityInterface cartesian_velocity_interface(is_elbow_active);
+
+To send the velocity command to the robot, you need to assign_loaned_command_interface in your custom controller.
+
+.. code-block:: cpp
+
+    cartesian_velocity_interface.assign_loaned_command_interface(command_interfaces_);
+
+In the update function of the controller you can send cartesian velocity command to the robot.
+
+.. code-block:: cpp
+
+    std::array<double, 6> cartesian_velocity;
+    cartesian_velocity = {0, 0, 0, 0, 0, 0.1};
+    cartesian_velocity_interface.setCommand(cartesian_velocity);
 
 .. _franka_robot_state_broadcaster:
 
