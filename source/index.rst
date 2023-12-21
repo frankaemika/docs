@@ -6,14 +6,6 @@ Franka Control Interface Documentation
   The software and its documentation support two different robots, the
   `Franka Research 3 (FR3) <https://www.franka.de/research>`_ and an older Franka Emika Robot (FER or Panda).
 
-.. note::
-
-    There is an
-    `unofficial Chinese translation of this page <http://www.franka.cn/FCI/>`_ .
-    The Chinese version is not officially maintained by Franka Emika and might
-    thus contain errors and/or be outdated.
-
-
 .. todolist::
 
 The Franka Control Interface (FCI) can be accessed via several open source components which we
