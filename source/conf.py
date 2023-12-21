@@ -53,8 +53,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Franka Control Interface (FCI)'
-copyright = '2017, Franka Emika GmbH'
-author = 'Franka Emika GmbH'
+copyright = '2023, Franka Robotics GmbH'
+author = 'Franka Robotics GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

@@ -52,7 +52,7 @@ FR3 robot. For installing the previous libfranka version you can initialize the 
 
         >> mex_franka_matlab_library();
 
-After the init script is completed you can start utilizing the Simulink and Matlab scripts for the Franka Emika robot.
+After the init script is completed you can start utilizing the Simulink and Matlab scripts for the Franka Robotics robot.
 
 .. hint::
     It is highly recommended to start with the provided Simulink demos before writing custom applications from scratch.
