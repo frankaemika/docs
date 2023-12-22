@@ -30,7 +30,7 @@ You also get access to the robot model library which provides:
  * Jacobian matrix of all robot joints.
  * Dynamics: inertia matrix, Coriolis and centrifugal vector and gravity vector.
 
-In addition, ``franka_ros`` connects Franka Emika research robots with the entire ROS ecosystem.
+In addition, ``franka_ros`` connects Franka Robotics research robots with the entire ROS ecosystem.
 It integrates ``libfranka`` into  `ROS Control <https://wiki.ros.org/ros_control>`_.
 Additionally, it includes `URDF <https://wiki.ros.org/urdf>`_ models and detailed 3D meshes of our
 robots and end effectors, which allows visualization (e.g. RViz) and kinematic simulations.

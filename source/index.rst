@@ -4,7 +4,7 @@ Franka Control Interface Documentation
 .. note::
 
   The software and its documentation support two different robots, the
-  `Franka Research 3 (FR3) <https://www.franka.de/research>`_ and an older Franka Emika Robot (FER or Panda).
+  `Franka Research 3 (FR3) <https://www.franka.de/research>`_ and an older Franka Robotics Robot (FER or Panda).
 
 .. todolist::
 
@@ -14,7 +14,7 @@ for improvements.
 
 These components are:
 
- * ``libfranka``, a C++ library that provides low-level control of Franka Emika research robots.
+ * ``libfranka``, a C++ library that provides low-level control of Franka Robotics research robots.
    Its source code is available at https://github.com/frankaemika/libfranka. API documentation is
    available at https://frankaemika.github.io/libfranka.
  * ``franka_ros``, our `ROS integration <https://wiki.ros.org/franka_ros>`_, including support for

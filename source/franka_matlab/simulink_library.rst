@@ -98,7 +98,7 @@ Get Model
 
     Get robot model numeric values Simulink Block.
 
-This Simulink block will deliver the numerical values of the Model of the Franka Emika robot. For an analytical
+This Simulink block will deliver the numerical values of the Model of the Franka Robotics robot. For an analytical
 description of the available signals see -->
 `Robot Model Signals <https://frankaemika.github.io/libfranka/classfranka_1_1Model.html>`_
 

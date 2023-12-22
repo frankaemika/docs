@@ -35,7 +35,7 @@ the URDF format according to the `URDF XML documentation <http://wiki.ros.org/ur
 
 In case you want to simulate the Panda robot, you can pass a ``gazebo`` argument to the XACRO file.
 Then the URDF will contain *estimated* inertias values, i.e. link masses and inertia tensors based
-on the `Dynamic Identification of the Franka Emika Panda Robot With Retrieval of Feasible Parameters Using
+on the `Dynamic Identification of the Franka Robotics Panda Robot With Retrieval of Feasible Parameters Using
 Penalty-Based Optimization <https://hal.inria.fr/hal-02265293/file/IROS_19_Panda.pdf>`_.
 
 .. code-block:: shell

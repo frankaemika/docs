@@ -44,7 +44,7 @@ are part of libfranka-common repository, a submodule of libfranka repository.
 Franka Matlab compatible versions are located :ref:`here<compatibility-franka-matlab>`.
 
 .. caution::
-    Franka Emika currently does not provide any support for Windows or Arm
+    Franka Robotics currently does not provide any support for Windows or Arm
 
 Compatibility with the kernel
 -----------------------------
