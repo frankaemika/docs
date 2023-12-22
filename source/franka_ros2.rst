@@ -190,6 +190,17 @@ joints while it is running.
 
     ros2 launch franka_bringup joint_impedance_example_controller.launch.py robot_ip:=<fci-ip>
 
+Joint Impedance With IK Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The example uses the LMA-Orocos solver from MoveIt service to compute the joint positions for the desired pose.
+The desired pose is to move the end-effector periodically in x and z directions. You can change the kinematic solver
+in the franka_moveit_config package, kinematics.yaml file.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py robot_ip:=<fci-ip>
+
 
 Model Example Controller
 ^^^^^^^^^^^^^^^^^^^^^^^^
