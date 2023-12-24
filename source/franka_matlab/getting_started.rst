@@ -4,25 +4,25 @@ Getting started
 Overview
 --------
 
-In the demos folder a set of Simulink examples with various implementations is located. Feel free to experiment, adjust
+In the demos folder a set of Simulink examples with various implementations is located. Feel free to experiment, adjust 
 them and expand them to fit your project needs!
 
 .. figure:: _static/demos_files.png
     :align: center
     :figclass: align-center
 
-    Simulink Demos from franka_matlab.
+    Simulink Demos in franka_matlab.
 
 Initialization
 --------------
 
-After opening, double clicking on any of the simulink models a set of parameters will be loaded automatically in the
+After opening, double clicking on any of the simulink models a set of parameters will be loaded automatically in the 
 workspace.
 
 .. hint::
 
-    The Simulink models are delivered in R2019a version. They will convert automatically to your Matlab version
-    when you try to save the model.
+    The Simulink models are delivered in R2019a version. They will convert automatically to your Matlab version 
+    when you try to save the model. 
 
 .. figure:: _static/workspace_parameters.png
     :align: center
@@ -30,8 +30,8 @@ workspace.
 
     Working space after loading a Simulink demo.
 
-The robot_ip is set to 172.16.0.2 by default after loading the demos. Make sure that the robot_ip parameters matches your
-setup, either by modifying it in the `demos/demos_common_config.m` matlab script file or from the cmd line after the
+The robot_ip is set to 172.16.0.2 by default after loading the demos. Make sure that the robot_ip parameters matches your 
+setup, either by modifying it in the `demos/demos_common_config.m` matlab script file or from the cmd line after the 
 simulink demo is loaded, like:
 
 .. code-block:: shell
@@ -46,8 +46,8 @@ Execution
 .. hint::
 
     The current workflow presented is utilizing the "Run on Custom Hardware" Simulink App, present in Matlab versions
-    :math:`\geq` R2020a. In case of Matlab 2019a you can build the model normally by using the "Build Model" button.
-    You then need to run the executable from a terminal as described below.
+    :math:`\geq` R2020a. In case of Matlab 2019a you can build the model normaly by using the "Build Model" button.
+    You then need to run the executable from a terminal as described bellow.
 
 Let's start by selecting the `Run on custom hardware` App from the Apps pane in Simulink.
 
@@ -61,7 +61,7 @@ Let's start by selecting the `Run on custom hardware` App from the Apps pane in 
 
     Before executing make sure that the brakes of the robot are disengaged and that the robot is in execution mode!
 
-You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is
+You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is 
 desired or `Build, Deploy & Start` for just executing the application without monitoring.
 
 .. figure:: _static/simulink_hardware_pane.png
@@ -70,7 +70,7 @@ desired or `Build, Deploy & Start` for just executing the application without mo
 
     Hardware Simulink App.
 
-For running the generated executable manually from a terminal make sure that you've first exported the full libfranka
+For running the generated executable manually from a terminal make sure that you've first exported the full libfranka 
 build path, in case of Linux:
 
 .. code-block:: shell
@@ -81,13 +81,13 @@ or in case of Windows, that you've included the full path of libfranka build dir
 
 .. hint::
 
-    As a reminder, in case of a robot with system version 4.2.0 or greater, the FCI control mode needs to be explicitly enabled through Desk --> Sidebar menu --> Activate FCI.
+    As a reminder, in case of a robot with system version 4.2.0 or greater, the FCI control mode needs to be explicitly enabled through Desk --> Sidebar menu --> Activate FCI. 
 
 .. caution::
 
     The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!
 
-You can then run the executable, which is located in the current working space.
+You can then run the executable, which is located in the current working space. 
 
 In case of Linux:
 
@@ -136,10 +136,10 @@ If the robot encounters an error state and transitions to reflex mode, you may a
 
     >> franka_automatic_error_recovery(<robot ip string>);
 
-In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring
-back the robot to a valid configuration.
+In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring 
+back the robot to a valid configuration. 
 
 .. hint::
 
-    Checkout the :ref:`matlab library <matlab-library>` for a set of helper
+    Checkout the :ref:`matlab library <matlab-library>` for a set of helper 
     functions that can help to optimize your workflow.

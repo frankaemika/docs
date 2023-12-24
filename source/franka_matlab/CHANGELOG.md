@@ -6,7 +6,14 @@
 
 ## 0.3.0 (20-09-2022)
 
-   - Windows 10 support (Experimental mainly due to the non Real-Time nature of the default Windows system).
+   - **BREAKING** New Matlab object oriented API expressed based on the new `FrankaRobot()` class. Incorporation of existing Franka Matlab functions as methods of the new API Class.
+   - Expansion of the Matlab API with the new methods `gripper_state()`, `gripper_homing()`, `gripper_grasp()`, `gripper_move()` and `gripper_stop()` for controlling the Franka Gripper.
+   - Expansion of the Matlab API with the new method `joint_trajectory_motion()` for following precomputed joint trajectories.
+   - Creation of the new demo `pick_and_place_with_RRT.mlx` showcasing a workflow approach for the new Matlab API.
+
+## 0.3.0 (20-09-2022)
+
+   - Windows 10 support (Experimental mainly due to the non-Real-Time nature of the default Windows system).
    - Project now relies on the leaner "Generic Real-Time" .tlc (grt.tlc) target framework.
    - Support for XCP communication protocol (vehicle network communication). Data inspector is now enabled!
    - Support for "Run on custom Hardware" Simulink App for controlling the "Build-deploy-execute-connect" workflow. 
@@ -43,4 +50,8 @@
     - **franka_emika_panda.tlc** & **franka_emika_panda_shrlib.tlc** custom linux targets, based on ert, that offer ext mode that is real time capable(package drop in case of main step frame loss).
     - **Matlab Library**(Experimental, limited support), includes the following command:
         - **automatic_error_recovery(robot_ip)**. Execute through a matlab command line for getting automatically out of an error state.
+<<<<<<< HEAD
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
+=======
+    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow. 
+>>>>>>> b769b4d... updated franka matlab section due to new matlab api
