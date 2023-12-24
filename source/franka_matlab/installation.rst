@@ -1,8 +1,8 @@
 Installation
 ============
 
-.. important::
-    Franka Matlab is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and 
+.. hint::
+    The Franka Matlab Toolbox is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and 
     the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_. 
     All the same 
     `system and network requirements <https://frankaemika.github.io/docs/requirements.html>`_  do therefore apply.
@@ -11,32 +11,25 @@ Linux System Setup
 ------------------
 
 .. important::
-    Make sure that you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ for your system with:
+    For Linux system we higly recommend installing the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_:
 
     .. code-block:: shell
 
         sudo apt install matlab-support
 
-A system wide installation of libfranka, **as a Debian package**, is required for the Franka Matlab Toolbox.
+Make sure that the following dependencies are installed:
 
-Please follow the `libfranka installation instructions <https://frankaemika.github.io/docs/installation_linux.html#building-from-source>`_ for building from source.
+    .. code-block:: shell
 
-Do not forget to build and install the libfranka Debian package as well:
+        sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-.. code-block:: shell
-
-    $ cd libfranka/build
-    $ cpack -G DEB
-    $ sudo dpkg -i libfranka*.deb
+You can either let the Franka Matlab Toolbox auto-install the libfranka locally or you can proceed with
+a system-wide libfranka.*.deb installation. We recommend the former.
 
 .. important::
-    Make sure that the Real Time Kernel is properly installed as described in the 
+    Make sure that the Real-Time Kernel is properly installed as described in the 
     `libfranka documentation <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
-
-.. hint::
-    before proceeding with the Franka Matlab Toolbox, it would be a good practice to execute a couple of the libfranka examples, under the build/examples folder, in order to ensure that the libfranka 
-    installation has been succesful and that the system can operate under the Real-Time control constraints.
-
+    
 Windows System Setup
 --------------------
 

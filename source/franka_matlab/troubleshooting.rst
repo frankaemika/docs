@@ -5,6 +5,38 @@ Troubleshooting
     Checkout the `Franka Community <https://www.franka-community.de>`_  and the 
     `franka_matlab category <https://www.franka-community.de/c/franka-matlab/15>`_ for relevant posts or for creating new ones! 
 
+.. hint::
+    Before proceeding with the Franka Matlab Toolbox, it would be a good practice to execute a couple of the libfranka examples, under the build/examples folder, in order to ensure that the libfranka 
+    installation has been succesful and that the system can operate under the Real-Time control constraints.
+
+control_modes.h: No such file or directory error.
+-------------------------------------------------
+
+.. figure:: _static/simulink_model_apply_control_only_build_error.png
+    :align: center
+    :figclass: align-center
+
+    The build error message in simulink when only the "apply control is present".
+
+This is a known current limitation of the system, as the build process will fail if only 
+the "apply control" block is present in a simulink model. 
+
+.. figure:: _static/simulink_model_apply_control_only.png
+    :align: center
+    :figclass: align-center
+
+    Example of a Simulink model with only "apply control". The build will fail.
+
+For fixing the issue just include any other block from the Franka Simulink Library, e.g 
+with the terminal if it will be left unused.
+
+.. figure:: _static/simulink_model_apply_control_only_fix.png
+    :align: center
+    :figclass: align-center
+
+    Fixing the "control_modes.h: No such file or directory error." by including any other
+    block from the Franka Simulink Library.
+
 libfranka reference
 -------------------
 .. hint::
@@ -20,18 +52,6 @@ and Simulink, e.g with figures and scopes respectively. We would then recommend 
 
     $ matlab -softwareopengl
 
-Mexing Simulink & Matlab library
---------------------------------
-
-Simulink & Matlab libraries are delivered with compiled binaries. In case issues arise re-mexing is advised. 
-
-You can mex the libraries by running:
-
-.. code-block:: shell
-
-    >> mex_simulink_library();
-    >> mex_matlab_library();
-
 Issues with libstdc++.so and other system dynamic libraries
 -----------------------------------------------------------
 
@@ -46,6 +66,7 @@ Franka Simulink library number of block instances
 -------------------------------------------------
 
 .. important::
-    Multiple instances for the Apply Control block are NOT allowed** in the same system (multiple instances can inserted in corresponding enabled 
-    subsystems). One-and-only-one Apply Control block is necessary for all the other blocks to work.
-    Multiple instances of the rest of the Franka Simulink library blocks ARE allowed.
+    The Simulink library has been designed for rapid-prototyping of robot controllers with one-robot 
+    in mind. Multiple instances for the Apply Control block are not encouraged as this has not been tested.
+    Multiple instances of all the other Simulink blocks, as long as they point to the same robot ip, can be 
+    utilized.
