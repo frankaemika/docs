@@ -61,6 +61,7 @@
         - **automatic_error_recovery(robot_ip)**. Execute through a matlab command line for getting automatically out of an error state.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
 =======
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow. 
@@ -68,3 +69,6 @@
 =======
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
 >>>>>>> 1ecfd86... updating franka matlab changelog
+=======
+    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
+>>>>>>> 32edb54bcbca3bb65cf0862555d644a3d017baf3
