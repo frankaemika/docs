@@ -7,9 +7,18 @@
 ## 0.3.0 (20-09-2022)
 
    - **BREAKING** New Matlab object oriented API expressed based on the new `FrankaRobot()` class. Incorporation of existing Franka Matlab functions as methods of the new API Class.
+   - **BREAKING** Removing all the "Panda" naming conventions. Replaced with "Franka Robot".
+   - **BREAKING** Franka Matlab is now distributed as a Toolbox Matlab Add-On. No installation script needed.
+   - Fixing collision threshold setting bug.
+   - Oldest supported Matlab version is now the R2021a.
+   - Adding the option to set the Nominal End-Effector to End-Effector frame NE_T_EE in the Simulink Block "Apply Control".
    - Expansion of the Matlab API with the new methods `gripper_state()`, `gripper_homing()`, `gripper_grasp()`, `gripper_move()` and `gripper_stop()` for controlling the Franka Gripper.
    - Expansion of the Matlab API with the new method `joint_trajectory_motion()` for following precomputed joint trajectories.
    - Creation of the new demo `pick_and_place_with_RRT.mlx` showcasing a workflow approach for the new Matlab API.
+
+## 0.3.1 (23-03-2023)
+
+   - Bugfix. Properly setting the collision threshold values in Simulink.
 
 ## 0.3.0 (20-09-2022)
 
@@ -40,18 +49,22 @@
 ## 0.1.0 (21-01-2020)
   
   - Features:
-    - **Simulink Library** for **Panda Robot**, includes the following blocks:
+    - **Simulink Library** for **Franka Robot**, includes the following blocks:
         - **Franka Simulink Iterface** for applying the desired control, plus additional parameters.
         - **Read Initial Robot State** for reading initial values during the first execution step for any desirable signal. The set of the desired signals can be set through the mask in free text form.
         - **Read Robot State** for reading the values of any desirable signal during execution. The set of the desired signals can be set through the mask in free text form.
-        - **Panda Model** for reading the values of all Model parameters of the Panda Robot during execution.
+        - **Franka Model** for reading the values of all Model parameters of the Franka Robot during execution.
         - **Duration Period** for reading the current step, sample time. If communication is not secured during the 1ms, the block will return the value of 2ms or 3ms etc.
-        - **Gripper Read State** for reading the current values out of the Panda Gripper.
-    - **franka_emika_panda.tlc** & **franka_emika_panda_shrlib.tlc** custom linux targets, based on ert, that offer ext mode that is real time capable(package drop in case of main step frame loss).
+        - **Gripper Read State** for reading the current values out of the Franka Gripper.
+    - **franka_robot.tlc** & **franka_robot_shrlib.tlc** custom linux targets, based on ert, that offer ext mode that is real time capable(package drop in case of main step frame loss).
     - **Matlab Library**(Experimental, limited support), includes the following command:
         - **automatic_error_recovery(robot_ip)**. Execute through a matlab command line for getting automatically out of an error state.
+<<<<<<< HEAD
 <<<<<<< HEAD
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
 =======
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow. 
 >>>>>>> b769b4d... updated franka matlab section due to new matlab api
+=======
+    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
+>>>>>>> 1ecfd86... updating franka matlab changelog
