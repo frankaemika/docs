@@ -1,11 +1,11 @@
 # Changelog:
 
-## 0.3.1 (23-03-2023)
-
-   - Bugfix. Properly setting the collision threshold values in Simulink.
-
-## 0.3.0 (20-09-2022)
-
+## 1.0.0 (22-01-2024)
+    
+   - **BREAKING** Robot Settings standardization with Matlab OOP.
+   - **BREAKING** Adding the option to set the rate limiter and the cutoff frequency in the apply control simulink block.
+   - **BREAKING** Removing the get initial robot state block from the simulink library.
+   - **BREAKING** Enhanced modular building structure for the Franka Simulink Library. Easy incorporation to larger projects and Harware Support Packages.
    - **BREAKING** New Matlab object oriented API expressed based on the new `FrankaRobot()` class. Incorporation of existing Franka Matlab functions as methods of the new API Class.
    - **BREAKING** Removing all the "Panda" naming conventions. Replaced with "Franka Robot".
    - **BREAKING** Franka Matlab is now distributed as a Toolbox Matlab Add-On. No installation script needed.
@@ -59,16 +59,4 @@
     - **franka_robot.tlc** & **franka_robot_shrlib.tlc** custom linux targets, based on ert, that offer ext mode that is real time capable(package drop in case of main step frame loss).
     - **Matlab Library**(Experimental, limited support), includes the following command:
         - **automatic_error_recovery(robot_ip)**. Execute through a matlab command line for getting automatically out of an error state.
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
-=======
-    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow. 
->>>>>>> b769b4d... updated franka matlab section due to new matlab api
-=======
-    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
->>>>>>> 1ecfd86... updating franka matlab changelog
-=======
-    - **Simulink Library misc**(Experimental, limited support) that includes a set of UI buttons with callback scripts with the potential to automate some of the dev. workflow.
->>>>>>> 32edb54bcbca3bb65cf0862555d644a3d017baf3
