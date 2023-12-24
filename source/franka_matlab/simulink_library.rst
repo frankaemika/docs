@@ -25,6 +25,7 @@ on the desired control mode that is selected from the drop-down list `Control Mo
 .. figure:: _static/block_parameters_apply_control.png
     :align: center
     :figclass: align-center
+    :width: 530px
 
     Apply Control Simulink Block Settings.
 
@@ -33,41 +34,23 @@ on the desired control mode that is selected from the drop-down list `Control Mo
     Namely the robot will move to the desirable configuration and only then the main execution of the Simulink model
     will take place. You can define that in the `Initial Configuration` section of the block settings. 
 
-Get Initial Robot State
------------------------
-
-.. figure:: _static/get_robot_state_init.png
-    :align: center
-    :figclass: align-center
-
-    Get initial robot state Simulink Block.
-
-This Simulink block will only capture and deliver the initial robot state values which are present during the 
-initial execution step. 
-
-You can write the signals that you wish to capture in free text form in the `Parameters` section. 
-For the set of available signals --> `Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_
-
-.. figure:: _static/get_robot_state_init_settings.png
-    :align: center
-    :figclass: align-center
-
-    Get initial robot state Simulink Block Settings.
-
-Get Current Robot State
+Get Robot State
 -----------------------
 
 .. figure:: _static/get_robot_state.png
     :align: center
     :figclass: align-center
 
-    Get current robot state Simulink Block.
-
-This Simulink block will capture and deliver the current robot state values. 
+    Get Robot State Simulink Block.
 
 You can write the signals that you wish to capture in free text form in the `Parameters` section. 
-For the set of available signals --> 
-`Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_
+For the set of available signals --> `Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_
+
+.. figure:: _static/get_robot_state_settings.png
+    :align: center
+    :figclass: align-center
+
+    Get initial robot state Simulink Block Settings.
 
 Get Duration(Sample Time)
 -------------------------

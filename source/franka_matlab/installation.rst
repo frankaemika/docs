@@ -61,46 +61,34 @@ You can then install the 64bit versions of eigen3 and poco packages:
     vcpkg install eigen3:x64-windows
     vcpkg install poco[netssl]:x64-windows
 
-You can now install libfranka in Windows: 
-
-After restarting the x64 Native Tools Command Prompt for VS 2017 do:
-
-.. code-block:: winbatch
-
-    cd C:\Users\{user name}
-    git clone --recursive https://github.com/frankaemika/libfranka
-    cd libfranka
-    mkdir build
-    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF -DCMAKE_TOOLCHAIN_FILE=C:\Users\{user name}\vcpkg\scripts\buildsystems\vcpkg.cmake -G Ninja ..
-    ninja
-
-.. important::
-    Make sure that you add the libfranka\\build folder also added in the PATH environment variable as well! 
-    This is a necessary requirement for generating and building code with the Franka Matlab Toolbox.
-
 Franka Matlab Toolbox Add-On Installation & License Management
 --------------------------------------------------------------
 
-For installing the Franka Matlab Toolbox, start by either double clicking on the franka_matlab.mltbx that you've received or by drag-and-dropping it to the current Matlab Command Window.
+For installing the Franka Matlab Toolbox either drag-and-drop the franka_matlab.mltbx
+to the current Matlab Command Window or you can use the Matlab Add-On manager.
 
-After the Franka Matlab Toolbox has been added as an Add-On the license number needs to be installed as well. 
+After this process is complete simply follow the instructions in the Getting Started guided 
+which should have been opened after the Franka Matlab Toolbox Add-on installation.
 
-For receiving the license number please contact Franka Emika and provide your Matlab license number. 
-
-You can find you license number by simply typing in Matlab:
-
-.. code-block:: shell
-
-    license;
-
-For installing the license you can type:
+In short you will need to generate a unique identifier for you PC by executing:
 
 .. code-block:: shell
 
-    franka_matlab_toolbox_install('your license number');
+    franka_matlab_toolbox_uid_gen();
 
-In case a removal of the Franka Matlab Toolbox is desired, we recommend starting by uninstalling the current license first with:
+Please then send this unique identifier to Franka Robotics for receiving a License Number for
+the Franka Matlab Toolbox.
+
+You can then proceed with the final installation step, by executing: 
 
 .. code-block:: shell
 
-    franka_matlab_toolbox_uninstall();
+    franka_matlab_toolbox_install('franka matlab toolbox license number as a string',['fr3' or 'gen1']);
+
+That's it the Franka Matlab Toolbox should be ready. 
+
+Get a glimpse of what the capabilities of the Toolbox are by navigating through the examples provided with the Toolbox:
+
+.. code-block:: shell
+
+    franka_matlab_toolbox_examples();
