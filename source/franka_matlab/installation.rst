@@ -83,7 +83,7 @@ You can then proceed with the final installation step, by executing:
 
 .. code-block:: shell
 
-    franka_matlab_toolbox_install('franka matlab toolbox license number as a string',['fr3' or 'gen1']);
+    franka_matlab_toolbox_install('franka matlab toolbox license number as a string',['fr3' or 'fer']);
 
 That's it the Franka Matlab Toolbox should be ready. 
 
