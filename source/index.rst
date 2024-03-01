@@ -23,9 +23,9 @@ These components are:
    The repository is available at https://github.com/frankaemika/franka_ros.
  * ``franka_ros2`` is currently released only as beta software.
    The repository is available at https://github.com/frankaemika/franka_ros2.
- * ``Franka Matlab`` provides a Simulink and a Matlab API, together with helper functions and tools,
+ * ``Franka MATLAB®`` provides a Simulink and a Matlab API, together with helper functions and tools,
    for rapid-prototyping in Real-Time on the Franka Robot"
-   Franka Matlab artifacts can be obtained at `Franka World <https://franka.world/>`_.
+   Franka MATLAB® artifacts can be obtained at `Franka World <https://franka.world/>`_.
 
 The source code of this documentation is also `available online
 <https://github.com/frankaemika/docs>`_.

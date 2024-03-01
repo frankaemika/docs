@@ -1,9 +1,9 @@
-Franka Matlab Documentation
-===========================
+Franka MATLAB® Toolbox
+======================
 
 .. todolist::
 
-Franka Matlab Toolbox contains a set of libraries and tools for exposing the Franka Robot to the Mathworks ecosystem with the:
+Franka MATLAB® Toolbox contains a set of libraries and tools for exposing the Franka Robot to the Mathworks ecosystem with the:
 
 * ``Simulink Franka Library``, a set of simulink blocks interfacing the Franka Emika Robot through automatic C++ code gen with Simulink Coder, for rapid-prototyping of robot control algorithms.
 

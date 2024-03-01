@@ -6,9 +6,9 @@
    - **BREAKING** Adding the option to set the rate limiter and the cutoff frequency in the apply control simulink block.
    - **BREAKING** Removing the get initial robot state block from the simulink library.
    - **BREAKING** Enhanced modular building structure for the Franka Simulink Library. Easy incorporation to larger projects and Harware Support Packages.
-   - **BREAKING** New Matlab object oriented API expressed based on the new `FrankaRobot()` class. Incorporation of existing Franka Matlab functions as methods of the new API Class.
+   - **BREAKING** New Matlab object oriented API expressed based on the new `FrankaRobot()` class. Incorporation of existing Franka MATLAB® functions as methods of the new API Class.
    - **BREAKING** Removing all the "Panda" naming conventions. Replaced with "Franka Robot".
-   - **BREAKING** Franka Matlab is now distributed as a Toolbox Matlab Add-On. No installation script needed.
+   - **BREAKING** Franka MATLAB® is now distributed as a Toolbox Matlab Add-On. No installation script needed.
    - Fixing collision threshold setting bug.
    - Oldest supported Matlab version is now the R2021a.
    - Adding the option to set the Nominal End-Effector to End-Effector frame NE_T_EE in the Simulink Block "Apply Control".
@@ -27,7 +27,7 @@
    - Support for XCP communication protocol (vehicle network communication). Data inspector is now enabled!
    - Support for "Run on custom Hardware" Simulink App for controlling the "Build-deploy-execute-connect" workflow. 
    - Project back-end overal simplification with modified rt_main.cpp for handling the external mode as a seperate thread.
-   - **BREAKING** all the Franka Matlab functions are starting with the "`franka_`" prefix.
+   - **BREAKING** all the Franka MATLAB® functions are starting with the "`franka_`" prefix.
    - Expansion of Matlab library with the functions `franka_communication_test()`, `franka_joint_poses()`, `franka_robot_state()` and `franka_joint_point_to_point_motion()`.
    - Addition of the Simulink demo, "joint_impedance_control.slx".
    - Fixing the bug when utilizing the Control Modes "Torque Control - X`.
