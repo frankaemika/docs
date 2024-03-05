@@ -52,8 +52,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Franka Control Interface (FCI)'
-copyright = '2023, Franka Robotics GmbH'
+project = 'Franka MATLAB® Toolbox'
+copyright = '2024, Franka Robotics GmbH'
 author = 'Franka Robotics GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
