@@ -4,7 +4,7 @@ Getting started
 Overview
 --------
 
-A set of Simulink & Matlab examples is included within the Franka MATLAB® Toolbox. Feel free to experiment, adjust 
+A set of Simulink & Matlab examples is included within the Franka MATLAB Toolbox. Feel free to experiment, adjust 
 them and expand them to fit your project needs!
 
 You can navigate through the examples by typing: 
@@ -17,7 +17,7 @@ You can navigate through the examples by typing:
     :align: center
     :figclass: align-center
 
-    Franka MATLAB® Toolbox Examples Navigator.
+    Franka MATLAB Toolbox Examples Navigator.
 
 Initialization
 --------------

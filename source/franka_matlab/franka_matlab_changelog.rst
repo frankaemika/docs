@@ -1,4 +1,4 @@
-Franka MATLAB® Toolbox changelog
+Franka MATLAB Toolbox changelog
 ================================
 
 .. include:: ../franka_matlab/CHANGELOG.md

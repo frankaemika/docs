@@ -52,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Franka MATLAB® Toolbox'
+project = 'Franka MATLAB Toolbox'
 copyright = '2024, Franka Robotics GmbH'
 author = 'Franka Robotics GmbH'
 

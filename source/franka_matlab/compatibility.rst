@@ -7,7 +7,7 @@ Compatibility with Matlab & libfranka
 -------------------------------------
 
 +------------------------+-------------------+----------------------------+
-| Franka MATLAB® version | libfranka version | Matlab Version             |
+| Franka MATLAB version  | libfranka version | Matlab Version             |
 +========================+===================+============================+
 | 1.0.0                  | 0.9.x & 0.13.x    | :math:`\geq` R2021a        |
 +------------------------+-------------------+----------------------------+ 
