@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_ros2 &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="franka_ros2 changelog" href="franka_ros2_changelog.html" />
+    <link rel="prev" title="franka_ros changelog" href="franka_ros_changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">franka_ros2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#optional-bashrc-settings">Optional .bashrc Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-from-source">Install From Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-vscode-devcontainer">Use VSCode DevContainer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#moveit">MoveIt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-controllers">Example Controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#move-to-start">Move-to-start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gravity-compensation">Gravity Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-impedance-example">Joint Impedance Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-impedance-with-ik-example">Joint Impedance With IK Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-example-controller">Model Example Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-position-example">Joint Position Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-velocity-example">Joint Velocity Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-pose-example">Cartesian Pose Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-orientation-example">Cartesian Orientation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-pose-elbow-example">Cartesian Pose Elbow Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-velocity-example">Cartesian Velocity Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-elbow-example">Cartesian Elbow Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#package-descriptions">Package Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#franka-bringup">franka_bringup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-description">franka_description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-example-controllers">franka_example_controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-gripper">franka_gripper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-hardware">franka_hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-semantic-components">franka_semantic_components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-moveit-config">franka_moveit_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-msgs">franka_msgs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-effort-trajectory-controller">joint_effort_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#differences-between-franka-ros-and-franka-ros2">Differences between franka_ros and franka_ros2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">franka_gripper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-gazebo">franka_gazebo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-visualization">franka_visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-control">franka_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-controllers">Writing Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#non-realtime-robot-parameter-setting">Non-realtime robot parameter setting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2_changelog.html">franka_ros2 changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/index.html">Franka MATLAB Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/franka_matlab_changelog.html">Franka MATLAB Toolbox changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>franka_ros2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/franka_ros2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-ros2">
+<h1>franka_ros2<a class="headerlink" href="#franka-ros2" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code> is not supported on Windows.</p>
+</div>
+<p>The <a class="reference external" href="https://github.com/frankaemika/franka_ros2">franka_ros2 repo</a> contains a ROS 2 integration of
+<a class="reference internal" href="libfranka.html"><span class="doc">libfranka</span></a>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>franka_ros2 is in rapid development. Anticipate breaking changes. Report bugs on
+<a class="reference external" href="https://github.com/frankaemika/franka_ros2/issues">GitHub</a>.</p>
+</div>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>A <a class="reference external" href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html">ROS 2 Humble installation</a>
+(ros-humble-desktop) or a VSCode IDE with DevContainer.</p></li>
+<li><p>A <a class="reference internal" href="installation_linux.html#preempt"><span class="std std-ref">PREEMPT_RT kernel</span></a> (optional, but strongly recommended).</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">cartesian_pose</span></code>, <code class="docutils literal notranslate"><span class="pre">joint_position</span></code> and <code class="docutils literal notranslate"><span class="pre">elbow_position</span></code> command interfaces realtime-kernel is absolutely necessary.</p></li>
+<li><p>A system-wide <a class="reference internal" href="installation_linux.html#build-libfranka"><span class="std std-ref">libfranka installation</span></a>. Minimum supported version of libfranka is 0.13.0.
+Here is a minimal example:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt install -y libpoco-dev libeigen3-dev
+git clone https://github.com/frankaemika/libfranka.git --recursive
+<span class="nb">cd</span> libfranka
+git switch <span class="m">0</span>.13.2
+mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
+cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>Release -DBUILD_TESTS<span class="o">=</span>OFF  ..
+cmake --build . -j<span class="k">$(</span>nproc<span class="k">)</span>
+cpack -G DEB
+sudo dpkg -i libfranka-*.deb
+</pre></div>
+</div>
+<section id="optional-bashrc-settings">
+<h3>Optional .bashrc Settings<a class="headerlink" href="#optional-bashrc-settings" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>To get colorized warn and error messages you can put
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">RCUTILS_COLORIZED_OUTPUT=1</span></code> into your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</p></li>
+<li><p>If your system language is not set to American English you should put
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">LC_NUMERIC=en_US.UTF-8</span></code> into your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> to avoid issues in RViz.</p></li>
+</ul>
+</section>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<section id="install-from-source">
+<h3>Install From Source<a class="headerlink" href="#install-from-source" title="Permalink to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Install requirements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">hardware</span><span class="o">-</span><span class="n">interface</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">generate</span><span class="o">-</span><span class="n">parameter</span><span class="o">-</span><span class="n">library</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">ros2</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">assets</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">msgs</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">xacro</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">angles</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">ros2</span><span class="o">-</span><span class="n">control</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">realtime</span><span class="o">-</span><span class="n">tools</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">toolbox</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">moveit</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">ros2</span><span class="o">-</span><span class="n">controllers</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">joint</span><span class="o">-</span><span class="n">state</span><span class="o">-</span><span class="n">publisher</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">joint</span><span class="o">-</span><span class="n">state</span><span class="o">-</span><span class="n">publisher</span><span class="o">-</span><span class="n">gui</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">ament</span><span class="o">-</span><span class="n">cmake</span> \
+<span class="n">ros</span><span class="o">-</span><span class="n">humble</span><span class="o">-</span><span class="n">ament</span><span class="o">-</span><span class="n">cmake</span><span class="o">-</span><span class="n">clang</span><span class="o">-</span><span class="nb">format</span> \
+<span class="n">python3</span><span class="o">-</span><span class="n">colcon</span><span class="o">-</span><span class="n">common</span><span class="o">-</span><span class="n">extensions</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a ROS 2 workspace:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">franka_ros2_ws</span><span class="o">/</span><span class="n">src</span>
+</pre></div>
+</div>
+</li>
+<li><p>Clone repo and build packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ros</span><span class="o">/</span><span class="n">humble</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">bash</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">franka_ros2_ws</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">frankaemika</span><span class="o">/</span><span class="n">franka_ros2</span><span class="o">.</span><span class="n">git</span> <span class="n">src</span><span class="o">/</span><span class="n">franka_ros2</span>
+<span class="n">colcon</span> <span class="n">build</span> <span class="o">--</span><span class="n">cmake</span><span class="o">-</span><span class="n">args</span> <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span>
+<span class="n">source</span> <span class="n">install</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="use-vscode-devcontainer">
+<h3>Use VSCode DevContainer<a class="headerlink" href="#use-vscode-devcontainer" title="Permalink to this heading"></a></h3>
+<p>FrankaROS2 package comes with .devcontainer folder which enables developer to use FrankaROS2 packages without manually installing ROS2 or libfranka.
+VSCode DevContainer working schematic is shown in the below image:</p>
+<blockquote>
+<div><figure class="align-center">
+<img alt="_images/vscode.png" src="_images/vscode.png" />
+</figure>
+</div></blockquote>
+<ol class="arabic">
+<li><p>Follow the setup guide from VSCode <a class="reference external" href="https://code.visualstudio.com/docs/devcontainers/tutorial">devcontainer_setup</a>.</p></li>
+<li><p>Create a ROS 2 workspace:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">franka_ros2_ws</span>
+<span class="n">cd</span> <span class="n">franka_ros2_ws</span>
+</pre></div>
+</div>
+</li>
+<li><p>Clone repo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">frankaemika</span><span class="o">/</span><span class="n">franka_ros2</span><span class="o">.</span><span class="n">git</span> <span class="n">src</span><span class="o">/</span><span class="n">franka_ros2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Move the .devcontainer folder to the franka_ros2_ws parent folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="n">franka_ros2</span><span class="o">/.</span><span class="n">devcontainer</span> <span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open VSCode:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">code</span> <span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open the current folder in DevContainer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl</span> <span class="o">+</span> <span class="n">shift</span> <span class="o">+</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>Write in the command prompt bar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dev</span> <span class="n">Containers</span><span class="p">:</span> <span class="n">Rebuild</span> <span class="ow">and</span> <span class="n">Reopen</span> <span class="ow">in</span> <span class="n">Container</span>
+</pre></div>
+</div>
+<p>and click this option in the search results</p>
+</li>
+<li><p>Open up the terminal in VScode:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ctrl + `
+</pre></div>
+</div>
+</li>
+<li><p>Source the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">ros_entrypoint</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install the Franka ROS 2 packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">colcon</span> <span class="n">build</span> <span class="o">--</span><span class="n">cmake</span><span class="o">-</span><span class="n">args</span> <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span>
+<span class="n">source</span> <span class="n">install</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="moveit">
+<h2>MoveIt<a class="headerlink" href="#moveit" title="Permalink to this heading"></a></h2>
+<p>To see if everything works, you can try to run the MoveIt example on the robot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_moveit_config</span> <span class="n">moveit</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Then activate the <code class="docutils literal notranslate"><span class="pre">MotionPlanning</span></code> display in RViz.</p>
+<p>If you do not have a robot you can still test your setup by running on a dummy hardware:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_moveit_config</span> <span class="n">moveit</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=</span><span class="n">dont</span><span class="o">-</span><span class="n">care</span> <span class="n">use_fake_hardware</span><span class="o">:=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>Wait until you can see the green <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can</span> <span class="pre">start</span> <span class="pre">planning</span> <span class="pre">now!</span></code> message from MoveIt inside the
+terminal. Then turn off the <code class="docutils literal notranslate"><span class="pre">PlanningScene</span></code> and turn it on again. After that turn on the <code class="docutils literal notranslate"><span class="pre">MotionPlanning</span></code>.</p>
+</section>
+<section id="example-controllers">
+<h2>Example Controllers<a class="headerlink" href="#example-controllers" title="Permalink to this heading"></a></h2>
+<p>This repo comes with a few example controllers located in the <code class="docutils literal notranslate"><span class="pre">franka_example_controllers</span></code> package.</p>
+<p>The following launch files are executed with the gripper by default. If you
+do not have the gripper attached you can disable the gripper in the launch file with <code class="docutils literal notranslate"><span class="pre">load_gripper:=false</span></code>.</p>
+<section id="move-to-start">
+<h3>Move-to-start<a class="headerlink" href="#move-to-start" title="Permalink to this heading"></a></h3>
+<p>This controller moves the robot to its home configuration.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup move_to_start_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="gravity-compensation">
+<span id="gravity-example"></span><h3>Gravity Compensation<a class="headerlink" href="#gravity-compensation" title="Permalink to this heading"></a></h3>
+<p>This is the simplest controller that we have and is a good starting point to write your own.
+It sends zero as torque command to all joints, which means that the robot only compensates its own weight.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup gravity_compensation_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="joint-impedance-example">
+<h3>Joint Impedance Example<a class="headerlink" href="#joint-impedance-example" title="Permalink to this heading"></a></h3>
+<p>The example moves joints 4 and 5 in a periodic movement that is very compliant. You can try to move the
+joints while it is running.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup joint_impedance_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="joint-impedance-with-ik-example">
+<h3>Joint Impedance With IK Example<a class="headerlink" href="#joint-impedance-with-ik-example" title="Permalink to this heading"></a></h3>
+<p>The example uses the LMA-Orocos solver from MoveIt service to compute the joint positions for the desired pose.
+The desired pose is to move the end-effector periodically in x and z directions. You can change the kinematic solver
+in the franka_moveit_config package, kinematics.yaml file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="model-example-controller">
+<h3>Model Example Controller<a class="headerlink" href="#model-example-controller" title="Permalink to this heading"></a></h3>
+<p>This is a read-only controller which prints the coriolis force vector, gravity force vector, pose matrix of Joint4,
+Joint4 body jacobian and end-effector jacobian with respect to the base frame.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup model_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="joint-position-example">
+<h3>Joint Position Example<a class="headerlink" href="#joint-position-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic position commands to the robot.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The position trajectory needs to start from the initial position of the robot.</p>
+</div>
+<p>To read the start position of the robot, you can read claim the <cite>initial_joint_position</cite>.
+state interface values before starting to send any commands.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">initialization_flag_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">initial_q_</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state_interface</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">get_value</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">initialization_flag_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup joint_position_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="joint-velocity-example">
+<h3>Joint Velocity Example<a class="headerlink" href="#joint-velocity-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic velocity commands to the 4th and 5th joint of the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup joint_velocity_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="cartesian-pose-example">
+<h3>Cartesian Pose Example<a class="headerlink" href="#cartesian-pose-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianPose interface to send periodic pose commands to the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup cartesian_pose_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="cartesian-orientation-example">
+<h3>Cartesian Orientation Example<a class="headerlink" href="#cartesian-orientation-example" title="Permalink to this heading"></a></h3>
+<p>This example uses CartesianOrientation interface to send periodic orientation commands around X axis of the end effector of the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="cartesian-pose-elbow-example">
+<h3>Cartesian Pose Elbow Example<a class="headerlink" href="#cartesian-pose-elbow-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic elbow commands while keeping the end effector pose constant.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="cartesian-velocity-example">
+<h3>Cartesian Velocity Example<a class="headerlink" href="#cartesian-velocity-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianVelocity interface to send periodic velocity commands to the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="cartesian-elbow-example">
+<h3>Cartesian Elbow Example<a class="headerlink" href="#cartesian-elbow-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianElbow interface to send periodic elbow commands to the robot while keeping the end effector velocity constant.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 launch franka_bringup elbow_example_controller.launch.py robot_ip:<span class="o">=</span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="package-descriptions">
+<h2>Package Descriptions<a class="headerlink" href="#package-descriptions" title="Permalink to this heading"></a></h2>
+<p>This section contains more detailed descriptions of what each package does. In general the package structure tries to
+adhere to the structure that is proposed
+<a class="reference external" href="https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html">here</a>.</p>
+<section id="franka-bringup">
+<h3>franka_bringup<a class="headerlink" href="#franka-bringup" title="Permalink to this heading"></a></h3>
+<p>This package contains the launch files for the examples as well as the basic <code class="docutils literal notranslate"><span class="pre">franka.launch.py</span></code> launch file, that
+can be used to start the robot without any controllers.</p>
+<p>When you start the robot with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_bringup</span> <span class="n">franka</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span> <span class="n">use_rviz</span><span class="o">:=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>There is no controller running apart from the <code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code>. However, a connection with the robot is still
+established and the current robot pose is visualized in RViz. In this mode the robot can be guided when the user stop
+button is pressed. However, once a controller that uses the <code class="docutils literal notranslate"><span class="pre">effort_command_interface</span></code> is started, the robot will be
+using the torque interface from libfranka. For example it is possible to launch the
+<code class="docutils literal notranslate"><span class="pre">gravity_compensation_example_controller</span></code> by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">control</span> <span class="n">load_controller</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">state</span> <span class="n">active</span>  <span class="n">gravity_compensation_example_controller</span>
+</pre></div>
+</div>
+<p>This is the equivalent of running the <code class="docutils literal notranslate"><span class="pre">gravity_compensation_example_controller.launch.py</span></code> launch file mentioned in
+<a class="reference internal" href="#gravity-example"><span class="std std-ref">Gravity Compensation</span></a>.</p>
+<p>When the controller is stopped with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">control</span> <span class="n">set_controller_state</span> <span class="n">gravity_compensation_example_controller</span> <span class="n">inactive</span>
+</pre></div>
+</div>
+<p>the robot will stop the torque control and will only send its current state over the FCI.</p>
+<p>You can now choose to start the same controller again with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">control</span> <span class="n">set_controller_state</span> <span class="n">gravity_compensation_example_controller</span> <span class="n">active</span>
+</pre></div>
+</div>
+<p>or load and start a different one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">control</span> <span class="n">load_controller</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">state</span> <span class="n">active</span> <span class="n">joint_impedance_example_controller</span>
+</pre></div>
+</div>
+</section>
+<section id="franka-description">
+<span id="id1"></span><h3>franka_description<a class="headerlink" href="#franka-description" title="Permalink to this heading"></a></h3>
+<p>This package contains the xacro files and meshes that are used to visualize the robot.
+Further, it contains a launch file that visualizes the robot model without access to a real robot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_description</span> <span class="n">visualize_franka</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">load_gripper</span><span class="o">:=&lt;</span><span class="n">true</span><span class="o">|</span><span class="n">false</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="franka-example-controllers">
+<span id="id2"></span><h3>franka_example_controllers<a class="headerlink" href="#franka-example-controllers" title="Permalink to this heading"></a></h3>
+<p>This package contains a few controllers that can be seen as example of how to write controllers in ROS 2. Currently,
+a controller only has access to measured joint positions and joint velocities. Based on this information the controller
+can send torque commands. It is currently not possible to use other interfaces like the joint position interface.</p>
+</section>
+<section id="franka-gripper">
+<h3>franka_gripper<a class="headerlink" href="#franka-gripper" title="Permalink to this heading"></a></h3>
+<p>This package contains the <code class="docutils literal notranslate"><span class="pre">franka_gripper_node</span></code> for interfacing with the <code class="docutils literal notranslate"><span class="pre">Franka</span> <span class="pre">Hand</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">franka_gripper_node</span></code> provides the following actions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">homing</span></code> - homes the gripper and updates the maximum width given the mounted fingers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move</span></code> - moves to a target width with the defined speed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grasp</span></code> - tries to grasp at the desired width with the desired force while closing with the given speed. The operation is successful if the
+distance <code class="docutils literal notranslate"><span class="pre">d</span></code> between the gripper fingers is <code class="docutils literal notranslate"><span class="pre">width</span> <span class="pre">-</span> <span class="pre">epsilon.inner</span> <span class="pre">&lt;</span> <span class="pre">d</span> <span class="pre">&lt;</span> <span class="pre">width</span> <span class="pre">+</span> <span class="pre">epsilon.outer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gripper_action</span></code> - a special grasping action for MoveIt.</p></li>
+</ul>
+<p>Also, there is a <code class="docutils literal notranslate"><span class="pre">stop</span></code> service that aborts gripper actions and stops grasping.</p>
+<p>Use the following launch file to start the gripper:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_gripper</span> <span class="n">gripper</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In a different tab you can now perform the homing and send a grasp command.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">/</span><span class="n">panda_gripper</span><span class="o">/</span><span class="n">homing</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Homing</span> <span class="p">{}</span>
+<span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">panda_gripper</span><span class="o">/</span><span class="n">grasp</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Grasp</span> <span class="s2">&quot;{width: 0.00, speed: 0.03, force: 50}&quot;</span>
+</pre></div>
+</div>
+<p>The inner and outer epsilon are 0.005 meter per default. You can also explicitly set the epsilon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">panda_gripper</span><span class="o">/</span><span class="n">grasp</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Grasp</span> <span class="s2">&quot;{width: 0.00, speed: 0.03, force: 50, epsilon: {inner: 0.01, outer: 0.01}}&quot;</span>
+</pre></div>
+</div>
+<p>To stop the grasping, you can use <code class="docutils literal notranslate"><span class="pre">stop</span></code> service.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">service</span> <span class="n">call</span> <span class="o">/</span><span class="n">panda_gripper</span><span class="o">/</span><span class="n">stop</span> <span class="n">std_srvs</span><span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">Trigger</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</section>
+<section id="franka-hardware">
+<span id="id3"></span><h3>franka_hardware<a class="headerlink" href="#franka-hardware" title="Permalink to this heading"></a></h3>
+<p>This package contains the <code class="docutils literal notranslate"><span class="pre">franka_hardware</span></code> plugin needed for <a class="reference external" href="https://control.ros.org/humble/index.html">ros2_control</a>.
+The plugin is loaded from the URDF of the robot and passed to the controller manager via the robot description.
+It provides for each joint:</p>
+<ul class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">state</span> <span class="pre">interface</span></code> that contains the measured joint position.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">state</span> <span class="pre">interface</span></code> that contains the measured joint velocity.</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">effort</span> <span class="pre">state</span> <span class="pre">interface</span></code> that contains the measured link-side joint torques including gravity.</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">initial_position</span> <span class="pre">state</span> <span class="pre">interface</span></code> that contains the initial joint position of the robot.</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">effort</span> <span class="pre">command</span> <span class="pre">interface</span></code> that contains the desired joint torques without gravity.</p></li>
+<li><p>a  <code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">command</span> <span class="pre">interface</span></code> that contains the desired joint position.</p></li>
+<li><p>a  <code class="docutils literal notranslate"><span class="pre">velocity</span> <span class="pre">command</span> <span class="pre">interface</span></code> that contains the desired joint velocity.</p></li>
+</ul>
+<p>In addition</p>
+<ul class="simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">franka_robot_state</span></code> that contains the robot state information, <a class="reference external" href="https://t.ly/0GfIM">franka_robot_state</a>.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">franka_robot_model_interface</span></code> that contains the pointer to the model object.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">franka_robot_state</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_robot_model_interface</span></code> state interfaces should not be used directly from hardware state interface.
+Rather, they should be utilized by the <a class="reference internal" href="#franka-semantic-components"><span class="std std-ref">franka_semantic_components</span></a> interface.</p>
+</div>
+<p>The IP of the robot is read over a parameter from the URDF.</p>
+</section>
+<section id="franka-semantic-components">
+<span id="id4"></span><h3>franka_semantic_components<a class="headerlink" href="#franka-semantic-components" title="Permalink to this heading"></a></h3>
+<p>This package contains franka_robot_model, franka_robot_state and cartesian command classes.
+These classes are used to convert franka_robot_model object and franka_robot_state objects,
+which are stored in the hardware_state_interface as a double pointer.</p>
+<p>For further reference on how to use these classes:
+<a class="reference external" href="https://github.com/frankaemika/franka_ros2/tree/humble/franka_robot_state_broadcaster">Franka Robot State Broadcaster</a>
+and
+<a class="reference external" href="https://github.com/frankaemika/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp">Franka Example Controllers(model_example_controller)</a></p>
+<ul class="simple">
+<li><p>Cartesian Pose Interface:</p></li>
+</ul>
+<p>This interface is used to send Cartesian pose commands to the robot by using the loaned command interfaces.
+FrankaSemanticComponentInterface class is handling the loaned command interfaces and state interfaces.
+While starting the cartesian pose interface, the user needs to pass a boolean flag to the constructor
+to indicate whether the interface is for the elbow or not.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">is_elbow_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="n">CartesianPoseInterface</span><span class="w"> </span><span class="nf">cartesian_pose_interface</span><span class="p">(</span><span class="n">is_elbow_active</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This interface allows users to read the current pose command interface values set by the franka hardware interface.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pose</span><span class="p">;</span><span class="w"></span>
+<span class="n">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">getInitialPoseMatrix</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>One could also read quaternion and translation values in Eigen format.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="n">quaternion</span><span class="p">;</span><span class="w"></span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="n">translation</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">quaternion</span><span class="p">,</span><span class="w"> </span><span class="n">translation</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">getInitialOrientationAndTranslation</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>After setting up the cartesian interface, you need to <code class="docutils literal notranslate"><span class="pre">assign_loaned_command_interfaces</span></code> and <code class="docutils literal notranslate"><span class="pre">assign_loaned_state_interfaces</span></code> in your controller.
+This needs to be done in the on_activate() function of the controller. Examples can be found in the
+<a class="reference external" href="https://t.ly/u-NFk">assign loaned comamand interface example</a></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">assign_loaned_command_interfaces</span><span class="p">(</span><span class="n">command_interfaces_</span><span class="p">);</span><span class="w"></span>
+<span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">assign_loaned_state_interfaces</span><span class="p">(</span><span class="n">state_interfaces_</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the update function of the controller you can send pose commands to the robot.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pose</span><span class="p">;</span><span class="w"></span>
+<span class="n">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">setCommanded</span><span class="p">(</span><span class="n">pose</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Or you can send quaternion, translation values in Eigen format.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="o">::</span><span class="n">Quaterniond</span><span class="w"> </span><span class="nf">quaternion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span><span class="w"> </span><span class="nf">translation</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span><span class="w"></span>
+<span class="n">cartesian_pose_interface</span><span class="p">.</span><span class="n">setCommand</span><span class="p">(</span><span class="n">quaternion</span><span class="p">,</span><span class="w"> </span><span class="n">translation</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Cartesian Velocity Interface:</p></li>
+</ul>
+<p>This interface is used to send Cartesian velocity commands to the robot by using the loaned command interfaces.
+FrankaSemanticComponentInterface class is handling the loaned command interfaces and state interfaces.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">is_elbow_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="n">CartesianVelocityInterface</span><span class="w"> </span><span class="nf">cartesian_velocity_interface</span><span class="p">(</span><span class="n">is_elbow_active</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To send the velocity command to the robot, you need to assign_loaned_command_interface in your custom controller.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cartesian_velocity_interface</span><span class="p">.</span><span class="n">assign_loaned_command_interface</span><span class="p">(</span><span class="n">command_interfaces_</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the update function of the controller you can send cartesian velocity command to the robot.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cartesian_velocity</span><span class="p">;</span><span class="w"></span>
+<span class="n">cartesian_velocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">};</span><span class="w"></span>
+<span class="n">cartesian_velocity_interface</span><span class="p">.</span><span class="n">setCommand</span><span class="p">(</span><span class="n">cartesian_velocity</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<span id="id6"></span><h3>franka_robot_state_broadcaster<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>This package contains read-only franka_robot_state_broadcaster controller.
+It publishes franka_robot_state topic to the topic named <cite>/franka_robot_state_broadcaster/robot_state</cite>.
+This controller node is spawned by franka_launch.py in the franka_bringup.
+Therefore, all the examples that include the franka_launch.py publishes the robot_state topic.</p>
+</section>
+<section id="franka-moveit-config">
+<span id="id7"></span><h3>franka_moveit_config<a class="headerlink" href="#franka-moveit-config" title="Permalink to this heading"></a></h3>
+<p>This package contains the configuration for MoveIt2. There is a new move group called
+<code class="docutils literal notranslate"><span class="pre">panda_manipulator</span></code> that has its tip between the fingers of the gripper and has its Z-axis rotated by -45 degrees, so
+that the X-axis is now facing forward, making it easier to use. The <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code> move group is still available
+for backward compatibility. New applications should use the new <code class="docutils literal notranslate"><span class="pre">panda_manipulator</span></code> move group instead.</p>
+<figure class="align-center" id="id10">
+<img alt="_images/move-groups.png" src="_images/move-groups.png" />
+<figcaption>
+<p><span class="caption-text">Visualization of the old and the new move group</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="franka-msgs">
+<h3>franka_msgs<a class="headerlink" href="#franka-msgs" title="Permalink to this heading"></a></h3>
+<p>This package contains the definitions for the different gripper actions and robot state message.</p>
+</section>
+<section id="joint-effort-trajectory-controller">
+<h3>joint_effort_trajectory_controller<a class="headerlink" href="#joint-effort-trajectory-controller" title="Permalink to this heading"></a></h3>
+<p>This package contains a modified joint_trajectory_controller that can use the effort interface of the
+<code class="docutils literal notranslate"><span class="pre">franka_hardware::FrankaHardwareInterface</span></code>. It is based on this
+<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/225">Pull request</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This package will be soon deleted as the fix is available in
+<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_trajectory_controller">ros2_controllers</a> master branch.
+As soon as, it’s backported to Humble, it will be deleted from franka_ros2 repository.</p>
+</div>
+</section>
+</section>
+<section id="differences-between-franka-ros-and-franka-ros2">
+<h2>Differences between franka_ros and franka_ros2<a class="headerlink" href="#differences-between-franka-ros-and-franka-ros2" title="Permalink to this heading"></a></h2>
+<p>This section gives an overview of the fundamental changes between <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code>.</p>
+<section id="id8">
+<h3>franka_gripper<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>All topics and actions were previously prefixed with <code class="docutils literal notranslate"><span class="pre">franka_gripper</span></code>. This prefix was renamed to <code class="docutils literal notranslate"><span class="pre">panda_gripper</span></code>
+to enable, in the future, a workflow where all prefixes are based on the <code class="docutils literal notranslate"><span class="pre">arm_id</span></code>
+to effortlessly enable multi arm setups.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">stop</span></code> action is now a service action as it is not preemptable.</p></li>
+<li><p>All actions (apart from the <code class="docutils literal notranslate"><span class="pre">gripper_action</span></code>) have the current gripper width as feedback.</p></li>
+</ul>
+</section>
+<section id="franka-gazebo">
+<h3>franka_gazebo<a class="headerlink" href="#franka-gazebo" title="Permalink to this heading"></a></h3>
+<p>Currently, we do not offer a Gazebo integration with <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code>. However, we provide one
+with <a class="reference internal" href="franka_ros.html"><span class="doc">franka_ros</span></a>.</p>
+</section>
+<section id="franka-visualization">
+<h3>franka_visualization<a class="headerlink" href="#franka-visualization" title="Permalink to this heading"></a></h3>
+<p>This package does not exist anymore. However, <a class="reference internal" href="#franka-description"><span class="std std-ref">franka_description</span></a> provides a launch file to visualize the robot
+model without a connection to a robot.</p>
+</section>
+<section id="franka-control">
+<h3>franka_control<a class="headerlink" href="#franka-control" title="Permalink to this heading"></a></h3>
+<p>This package does not exist anymore. The connection to the robot is provided by the hardware plugin in
+the <a class="reference internal" href="#franka-hardware"><span class="std std-ref">franka_hardware</span></a> package. The actions and services that it provided are currently
+not offered in <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code>.</p>
+</section>
+<section id="writing-controllers">
+<h3>Writing Controllers<a class="headerlink" href="#writing-controllers" title="Permalink to this heading"></a></h3>
+<p>Compared to <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> we currently offer a reduced set of controller interfaces:</p>
+<ul class="simple">
+<li><p>Joint positions</p></li>
+<li><p>Joint velocities</p></li>
+<li><p>Measured torques</p></li>
+<li><p>Franka robot state</p></li>
+<li><p>Franka robot model</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Franka robot state is published through <a class="reference internal" href="#id5"><span class="std std-ref">franka_robot_state_broadcaster</span></a>
+package to the topic named  <cite>/franka_robot_state_broadcaster/robot_state</cite></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Both Franka robot state and Franka robot model are advised to use through <a class="reference internal" href="#franka-semantic-components"><span class="std std-ref">franka_semantic_components</span></a> class.
+They are stored in the state_interface as double pointers and casted back to their original objects inside the franka_semantic_component class.</p>
+<p>Example of using franka_model can be found in the franka_example_controllers package:
+<a class="reference external" href="https://github.com/frankaemika/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp">model_example_controller</a>.</p>
+</div>
+<p>You can base your own controller on one of the <a class="reference internal" href="#franka-example-controllers"><span class="std std-ref">franka_example_controllers</span></a>. To compute kinematic
+and dynamic quantities of the robot you can use the joint states and the URDF of the robot in libraries like
+<a class="reference external" href="https://www.orocos.org/kdl/user-manual">KDL</a> (of which there is also a ROS 2 package available).</p>
+</section>
+</section>
+<section id="non-realtime-robot-parameter-setting">
+<h2>Non-realtime robot parameter setting<a class="headerlink" href="#non-realtime-robot-parameter-setting" title="Permalink to this heading"></a></h2>
+<p>Non-realtime robot parameter setting can be done via ROS 2 services. They are advertised after the robot hardware is initialized.</p>
+<p>Service names are given below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_cartesian_stiffness</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_force_torque_collision_behavior</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_full_collision_behavior</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_joint_stiffness</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_load</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_parameters</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_parameters_atomically</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_stiffness_frame</span>
+<span class="o">*</span> <span class="o">/</span><span class="n">service_server</span><span class="o">/</span><span class="n">set_tcp_frame</span>
+</pre></div>
+</div>
+<p>Service message descriptions are given below.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetJointStiffness</span></code> specifies joint stiffness for the internal controller
+(damping is automatically derived from the stiffness).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetCartesianStiffness</span></code> specifies Cartesian stiffness for the internal
+controller (damping is automatically derived from the stiffness).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetTCPFrame</span></code> specifies the transformation from &lt;arm_id&gt;_EE (end effector) to
+&lt;arm_id&gt;_NE (nominal end effector) frame. The transformation from flange to end effector frame
+is split into two transformations: &lt;arm_id&gt;_EE to &lt;arm_id&gt;_NE frame and &lt;arm_id&gt;_NE to
+&lt;arm_id&gt;_link8 frame. The transformation from &lt;arm_id&gt;_NE to &lt;arm_id&gt;_link8 frame can only be
+set through the administrator’s interface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetStiffnessFrame</span></code> specifies the transformation from &lt;arm_id&gt;_K to &lt;arm_id&gt;_EE frame.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetForceTorqueCollisionBehavior</span></code> sets thresholds for external Cartesian
+wrenches to configure the collision reflex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetFullCollisionBehavior</span></code> sets thresholds for external forces on Cartesian
+and joint level to configure the collision reflex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::srv::SetLoad</span></code> sets an external load to compensate (e.g. of a grasped object).</p></li>
+</ul>
+</div></blockquote>
+<p>Launch franka_bringup/franka.launch.py file to initialize robot hardware:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_bringup</span> <span class="n">franka</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Here is a minimal example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2 service call /service_server/set_joint_stif
+fness franka_msgs/srv/SetJointStiffness <span class="s2">&quot;{joint_stiffness: [1000.0, 1000.0, 10</span>
+<span class="s2">00.0, 1000.0, 1000.0, 1000.0, 1000.0]}&quot;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Non-realtime parameter setting can only be done when the robot hardware is in <cite>idle</cite> mode.
+If a controller is active and claims command interface this will put the robot in the <cite>move</cite> mode.
+In <cite>move</cite> mode non-realtime param setting is not possible.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The &lt;arm_id&gt;_EE frame denotes the part of the
+configurable end effector frame which can be adjusted during run time through <cite>franka_ros</cite>. The
+&lt;arm_id&gt;_K frame marks the center of the internal
+Cartesian impedance. It also serves as a reference frame for external wrenches. <em>Neither the
+&lt;arm_id&gt;_EE nor the &lt;arm_id&gt;_K are contained in the URDF as they can be changed at run time</em>.
+By default, &lt;arm_id&gt; is set to “panda”.</p>
+<figure class="align-center" id="id11">
+<img alt="_images/frames.svg" src="_images/frames.svg" /><figcaption>
+<p><span class="caption-text">Overview of the end-effector frames.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>When using the <code class="docutils literal notranslate"><span class="pre">fake_hardware</span></code> with MoveIt, it takes some time until the default position is applied.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="franka_ros_changelog.html" class="btn btn-neutral float-left" title="franka_ros changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="franka_ros2_changelog.html" class="btn btn-neutral float-right" title="franka_ros2 changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
