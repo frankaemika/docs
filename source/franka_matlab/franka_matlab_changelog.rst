@@ -1,2 +1,6 @@
-.. include:: ./CHANGELOG.md
+Franka MATLAB Toolbox changelog
+================================
+
+.. include:: ../franka_matlab/CHANGELOG.md
    :parser: myst_parser.sphinx_
+   :start-line: 2

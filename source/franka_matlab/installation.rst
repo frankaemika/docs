@@ -1,108 +1,94 @@
 Installation
 ============
 
-Franka Matlab can be downloaded from the `Franka World Hub <https://franka.world/resources>`_.
+.. hint::
+    The Franka MATLAB Toolbox is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and 
+    the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_. 
+    All the same 
+    `system and network requirements <https://frankaemika.github.io/docs/requirements.html>`_  do therefore apply.
 
-Installation on Linux
----------------------
-
-.. important::
-    Franka Matlab is based on the `Franka Control Interface (FCI) <https://frankaemika.github.io/docs/>`_ and
-    specifically the `libfranka C++ interface <https://frankaemika.github.io/docs/libfranka.html>`_,
-    therefore all the same `system and network requirements <https://frankaemika.github.io/docs/requirements.html>`_
-    apply.
+Linux System Setup
+------------------
 
 .. important::
-    Also, make sure that the Real Time Kernel is properly installed as described in the
-    `libfranka documentation <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
-
-Same as with libfranka the following dependencies are required:
-
-.. code-block:: shell
-
-    $ sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
-
-Add the 1st level of the franka_matlab to the path, by right clicking on the franka_matlab folder and selecting Add to Path >
-Selected Folders.
-
-Alternatively, the following command can be executed:
-
-.. code-block:: shell
-
-    >> addpath(<franka_matlab full path>);
-
-Initialize the project with:
-
-.. code-block:: shell
-
-    >> init_franka_matlab();
-
-In case no libfranka build is found in the franka_matlab directory, the init script will try to install it automatically.
-Just press `Y` and enter when prompted. By default the init function will try to install libfranka 0.10.0 which is compatible with the
-FR3 robot. For installing the previous libfranka version you can initialize the project with:
-
-.. code-block:: shell
-
-    >> init_franka_matlab('0.9.2');
-
-.. warning::
-    In case you are installing libfranka 0.9.x it is also necessary to mex the Matlab API once:
+    For Linux system we higly recommend installing the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_:
 
     .. code-block:: shell
 
-        >> mex_franka_matlab_library();
+        sudo apt install matlab-support
 
-After the init script is completed you can start utilizing the Simulink and Matlab scripts for the Franka Robotics robot.
+Make sure that the following dependencies are installed:
 
-.. hint::
-    It is highly recommended to start with the provided Simulink demos before writing custom applications from scratch.
+    .. code-block:: shell
 
-Installation on Windows
------------------------
+        sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-.. warning::
-    Support for Windows is still experimental. Issues could arise due to a lack of real-time kernel capabilities.
-    Make sure that your windows system is powerful enough and in top condition.
-
-Please make sure first to install the Visual Studio 2017 community edition (English Version) on a Windows 10 PC.
-
-Make sure that vcpkg is also installed.
+You can either let the Franka MATLAB Toolbox auto-install the libfranka locally or you can proceed with
+a system-wide libfranka.*.deb installation. We recommend the former.
 
 .. important::
-    Make sure that the vcpkg path is exposed through the PATH environment variable.
-    You can modify the PATH environment variable in Windows 10:
+    Make sure that the Real-Time Kernel is properly installed as described in the 
+    `libfranka documentation <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
+    
+Windows System Setup
+--------------------
 
-    1. Open the Start Search, type in “env”, and choose “Edit the system environment variables”.
-       Alternatively hit *Windows Key + R* at the same time to get command prompt. Then type 'sysdm.cpl',
-       go to advanced and select Environmental Variables.
-    2. Click the “Environment Variables” button.
-    3. Under the “System Variables” section, find the row with “Path” in the first column, and click edit.
-    4. Add the path to the vcpkg executable, like e.g C:\src\vcpkg
-    5. Verify by opening a terminal and hitting `vcpkg`.
+.. warning::
+    Support for Windows is still experimental. Issues could arise due to lack of hard Real-Time scheduling capabilities of the generic Windows distributions.
 
-You can then install the 64bit! versions of eigen3 and poco packages:
+Please make sure first to install the Visual Studio 2017 Community Edition (English Version) on a Windows 10 PC.
+
+Additionally the following software components must be installed for windows:
+
+* git
+* cmake
+* vcpkg
+* ninja
+
+Make sure that the vcpkg & ninja paths are exposed through the PATH environment variable. 
+You can modify the PATH environment variable in Windows 10:
+
+1. Open the Start Search, type in “env”, and choose “Edit the system environment variables”. 
+2. Click the “Environment Variables” button. 
+3. Under the “System Variables” section, find the row with “Path” in the first column, and click edit. 
+4. Add the vcpkg & ninja paths, like e.g C:\\Users\\{user name}\\vcpkg & C:\\Users\\{user name}\\ninja
+5. Verify by opening a terminal and evaluating the `vcpkg` and `ninja` commands.  
+
+You can then install the 64bit versions of eigen3 and poco packages:
 
 .. code-block:: shell
 
     vcpkg install eigen3:x64-windows
-    vcpkg install poco:x64-windows
+    vcpkg install poco[netssl]:x64-windows
 
-Same as with linux you can execute in Matlab:
+Franka MATLAB Toolbox Add-On Installation & License Management
+---------------------------------------------------------------
 
-.. code-block:: shell
+For installing the Franka MATLAB Toolbox either drag-and-drop the franka_matlab.mltbx
+to the current Matlab Command Window or you can use the Matlab Add-On manager.
 
-    >> addpath(<franka_matlab full path>);
+After this process is complete simply follow the instructions in the Getting Started guided 
+which should have been opened after the Franka MATLAB Toolbox Add-on installation.
 
-Initialize the project with:
-
-.. code-block:: shell
-
-    >> init_franka_matlab();
-
-or for the previous libfranka version:
+In short you will need to generate a unique identifier for you PC by executing:
 
 .. code-block:: shell
 
-    >> init_franka_matlab('0.9.2');
+    franka_matlab_toolbox_uid_gen();
 
-Press `Y` when prompted for automatically installing libfranka.
+Please then send this unique identifier to Franka Robotics for receiving a License Number for
+the Franka MATLAB Toolbox.
+
+You can then proceed with the final installation step, by executing: 
+
+.. code-block:: shell
+
+    franka_matlab_toolbox_install('franka matlab toolbox license number as a string',['fr3' or 'fer']);
+
+That's it the Franka MATLAB Toolbox should be ready. 
+
+Get a glimpse of what the capabilities of the Toolbox are by navigating through the examples provided with the Toolbox:
+
+.. code-block:: shell
+
+    franka_matlab_toolbox_examples();

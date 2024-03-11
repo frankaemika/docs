@@ -41,7 +41,7 @@ and `Gripper version line 17
 <https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/gripper/types.h>`_
 are part of libfranka-common repository, a submodule of libfranka repository.
 
-Franka Matlab compatible versions are located :ref:`here<compatibility-franka-matlab>`.
+Franka MATLAB® compatible versions are located :ref:`here<compatibility-franka-matlab>`.
 
 .. caution::
     Franka Robotics currently does not provide any support for Windows or Arm
