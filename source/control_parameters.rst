@@ -239,13 +239,13 @@ Here are the parameters describing the suggested position-velocity rectangular l
 Denavit–Hartenberg parameters
 -----------------------------
 
-The Denavit–Hartenberg parameters for the Panda's kinematic chain are derived following Craig's convention and are as follows:
+The Denavit–Hartenberg parameters for the Franka Research 3 kinematic chain are derived following Craig's convention and are as follows:
 
-.. figure:: _static/dh-diagram.png
+.. figure:: _static/dh-diagram-frankarobotics.png
     :align: center
     :figclass: align-center
 
-    Panda's kinematic chain.
+    Franka Research 3 kinematic chain.
 
 +-------------+-----------------------+-----------------------+------------------------------+------------------------------+
 |    Joint    | :math:`a\;(\text{m})` | :math:`d\;(\text{m})` | :math:`\alpha\;(\text{rad})` | :math:`\theta\;(\text{rad})` |

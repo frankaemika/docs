@@ -21,8 +21,7 @@ These components are:
    ROS Control and MoveIt!. It also contains ``franka_description``, a collection of URDF models and
    3D meshes that can be useful outside of ROS.
    The repository is available at https://github.com/frankaemika/franka_ros.
- * ``franka_ros2`` is currently released only as beta software.
-   The repository is available at https://github.com/frankaemika/franka_ros2.
+ * ``franka_ros2`` The repository is available at https://github.com/frankaemika/franka_ros2.
  * ``Franka MATLAB®`` provides a Simulink and a Matlab API, together with helper functions and tools,
    for rapid-prototyping in Real-Time on the Franka Robot"
    Franka MATLAB® artifacts can be obtained at `Franka World <https://franka.world/>`_.

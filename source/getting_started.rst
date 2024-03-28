@@ -96,20 +96,20 @@ For this step, the robot needs to be installed and tested. **Please read through
 the documents shipped with your robot and follow the setup instructions before
 continuing any further!**
 
-The Control's network can be configured in the administrator's interface. For
+With system version >= 5.5.0, the Control's network can be configured in the settings interface. For
 the duration of this step you can connect to the robot through the port in the
 robot's base. For details, consult the `Connecting a user interface device`
 section in the manual delivered with your robot.
 
-.. figure:: _static/accessing-admin.png
+.. figure:: _static/FrankaUI_Settings_Bar.png
     :align: center
     :figclass: align-center
 
-    Accessing the administrator's interface through Desk.
+    Accessing the Franka's settings interface through Desk.
 
 To set up a static address, enter the following values in the `Network` section:
 
-.. figure:: _static/control-static-ip.png
+.. figure:: _static/FrankaUI_Settings_Network.png
     :align: center
     :figclass: align-center
 
@@ -176,23 +176,23 @@ Preparing the robot for FCI usage in Desk
 In order to verify the connection, the robot's brakes need to be unlocked in Desk and the activation
 device needs to be relased so that the robot is ready for execution indicated by blue LED mode.
 
-Enabling the FCI mode
+Activating the FCI mode
 ^^^^^^^^^^^^^^^^^^^^^
 
-Using a robot with system version >= 4.2.0 requires to enable the FCI mode. To do that open Desk,
-expand the menu in the sidebar and press 'Activate FCI'.
+To activate FCI mode, open Desk, then release the robot brakes, and expand the menu in the top bar. Finally, click on 'Activate FCI'.
 
-.. figure:: _static/activate_fci.png
+.. figure:: _static/FrankaUI_System_ActivateFCI.png
     :align: center
     :figclass: align-center
+    :width: 300px
 
-    Enabling the FCI mode in the Desk sidebar menu
+    Activating the FCI mode in the Desk topbar menu (system version >= 5.5.0)
 
 
 FCI mode in Panda
 """""""""""""""""
 
-After enabling the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode
+After Activating the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode
 is currently active and that Desk interactions are not allowed while it is active. This pop-up needs to
 remain open while working with FCI. Further information about Single Point of Control (SPoC) can be found
 in the manual shipped with the robot which can also be found in our
@@ -202,18 +202,22 @@ in the manual shipped with the robot which can also be found in our
     :align: center
     :figclass: align-center
 
-    Pop-up when the FCI mode is enabled
+    Pop-up when the FCI mode is activated
 
 FCI mode in Franka Research 3
 """""""""""""""""""""""""""""
 
-After enabling the FCI mode, the sidebar shows that FCI is on.
+After Activating the FCI mode, a pop-up appears, then the user needs to confirm.
 
-.. figure:: _static/fci-on.png
-    :align: center
-    :figclass: align-center
+.. raw:: html
 
-    Sidebar when the FCI mode is enabled
+   <table style="margin-bottom: 25px;">
+            <tr>
+                <td><img src="_static/FrankaUI_System_ActivateFCI_Confirm.png" alt="FrankaUI_System_ActivateFCI_Confirm" style="width: 300px;"/></td>
+                <td><img src="_static/FrankaUI_System_ActivateFCI_Done.png" alt="FrankaUI_System_ActivateFCI_Done" style="width: 300px;"/></td>
+            </tr>
+        <caption style="caption-side: bottom; text-align: center;">Sidebar is green when the FCI mode is activated</caption>
+    </table>
 
 Verifying the connection
 ------------------------
