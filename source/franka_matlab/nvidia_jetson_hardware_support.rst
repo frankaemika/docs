@@ -7,10 +7,12 @@ for NVIDIA's Jetson Hardware boards, by both Linux and Windows host PCs.
 Installation and Requirements
 -----------------------------
 
-Before proceeding please make sure that you have downloaded and installed the 
+Please make sure that you are using the `Jetson Linux Real-Time Kernel Package <https://docs.nvidia.com/jetson/archives/r35.1/DeveloperGuide/text/SD/Kernel/KernelCustomization.html#using-the-jetson-linux-real-time-kernel-package>`_.
+
+Also please make sure that you have downloaded and installed the 
 `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_.
 
-Also make sure you have successfully installed the Franka MATLAB Toolbox in case not installed already.
+Lastly, make sure you have successfully installed the Franka MATLAB Toolbox.
 
 Getting started
 ---------------
