@@ -25,5 +25,5 @@ Franka MATLAB Toolbox contains a set of libraries and tools for exposing the Fra
    getting_started
    simulink_library
    matlab_library
-   nvidia_jetson_hardware_support
+   franka_ai_companion_support
    troubleshooting

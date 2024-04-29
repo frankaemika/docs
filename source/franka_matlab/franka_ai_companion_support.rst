@@ -1,8 +1,10 @@
-NVIDIA Jetson Hardware Support
-==============================
+Franka AI Companion Support
+===========================
 
 The Simulink implementations with the Franka MATLAB Toolbox can be readily built and deployed 
-for NVIDIA's Jetson Hardware boards, by both Linux and Windows host PCs.
+to the Franka AI Companion, by both Linux and Windows host PCs. Generic NVIDIA's Jetson Hardware boards
+are also supported, given that they are equiped with a Real-Time kernel and a system-wide libfranka
+installation.
 
 Installation and Requirements
 -----------------------------
@@ -49,16 +51,18 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 
     "Board Parameters"
 
-.. hint::
+.. important::
 
-    In case the ssh server operates in an alternative port number in the Jetson 
-    target hardware platfrom, other than the default `22`, you can manually set 
-    it by excecuting the following MATLAB commands:
+    For setting the specific port in which the ssh server is exposed by the currently targeted docker
+    instance please excecute the following MATLAB commands:
 
     .. code-block:: shell
 
         >> hd = nvidiacoder.internal.BoardParameters('NVIDIA Jetson');
         >> setParam(hb,'port','<new port number>');
+
+In case you operate in standard Jetson Hardware Platform with a standard ssh server configuration, 
+the step above is not necessary.
 
 It is also highly recommended to run the external mode as a background thread, so that
 the real-time 1kHz won't get potentially disrupted when built with "Monitor & Tuning".
