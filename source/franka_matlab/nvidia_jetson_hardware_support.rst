@@ -71,6 +71,19 @@ the real-time 1kHz won't get potentially disrupted when built with "Monitor & Tu
 
 You can now build and deploy for your NVIDIA Jetson Platform!
 
+.. warning::
+
+    Before choosing the "Monitor & Tune" for utilzing the External Mode, make sure that 
+    the option "Nonreusable function" has been chosen in Model Settings-->Code Generation-->
+    Interface.
+
+    .. figure:: _static/model_settings_interface_non_reusable_function.png
+        :align: center
+        :figclass: align-center
+        :scale: 50%
+
+        "Nonreusable function option is required for building with External-Mode"
+
 .. figure:: _static/jetson_deploy.png
     :align: center
     :figclass: align-center
