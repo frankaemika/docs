@@ -49,6 +49,17 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 
     "Board Parameters"
 
+.. hint::
+
+    In case the ssh server operates in an alternative port number in the Jetson 
+    target hardware platfrom, other than the default `22`, you can manually set 
+    it by excecuting the following MATLAB commands:
+
+    .. code-block:: shell
+
+        >> hd = nvidiacoder.internal.BoardParameters('NVIDIA Jetson');
+        >> setParam(hb,'port','<new port number>');
+
 It is also highly recommended to run the external mode as a background thread, so that
 the real-time 1kHz won't get potentially disrupted when built with "Monitor & Tuning".
 
