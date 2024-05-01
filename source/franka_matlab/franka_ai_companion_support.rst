@@ -3,18 +3,18 @@ Franka AI Companion Support
 
 The Simulink implementations with the Franka MATLAB Toolbox can be readily built and deployed 
 to the Franka AI Companion, by both Linux and Windows host PCs. Generic NVIDIA's Jetson Hardware boards
-are also supported, given that they are equiped with a Real-Time kernel and a system-wide libfranka
+are also supported, given that they are equiped with a `Real-Time kernel Package <https://docs.nvidia.com/jetson/archives/r35.1/DeveloperGuide/text/SD/Kernel/KernelCustomization.html#using-the-jetson-linux-real-time-kernel-package>`_ and a system-wide libfranka
 installation.
 
 Installation and Requirements
 -----------------------------
 
-Please make sure that you are using the `Jetson Linux Real-Time Kernel Package <https://docs.nvidia.com/jetson/archives/r35.1/DeveloperGuide/text/SD/Kernel/KernelCustomization.html#using-the-jetson-linux-real-time-kernel-package>`_.
+In your host PC:
 
-Also please make sure that you have downloaded and installed the 
-`MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_.
+#. Make sure you have successfully installed the Franka MATLAB Toolbox.
+#. Also please make sure that you have downloaded and installed the `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_.
 
-Lastly, make sure you have successfully installed the Franka MATLAB Toolbox.
+The Franka Companion AI includes all the required dependencies from the box!
 
 Getting started
 ---------------
@@ -54,7 +54,7 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 .. important::
 
     For setting the specific port in which the ssh server is exposed by the currently targeted docker
-    instance please excecute the following MATLAB commands:
+    instance, please excecute the following MATLAB commands:
 
     .. code-block:: shell
 
