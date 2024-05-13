@@ -677,7 +677,20 @@ Here is a minimal example:
 
         Overview of the end-effector frames.
 
+Non-realtime ROS 2 actions
+--------------------------
 
+Non-realtime ROS 2 actions can be done via the `ActionServer`. Following actions are available:
+
+* ``/action_server/error_recovery`` - Recovers automatically from a robot error.
+
+The used messages are:
+
+* ``franka_msgs::action::ErrorRecovery`` - no parameters.
+
+Example usage:::
+
+    ros2 action send_goal /action_server/error_recovery franka_msgs/action/ErrorRecovery {}
 
 Known Issues
 ------------
