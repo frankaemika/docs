@@ -560,9 +560,9 @@ impedances at runtime via dynamic reconfigure.
 
 franka_gazebo
 -------------
-This package allows you to simulate our robot in `Gazebo <http://gazebosim.org/>`_. This is possible
+This package allows you to simulate our robot in `Gazebo <https://gazebosim.org/>`_. This is possible
 because Gazebo is able to integrate into the ROS control framework with the
-`gazebo_ros <http://gazebosim.org/tutorials?tut=ros_control&cat=connect_ros>`_ package.
+`gazebo_ros <https://classic.gazebosim.org/tutorials?tut=ros_control&cat=connect_ros>`_ package.
 
 .. important:: This package is available from 0.8.0
 
@@ -1104,7 +1104,7 @@ set the following parameters:
 
 .. note::
 
-  Refer to `Gazebo Friction Documentation <http://gazebosim.org/tutorials?tut=friction>`_
+  Refer to `Gazebo Friction Documentation <https://classic.gazebosim.org/tutorials?tut=friction>`_
 
 
 franka_msgs
@@ -1123,7 +1123,7 @@ panda_moveit_config
     This package was moved to the `ros_planning repos <https://github.com/ros-planning/panda_moveit_config>`_.
 
 For more details, documentation and tutorials, please have a look at the
-`MoveIt! tutorials website <https://ros-planning.github.io/moveit_tutorials/>`_.
+`MoveIt! tutorials website <https://docs.ros.org/en/kinetic/api/moveit_tutorials/html/index.html>`_.
 
 
 .. _write_own_controller:

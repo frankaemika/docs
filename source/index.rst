@@ -4,7 +4,7 @@ Franka Control Interface Documentation
 .. note::
 
   The software and its documentation support two different robots, the
-  `Franka Research 3 (FR3) <https://www.franka.de/research>`_ and an older Franka Robotics Robot (FER or Panda).
+  `Franka Research 3 (FR3) <https://franka.de/research>`_ and an older Franka Robotics Robot (FER or Panda).
 
 .. todolist::
 
