@@ -15,6 +15,12 @@ Franka MATLAB Toolbox contains a set of libraries and tools for exposing the Fra
 
 * ``Matlab Franka Library``, a set of matlab functions for reading the current robot state and applying some simple open loop motion commands.
 
+.. figure:: _static/hardware_config_options.png
+    :align: center
+    :figclass: align-center
+
+    Hardware setup configuration options for the Franka Toolbox for MATLAB.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
