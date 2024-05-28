@@ -19,7 +19,7 @@ Franka MATLAB Toolbox contains a set of libraries and tools for exposing the Fra
     :align: center
     :figclass: align-center
 
-    Hardware setup configuration options for the Franka Toolbox for MATLAB.
+    Hardwarε configuration options for the Franka Toolbox for MATLAB.
 
 .. toctree::
    :maxdepth: 2
