@@ -54,12 +54,11 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 .. important::
 
     For setting the specific port in which the ssh server is exposed by the currently targeted docker
-    instance, please excecute the following MATLAB commands:
+    instance, please excecute the following MATLAB command:
 
     .. code-block:: shell
 
-        >> hd = nvidiacoder.internal.BoardParameters('NVIDIA Jetson');
-        >> setParam(hb,'port','<new port number>');
+        >> franka_ai_companion_switch_port('<desired port number>');
 
 In case you operate in standard Jetson Hardware Platform with a standard ssh server configuration, 
 the step above is not necessary.
