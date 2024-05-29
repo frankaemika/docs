@@ -58,7 +58,7 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 
     .. code-block:: shell
 
-        >> franka_ai_companion_switch_port('<desired port number>');
+        >> franka_ai_companion_switch_port(<desired port number>);
 
 In case you operate in standard Jetson Hardware Platform with a standard ssh server configuration, 
 the step above is not necessary.
