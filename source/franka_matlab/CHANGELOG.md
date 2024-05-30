@@ -1,5 +1,10 @@
 # Changelog:
 
+## 1.1.0 (14-06-2024)
+    
+   - **BREAKING** Installation workflow and Simulink build system modification for supporting deployment to the Franka AI Companion.
+   - **BREAKING** Toolbox renaming: Franka Toolbox for MATLAB. Scripts also now follow the shorter convention: franka_toolbox_<>.m
+
 ## 1.0.0 (11-03-2024)
     
    - **BREAKING** Robot Settings standardization with Matlab OOP.
