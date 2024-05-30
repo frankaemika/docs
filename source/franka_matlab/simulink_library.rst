@@ -1,5 +1,5 @@
-Fanka Library for Simulink
-==========================
+Fanka Library for Simulink - Reference
+======================================
 
 .. hint::
     Regarding the inputs/outputs signals nomenclature datatypes and sizes the libfranka definitions
