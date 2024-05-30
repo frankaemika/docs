@@ -20,8 +20,9 @@ You can navigate through the examples by typing:
 
     Franka MATLAB Toolbox Examples Navigator.
 
-Initialization
---------------
+
+Simulink Build & Deploy - Franka AI Companion  
+---------------------------------------------
 
 After opening, double clicking on any of the Simulink models the robot settings will be loaded automatically in the 
 workspace, in the form of the object `frs`.
@@ -44,9 +45,6 @@ You can modify the default settings for the FrankaRobotSettings with
 .. code-block:: shell
 
     >> edit FrankaRobotSettings.m
-
-Simulink Build & Deploy - Franka AI Companion  
----------------------------------------------
 
 Start by clicking "Run on Custom Hardware" in the Simulink APPS pane.
 
