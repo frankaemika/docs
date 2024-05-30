@@ -5,10 +5,6 @@ Troubleshooting
     Checkout the `Franka Community <https://www.franka-community.de>`_  and the 
     `franka_matlab category <https://www.franka-community.de/c/franka-matlab/15>`_ for relevant posts or for creating new ones! 
 
-.. hint::
-    Before proceeding with the Franka MATLAB Toolbox, it would be a good practice to execute a couple of the libfranka examples, under the build/examples folder, in order to ensure that the libfranka 
-    installation has been succesful and that the system can operate under the Real-Time control constraints.
-
 control_modes.h: No such file or directory error.
 -------------------------------------------------
 
