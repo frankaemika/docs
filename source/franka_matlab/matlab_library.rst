@@ -1,7 +1,7 @@
 .. _matlab-library:
 
-Franka Library for MATLAB
-=========================
+Franka Library for MATLAB - Reference
+=====================================
 
 .. important::
     In it's current form, the MATLAB library is not officially 
