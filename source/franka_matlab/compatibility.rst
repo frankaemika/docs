@@ -9,7 +9,9 @@ Compatibility with Matlab & libfranka
 +------------------------+-------------------+----------------------------+
 | Franka MATLAB version  | libfranka version | Matlab Version             |
 +========================+===================+============================+
-| 1.0.0                  | 0.9.x & 0.13.x    | :math:`\geq` R2021a        |
+| 1.1.0                  | 0.9.2 & 0.13.4    | :math:`\geq` R2022a        |
++------------------------+-------------------+----------------------------+ 
+| 1.0.0                  | 0.9.2 & 0.13.3    | :math:`\geq` R2021a        |
 +------------------------+-------------------+----------------------------+ 
 | 0.3.1                  | 0.9.x & 0.10.x    | :math:`\geq` R2019a        |
 +------------------------+-------------------+----------------------------+ 
@@ -25,10 +27,3 @@ Compatibility with Matlab & libfranka
 +------------------------+-------------------+----------------------------+
 
 `libfranka and robot system compatibility <https://frankaemika.github.io/docs/compatibility.html>`_
-
-.. important::
-    The `pick_and_place_with_RRT.mlx` Matlab demo is compatible with Matlab :math:`\geq` R2021b, as the required libraries from the Matlab Robotics Toolbox have only introduced since then.
-
-.. important::
-    Make sure that you've installed and set up Matlab with a compatible compiler version! You can find the list of Matlab 
-    compatible compilers in `this link <https://www.mathworks.com/support/requirements/supported-compilers.html>`_.

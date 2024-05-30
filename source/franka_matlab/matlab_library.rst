@@ -1,21 +1,13 @@
 .. _matlab-library:
 
-Matlab Library
-==============
+Franka Library for MATLAB
+=========================
 
-Matlab Demo Pick & Place with RRT 
----------------------------------
-
-For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is a good starting point. 
-
-.. figure:: _static/matlab_pick_and_place_with_RRT_demo.png
-    :align: center
-    :figclass: align-center
-
-    Live Matlab Script and Figure of the pick-and-place demo.
-
-.. hint::
-    The pick-and-place demo requires the `Matlab Robotics Toolbox <https://www.mathworks.com/products/robotics.html>`_ with Matlab :math:`\geq` R2021b.
+.. important::
+    In it's current form, the MATLAB library is not officially 
+    supported for usage in combination with the Franka AI companion 
+    and it's mainly purposed to be executed natively, in Linux Host PC with 
+    Real-Time Kernel. 
 
 FrankaRobot Class
 -----------------
