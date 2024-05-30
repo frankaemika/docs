@@ -1,5 +1,5 @@
-MATLAB Toolbox dependencies
-===========================
+Dependencies
+============
 
 The following Mathworks products are required: 
 
