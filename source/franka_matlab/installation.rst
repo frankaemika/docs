@@ -38,14 +38,14 @@ Check the "Getting Started" section bellow for start exploring the Toolbox.
 Linux System - Native Deployment & Execution
 --------------------------------------------
 
-In case you are planning to utilize your Linux Host PC for running the Franka Toolbox application natively, without the help of the Franka AI Companion please make sure:
+For building, deploying & executing in the Linux host PC please make sure that:
 
 1. You have Real-Time Kernel setup for your system. See the page `Setting up the real-time kernel <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
 2. You have libfranka installed and it's dependencies. See the page `Building libfranka <https://frankaemika.github.io/docs/installation_linux.html#building-libfranka>`_.
 
 Make sure that the Debian package of libfranka is properly built and installed system-wide.
 
-Alternatively you can proceed with a local (non-system-wide) libfranka auto-installation with the help of the following command:
+Alternatively, after you've managed the dependencies, you can proceed with a local (non-system-wide) libfranka auto-installation with the help of the following command:
 
 .. code-block:: shell
 
