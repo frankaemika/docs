@@ -45,8 +45,8 @@ You can modify the default settings for the FrankaRobotSettings with
 
     >> edit FrankaRobotSettings.m
 
-Simulink Example Execution - Franka AI Companion  
-------------------------------------------------
+Simulink Build & Deploy - Franka AI Companion  
+---------------------------------------------
 
 Start by clicking "Run on Custom Hardware" in the Simulink APPS pane.
 
@@ -122,8 +122,8 @@ You can now build and deploy for your NVIDIA Jetson Platform!
 
     "Build & Deploy"
 
-Simulink Example Execution - Linux Host - Native
-------------------------------------------------
+Simulink Build & Deploy - Linux Host
+------------------------------------
 
 Let's start by selecting the `Run on custom hardware` App from the Apps pane in Simulink.
 
