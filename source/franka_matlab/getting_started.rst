@@ -20,12 +20,14 @@ You can navigate through the examples by typing:
 
     Franka MATLAB Toolbox Examples Navigator.
 
+.. figure:: _static/cartesian_impedance_control_overview.png
+    :align: center
+    :figclass: align-center
 
-Simulink Build & Deploy - Franka AI Companion  
----------------------------------------------
+    The Cartesian Impedance Control Example equiped with sliders as UI elements for controlling the End-Effector position.
 
-After opening, double clicking on any of the Simulink models the robot settings will be loaded automatically in the 
-workspace, in the form of the object `frs`.
+After opening, by double clicking, any of the Simulink models the robot settings will be loaded automatically in the 
+workspace, in the form of the `frs` object.
 
 .. figure:: _static/workspace_parameters.png
     :align: center
@@ -45,6 +47,12 @@ You can modify the default settings for the FrankaRobotSettings with
 .. code-block:: shell
 
     >> edit FrankaRobotSettings.m
+
+Simulink Build & Deploy - Franka AI Companion  
+---------------------------------------------
+
+For building & deploying to the Franka AI Companion you can 
+use the following recommended workflow:
 
 Start by clicking "Run on Custom Hardware" in the Simulink APPS pane.
 
