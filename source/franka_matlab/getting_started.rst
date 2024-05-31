@@ -48,37 +48,47 @@ You can modify the default settings for the FrankaRobotSettings with
 
     >> edit FrankaRobotSettings.m
 
+Simulink Solver Settings
+------------------------
+
+The requirements for the solver settings for the Simulink model should be:
+
+* Fixed-step
+* discrete (no continuous states)
+* With Fixed-step sixe (fundamental sample time) of `0.001`.
+
 Simulink Build & Deploy - Franka AI Companion  
 ---------------------------------------------
 
 For building & deploying to the Franka AI Companion you can 
 use the following recommended workflow:
 
-Start by clicking "Run on Custom Hardware" in the Simulink APPS pane.
+Start by clicking "Run on Hardware Board" in the Simulink APPS pane and select
+the "NVIDIA Jetson" option.
 
-.. figure:: _static/run_on_custom_hardware.png
+.. figure:: _static/cartesian_impedance_control_run_on_hardware.png
     :align: center
     :figclass: align-center
 
-    "Run on Custom Hardware"
+    Run on Hardware Board - Select "NVIDIA Jetson".
 
-Continue by clicking on the "Hardware Settings"
+.. important::
+
+    In case this option is not visible make sure that the 
+    `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_ 
+    is installed.
+
+We need to proceed with a couple of "Hardware Settings" before building & running the model.
 
 .. figure:: _static/hardware_settings.png
     :align: center
     :figclass: align-center
 
-    "Hardware Settings"
+    Select the "Hardware Settings"
 
 Select the "NVIDIA Jetson" Hardware board
 
-.. figure:: _static/select_nvidia_jetson.png
-    :align: center
-    :figclass: align-center
-
-    "Select NVIDIA Jetson Hardware Board"
-
-Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platform.
+Set the `Device Address`, `Username` and `Password` which correspond to your docker instance as it is running in the Franka AI Companion.
 
 .. figure:: _static/board_parameters.png
     :align: center
@@ -95,43 +105,39 @@ Set the `Device Address`, `Username` and `Password` for your NVIDIA Jetson platf
 
         >> franka_ai_companion_switch_port(<desired port number>);
 
-In case you operate in standard Jetson Hardware Platform with a standard ssh server configuration, 
-the step above is not necessary.
+.. important::
 
-It is also highly recommended to run the external mode as a background thread, so that
-the real-time 1kHz won't get potentially disrupted when built with "Monitor & Tuning".
+    If you are planning to utilize the External Mode for "Monitoring  & Tuning" make sure
+    that you've applied the settings descibed in the section bellow :ref:`external_mode_settings`.
 
-.. figure:: _static/external_mode_background_thread.png
-    :align: center
-    :figclass: align-center
+.. important::
 
-    "Run External Mode as a Background Thread"
+    Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
+    in Desk and that the robot is in execution mode (user-button is released)!
 
-You can now build and deploy for your NVIDIA Jetson Platform!
+You can now "Build and Deploy" or "Monitor and Tune" for running the Simulink Model!
 
-.. warning::
+.. caution::
 
-    Before choosing the "Monitor & Tune" for utilzing the External Mode, make sure that 
-    the option "Nonreusable function" has been chosen in Model Settings-->Code Generation-->
-    Interface.
-
-    .. figure:: _static/model_settings_interface_non_reusable_function.png
-        :align: center
-        :figclass: align-center
-        :scale: 50%
-
-        "Nonreusable function option is required for building with External-Mode"
+    The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!
 
 .. figure:: _static/jetson_deploy.png
     :align: center
     :figclass: align-center
 
-    "Build & Deploy"
+    "Build & Deploy" or "Monitor & Tune" for enabling the External Mode.
 
 Simulink Build & Deploy - Linux Host
 ------------------------------------
 
-Let's start by selecting the `Run on custom hardware` App from the Apps pane in Simulink.
+.. important::
+
+    If you are planning to build, run & deploy the application to your linux host pc 
+    make sure that you've installed libfranka and a Real-Time kernel as described in the 
+    previous installation page.
+
+Let's start by selecting the `Run on Custom Hardware` App from the Apps pane in Simulink. 
+Allow the grt.tlc target to be auto-selected, as prompted.
 
 .. figure:: _static/cartesian_impedance_control_apps.png
     :align: center
@@ -139,10 +145,34 @@ Let's start by selecting the `Run on custom hardware` App from the Apps pane in 
 
     "Run on custom hardware" Simulink App.
 
+Please proceed with the following necessary model checks before proceeding:
+
+ * The Device vendor under "Hardware Implementation" is either "Intel" or "AMD" and device type "x86-64 (Linux 64)".
+ * Code interface packaging options is set to "Nonreusable function".
+
+.. figure:: _static/linux_host_hardware_implementation.png
+    :align: center
+    :figclass: align-center
+    :scale: 60%
+
+    Hardware Implementation - Device vendor selection.
+
+.. figure:: _static/interface_pane.png
+    :align: center
+    :figclass: align-center
+    :scale: 70%
+
+    "Code interface packaging" options.
+
+.. important::
+
+    If you are planning to utilize the External Mode for "Monitoring  & Tuning" make sure
+    that you've applied the settings descibed in the section bellow :ref:`external_mode_settings`.
+
 .. important::
 
     Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
-    in Desk and that the robot is in execution mode(user button is released)!
+    in Desk and that the robot is in execution mode (user-button is released)!
 
 You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is 
 desired or `Build, Deploy & Start` for just executing the application without monitoring.
@@ -157,20 +187,39 @@ desired or `Build, Deploy & Start` for just executing the application without mo
 
     The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!
 
-Alternatively you can run the auto-generated executable located in the current working space manually from a terminal:
+.. _external_mode_settings:
 
-In case of Linux:
+Simulink External Mode ("Monitor & Tune") - Necessary Settings
+--------------------------------------------------------------
 
+In case you are planning to execute with External Mode for "Monitor & Tuning", 
+it is also necessary to apply the following settings:
 
-.. code-block:: shell
+ * "Run external mode in a background thread".
+ * The Code interface packaging is "Nonreusable function".
+ * "MAT-file logging" is unchecked.
 
-    $ ./<simulink_model_name>
+.. figure:: _static/external_mode_background_thread.png
+    :align: center
+    :figclass: align-center
+    :scale: 50%
 
-or in case of Windows:
+    "Run external mode in a background thread" is necessary so that the 1kHz loop won't get disturbed
 
-.. code-block:: shell
+.. figure:: _static/model_settings_interface_non_reusable_function.png
+    :align: center
+    :figclass: align-center
+    :scale: 70%
 
-    > <simulink_model_name>.exe
+    "Nonreusable function option is required for building with External-Mode
+
+.. figure:: _static/model_settings_interface_mat_file_logging.png
+    :align: center
+    :figclass: align-center
+    :scale: 50%
+
+    "MAT-file logging" should be unchecked unchecked for building with External-Mode"
+
 
 MATLAB Demo Pick & Place with RRT 
 ---------------------------------
