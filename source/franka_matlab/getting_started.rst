@@ -103,7 +103,7 @@ Set the `Device Address`, `Username` and `Password` which correspond to your doc
 
     .. code-block:: shell
 
-        >> franka_ai_companion_switch_port(<desired port number>);
+        >> franka_ai_companion_port_switch(<desired port number>);
 
 .. important::
 
