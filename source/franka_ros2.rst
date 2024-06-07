@@ -69,6 +69,8 @@ Install From Source
     ros-humble-realtime-tools \
     ros-humble-xacro \
     ros-humble-hardware-interface \
+    ros-humble-ros-gz \
+    ros-humble-ign_ros2_control \
     python3-colcon-common-extensions
 
 2. Create a ROS 2 workspace::
