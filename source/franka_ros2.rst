@@ -19,7 +19,7 @@ Prerequisites
   (ros-humble-desktop) or a VSCode IDE with DevContainer.
 * A :ref:`PREEMPT_RT kernel <preempt>` (optional, but strongly recommended).
 * For ``cartesian_pose``, ``joint_position`` and ``elbow_position`` command interfaces realtime-kernel is absolutely necessary.
-* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.0.
+* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.4.
   Here is a minimal example:
 
 .. code-block:: shell
@@ -27,7 +27,7 @@ Prerequisites
    sudo apt install -y libpoco-dev libeigen3-dev
    git clone https://github.com/frankaemika/libfranka.git --recursive
    cd libfranka
-   git switch 0.13.2
+   git checkout 0.13.4
    mkdir build && cd build
    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF  ..
    cmake --build . -j$(nproc)
@@ -52,22 +52,23 @@ Install From Source
 1. Install requirements::
 
     sudo apt install -y \
-    ros-humble-hardware-interface \
-    ros-humble-generate-parameter-library \
+    ros-humble-ament-cmake \
+    ros-humble-ament-cmake-clang-format \
+    ros-humble-angles \
+    ros-humble-ros2-controllers \
+    ros-humble-ros2-control \
     ros-humble-ros2-control-test-assets \
     ros-humble-controller-manager \
     ros-humble-control-msgs \
-    ros-humble-xacro \
-    ros-humble-angles \
-    ros-humble-ros2-control \
-    ros-humble-realtime-tools \
     ros-humble-control-toolbox \
-    ros-humble-moveit \
-    ros-humble-ros2-controllers \
+    ros-humble-generate-parameter-library \
     ros-humble-joint-state-publisher \
     ros-humble-joint-state-publisher-gui \
-    ros-humble-ament-cmake \
-    ros-humble-ament-cmake-clang-format \
+    ros-humble-moveit \
+    ros-humble-pinocchio \
+    ros-humble-realtime-tools \
+    ros-humble-xacro \
+    ros-humble-hardware-interface \
     python3-colcon-common-extensions
 
 2. Create a ROS 2 workspace::
@@ -79,6 +80,7 @@ Install From Source
     source /opt/ros/humble/setup.bash
     cd ~/franka_ros2_ws
     git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
+    git clone https://github.com/frankaemika/franka_description.git src/franka_description
     colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
     source install/setup.sh
 
@@ -101,10 +103,11 @@ VSCode DevContainer working schematic is shown in the below image:
 3. Clone repo::
 
     git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
+    git clone https://github.com/frankaemika/franka_description.git src/franka_description
 
 4. Move the .devcontainer folder to the franka_ros2_ws parent folder::
 
-    mv franka_ros2/.devcontainer .
+    mv src/franka_ros2/.devcontainer .
 
 5. Open VSCode::
 
@@ -126,7 +129,7 @@ VSCode DevContainer working schematic is shown in the below image:
 
 8. Source the environment::
 
-    source /ros_entrypoint.sh
+    source /opt/ros/humble/setup.sh
 
 9. Install the Franka ROS 2 packages::
 
@@ -166,7 +169,7 @@ This controller moves the robot to its home configuration.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup move_to_start_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup move_to_start_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 .. _gravity_example:
 
@@ -178,7 +181,7 @@ It sends zero as torque command to all joints, which means that the robot only c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup gravity_compensation_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup gravity_compensation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Joint Impedance Example
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -188,7 +191,7 @@ joints while it is running.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_impedance_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Joint Impedance With IK Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -199,7 +202,7 @@ in the franka_moveit_config package, kinematics.yaml file.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 
 Model Example Controller
@@ -209,7 +212,7 @@ Joint4 body jacobian and end-effector jacobian with respect to the base frame.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup model_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup model_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Joint Position Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -233,7 +236,7 @@ state interface values before starting to send any commands.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_position_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_position_example_controller arm_id:=fr3 robot_ip:=<fci-ip>
 
 Joint Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -241,7 +244,7 @@ This example sends periodic velocity commands to the 4th and 5th joint of the ro
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_velocity_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Cartesian Pose Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -249,7 +252,7 @@ This example uses the CartesianPose interface to send periodic pose commands to 
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_pose_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup cartesian_pose_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Cartesian Orientation Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -257,7 +260,7 @@ This example uses CartesianOrientation interface to send periodic orientation co
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Cartesian Pose Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -265,7 +268,7 @@ This example sends periodic elbow commands while keeping the end effector pose c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Cartesian Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -273,7 +276,7 @@ This example uses the CartesianVelocity interface to send periodic velocity comm
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Cartesian Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -281,7 +284,7 @@ This example uses the CartesianElbow interface to send periodic elbow commands t
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup elbow_example_controller.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_bringup elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 
 Package Descriptions
@@ -300,7 +303,7 @@ can be used to start the robot without any controllers.
 
 When you start the robot with::
 
-    ros2 launch franka_bringup franka.launch.py robot_ip:=<fci-ip> use_rviz:=true
+    ros2 launch franka_bringup franka.launch.py arm_id:=fr3 robot_ip:=<fci-ip> use_rviz:=true
 
 There is no controller running apart from the ``joint_state_broadcaster``. However, a connection with the robot is still
 established and the current robot pose is visualized in RViz. In this mode the robot can be guided when the user stop
@@ -332,6 +335,9 @@ or load and start a different one::
 
 franka_description
 ^^^^^^^^^^^^^^^^^^
+.. warning::
+    As of version 0.1.14 the franka_description package is not available in the franka_ros2 repository.
+    It is available in a separate repository `<franka_description https://github.com/frankaemika/franka_description>`_.
 
 This package contains the xacro files and meshes that are used to visualize the robot.
 Further, it contains a launch file that visualizes the robot model without access to a real robot::
@@ -372,21 +378,28 @@ Use the following launch file to start the gripper::
 In a different tab you can now perform the homing and send a grasp command.::
 
 
-    ros2 action send_goal /panda_gripper/homing franka_msgs/action/Homing {}
-    ros2 action send_goal -f /panda_gripper/grasp franka_msgs/action/Grasp "{width: 0.00, speed: 0.03, force: 50}"
+    ros2 action send_goal /fr3_gripper/homing franka_msgs/action/Homing {}
+    ros2 action send_goal -f /fr3_gripper/grasp franka_msgs/action/Grasp "{width: 0.00, speed: 0.03, force: 50}"
 
 The inner and outer epsilon are 0.005 meter per default. You can also explicitly set the epsilon::
 
-    ros2 action send_goal -f /panda_gripper/grasp franka_msgs/action/Grasp "{width: 0.00, speed: 0.03, force: 50, epsilon: {inner: 0.01, outer: 0.01}}"
+    ros2 action send_goal -f /fr3_gripper/grasp franka_msgs/action/Grasp "{width: 0.00, speed: 0.03, force: 50, epsilon: {inner: 0.01, outer: 0.01}}"
 
 To stop the grasping, you can use ``stop`` service.::
 
-    ros2 service call /panda_gripper/stop std_srvs/srv/Trigger {}
+    ros2 service call /fr3_gripper/stop std_srvs/srv/Trigger {}
 
 .. _franka_hardware:
 
 franka_hardware
 ^^^^^^^^^^^^^^^
+.. important::
+    Breaking changes as of 0.1.14 release: ``franka_hardware`` robot_state and robot_model will be prefixed by the ``arm_id``.
+
+        - ``panda/robot_model  -> ${arm_id}/robot_model``
+        - ``panda/robot_state  -> ${arm_id}/robot_state``
+
+    There is no change with the state and command interfaces naming. They are prefixed with the joint names in the URDF.
 
 This package contains the ``franka_hardware`` plugin needed for `ros2_control <https://control.ros.org/humble/index.html>`_.
 The plugin is loaded from the URDF of the robot and passed to the controller manager via the robot description.
@@ -394,7 +407,7 @@ It provides for each joint:
 
 * a ``position state interface`` that contains the measured joint position.
 * a ``velocity state interface`` that contains the measured joint velocity.
-* an ``effort state interface`` that contains the measured link-side joint torques including gravity.
+* an ``effort state interface`` that contains the measured link-side joint torques.
 * an ``initial_position state interface`` that contains the initial joint position of the robot.
 * an ``effort command interface`` that contains the desired joint torques without gravity.
 * a  ``position command interface`` that contains the desired joint position.
