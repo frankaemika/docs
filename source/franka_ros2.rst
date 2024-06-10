@@ -339,7 +339,7 @@ franka_description
 ^^^^^^^^^^^^^^^^^^
 .. warning::
     As of version 0.1.14 the franka_description package is not available in the franka_ros2 repository.
-    It is available in a separate repository `<franka_description https://github.com/frankaemika/franka_description>`_.
+    It is available in a separate repository `Franka Description <https://github.com/frankaemika/franka_description>`_.
 
 This package contains the xacro files and meshes that are used to visualize the robot.
 Further, it contains a launch file that visualizes the robot model without access to a real robot::
@@ -417,7 +417,7 @@ It provides for each joint:
 
 In addition
 
-* a ``franka_robot_state`` that contains the robot state information, `franka_robot_state <https://t.ly/0GfIM>`_.
+* a ``franka_robot_state`` that contains the robot state information, `franka_robot_state <https://shorturl.at/wajZV>`_.
 * a ``franka_robot_model_interface`` that contains the pointer to the model object.
 
 .. important::
@@ -470,7 +470,7 @@ One could also read quaternion and translation values in Eigen format.
 After setting up the cartesian interface, you need to ``assign_loaned_command_interfaces`` and ``assign_loaned_state_interfaces`` in your controller.
 This needs to be done in the on_activate() function of the controller. Examples can be found in the
 `assign loaned comamand interface example
-<https://t.ly/u-NFk>`_
+<https://shorturl.at/nmebx>`_
 
 .. code-block:: cpp
 
