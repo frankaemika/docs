@@ -177,7 +177,7 @@ In order to verify the connection, the robot's brakes need to be unlocked in Des
 device needs to be relased so that the robot is ready for execution indicated by blue LED mode.
 
 Activating the FCI mode
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 To activate FCI mode, open Desk, then release the robot brakes, and expand the menu in the top bar. Finally, click on 'Activate FCI'.
 

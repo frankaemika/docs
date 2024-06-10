@@ -167,6 +167,7 @@ This parameter is used to determine the flip direction of the elbow.
 
                 Minimum velocities
 
+    In order to avoid violating the safety joint velocity limits, the Max/Min Joint velocity limits for FCI are more restrictive than those provided in the Datasheet.
 
 As most motion planners cannot deal with those functions for describing the velocity limits of each joint but they only deal with
 fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.

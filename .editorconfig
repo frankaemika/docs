@@ -14,7 +14,10 @@ indent_style = tab
 indent_size = 4
 
 [*.rst]
-max_line_length = 120
+max_line_length = 150
+
+[compatibility.rst]
+max_line_length = 165
 
 [control_parameters.rst]
 max_line_length = 170

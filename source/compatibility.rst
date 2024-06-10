@@ -6,12 +6,12 @@ Compatible versions
 Compatibility with libfranka
 ----------------------------
 
-Various versions of compatible components are available. 
-The table below offers an overview, with a recommendation to utilize up-to-date versions whenever possible. 
-The symbol '>= ' indicates that compatibility with newer robot system versions has not been tested, 
+Various versions of compatible components are available.
+The table below offers an overview, with a recommendation to utilize up-to-date versions whenever possible.
+The symbol '>= ' indicates that compatibility with newer robot system versions has not been tested,
 implying that compatibility is not guaranteed (e.g., libfranka 0.2.0 may not be compatible with robot system version 4.0.0).
 
-The Robot system versions 2.x.x are not listed in the table below, but they are included as compatible with Robot system version >= 1.3.0. 
+The Robot system versions 2.x.x are not listed in the table below, but they are included as compatible with Robot system version >= 1.3.0.
 Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
 
 +----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
