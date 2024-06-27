@@ -19,7 +19,7 @@ Prerequisites
   (ros-humble-desktop) or a VSCode IDE with DevContainer.
 * A :ref:`PREEMPT_RT kernel <preempt>` (optional, but strongly recommended).
 * For ``cartesian_pose``, ``joint_position`` and ``elbow_position`` command interfaces realtime-kernel is absolutely necessary.
-* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.4.
+* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.2.
   Here is a minimal example:
 
 .. code-block:: shell
@@ -27,7 +27,7 @@ Prerequisites
    sudo apt install -y libpoco-dev libeigen3-dev
    git clone https://github.com/frankaemika/libfranka.git --recursive
    cd libfranka
-   git checkout 0.13.4
+   git checkout 0.13.2
    mkdir build && cd build
    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF  ..
    cmake --build . -j$(nproc)
@@ -238,7 +238,7 @@ state interface values before starting to send any commands.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_position_example_controller arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_position_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
 Joint Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -613,7 +613,7 @@ Now you can launch the velocity example with Gazebo simulator.
     ros2 launch franka_gazebo_bringup gazebo_joint_velocity_controller_example.launch.py load_gripper:=true franka_hand:='franka_hand'
 
 
-Keep in mind that the gripper joint has a bug with the joint velocity controller. 
+Keep in mind that the gripper joint has a bug with the joint velocity controller.
 If you are interested in controlling the gripper please use joint position interface.
 
 
