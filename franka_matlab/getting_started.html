@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simulink Library" href="simulink_library.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2_changelog.html">franka_ros2 changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka MATLAB Toolbox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="matlab_toolbox_dependencies.html">Matlab toolbox dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#execution">Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-error-recovery">Automatic error recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Simulink Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Matlab Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab_changelog.html">Franka MATLAB Toolbox changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka MATLAB Toolbox</a> &raquo;</li>
+      <li>Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_matlab/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>A set of Simulink &amp; Matlab examples is included within the Franka MATLAB Toolbox. Feel free to experiment, adjust
+them and expand them to fit your project needs!</p>
+<p>You can navigate through the examples by typing:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;&gt; franka_matlab_toolbox_examples<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<img alt="../_images/franka_matlab_toolbox_examples.png" src="../_images/franka_matlab_toolbox_examples.png" />
+<figcaption>
+<p><span class="caption-text">Franka MATLAB Toolbox Examples Navigator.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
+<p>After opening, double clicking on any of the simulink models the robot settings will be loaded automatically in the
+workspace, in the form of the object <cite>frs</cite>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The Simulink models are delivered in R2021a version. They will convert automatically to your Matlab version
+when you try to save the model.</p>
+</div>
+<figure class="align-center" id="id2">
+<img alt="../_images/workspace_parameters.png" src="../_images/workspace_parameters.png" />
+<figcaption>
+<p><span class="caption-text">The Franka Robot Settings object.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The robot_ip is set to 172.16.0.2. Make sure that the robot_ip, as well as all the other parameters matches your
+setup for your intended purposes.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;&gt; frs.robot_ip <span class="o">=</span> &lt;your robot ip string&gt;
+</pre></div>
+</div>
+<p>You can modify the default settings for the FrankaRobotSettings with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;&gt; edit FrankaRobotSettings.m
+</pre></div>
+</div>
+</section>
+<section id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Permalink to this heading"></a></h2>
+<p>Let’s start by selecting the <cite>Run on custom hardware</cite> App from the Apps pane in Simulink.</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/cartesian_impedance_control_apps.png" src="../_images/cartesian_impedance_control_apps.png" />
+<figcaption>
+<p><span class="caption-text">“Run on custom hardware” Simulink App.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
+in Desk and that the robot is in execution mode(user button is released)!</p>
+</div>
+<p>You can then select from the Hardware tab either <cite>Monitor &amp; Tune</cite> in case monitoring through the external mode is
+desired or <cite>Build, Deploy &amp; Start</cite> for just executing the application without monitoring.</p>
+<figure class="align-center" id="id4">
+<img alt="../_images/cartesian_impedance_control_hardware.png" src="../_images/cartesian_impedance_control_hardware.png" />
+<figcaption>
+<p><span class="caption-text">Hardware Simulink App.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!</p>
+</div>
+<p>Alternatively you can run the auto-generated executable located in the current working space manually from a terminal:</p>
+<p>In case of Linux:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./&lt;simulink_model_name&gt;
+</pre></div>
+</div>
+<p>or in case of Windows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt; &lt;simulink_model_name&gt;.exe
+</pre></div>
+</div>
+</section>
+<section id="automatic-error-recovery">
+<h2>Automatic error recovery<a class="headerlink" href="#automatic-error-recovery" title="Permalink to this heading"></a></h2>
+<p>If the robot encounters an error state and transitions to reflex mode,
+you may attempt a recovery by executing the automatic error recovery command in Matlab.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;&gt; <span class="nv">fr</span> <span class="o">=</span> FrankaRobot<span class="o">(</span>&lt;robot ip as string&gt;<span class="o">)</span><span class="p">;</span>
+&gt;&gt; fr.automatic_error_recovery<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring
+back the robot to a valid configuration.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Checkout the <a class="reference internal" href="matlab_library.html#matlab-library"><span class="std std-ref">matlab library</span></a> for a set of helper
+functions that can help to optimize your workflow.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simulink_library.html" class="btn btn-neutral float-right" title="Simulink Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
