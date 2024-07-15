@@ -1,5 +1,9 @@
 # Changelog:
 
+## 1.1.0 (01-08-2024)
+
+   - Support for libfranka 0.13.4.
+
 ## 1.0.0 (11-03-2024)
     
    - **BREAKING** Robot Settings standardization with Matlab OOP.
