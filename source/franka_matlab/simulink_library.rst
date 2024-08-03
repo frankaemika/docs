@@ -7,7 +7,7 @@ Fanka Library for Simulink - Reference
     `Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_. 
     Column-major format for the signal has been adopted as well.
 
-Apply Control
+Robot Control
 -------------
 
 .. figure:: _static/robot_control.png
@@ -87,3 +87,54 @@ The gripper state block will inform the application about the current gripper st
     Highly recommended to have a look at the 
     `GripperState Struct Reference <https://frankaemika.github.io/libfranka/structfranka_1_1GripperState.html>`_ 
     for the list of available signals and the demo `grasp_objects.slx` which is provided for getting started.
+
+Mass Matrix
+-----------
+
+.. figure:: _static/mass_matrix.png
+    :align: center
+    :figclass: align-center
+
+    Get the Mass Matrix of the Robot Model. 
+
+Coriolis
+--------
+
+.. figure:: _static/coriolis.png
+    :align: center
+    :figclass: align-center
+
+    Get the Coriolis Matrix of the Robot Model.
+
+Gravity
+-------
+
+.. figure:: _static/gravity.png
+    :align: center
+    :figclass: align-center
+
+    Get the Gravity Vector of the Robot Model.
+
+
+Jacobian
+--------
+
+.. figure:: _static/jacobian.png
+    :align: center
+    :figclass: align-center
+
+    Get the Jabobian Matrix of the Robot.
+
+You can select between "zero" or "body" Jacobian as well as the desired 
+frame inside the block parameters.
+
+Pose
+----
+
+.. figure:: _static/pose.png
+    :align: center
+    :figclass: align-center
+
+    Get the Robot Pose.
+
+You can select the desired pose frame inside the block parameters.
