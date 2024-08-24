@@ -1,9 +1,13 @@
 # Changelog:
 
-## 1.1.0 (14-06-2024)
-    
+## 2.0.0 (tbd)
+
+   - **BREAKING** New Simulink Model Blocks replacing the old single Model Block.
    - **BREAKING** Installation workflow and Simulink build system modification for supporting deployment to the Franka AI Companion.
    - **BREAKING** Toolbox renaming: Franka Toolbox for MATLAB. Scripts also now follow the shorter convention: franka_toolbox_<>.m
+   - Cartesian impedance control example now includes UI elements as improved demo and better testing of the External Mode.  
+   - Dropping experimental support for native deployment in Windows host machines
+   - Switch port matlab function for targeting custom docker images in AI Companion.
 
 ## 1.0.0 (11-03-2024)
     
