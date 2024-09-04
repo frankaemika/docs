@@ -9,7 +9,7 @@ Compatibility with Matlab & libfranka
 +------------------------+-------------------+----------------------------+
 | Franka MATLAB version  | libfranka version | Matlab Version             |
 +========================+===================+============================+
-| 2.0.0                  | 0.9.2 & 0.13.4    | :math:`\geq` R2022a        |
+| 2.0.0*                 | 0.9.2 & 0.13.4    | :math:`\geq` R2022a        |
 +------------------------+-------------------+----------------------------+ 
 | 1.0.0                  | 0.9.2 & 0.13.3    | :math:`\geq` R2021a        |
 +------------------------+-------------------+----------------------------+ 
@@ -26,4 +26,18 @@ Compatibility with Matlab & libfranka
 | 0.1.0                  | 0.7.1             | R2019a                     |
 +------------------------+-------------------+----------------------------+
 
+\* since version 2.0.0 the toolbox ships with libfranka binaries. No need for manual installation 
+
 `libfranka and robot system compatibility <https://frankaemika.github.io/docs/compatibility.html>`_
+
+
+Compatibility with Ubuntu
+-------------------------
+
++------------------------+----------------+
+| Franka MATLAB version  | Ubuntu version |
++========================+================+
+| 2.0.0                  | 22.04          |
++------------------------+----------------+
+| 1.0.0                  | 20.04          |
++------------------------+----------------+
