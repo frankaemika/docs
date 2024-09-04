@@ -35,21 +35,17 @@ At this point you should be good to go!
 
 Check the "Getting Started" section bellow for start exploring the Toolbox. 
 
-Native Deployment & Execution in Linux Host PC
-----------------------------------------------
+Dependencies
+------------
 
-For building, deploying & executing in the Linux host PC please make sure that:
+Make sure the you've installed the following 3d party dependencies at your target machine.
 
-1. You have Real-Time Kernel setup for your system. See the page `Setting up the real-time kernel <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
-2. You have libfranka installed and it's dependencies. See the page `Building libfranka <https://frankaemika.github.io/docs/installation_linux.html#building-libfranka>`_.
+.. code-block:: bash
 
-Make sure that the Debian package of libfranka is properly built and installed system-wide.
+    $ sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-Alternatively, after you've managed the dependencies, you can proceed with a local (non-system-wide) libfranka auto-installation with the help of the following command:
-
-.. code-block:: matlab
-
-    >> franka_toolbox_libfranka_install('<desired libfranka version>');
+.. hint::
+    Since version 2.0.0 libfranka is distributed with the Toolbox. No manual installation is required.
 
 Uninstalling
 -------------
