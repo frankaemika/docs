@@ -12,143 +12,23 @@ The `franka_ros2 repo <https://github.com/frankaemika/franka_ros2>`_ contains a 
     `GitHub <https://github.com/frankaemika/franka_ros2/issues>`_.
 
 
-Prerequisites
--------------
+Installation
+------------
 
-* A `ROS 2 Humble installation <https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html>`_
-  (ros-humble-desktop) or a VSCode IDE with DevContainer.
-* A :ref:`PREEMPT_RT kernel <preempt>` (optional, but strongly recommended).
-* For ``cartesian_pose``, ``joint_position`` and ``elbow_position`` command interfaces realtime-kernel is absolutely necessary.
-* A system-wide :ref:`libfranka installation <build-libfranka>`. Minimum supported version of libfranka is 0.13.2.
-  Here is a minimal example:
-
-.. code-block:: shell
-
-   sudo apt install -y libpoco-dev libeigen3-dev
-   git clone https://github.com/frankaemika/libfranka.git --recursive
-   cd libfranka
-   git checkout 0.13.2
-   mkdir build && cd build
-   cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF  ..
-   cmake --build . -j$(nproc)
-   cpack -G DEB
-   sudo dpkg -i libfranka-*.deb
-
-Optional .bashrc Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* To get colorized warn and error messages you can put
-  ``export RCUTILS_COLORIZED_OUTPUT=1`` into your ``.bashrc``.
-
-* If your system language is not set to American English you should put
-  ``export LC_NUMERIC=en_US.UTF-8`` into your ``.bashrc`` to avoid issues in RViz.
-
-Setup
-------
-
-Install From Source
-^^^^^^^^^^^^^^^^^^^
-
-1. Install requirements::
-
-    sudo apt install -y \
-    ros-humble-ament-cmake \
-    ros-humble-ament-cmake-clang-format \
-    ros-humble-angles \
-    ros-humble-ros2-controllers \
-    ros-humble-ros2-control \
-    ros-humble-ros2-control-test-assets \
-    ros-humble-controller-manager \
-    ros-humble-control-msgs \
-    ros-humble-control-toolbox \
-    ros-humble-generate-parameter-library \
-    ros-humble-joint-state-publisher \
-    ros-humble-joint-state-publisher-gui \
-    ros-humble-moveit \
-    ros-humble-pinocchio \
-    ros-humble-realtime-tools \
-    ros-humble-xacro \
-    ros-humble-hardware-interface \
-    ros-humble-ros-gz \
-    python3-colcon-common-extensions
-
-2. Create a ROS 2 workspace::
-
-    mkdir -p ~/franka_ros2_ws/src
-
-3. Clone repo and build packages::
-
-    source /opt/ros/humble/setup.bash
-    cd ~/franka_ros2_ws
-    git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
-    git clone https://github.com/frankaemika/franka_description.git src/franka_description
-    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-    source install/setup.sh
-
-Use VSCode DevContainer
-^^^^^^^^^^^^^^^^^^^^^^^
-FrankaROS2 package comes with .devcontainer folder which enables developer to use FrankaROS2 packages without manually installing ROS2 or libfranka.
-VSCode DevContainer working schematic is shown in the below image:
-
-  .. figure:: _static/vscode.png
-    :align: center
-    :figclass: align-center
-
-1. Follow the setup guide from VSCode `devcontainer_setup <https://code.visualstudio.com/docs/devcontainers/tutorial>`_.
-
-2. Create a ROS 2 workspace::
-
-    mkdir franka_ros2_ws
-    cd franka_ros2_ws
-
-3. Clone repo::
-
-    git clone https://github.com/frankaemika/franka_ros2.git src/franka_ros2
-    git clone https://github.com/frankaemika/franka_description.git src/franka_description
-
-4. Move the .devcontainer folder to the franka_ros2_ws parent folder::
-
-    mv src/franka_ros2/.devcontainer .
-
-5. Open VSCode::
-
-    code .
-
-6. Open the current folder in DevContainer::
-
-    ctrl + shift + p
-
-   Write in the command prompt bar::
-
-    Dev Containers: Rebuild and Reopen in Container
-
-   and click this option in the search results
-
-7. Open up the terminal in VScode::
-
-    ctrl + `
-
-8. Source the environment::
-
-    source /opt/ros/humble/setup.sh
-
-9. Install the Franka ROS 2 packages::
-
-    colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
-    source install/setup.sh
+Please refer to the `README.md <https://github.com/frankaemika/franka_ros2/blob/humble/README.md>`_
 
 MoveIt
 ------
 
 To see if everything works, you can try to run the MoveIt example on the robot::
 
-    ros2 launch franka_moveit_config moveit.launch.py robot_ip:=<fci-ip>
+    ros2 launch franka_fr3_moveit_config moveit.launch.py robot_ip:=<fci-ip>
 
 Then activate the ``MotionPlanning`` display in RViz.
 
 If you do not have a robot you can still test your setup by running on a dummy hardware::
 
-    ros2 launch franka_moveit_config moveit.launch.py robot_ip:=dont-care use_fake_hardware:=true
+    ros2 launch franka_fr3_moveit_config moveit.launch.py robot_ip:=dont-care use_fake_hardware:=true
 
 
 Wait until you can see the green ``You can start planning now!`` message from MoveIt inside the
@@ -199,7 +79,7 @@ Joint Impedance With IK Example
 
 The example uses the LMA-Orocos solver from MoveIt service to compute the joint positions for the desired pose.
 The desired pose is to move the end-effector periodically in x and z directions. You can change the kinematic solver
-in the franka_moveit_config package, kinematics.yaml file.
+in the franka_fr3_moveit_config package, kinematics.yaml file.
 
 .. code-block:: shell
 
@@ -526,10 +406,10 @@ It publishes franka_robot_state topic to the topic named `/franka_robot_state_br
 This controller node is spawned by franka_launch.py in the franka_bringup.
 Therefore, all the examples that include the franka_launch.py publishes the robot_state topic.
 
-.. _franka_moveit_config:
+.. _franka_fr3_moveit_config:
 
-franka_moveit_config
-^^^^^^^^^^^^^^^^^^^^
+franka_fr3_moveit_config
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 This package contains the configuration for MoveIt2. There is a new move group called
 ``panda_manipulator`` that has its tip between the fingers of the gripper and has its Z-axis rotated by -45 degrees, so
