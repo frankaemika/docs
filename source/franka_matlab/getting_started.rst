@@ -2,7 +2,7 @@ Getting started
 ===============
 .. _getting_started:
 
-Overview
+Simulink
 --------
 
 The Franka MATLAB Toolbox includes a comprehensive set of Simulink and MATLAB examples. These examples are designed to help you understand the toolbox's capabilities and can be customized to meet your project requirements.
@@ -47,7 +47,7 @@ You can modify the default settings for the FrankaRobotSettings with
     edit FrankaRobotSettings.m
 
 Simulink Solver Settings
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The requirements for the solver settings for the Simulink model should be:
 
@@ -56,7 +56,7 @@ The requirements for the solver settings for the Simulink model should be:
 * With Fixed-step sixe (fundamental sample time) of `0.001`.
 
 Simulink Build & Deploy - Franka AI Companion  
----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For building & deploying to the Franka AI Companion you can 
 use the following recommended workflow:
@@ -126,7 +126,7 @@ You can now "Build and Deploy" or "Monitor and Tune" for running the Simulink Mo
     "Build & Deploy" or "Monitor & Tune" for enabling the External Mode.
 
 Simulink Build & Deploy - Linux Host
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
 
@@ -188,7 +188,7 @@ desired or `Build, Deploy & Start` for just executing the application without mo
 .. _external_mode_settings:
 
 Simulink External Mode ("Monitor & Tune") - Necessary Settings
---------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In case you are planning to execute with External Mode for "Monitor & Tuning", 
 it is also necessary to apply the following settings:
@@ -218,20 +218,22 @@ it is also necessary to apply the following settings:
 
     "MAT-file logging" should be unchecked unchecked for building with External-Mode"
 
+MATLAB
+------
 
-MATLAB Demo Pick & Place with RRT 
----------------------------------
+Demo Pick & Place with RRT 
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is a good starting point. 
 
 .. figure:: _static/matlab_pick_and_place_with_RRT_demo.png
     :align: center
-    :figclass: align-center
+    :figclass: align^center
 
-    Live Matlab Script and Figure of the pick-and-place demo.
+    Live Matlab Script and Figure of the pick^and^place demo.
 
 Automatic error recovery
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 If the robot encounters an error state and transitions to reflex mode, 
 you may attempt a recovery by executing the automatic error recovery command in Matlab.
 
