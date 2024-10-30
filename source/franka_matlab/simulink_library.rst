@@ -2,10 +2,10 @@ Fanka Library for Simulink - Reference
 ======================================
 
 .. hint::
-    Regarding the inputs/outputs signals nomenclature datatypes and sizes the libfranka definitions
-    have been fully adopted. You can check the list of signals here -->
-    `Robot State Attributes <https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`_.
-    Column-major format for the signal has been adopted as well.
+    Regarding the input/output signal nomenclature, datatypes, and sizes, the libfranka definitions 
+    have been fully adopted. You can find the complete list of signals 
+    `here <https://frankaemika.github.io/libfranka/0.15.0/structfranka_1_1RobotState.html>`_. 
+    The column-major format for signals has been adopted as well.
 
 Robot Control
 -------------
@@ -16,8 +16,7 @@ Robot Control
 
     Robot Control Simulink Block.
 
-This is the main block of the Franka Simulink Library and it is responsible for applying the desired robot parameters and  
-control signals to the robot. 
+This is the main block of the Franka Simulink Library. It is responsible for applying the desired robot parameters and control signals to the robot.
 
 The robot settings can be applied through the block parameters.
 
@@ -28,10 +27,10 @@ The robot settings can be applied through the block parameters.
 
     Robot Control Simulink Block Settings.
 
-.. hint::
-    If desirable, an initial robot configuration can be applied **!!before!!** the main execution of the control loop.
-    Namely the robot will move to the desirable configuration and only then the main execution of the Simulink model
-    will take place. You can define that in the `Initial Configuration` section of the block settings.
+.. hint:: 
+    If desired, an initial robot configuration can be applied **before** the main execution of the control loop. 
+    Namely, the robot will move to the desired configuration and only then the main execution of the Simulink model
+    will take place. You can define that in the `Initial Configuration` section of the block settings. 
 
 Robot State
 -----------
@@ -42,7 +41,7 @@ Robot State
 
     Robot State Simulink Block.
 
-For reading the desired set of signals steming from the current robot state, 
+For reading the desired set of signals stemming from the current robot state, 
 you can free-type the names of the signals in the `Parameters` pane of the block parameters. 
 For the set of available signals and their namings --> `Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_
 
@@ -64,13 +63,8 @@ Duration Period
 This Simulink block outputs the duration from the last execution step in seconds. Ideally this should be always
 0.001 seconds but due to lost packages during communication errors 0.002 secs or 0.003 secs could be seen.
 
-.. warning::
-    The step count of the Simulink model **does not change** during these communication mishaps!
-    It just continues incrementally although an execution step in reality has been lost!
-    Special design considerations should be therefore demanded especially in the case of
-    sensitive position motion generators.
-    Have a look to e.g the generate_cartesian_pose_motion.slx demo to see how the
-    main "clock" of the application has been designed.
+.. warning:: 
+    The step count of the Simulink model **does not change** during these communication mishaps. It continues to increment even though an execution step has been lost in reality. Therefore, special design considerations are necessary, especially for sensitive position motion generators. For example, refer to the `generate_cartesian_pose_motion.slx` demo to see how the main "clock" of the application has been designed.
 
 Gripper State
 -------------

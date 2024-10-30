@@ -1,19 +1,17 @@
 Getting started
 ===============
+.. _getting_started:
 
 Overview
 --------
 
-A set of Simulink & MATLAB examples is included within the 
-Franka MATLAB Toolbox. Feel free to experiment, adjust them 
-and expand them in order to fit your project needs.
+The Franka MATLAB Toolbox includes a comprehensive set of Simulink and MATLAB examples. These examples are designed to help you understand the toolbox's capabilities and can be customized to meet your project requirements.
 
-You can navigate through the examples by typing: 
+To browse the available examples, use the following command:
 
 .. code-block:: matlab
 
-    >> franka_toolbox_examples();
-
+    franka_toolbox_examples();
 .. figure:: _static/franka_matlab_toolbox_examples.png
     :align: center
     :figclass: align-center
@@ -38,15 +36,15 @@ workspace, in the form of the `frs` object.
 The robot_ip is set to 172.16.0.2. Make sure that the robot_ip, as well as all the other parameters matches your 
 setup for your intended purposes.
 
-.. code-block:: shell
+.. code-block:: matlab
 
-    >> frs.robot_ip = <your robot ip string>
+    frs.robot_ip = <your robot ip string>
 
 You can modify the default settings for the FrankaRobotSettings with
 
-.. code-block:: shell
+.. code-block:: matlab
 
-    >> edit FrankaRobotSettings.m
+    edit FrankaRobotSettings.m
 
 Simulink Solver Settings
 ------------------------
@@ -103,7 +101,7 @@ Set the `Device Address`, `Username` and `Password` which correspond to your doc
 
     .. code-block:: shell
 
-        >> franka_ai_companion_port_switch(<desired port number>);
+        franka_ai_companion_port_switch(<desired port number>);
 
 .. important::
 
@@ -239,8 +237,8 @@ you may attempt a recovery by executing the automatic error recovery command in 
 
 .. code-block:: shell
 
-    >> fr = FrankaRobot(<robot ip as string>);
-    >> fr.automatic_error_recovery();
+    fr = FrankaRobot(<robot ip as string>);
+    fr.automatic_error_recovery();
 
 In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring 
 back the robot to a valid configuration. 
@@ -249,3 +247,4 @@ back the robot to a valid configuration.
 
     Checkout the :ref:`Franka library for MATLAB <matlab-library>` for a set of helper 
     functions that can help to optimize your workflow.
+
