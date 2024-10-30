@@ -1,9 +1,7 @@
 Franka Toolbox for MATLAB
 =========================
 
-.. todolist::
-
-The Franka Toolbox for MATLAB contains a set of libraries and tools for exposing the Franka Robot to the Mathworks software ecosystem.
+The Franka Toolbox for MATLAB provides libraries and tools that integrate Franka robots with the MathWorks® software ecosystem.
 
 .. figure:: _static/hardware_config_options.png
     :align: center
@@ -11,7 +9,7 @@ The Franka Toolbox for MATLAB contains a set of libraries and tools for exposing
 
     Hardware/Software configuration options for the Franka Toolbox for MATLAB.
 
-The Toolbox consists of the:
+The toolbox comprises two main components:
 
 * ``Franka Library for Simulink``, a set of Simulink blocks for interfacing the Franka Robot through automatic C++ code gen with Simulink Coder. The library mainly aims at assisting with the rapid-development of advanced robot controllers.
 
@@ -21,22 +19,19 @@ The Toolbox consists of the:
 
     Simulink Library for rapid-prototyping of controllers for the Franka Robot.
 
-and the:
-
 * ``Franka Library for MATLAB``, which provides the `FrankaRobot()` MATLAB class for directly interfacing the Franka Robot.
 
 .. figure:: _static/matlab_pick_and_place_with_RRT_demo.png
     :align: center
     :figclass: align-center
 
-    The Live Matlab Script implementation of the "pick-and-place with RRT" example as provided with the Franka Toolbox for MATLAB.
+    Example of a pick-and-place operation using RRT (Rapidly-exploring Random Tree) implemented in MATLAB Live Script.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   matlab_toolbox_dependencies
-   compatibility
+   system_requirements
    installation
    getting_started
    simulink_library
