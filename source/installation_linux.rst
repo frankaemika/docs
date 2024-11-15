@@ -90,11 +90,11 @@ kernel. This section describes the procedure of patching a kernel to support
 
 .. note::
 
-    NVIDIA binary drivers are not supported on ``PREEMPT_RT`` kernels.
+    NVIDIA drivers are not officially supported on ``PREEMPT_RT`` kernels, but the installation might work anyway by passing the environment variable ``IGNORE_PREEMPT_RT_PRESENCE=1`` to the installation command.
 
 First, install the necessary dependencies::
 
-    sudo apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex dwarves zstd libncurses-dev
+    sudo apt-get install build-essential bc curl debhelper dpkg-dev devscripts fakeroot libssl-dev libelf-dev bison flex cpio kmod rsync libncurses-dev
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
@@ -109,34 +109,41 @@ use ``curl`` to download the source files:
 
    .. code::
 
-      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
-      curl -SLO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
-      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
-      curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
+      curl -LO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
+      curl -LO https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
+      curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
+      curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
 
 .. note::
    For Ubuntu 18.04 tested with the kernel version 5.4.19:
 
    .. code::
 
-     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.xz
-     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.sign
-     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.xz
-     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.sign
+     curl -LO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.sign
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.sign
 
 .. note::
    For Ubuntu 20.04 tested with the kernel version 5.9.1:
 
    .. code::
 
-     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.xz
-     curl -SLO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.sign
-     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.xz
-     curl -SLO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.sign
-
+     curl -LO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.sign
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.sign
 
 .. note::
    For Ubuntu 22.04, we recommend using the `Ubuntu Pro real-time kernel <https://ubuntu.com/real-time>`_. After enabling it, you can skip directly to :ref:`installation-real-time`.
+   In case you do not want to use Ubuntu Pro, you can proceed as for the other versions (tested with the kernel version 6.8.0):
+
+   .. code::
+
+     curl -LO https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.8.tar.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.8.tar.sign
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/6.8/older/patch-6.8-rt8.patch.xz
+     curl -LO https://www.kernel.org/pub/linux/kernel/projects/rt/6.8/older/patch-6.8-rt8.patch.sign
 
 And decompress them with::
 
@@ -210,23 +217,27 @@ Next copy your currently booted kernel configuration as the default config for t
 
     cp -v /boot/config-$(uname -r) .config
 
+Exclude the debug information from the kernel files to save space::
+
+    scripts/config --disable DEBUG_INFO
+    scripts/config --disable DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT
+    scripts/config --disable DEBUG_KERNEL
+
+Disable the system-wide ring of trusted keys::
+
+    scripts/config --disable SYSTEM_TRUSTED_KEYS
+    scripts/config --disable SYSTEM_REVOCATION_LIST
+
+Activate the Fully Preemptible Kernel (Real-Time)::
+
+    scripts/config --disable PREEMPT_NONE
+    scripts/config --disable PREEMPT_VOLUNTARY
+    scripts/config --disable PREEMPT
+    scripts/config --enable PREEMPT_RT
+
 Now you can use this config as the default to configure the build::
 
     make olddefconfig
-    make menuconfig
-
-The second command brings up a terminal interface in which you can configure the preemption model. Navigate with the
-arrow keys to *General Setup* > *Preemption Model* and select *Fully Preemptible Kernel (Real-Time)*.
-
-After that navigate to *Cryptographic API* > *Certificates for signature checking*
-(at the very bottom of the list) > *Provide system-wide ring of trusted keys* >
-*Additional X.509 keys for default system keyring*
-
-Remove the "debian/canonical-certs.pem" from the prompt and press Ok. Save this
-configuration to ``.config`` and exit the TUI.
-
-.. note::
-   If you prefer GUIs over TUIs use ``make xconfig`` instead of ``make menuconfig``
 
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
@@ -237,7 +248,7 @@ Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
 packages without the ``dbg`` suffix. To install::
 
-    sudo dpkg -i ../linux-headers-*.deb ../linux-image-*.deb
+    sudo IGNORE_PREEMPT_RT_PRESENCE=1 dpkg -i ../linux-headers-*.deb ../linux-image-*.deb
 
 Verifying the new kernel
 ^^^^^^^^^^^^^^^^^^^^^^^^
