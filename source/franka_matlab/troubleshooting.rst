@@ -33,6 +33,19 @@ with the terminal if it will be left unused.
     Fixing the "control_modes.h: No such file or directory error." by including any other
     block from the Franka Simulink Library.
 
+missing "MW_custom_RTOS_header.h"
+---------------------------------
+
+When working with the AI Companion or a NVIDIA Jetson platform, if you encounter an error
+releated to missing "MW_custom_RTOS_header.h", you can try forcing the NVIDIA Simulink Code Generation settings to reset:
+
+.. figure:: _static/ai_companion_jetson_trouble.png
+    :align: center
+    :figclass: align-center
+
+    Fixing the "missing MW_custom_RTOS_header.h" error by forcing the Simulink Jetson related 
+    settings to reset.
+
 libfranka reference
 -------------------
 .. hint::
