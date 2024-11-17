@@ -26,7 +26,7 @@ please visit the `Franka Emika System Requirements <https://frankaemika.github.i
 +------------------------+-------------------+------------------------+-------------------------------+
 
 .. note::
-   \*Starting with version 2.0.0, the toolbox includes prebuilt libfranka binaries, eliminating the need for manual installation.
+   \*Starting with version 2.0.0, the toolbox includes prebuilt libfranka, eliminating the need for manual installation.
 
 For detailed information about robot system requirements, see the `libfranka compatibility documentation <https://frankaemika.github.io/docs/compatibility.html>`_.
 
