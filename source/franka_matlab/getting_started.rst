@@ -55,8 +55,8 @@ The requirements for the solver settings for the Simulink model should be:
 * discrete (no continuous states)
 * With Fixed-step sixe (fundamental sample time) of `0.001`.
 
-Simulink Build & Deploy - Franka AI Companion  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Simulink Build & Deploy - Target PC: Franka AI Companion  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For building & deploying to the Franka AI Companion you can 
 use the following recommended workflow:
@@ -94,6 +94,14 @@ Set the `Device Address`, `Username` and `Password` which correspond to your doc
 
     "Board Parameters"
 
+It is recommended to select the "C++11" option in order to ensure compatibility with the MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms.
+
+.. figure:: _static/jetson_config_c++11.png
+    :align: center
+    :figclass: align-center
+
+    Select the "C++11" option.
+
 .. important::
 
     For setting the specific port in which the ssh server is exposed by the currently targeted docker
@@ -125,8 +133,8 @@ You can now "Build and Deploy" or "Monitor and Tune" for running the Simulink Mo
 
     "Build & Deploy" or "Monitor & Tune" for enabling the External Mode.
 
-Simulink Build & Deploy - Linux Host
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Simulink Build & Deploy - Target PC: Linux Host
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
 
