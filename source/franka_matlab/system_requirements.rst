@@ -34,22 +34,42 @@ MATLAB Coder Support Package for NVIDIA Jetson
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 **For working with the Franka AI Companion & NVIDIA Jetson platforms** please download and install the `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_.
 
-Target PC Franka AI Companion
------------------------------
+Target PC - AI Companion
+------------------------
 
-libfranka version support & system dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Franka Toolbox for MATLAB ships with precompiled libfranka which requires the following system dynamic libraries:
 
-+--------------+------------------------+------------------------+
-| Franka Robot | libfranka Version      | System Dependency      |
-+==============+========================+========================+
-| FER          | 0.9.2                  | libpoco-dev            |
-+--------------+------------------------+------------------------+
-| FR3          | 0.14.0                 | libpoco-dev, pinocchio |
-+--------------+------------------------+------------------------+
+precompiled libfranka system dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Target PC Real-Time Ubuntu Host PC (Host & Target PC are the same machine)
---------------------------------------------------------------------------
++--------------+------------------------+---------------------------------------------------+
+| Franka Robot | libfranka Version      | System Dependency                                 |
++==============+========================+===================================================+
+| FR3          | 0.14.0                 | libpoco-dev (1.8.0.1-1ubuntu4), pinocchio (2.7.1) |
++--------------+------------------------+---------------------------------------------------+
+| FER          | 0.9.2                  | libpoco-dev (1.8.0.1-1ubuntu4)                    |
++--------------+------------------------+---------------------------------------------------+
+
+
+To install the required version of libpoco-dev (1.8.0.1-1ubuntu4) on your system, you can use the following commands:
+
+.. code-block:: shell
+
+    sudo apt-get update
+    sudo apt-get install libpoco-dev=1.8.0.1-1ubuntu4
+
+For installing the required version of pinocchio (2.7.1), please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
+
+.. warning::
+
+    In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
+    For handling options, see :ref:`libfranka_handling_options`.
+
+
+Target PC - RT Linux Host
+-------------------------
+
+System requirements when the Host & Target PC are the same machine.
 
 System Requirements
 ^^^^^^^^^^^^^^^^^^^
@@ -79,18 +99,30 @@ in order for Matlab to reference the system dynamic libraries instead of the pre
     sudo apt install matlab-support
 
 
-libfranka version support & system dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+precompiled libfranka system dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Franka Toolbox for MATLAB supports the following libfranka versions:
+Franka Toolbox comes with prebuilt libfranka which requires the following system dynamic libraries:
 
-Franka Toolbox comes with prebuilt libfranka which require the following system dynamic libraries:
++--------------+------------------------+-------------------------------------------+
+| Franka Robot | libfranka Version      | System Dependency                         |
++==============+========================+===========================================+
+| FR3          | 0.14.0                 | libpoco-dev (1.11.0-3), pinocchio (3.0.0) |
++--------------+------------------------+-------------------------------------------+
+| FER          | 0.9.2                  | libpoco-dev (1.11.0-3)                    |
++--------------+------------------------+-------------------------------------------+
 
-+--------------+------------------------+------------------------+
-| Franka Robot | libfranka Version      | System Dependency      |
-+==============+========================+========================+
-| FER          | 0.9.2                  | libpoco-dev            |
-+--------------+------------------------+------------------------+
-| FR3          | 0.14.0                 | libpoco-dev, pinocchio |
-+--------------+------------------------+------------------------+
+To install the required version of libpoco-dev (1.11.0-3) on your system, you can use the following commands:
+
+.. code-block:: shell
+
+    sudo apt-get update
+    sudo apt-get install libpoco-dev=1.11.0-3
+
+For installing the required version of pinocchio (3.0.0), please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
+
+.. warning::
+
+    In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
+    For handling options, see :ref:`libfranka_handling_options`.
 

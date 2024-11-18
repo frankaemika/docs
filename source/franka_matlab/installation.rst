@@ -43,8 +43,11 @@ or for first-generation `FER` robots:
 
     franka_toolbox_install('<your_license_number>', 'fer');
 
-libfranka installation options for Target PC
---------------------------------------------
+
+.. _libfranka_handling_options:
+
+libfranka handling options for Target PC
+----------------------------------------
 
 libfranka
 ^^^^^^^^^
