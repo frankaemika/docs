@@ -43,23 +43,68 @@ or for first-generation `FER` robots:
 
     franka_toolbox_install('<your_license_number>', 'fer');
 
-
-.. _libfranka_handling_options:
-
-libfranka handling options for Target PC
-----------------------------------------
-
-libfranka
-^^^^^^^^^
-Starting with Franka Toolbox for MATLAB version 2.0.0, libfranka is included in the toolbox distribution. No separate installation is required.
-
 Uninstall Toolbox
 -----------------
 
-1. Clean up installation:
+1. Clean-up local permanent installation artifacts:
 
 .. code-block:: matlab
 
     franka_toolbox_uninstall();
 
 2. Remove the toolbox using MATLAB Add-Ons Manager.
+
+.. figure:: _static/franka_toolbox_uninstall.png
+    :align: center
+    :figclass: align-center
+    :scale: 60%
+
+    Uninstalling the Franka Toolbox.
+
+.. _libfranka_handling_options:
+
+libfranka handling options for Target PC
+----------------------------------------
+
+libfranka pre-built binaries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with Franka Toolbox for MATLAB version 2.0.0, libfranka is included in the toolbox distribution.
+
+There are dynamic dependencies for the precompiled libfranka on the Target PC, which need to be installed on the Target PC:
+
+1. :ref:`precompiled libfranka system dependencies for AI Companion<system_dependencies_precompiled_ai_companion>` section.
+2. :ref:`precompiled libfranka system dependencies for RT Linux Host<system_dependencies_precompiled_rt_linux_host>` section.   
+
+libfranka local (Toolbox scope) installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In case the system dependencies for the precompiled libfranka cannot be met, or if in case there are issues with the precompiled binaries, you can build and install libfranka from source, locally in the scope of the Franka Toolbox only.
+
+Start by installing the dependencies for the libfranka build:
+
+.. code-block:: bash
+
+    sudo apt remove "*libfranka*"
+    sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
+
+Then the whole process can be handled automatically by the toolbox. 
+
+You can execute the following command in MATLAB to start the auto-installation for the AI Companion:
+
+.. code-block:: matlab
+
+    franka_toolbox_libfranka_install_remote(<'0.9.2' | '0.14.0'>,'<user name>','<IP address>','<Port number (optional)>');
+
+or in case of an RT Linux Host:
+
+.. code-block:: matlab
+
+    franka_toolbox_libfranka_install(<'0.9.2' | '0.14.0'>, true);
+
+libfranka system-wide installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+libfranka can be also installed manually system-wide on the Target PC. For more details, please refer to the `libfranka README <https://github.com/frankaemika/libfranka/blob/main/README.md>`_.
+
+The system-wide installation has the highest priority during build over the local installation in the scope of the toolbox.

@@ -39,6 +39,8 @@ Target PC - AI Companion
 
 Franka Toolbox for MATLAB ships with precompiled libfranka which requires the following system dynamic libraries:
 
+.. _system_dependencies_precompiled_ai_companion:
+
 precompiled libfranka system dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -63,7 +65,7 @@ For installing the required version of pinocchio (2.7.1), please refer to the `P
 .. warning::
 
     In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
-    For handling options, see :ref:`libfranka_handling_options`.
+    For handling options, see :ref:`libfranka handling options for Target PC<libfranka_handling_options>`.
 
 
 Target PC - RT Linux Host
@@ -98,6 +100,7 @@ in order for Matlab to reference the system dynamic libraries instead of the pre
 
     sudo apt install matlab-support
 
+.. _system_dependencies_precompiled_rt_linux_host:
 
 precompiled libfranka system dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,5 +127,5 @@ For installing the required version of pinocchio (3.0.0), please refer to the `P
 .. warning::
 
     In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
-    For handling options, see :ref:`libfranka_handling_options`.
+    For handling options, see :ref:`libfranka handling options for Target PC<libfranka_handling_options>`.
 
