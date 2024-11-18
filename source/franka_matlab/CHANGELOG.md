@@ -1,7 +1,8 @@
 # Changelog:
 
-## 2.0.0 (tbd)
+## 2.0.0 (20-11-2024)
 
+   - **BREAKING** libfranka pre-built binaries now are contained in the project. No separate installation is required.
    - **BREAKING** New Simulink Model Blocks replacing the old single Model Block.
    - **BREAKING** Installation workflow and Simulink build system modification for supporting deployment to the Franka AI Companion.
    - **BREAKING** Toolbox renaming: Franka Toolbox for MATLAB. Scripts also now follow the shorter convention: franka_toolbox_<>.m
