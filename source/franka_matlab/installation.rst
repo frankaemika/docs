@@ -107,4 +107,16 @@ libfranka system-wide installation
 
 libfranka can be also installed manually system-wide on the Target PC. For more details, please refer to the `libfranka README <https://github.com/frankaemika/libfranka/blob/main/README.md>`_.
 
-The system-wide installation has the highest priority during build over the local installation in the scope of the toolbox.
+In case you prefer to build against the system-wide libfranka installation, you can do so by executing:
+
+.. code-block:: matlab
+
+    franka_toolbox_libfranka_system_installation_set(true);
+
+This will trigger the toolbox to build against the system-wide libfranka installation.
+
+For reverting back to the local installation in the scope of the toolbox, you can execute:
+
+.. code-block:: matlab
+
+    franka_toolbox_libfranka_system_installation_set(false);
