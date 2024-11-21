@@ -53,14 +53,14 @@ precompiled libfranka system dependencies
 +--------------+------------------------+---------------------------------------------------+
 
 
-To install the required version of libpoco-dev (1.8.0.1-1ubuntu4) on your system, you can use the following commands:
+To install the required version of libpoco-dev on your system, you can use the following commands:
 
 .. code-block:: shell
 
     sudo apt-get update
     sudo apt-get install libpoco-dev=1.8.0.1-1ubuntu4
 
-For installing the required version of pinocchio (2.7.1), please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
+For installing the required version of pinocchio, please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
 
 .. warning::
 
@@ -115,14 +115,14 @@ Franka Toolbox comes with prebuilt libfranka which requires the following system
 | FER          | 0.9.2                  | libpoco-dev (1.11.0-3)                    |
 +--------------+------------------------+-------------------------------------------+
 
-To install the required version of libpoco-dev (1.11.0-3) on your system, you can use the following commands:
+To install the required version of libpoco-dev on your system, you can use the following commands:
 
 .. code-block:: shell
 
     sudo apt-get update
     sudo apt-get install libpoco-dev=1.11.0-3
 
-For installing the required version of pinocchio (3.0.0), please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
+For installing the required version of pinocchio, please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
 
 .. warning::
 
