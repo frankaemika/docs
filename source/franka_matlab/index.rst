@@ -1,5 +1,5 @@
-Franka Toolbox for MATLAB 2.0.0
-===============================
+Franka Toolbox for MATLAB
+=========================
 
 The Franka Toolbox for MATLAB provides libraries and tools that integrate Franka robots with the MathWorks® software ecosystem.
 
