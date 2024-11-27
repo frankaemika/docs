@@ -5,10 +5,6 @@ Troubleshooting
     Checkout the `Franka Community <https://www.franka-community.de>`_  and the 
     `franka_matlab category <https://www.franka-community.de/c/franka-matlab/15>`_ for relevant posts or for creating new ones! 
 
-.. hint::
-    Before proceeding with the Franka MATLAB Toolbox, it would be a good practice to execute a couple of the libfranka examples, under the build/examples folder, in order to ensure that the libfranka 
-    installation has been succesful and that the system can operate under the Real-Time control constraints.
-
 control_modes.h: No such file or directory error.
 -------------------------------------------------
 
@@ -36,6 +32,19 @@ with the terminal if it will be left unused.
 
     Fixing the "control_modes.h: No such file or directory error." by including any other
     block from the Franka Simulink Library.
+
+missing "MW_custom_RTOS_header.h"
+---------------------------------
+
+When working with the AI Companion or a NVIDIA Jetson platform, if you encounter an error
+releated to missing "MW_custom_RTOS_header.h", you can try forcing the NVIDIA Simulink Code Generation settings to reset:
+
+.. figure:: _static/ai_companion_jetson_trouble.png
+    :align: center
+    :figclass: align-center
+
+    Fixing the "missing MW_custom_RTOS_header.h" error by forcing the Simulink Jetson related 
+    settings to reset.
 
 libfranka reference
 -------------------
