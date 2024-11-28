@@ -94,15 +94,16 @@ kernel. This section describes the procedure of patching a kernel to support
 
 First, install the necessary dependencies::
 
-    sudo apt-get install build-essential bc curl ca-certificates gnupg2 libssl-dev lsb-release libelf-dev bison flex dwarves zstd libncurses-dev
+    sudo apt-get install build-essential bc curl ca-certificates debhelper gnupg2 git libssl-dev lsb-release libelf-dev bison flex dwarves zstd libncurses-dev
 
 Then, you have to decide which kernel version to use. To find the one you are
 using currently, use ``uname -r``. Real-time patches are only available for
 select kernel versions, see
 https://www.kernel.org/pub/linux/kernel/projects/rt/. We recommend choosing the
-version closest to the one you currently use. If you choose a
-different version, simply substitute the numbers. Having decided on a version,
-use ``curl`` to download the source files:
+version ``uname -r`` shows. If there is no version for this kernel available chose the one closest to the one you currently use. 
+It might then be necessary to install the kernel sources for this version as well with: ``sudo apt install linux-headers-<version>-generic``.
+If you choose a different version, simply substitute the numbers. Be aware that if you use a kernel version ``x.x.0`` you have to download the version ``linux-x.x.tar.xz`` file.
+Having decided on a version, use ``curl`` to download the source files:
 
 .. note::
    For Ubuntu 16.04 tested with the kernel version 4.14.12:
@@ -222,7 +223,8 @@ After that navigate to *Cryptographic API* > *Certificates for signature checkin
 (at the very bottom of the list) > *Provide system-wide ring of trusted keys* >
 *Additional X.509 keys for default system keyring*
 
-Remove the "debian/canonical-certs.pem" from the prompt and press Ok. Save this
+Remove the "debian/canonical-certs.pem" from the prompt and press Ok. In the same menu there is an option called:
+*Provide system-wide ring of revocation certificates* remove this as well. Save this
 configuration to ``.config`` and exit the TUI.
 
 .. note::
@@ -231,7 +233,7 @@ configuration to ``.config`` and exit the TUI.
 Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
 multithreading option ``-j`` to the number of your CPU cores::
 
-    make -j$(nproc) deb-pkg
+    make -j$(nproc) bindeb-pkg
 
 Finally, you are ready to install the newly created package. The exact names
 depend on your environment, but you are looking for ``headers`` and ``images``
