@@ -37,28 +37,34 @@ MATLAB Coder Support Package for NVIDIA Jetson
 Target PC - AI Companion
 ------------------------
 
-Franka Toolbox for MATLAB ships with precompiled libfranka which requires the following system dynamic libraries:
-
 .. _system_dependencies_precompiled_ai_companion:
+
+The Franka Toolbox for MATLAB ships with prebuilt libfranka and other binaries which are built based on the following AI Companion Target PC Ubuntu version:
+
++-------------------------+---------------------------------------------+
+| Franka Toolbox Version  | Target PC Ubuntu Version (recommended)      |
++=========================+=============================================+
+| 2.0.0                   | 20.04 LTS                                   |
++-------------------------+---------------------------------------------+
 
 precompiled libfranka system dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-+--------------+------------------------+---------------------------------------------------+
-| Franka Robot | libfranka Version      | System Dependency                                 |
-+==============+========================+===================================================+
-| FR3          | 0.14.0                 | libpoco-dev (1.9.2-3ubuntu3), pinocchio (2.7.1)   |
-+--------------+------------------------+---------------------------------------------------+
-| FER          | 0.9.2                  | libpoco-dev (1.9.2-3ubuntu3)                      |
-+--------------+------------------------+---------------------------------------------------+
++--------------+------------------------+--------------------------------------------------------------------------+
+| Franka Robot | libfranka Version      | System Dependency                                                        |
++==============+========================+==========================================================================+
+| FR3          | 0.14.0                 | libpoco-dev (1.9.2-3ubuntu3 - Ubuntu-20.04 default), pinocchio (2.7.1)   |
++--------------+------------------------+--------------------------------------------------------------------------+
+| FER          | 0.9.2                  | libpoco-dev (1.9.2-3ubuntu3 - Ubuntu-20.04 default)                      |
++--------------+------------------------+--------------------------------------------------------------------------+
 
 
-To install the required version of libpoco-dev on your system, you can use the following commands:
+To install the required version of libpoco-dev on your system, you can use the following commands for Ubuntu-20.04:
 
 .. code-block:: shell
 
     sudo apt-get update
-    sudo apt-get install libpoco-dev=1.8.0.1-1ubuntu4
+    sudo apt-get install libpoco-dev
 
 For installing the required version of pinocchio, please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
 
@@ -84,11 +90,11 @@ Make sure that your target PC configuration complies with the following document
 
 The Franka Toolbox for MATLAB ships with prebuilt libfranka and other binaries which are built based on the following Target PC Ubuntu version:
 
-+-------------------------+---------------------------------------------+
-| Franka Toolbox Version  | Target PC Ubuntu Version (recommended)      |
-+=========================+=============================================+
-| 2.0.0                   | 22.04 LTS                                   |
-+-------------------------+---------------------------------------------+
++-------------------------+-----------------------------------------------------+
+| Franka Toolbox Version  | Target AI Companion PC Ubuntu Version (recommended) |
++=========================+=====================================================+
+| 2.0.0                   | 22.04 LTS                                           |
++-------------------------+-----------------------------------------------------+
 
 MATLAB Support Package for Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,20 +113,20 @@ precompiled libfranka system dependencies
 
 Franka Toolbox comes with prebuilt libfranka which requires the following system dynamic libraries:
 
-+--------------+------------------------+-------------------------------------------+
-| Franka Robot | libfranka Version      | System Dependency                         |
-+==============+========================+===========================================+
-| FR3          | 0.14.0                 | libpoco-dev (1.11.0-3), pinocchio (3.2.0) |
-+--------------+------------------------+-------------------------------------------+
-| FER          | 0.9.2                  | libpoco-dev (1.11.0-3)                    |
-+--------------+------------------------+-------------------------------------------+
++--------------+------------------------+-------------------------------------------------------------------+
+| Franka Robot | libfranka Version      | System Dependency                                                 |
++==============+========================+===================================================================+
+| FR3          | 0.14.0                 | libpoco-dev (1.11.0-3 - Ubuntu-22.04 default), pinocchio (3.2.0)  |
++--------------+------------------------+-------------------------------------------------------------------+
+| FER          | 0.9.2                  | libpoco-dev (1.11.0-3 - Ubuntu-22.04 default)                     |
++--------------+------------------------+-------------------------------------------------------------------+
 
-To install the required version of libpoco-dev on your system, you can use the following commands:
+To install the required version of libpoco-dev on your system, you can use the following commands for Ubuntu-22.04:
 
 .. code-block:: shell
 
     sudo apt-get update
-    sudo apt-get install libpoco-dev=1.11.0-3
+    sudo apt-get install libpoco-dev
 
 For installing the required version of pinocchio, please refer to the `Pinocchio installation documentation <https://stack-of-tasks.github.io/pinocchio/download.html>`_.
 
