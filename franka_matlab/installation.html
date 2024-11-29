@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting started" href="getting_started.html" />
+    <link rel="prev" title="System Requirements" href="system_requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2_changelog.html">franka_ros2 changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-1-direct-installation">Option 1: Direct Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option-2-programmatically">Option 2: Programmatically</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#license-management-activation">License Management &amp; Activation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generate-system-identifier">1. Generate System Identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtain-license">2. Obtain License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#activate-license">3. Activate License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#uninstall-toolbox">Uninstall Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libfranka-handling-options-for-target-pc">libfranka handling options for Target PC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libfranka-pre-built-binaries">libfranka pre-built binaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libfranka-local-toolbox-scope-installation">libfranka local (Toolbox scope) installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libfranka-system-wide-installation">libfranka system-wide installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Franka Library for MATLAB - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_matlab/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<section id="installation-methods">
+<h2>Installation Methods<a class="headerlink" href="#installation-methods" title="Permalink to this heading"></a></h2>
+<section id="option-1-direct-installation">
+<h3>Option 1: Direct Installation<a class="headerlink" href="#option-1-direct-installation" title="Permalink to this heading"></a></h3>
+<p>Drag and drop the <code class="docutils literal notranslate"><span class="pre">franka_toolbox.mltbx</span></code> file into your MATLAB Command Window and follow the installation prompts.</p>
+</section>
+<section id="option-2-programmatically">
+<h3>Option 2: Programmatically<a class="headerlink" href="#option-2-programmatically" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">uiopen</span><span class="p">(</span><span class="s">&#39;&lt;path to your franka.mltbx file&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license-management-activation">
+<h2>License Management &amp; Activation<a class="headerlink" href="#license-management-activation" title="Permalink to this heading"></a></h2>
+<section id="generate-system-identifier">
+<h3>1. Generate System Identifier<a class="headerlink" href="#generate-system-identifier" title="Permalink to this heading"></a></h3>
+<p>Execute the following command in MATLAB to generate your system’s unique identifier:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_uid_gen</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="obtain-license">
+<h3>2. Obtain License<a class="headerlink" href="#obtain-license" title="Permalink to this heading"></a></h3>
+<p>Contact Franka Robotics with your generated identifier to receive your license number.</p>
+</section>
+<section id="activate-license">
+<h3>3. Activate License<a class="headerlink" href="#activate-license" title="Permalink to this heading"></a></h3>
+<p>For Franka Research 3 robots:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_install</span><span class="p">(</span><span class="s">&#39;&lt;your_license_number&gt;&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or for first-generation <cite>FER</cite> robots:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_install</span><span class="p">(</span><span class="s">&#39;&lt;your_license_number&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;fer&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="uninstall-toolbox">
+<h2>Uninstall Toolbox<a class="headerlink" href="#uninstall-toolbox" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Clean-up local permanent installation artifacts:</p></li>
+</ol>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_uninstall</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Remove the toolbox using MATLAB Add-Ons Manager.</p></li>
+</ol>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/franka_toolbox_uninstall.png"><img alt="../_images/franka_toolbox_uninstall.png" src="../_images/franka_toolbox_uninstall.png" style="width: 451.8px; height: 141.6px;" /></a>
+<figcaption>
+<p><span class="caption-text">Uninstalling the Franka Toolbox.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="libfranka-handling-options-for-target-pc">
+<span id="libfranka-handling-options"></span><h2>libfranka handling options for Target PC<a class="headerlink" href="#libfranka-handling-options-for-target-pc" title="Permalink to this heading"></a></h2>
+<section id="libfranka-pre-built-binaries">
+<h3>libfranka pre-built binaries<a class="headerlink" href="#libfranka-pre-built-binaries" title="Permalink to this heading"></a></h3>
+<p>Starting with Franka Toolbox for MATLAB version 2.0.0, libfranka is included in the toolbox distribution.</p>
+<p>There are dynamic dependencies for the precompiled libfranka on the Target PC, which need to be installed on the Target PC:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="system_requirements.html#system-dependencies-precompiled-ai-companion"><span class="std std-ref">precompiled libfranka system dependencies for AI Companion</span></a> section.</p></li>
+<li><p><a class="reference internal" href="system_requirements.html#system-dependencies-precompiled-rt-linux-host"><span class="std std-ref">precompiled libfranka system dependencies for RT Linux Host</span></a> section.</p></li>
+</ol>
+</section>
+<section id="libfranka-local-toolbox-scope-installation">
+<h3>libfranka local (Toolbox scope) installation<a class="headerlink" href="#libfranka-local-toolbox-scope-installation" title="Permalink to this heading"></a></h3>
+<p>In case the system dependencies for the precompiled libfranka cannot be met, or if in case there are issues with the precompiled binaries, you can build and install libfranka from source, locally in the scope of the Franka Toolbox only.</p>
+<p>Start by installing the dependencies for the libfranka build:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt remove <span class="s2">&quot;*libfranka*&quot;</span>
+sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
+</pre></div>
+</div>
+<p>Then the whole process can be handled automatically by the toolbox.</p>
+<p>You can execute the following command in MATLAB to start the auto-installation for the AI Companion:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_libfranka_install_remote</span><span class="p">(</span><span class="o">&lt;</span><span class="s">&#39;0.9.2&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;0.14.0&#39;</span><span class="o">&gt;</span><span class="p">,</span><span class="s">&#39;&lt;user name&gt;&#39;</span><span class="p">,</span><span class="s">&#39;&lt;IP address&gt;&#39;</span><span class="p">,</span><span class="s">&#39;&lt;Port number (optional)&gt;&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or in case of an RT Linux Host:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_libfranka_install</span><span class="p">(</span><span class="o">&lt;</span><span class="s">&#39;0.9.2&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;0.14.0&#39;</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="libfranka-system-wide-installation">
+<h3>libfranka system-wide installation<a class="headerlink" href="#libfranka-system-wide-installation" title="Permalink to this heading"></a></h3>
+<p>libfranka can be also installed manually system-wide on the Target PC. For more details, please refer to the <a class="reference external" href="https://github.com/frankaemika/libfranka/blob/main/README.md">libfranka README</a>.</p>
+<p>In case you prefer to build against the system-wide libfranka installation, you can do so by executing:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_libfranka_system_installation_set</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This will trigger the toolbox to build against the system-wide libfranka installation.</p>
+<p>For reverting back to the local installation in the scope of the toolbox, you can execute:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_libfranka_system_installation_set</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system_requirements.html" class="btn btn-neutral float-left" title="System Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

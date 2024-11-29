@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_ros2 changelog &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Franka Toolbox for MATLAB" href="franka_matlab/index.html" />
+    <link rel="prev" title="franka_ros2" href="franka_ros2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2.html">franka_ros2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">franka_ros2 changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.1.11 - 2023-12-20</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.1.10 - 2023-12-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">0.1.9 - 2023-12-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">0.1.8 - 2023-11-16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">0.1.7 - 2023-11-10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">0.1.6 - 2023-11-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">0.1.5 - 2023-10-13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">0.1.4 - 2023-09-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">0.1.3 - 2023-08-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">0.1.2 - 2023-08-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">0.1.1 - 2023-08-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">0.1.0 - 2023-07-28</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>franka_ros2 changelog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/franka_ros2_changelog.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-ros2-changelog">
+<h1>franka_ros2 changelog<a class="headerlink" href="#franka-ros2-changelog" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>0.1.11 - 2023-12-20<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2, requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_example_controllers: Add a joint impedance example using OrocosKDL(LMA-ik) through MoveIt service.</p></li>
+<li><p>franka_hardware: Register initial joint positions and cartesian pose state interface without having running command interfaces.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.1.10 - 2023-12-04<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>Adapted the franka robot state broadcaster to use ROS 2 message types</p></li>
+<li><p>Adapted the Cartesian velocity command interface to use Eigen types</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.1.9 - 2023-12-04<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: add state interfaces for initial position, cartesian pose and elbow.</p></li>
+<li><p>franka_hardware: support cartesian pose interface.</p></li>
+<li><p>franka_semantic_component: support cartesian pose interface.</p></li>
+<li><p>franka_example_controllers: add cartesian pose example controller</p></li>
+<li><p>franka_example_controllers: add cartesian elbow controller</p></li>
+<li><p>franka_example_controllers: add cartesian orientation controller</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>0.1.8 - 2023-11-16<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: add unit tests for robot class.</p></li>
+<li><p>joint_trajectory_controller: hotfix add joint patched old JTC back.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>0.1.7 - 2023-11-10<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: joint position command interface supported</p></li>
+<li><p>franka_hardware: controller initializer automatically acknowledges error, if arm is in reflex mode</p></li>
+<li><p>franka_example_controllers: joint position example controller provided</p></li>
+<li><p>franka_example_controllers: fix second start bug with the example controllers</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>0.1.6 - 2023-11-03<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: support for cartesian velocity command interface</p></li>
+<li><p>franka_semantic_component: implemented cartesian velocity interface</p></li>
+<li><p>franka_example_controllers: implement cartesian velocity example controller</p></li>
+<li><p>franka_example_controllers: implement elbow example controller</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>0.1.5 - 2023-10-13<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: support joint velocity command interface</p></li>
+<li><p>franka_example_controllers: implement joint velocity example controller</p></li>
+<li><p>franka_description: add velocity command interface to the control tag</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>0.1.4 - 2023-09-26<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: adapt to libfranka active control v0.12.1</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>0.1.3 - 2023-08-24<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: hotfix start controller when user claims the command interface</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>0.1.2 - 2023-08-21<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: implement non-realtime parameter services</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>0.1.1 - 2023-08-21<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_hardware: uses updated libfranka version providing the possibility to have the control loop on the ROS side</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>0.1.0 - 2023-07-28<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.10.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>franka_bringup: franka_robot_state broadcaster added to franka.launch.py.</p></li>
+<li><p>franka_example_controllers: model printing read only controller implemented</p></li>
+<li><p>franka_robot_model: semantic component to access robot model parameters.</p></li>
+<li><p>franka_msgs: franka robot state msg added</p></li>
+<li><p>franka_robot_state: broadcaster publishes robot state.</p></li>
+</ul>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>CI tests in Jenkins.</p></li>
+<li><p>joint_effort_trajectory_controller package that contains a version of the
+joint_trajectory_controller that can use the torque interface.
+<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/225">See this PR</a></p></li>
+<li><p>franka_bringup package that contains various launch files to start controller examples or Moveit2.</p></li>
+<li><p>franka_moveit_config package that contains a minimal moveit config to control the robot.</p></li>
+<li><p>franka_example_controllers package that contains some example controllers to use.</p></li>
+<li><p>franka_hardware package that contains a plugin to access the robot.</p></li>
+<li><p>franka_msgs package that contains common message, service and action type definitions.</p></li>
+<li><p>franka_description package that contains all meshes and xacro files.</p></li>
+<li><p>franka_gripper package that offers action and service interfaces to use the Franka Hand gripper.</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>franka_hardware Fix the mismatched joint state interface type logger error message.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="franka_ros2.html" class="btn btn-neutral float-left" title="franka_ros2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="franka_matlab/index.html" class="btn btn-neutral float-right" title="Franka Toolbox for MATLAB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

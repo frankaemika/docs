@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compatible versions &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation on Linux" href="installation_linux.html" />
+    <link rel="prev" title="Minimum system and network requirements" href="requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Compatible versions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compatibility-with-libfranka">Compatibility with libfranka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compatibility-with-the-kernel">Compatibility with the kernel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_windows.html">Installation on Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka_changelog.html">libfranka changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros_changelog.html">franka_ros changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2_changelog.html">franka_ros2 changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Compatible versions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/compatibility.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="compatible-versions">
+<h1>Compatible versions<a class="headerlink" href="#compatible-versions" title="Permalink to this heading"></a></h1>
+<section id="compatibility-with-libfranka">
+<span id="compatibility-libfranka"></span><h2>Compatibility with libfranka<a class="headerlink" href="#compatibility-with-libfranka" title="Permalink to this heading"></a></h2>
+<p>Various versions of compatible components are available.
+The table below offers an overview, with a recommendation to utilize up-to-date versions whenever possible.
+The symbol ‘&gt;= ‘ indicates that compatibility with newer robot system versions has not been tested,
+implying that compatibility is not guaranteed (e.g., libfranka 0.2.0 may not be compatible with robot system version 4.0.0).</p>
+<p>The Robot system versions 2.x.x are not listed in the table below, but they are included as compatible with Robot system version &gt;= 1.3.0.
+Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Robot system version</p></th>
+<th class="head"><p>libfranka version</p></th>
+<th class="head"><p>Robot / Gripper
+Server version</p></th>
+<th class="head"><p>franka_ros2 version</p></th>
+<th class="head"><p>franka_description</p></th>
+<th class="head"><p>Ubuntu / ROS 2</p></th>
+<th class="head"><p>franka_ros version</p></th>
+<th class="head"><p>Ubuntu / ROS 1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&gt;= 5.7.0 (FR3)</p></td>
+<td><p>&gt;= 0.14.0</p></td>
+<td><p>8 / 3</p></td>
+<td></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 5.5.0 (FR3)</p></td>
+<td><p>&gt;= 0.13.3</p></td>
+<td><p>7 / 3</p></td>
+<td><p>&gt;= v0.1.15</p></td>
+<td><p>&gt;= 0.3.0</p></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 5.5.0 (FR3)</p></td>
+<td><p>&gt;= 0.13.3</p></td>
+<td><p>7 / 3</p></td>
+<td></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 5.2.0 (FR3)</p></td>
+<td><p>&gt;= 0.13.0</p></td>
+<td><p>6 / 3</p></td>
+<td><p>&gt;= v0.1.8</p></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 5.2.0 (FR3)</p></td>
+<td><p>&gt;= 0.12.1</p></td>
+<td><p>6 / 3</p></td>
+<td><p>&gt;= v0.1.6</p></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 5.2.0 (FR3)</p></td>
+<td><p>&gt;= 0.11.0</p></td>
+<td><p>6 / 3</p></td>
+<td><p>&gt;= v0.1.3</p></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 5.2.0 (FR3)</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>6 / 3</p></td>
+<td><p>&gt;= v0.1.0</p></td>
+<td></td>
+<td><p>22.04 / humble</p></td>
+<td><p>&gt;= 0.10.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 4.2.1 (FER)</p></td>
+<td><p>&gt;= 0.9.1 &lt; 0.10.0</p></td>
+<td><p>5 / 3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>&gt;= 0.8.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 4.0.0 (FER)</p></td>
+<td><p>&gt;= 0.8.0</p></td>
+<td><p>4 / 3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>&gt;= 0.8.0</p></td>
+<td><p>20.04 / noetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 3.0.0 (FER)</p></td>
+<td><p>0.7.1</p></td>
+<td><p>3 / 3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>0.7.0</p></td>
+<td><p>18.04 / melodic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 1.3.0 (FER)</p></td>
+<td><p>0.5.0</p></td>
+<td><p>3 / 2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>0.6.0</p></td>
+<td><p>16.04 / kinetic</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;= 1.2.0 (FER)</p></td>
+<td><p>0.3.0</p></td>
+<td><p>2 / 2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>0.4.0</p></td>
+<td><p>16.04 / kinetic</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;= 1.1.0 (FER)</p></td>
+<td><p>0.2.0</p></td>
+<td><p>2 / 1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/robot/service_types.h">Robot version line 17</a>
+and <a class="reference external" href="https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/gripper/types.h">Gripper version line 17</a>
+are part of libfranka-common repository, a submodule of libfranka repository.</p>
+<p>Franka MATLAB® compatible versions are located <span class="xref std std-ref">here</span>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Franka Robotics currently does not provide any support for Windows or Arm</p>
+</div>
+</section>
+<section id="compatibility-with-the-kernel">
+<h2>Compatibility with the kernel<a class="headerlink" href="#compatibility-with-the-kernel" title="Permalink to this heading"></a></h2>
+<p>There are different kernels, which are compatible with different Ubuntu system versions.
+The following table gives an overview of recommended Kernels.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Kernel version</p></th>
+<th class="head"><p>Ubuntu</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pro Kernel</p></td>
+<td><p>22.04 (Jammy Jellyfish)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.9.1</p></td>
+<td><p>20.04 (Focal Fossa)</p></td>
+</tr>
+<tr class="row-even"><td><p>5.4.19</p></td>
+<td><p>18.04 (Bionic)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.14.12</p></td>
+<td><p>16.04 (Xenial Xerus)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="requirements.html" class="btn btn-neutral float-left" title="Minimum system and network requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation_linux.html" class="btn btn-neutral float-right" title="Installation on Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
