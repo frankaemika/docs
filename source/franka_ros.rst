@@ -916,7 +916,7 @@ all seven joints in your URDF:
     </transmission>
 
 When your controller accesses the `robot state
-<https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_ via the ``FrankaStateInterface`` it can
+<https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`_ via the ``FrankaStateInterface`` it can
 expect the following values to be simulated:
 
 +---+----------------------------------+------------------------------------------------------------------------+

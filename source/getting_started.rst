@@ -252,7 +252,7 @@ Change to the build directory of ``libfranka`` and execute the example:
 
 The program will print the current state of the robot to the console and terminate after a few
 iterations. The fields are explained in the
-`libfranka API documentation <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_.
+`libfranka API documentation <https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`_.
 
 Example output:
 

@@ -18,6 +18,8 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
 | Robot system version | libfranka version | Robot / Gripper |franka_ros2 version| franka_description| Ubuntu / ROS 2    | franka_ros version| Ubuntu / ROS 1    |
 |                      |                   | Server version  |                   |                   |                   |                   |                   |
 +======================+===================+=================+===================+===================+===================+===================+===================+
+| >= 5.7.2 (FR3)       | >= 0.15.0         | 9 / 3           | >= 0.1.16         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
++----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
 | >= 5.7.0 (FR3)       | >= 0.14.0         | 8 / 3           |                   |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
 +----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
 | >= 5.5.0 (FR3)       | >= 0.13.3         | 7 / 3           | >= v0.1.15        | >= 0.3.0          | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
@@ -45,10 +47,10 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
 | >= 1.1.0 (FER)       | 0.2.0             | 2 / 1           |                   |                   |                   |                   |                   |
 +----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
 
-`Robot version line 17
-<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/robot/service_types.h>`_
+`Robot version line 19
+<https://github.com/frankaemika/libfranka-common/blob/fr3-develop/include/research_interface/robot/service_types.h>`_
 and `Gripper version line 17
-<https://github.com/frankaemika/libfranka-common/blob/master/include/research_interface/gripper/types.h>`_
+<https://github.com/frankaemika/libfranka-common/blob/fr3-develop/include/research_interface/gripper/types.h>`_
 are part of libfranka-common repository, a submodule of libfranka repository.
 
 Franka MATLAB® compatible versions are located :ref:`here<compatibility-franka-matlab>`.
