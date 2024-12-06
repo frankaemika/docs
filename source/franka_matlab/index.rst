@@ -31,6 +31,7 @@ The toolbox comprises two main components:
    :maxdepth: 2
    :caption: Contents:
 
+   compatibility
    system_requirements
    installation
    getting_started
