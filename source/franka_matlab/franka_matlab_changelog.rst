@@ -1,5 +1,5 @@
-Franka MATLAB Toolbox changelog
-================================
+Franka Toolbox for MATLAB changelog
+===================================
 
 .. include:: ../franka_matlab/CHANGELOG.md
    :parser: myst_parser.sphinx_
