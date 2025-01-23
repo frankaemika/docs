@@ -46,7 +46,6 @@ The source code of this documentation is also `available online
    requirements
    compatibility
    installation_linux
-   installation_windows
    getting_started
    libfranka
    libfranka_changelog

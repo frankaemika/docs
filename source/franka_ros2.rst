@@ -64,6 +64,17 @@ It sends zero as torque command to all joints, which means that the robot only c
 
     ros2 launch franka_bringup gravity_compensation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
 
+Gripper Example
+^^^^^^^^^^^^^^^
+
+Demonstrates the Franka *Action Interface* for controlling the Franka Hand (aka: Gripper). The controller submits *Goals* to repeatedly close, then reopen, the gripper given a hard-coded target grasp size with epsilon. It evaluates whether the grasp is successful or
+failed based on the object's size and the defined tolerances.
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup gripper_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+
+
 Joint Impedance Example
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -98,22 +109,6 @@ Joint4 body jacobian and end-effector jacobian with respect to the base frame.
 Joint Position Example
 ^^^^^^^^^^^^^^^^^^^^^^
 This example sends periodic position commands to the robot.
-
-.. important::
-    The position trajectory needs to start from the initial position of the robot.
-
-To read the start position of the robot, you can read claim the `initial_joint_position`.
-state interface values before starting to send any commands.
-
-.. code-block:: cpp
-
-  if (initialization_flag_) {
-    for (size_t i = 0; i < 7; ++i) {
-      initial_q_.at(i) = state_interface[i].get_value();
-    }
-    initialization_flag_ = false;
-  }
-
 
 .. code-block:: shell
 
