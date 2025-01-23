@@ -2,9 +2,8 @@
 
 [![Build Status][travis-status]][travis]
 
-To build the documentation, execute:
-
-    pip3 install --user -r requirements.txt
+To build the documentation, first build the container, then execute:
+    
     make html
 
 ## License

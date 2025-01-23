@@ -1,0 +1,25 @@
+{
+    "name": "GitHub Documentation Development Container",
+    "privileged": true,
+    "remoteUser": "user",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "documentation",
+    "workspaceFolder": "/workspace",
+    "initializeCommand": "echo \"USER_UID=$(id -u $USER)\nUSER_GID=$(id -g $USER)\" > .env",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                }
+            }
+        }
+    }
+}
