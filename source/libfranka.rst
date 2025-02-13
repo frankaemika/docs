@@ -1,8 +1,8 @@
 libfranka
 =========
 
-Before continuing with this chapter, please install or compile libfranka for :doc:`Linux <installation_linux>`
-or :doc:`Windows <installation_windows>`.
+Before continuing with this chapter, please install or compile libfranka for :doc:`Linux <installation_linux>`.
+
 API documentation for the latest version of ``libfranka`` is available at
 https://frankaemika.github.io/libfranka.
 

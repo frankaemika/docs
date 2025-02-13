@@ -1,8 +1,8 @@
 Getting started
 ===============
 
-After setting up the required software for :doc:`Linux <installation_linux>` or
-:doc:`Windows <installation_windows>`, it is time to connect to the robot and test the whole setup
+After setting up the required software for :doc:`Linux <installation_linux>`.
+It is time to connect to the robot and test the whole setup
 by using FCI to read the current robot state.
 
 Operating the robot

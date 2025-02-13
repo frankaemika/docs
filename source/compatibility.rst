@@ -14,38 +14,138 @@ implying that compatibility is not guaranteed (e.g., libfranka 0.2.0 may not be 
 The Robot system versions 2.x.x are not listed in the table below, but they are included as compatible with Robot system version >= 1.3.0.
 Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
 
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| Robot system version | libfranka version | Robot / Gripper |franka_ros2 version| franka_description| Ubuntu / ROS 2    | franka_ros version| Ubuntu / ROS 1    |
-|                      |                   | Server version  |                   |                   |                   |                   |                   |
-+======================+===================+=================+===================+===================+===================+===================+===================+
-| >= 5.7.2 (FR3)       | >= 0.15.0         | 9 / 3           | >= v1.0.0         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.7.0 (FR3)       | >= 0.14.0         | 8 / 3           |                   |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.5.0 (FR3)       | >= 0.13.3         | 7 / 3           | >= v0.1.15        | >= 0.3.0          | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.5.0 (FR3)       | >= 0.13.3         | 7 / 3           |                   |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.2.0 (FR3)       | >= 0.13.0         | 6 / 3           | >= v0.1.8         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.2.0 (FR3)       | >= 0.12.1         | 6 / 3           | >= v0.1.6         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.2.0 (FR3)       | >= 0.11.0         | 6 / 3           | >= v0.1.3         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 5.2.0 (FR3)       | >= 0.10.0         | 6 / 3           | >= v0.1.0         |                   | 22.04 / humble    | >= 0.10.0         | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 4.2.1 (FER)       | >= 0.9.1 < 0.10.0 | 5 / 3           |                   |                   |                   | >= 0.8.0          | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 4.0.0 (FER)       | >= 0.8.0          | 4 / 3           |                   |                   |                   | >= 0.8.0          | 20.04 / noetic    |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 3.0.0 (FER)       | 0.7.1             | 3 / 3           |                   |                   |                   | 0.7.0             | 18.04 / melodic   |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 1.3.0 (FER)       | 0.5.0             | 3 / 2           |                   |                   |                   | 0.6.0             | 16.04 / kinetic   |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 1.2.0 (FER)       | 0.3.0             | 2 / 2           |                   |                   |                   | 0.4.0             | 16.04 / kinetic   |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| >= 1.1.0 (FER)       | 0.2.0             | 2 / 1           |                   |                   |                   |                   |                   |
-+----------------------+-------------------+-----------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+.. raw:: html
+
+    <style>
+        .compatibility-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .robot-select {
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+        .compatibility-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .compatibility-table th, 
+        .compatibility-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .compatibility-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .compatibility-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .matrix {
+            display: none;
+        }
+        .matrix.active {
+            display: block;
+        }
+        .robot-description {
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+
+    <div class="compatibility-container">
+        <select class="robot-select" id="robotSelector" onchange="showCompatibility()">
+        </select>
+        <div class="robot-description" id="robotDescription"></div>
+        <div id="matrixContainer"></div>
+    </div>
+
+    <script src="_static/compatibility_data.js"></script>
+    <script>
+        // Populate the dropdown
+        const selector = document.getElementById('robotSelector');
+        
+        // Sort robot names to ensure Franka Research 3 is first
+        const robotNames = Object.keys(compatibilityData).sort((a, b) => {
+            if (a === 'Franka Research 3') return -1;
+            if (b === 'Franka Research 3') return 1;
+            return a.localeCompare(b);
+        });
+        
+        robotNames.forEach(robot => {
+            const option = document.createElement('option');
+            option.value = robot;
+            option.textContent = robot;
+            selector.appendChild(option);
+        });
+
+        // Set default selection to Franka Research 3
+        selector.value = 'Franka Research 3';
+        showCompatibility();  // Show the default selection immediately
+        
+        function createTable(robotData) {
+            const table = document.createElement('table');
+            table.className = 'compatibility-table';
+            
+            // Create header row
+            const headerRow = document.createElement('tr');
+            robotData.headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+            
+            // Create data rows
+            robotData.data.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+            });
+            
+            return table;
+        }
+
+        function showCompatibility() {
+            const selected = selector.value;
+            const container = document.getElementById('matrixContainer');
+            const descriptionElement = document.getElementById('robotDescription');
+            
+            // Clear previous content
+            container.innerHTML = '';
+            descriptionElement.textContent = '';
+            
+            if (selected && compatibilityData[selected]) {
+                // Show robot description
+                if (robotDescriptions[selected]) {
+                    descriptionElement.textContent = robotDescriptions[selected];
+                }
+                
+                // Create and show compatibility table
+                const table = createTable(compatibilityData[selected]);
+                container.appendChild(table);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showCompatibility();
+        });
+    </script>
 
 `Robot version line 19
 <https://github.com/frankaemika/libfranka-common/blob/fr3-develop/include/research_interface/robot/service_types.h>`_
