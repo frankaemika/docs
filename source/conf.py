@@ -31,30 +31,33 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.mathjax',
-    'sphinx.ext.todo',
-    'sphinx_reredirects',
-    'myst_parser'
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo",
+    "sphinx_reredirects",
+    "myst_parser",
 ]
 
 # TODO: set mathjax_path for offline support
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = 'Franka Control Interface (FCI)'
-copyright = '2023, Franka Robotics GmbH'
-author = 'Franka Robotics GmbH'
+project = "Franka Control Interface (FCI)"
+copyright = "2023, Franka Robotics GmbH"
+author = "Franka Robotics GmbH"
+
+# The version of libfranka that the documentation refers to
+libfranka_version = "0.15.0"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -70,7 +73,7 @@ author = 'Franka Robotics GmbH'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -78,7 +81,7 @@ language = 'en'
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'default'
+pygments_style = "default"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -89,7 +92,7 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -100,17 +103,17 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
-html_css_files = ['style_override.css']
+html_css_files = ["style_override.css"]
 
-html_favicon = '_static/favicon.png'
-html_logo = '_static/logo.svg'
+html_favicon = "_static/favicon.png"
+html_logo = "_static/logo.svg"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'fci-docs'
+htmlhelp_basename = "fci-docs"
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -118,16 +121,13 @@ htmlhelp_basename = 'fci-docs'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    'papersize': 'a4paper',
-
+    "papersize": "a4paper",
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -137,9 +137,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'fci.tex',
-     'Franka Control Interface Documentation',
-     author, 'manual'),
+    (master_doc, "fci.tex", "Franka Control Interface Documentation", author, "manual"),
 ]
 
 
@@ -147,10 +145,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'fci',
-     'Franka Control Interface Documentation', [author], 1)
-]
+man_pages = [(master_doc, "fci", "Franka Control Interface Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -159,8 +154,47 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'fci',
-     'Franka Control Interface Documentation', author,
-     'fci', 'Franka Control Interface',
-     'Miscellaneous'),
+    (
+        master_doc,
+        "fci",
+        "Franka Control Interface Documentation",
+        author,
+        "fci",
+        "Franka Control Interface",
+        "Miscellaneous",
+    ),
 ]
+
+from docutils import nodes
+
+
+def setup(app):
+    """Set up the Sphinx application."""
+    # Add variables that can be used in RST files
+    app.add_config_value("libfranka_version", libfranka_version, "env")
+
+    # Add a function to generate API documentation URLs
+    def api_url(text):
+        """Generate a URL for the libfranka API documentation."""
+        return f"https://frankaemika.github.io/libfranka/{libfranka_version}/{text}"
+
+    def api_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+        """Handle :api: role in RST.
+
+        The role can be used in two ways:
+        1. :api:`path_to_doc` - will use the path as both the URL and display text
+        2. :api:`display text|path_to_doc` - will use the path for URL but show display text
+        """
+        parts = text.split("|", 1)
+        if len(parts) == 2:
+            text, target = parts
+        else:
+            target = text
+            # Extract meaningful text from the target
+            text = target.split(".")[-2].split("_")[-1].title()
+
+        url = api_url(target)
+        node = nodes.reference(rawtext, text, refuri=url, **options)
+        return [node], []
+
+    app.add_role("api", api_role)

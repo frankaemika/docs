@@ -57,8 +57,7 @@ Concerning the Arm, some useful non-realtime commands are:
    happened in the robot.
 
 For a complete and fully specified list check the API documentation for the
-`Arm <https://frankaemika.github.io/libfranka/0.14.2/classfranka_1_1Robot.html>`__
-or the `Hand <https://frankaemika.github.io/libfranka/0.14.2/classfranka_1_1Gripper.html>`__.
+:api:`Robot|classfranka_1_1Robot.html` or the :api:`Gripper|classfranka_1_1Gripper.html`.
 
 All operations (non-realtime or realtime) on the Arm or the Hand are performed through the
 ``franka::Robot`` and ``franka::Gripper`` objects respectively. A connection to the Arm/Hand
@@ -394,8 +393,8 @@ It provides:
  * *Interface signals*: the last commanded and desired values and their derivatives,
    as explained in the previous subsection.
 
-For a complete list check the API of the ``franka::RobotState``
-`here <https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`__.
+For a complete list check the API of the ``franka::RobotState`` 
+:api:`RobotState|structfranka_1_1RobotState.html`.
 As shown in the the previous subsection, the robot state is always an input of all callback
 functions for control loops. However, if you wish to only read the robot state without controlling
 it, the functions ``read`` or ``readOnce`` can be used to gather it, e.g. for
@@ -433,11 +432,9 @@ The robot model library provides
 
 Note that after you load the model library, you can compute kinematic and dynamic parameters for
 an arbitrary robot state, not just the current one. You can also use the model library in a non
-realtime fashion, e.g. in an optimization loop. The libfranka examples include exemplary code
-`printing joint poses
-<https://frankaemika.github.io/libfranka/0.14.2/print_joint_poses_8cpp-example.html>`_
-or `computing jacobians and dynamic parameters
-<https://frankaemika.github.io/libfranka/0.14.2/cartesian_impedance_control_8cpp-example.html>`_.
+realtime fashion, e.g. in an optimization loop. The libfranka examples include exemplary code for
+:api:`printing joint poses|print_joint_poses_8cpp-example.html` or
+:api:`computing jacobians|cartesian_impedance_control_8cpp-example.html`.
 
 .. _control-errors:
 
@@ -447,8 +444,7 @@ Errors
 Using the FCI you will encounter several errors that happen either due to noncompliant
 commands sent by the user, due to communication problems or due to the robot behavior.
 The most relevant ones are detailed in the following subsections.
-For a complete list please check the `API documentation
-<https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1Errors.html>`_.
+For a complete list please check the API documentation at :api:`Errors|structfranka_1_1Errors.html`.
 
 .. hint::
 
