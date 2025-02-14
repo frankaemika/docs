@@ -148,7 +148,7 @@ as shown in this example
 
 All control loops are finished once the ``motion_finished`` flag of a realtime command is set
 to ``true``. An excerpt of the ``generate_joint_velocity_motion`` example included
-in the `libfranka examples <https://frankaemika.github.io/libfranka/0.14.2/examples.html>`__ is shown here
+in the :api:`libfranka examples|examples.html` is shown here
 
 .. code-block:: c++
 
@@ -204,7 +204,7 @@ compensated by the robot.
         });
 
 You can find examples for all interfaces and combinations of control loops in the
-`libfranka examples <https://frankaemika.github.io/libfranka/0.14.2/examples.html>`__. Prior to running
+:api:`examples|examples.html`. Prior to running
 the examples, verify that the robot has enough free space to move without colliding. Then, for
 instance for the ``generate_joint_velocity_motion`` example execute the following command from
 the ``libfranka`` build directory:

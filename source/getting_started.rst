@@ -251,8 +251,7 @@ Change to the build directory of ``libfranka`` and execute the example:
     On Windows, the easiest way is to copy the needed libraries into the same directory as the executable.
 
 The program will print the current state of the robot to the console and terminate after a few
-iterations. The fields are explained in the
-`libfranka API documentation <https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`_.
+iterations. The fields are explained in the :api:`RobotState|structfranka_1_1RobotState.html`.
 
 Example output:
 
