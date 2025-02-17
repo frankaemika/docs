@@ -915,8 +915,7 @@ all seven joints in your URDF:
       <actuator name="${arm_id}_motor7"><hardwareInterface>franka_hw/FrankaStateInterface</hardwareInterface></actuator>
     </transmission>
 
-When your controller accesses the `robot state
-<https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1RobotState.html>`_ via the ``FrankaStateInterface`` it can
+When your controller accesses the :api:`RobotState|structfranka_1_1RobotState.html` via the ``FrankaStateInterface`` it can
 expect the following values to be simulated:
 
 +---+----------------------------------+------------------------------------------------------------------------+
@@ -1166,7 +1165,7 @@ Possible claims to command interfaces are:
 |     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
 |       ``PositionJointInterface``                |       ``FrankaCartesianPoseInterface``       |
 |     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
-|       ``VelocityJointInterface``                |       ``FrankaCartesianVelocityInterface``   |
+|       ``VelocityJointInterface``                |     ``FrankaCartesianVelocityInterface``     |
 |     - ``EffortJointInterface`` +                |                                              |
 |       ``FrankaCartesianPoseInterface``          |                                              |
 |     - ``EffortJointInterface`` +                |                                              |
