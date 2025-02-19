@@ -16,10 +16,23 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+import json
+from pathlib import Path
+
+sys.path.insert(0, os.path.abspath("_static"))
+
+try:
+    from compatibility_data import COMPATIBILITY_DATA
+
+    print("Loaded compatibility data:", COMPATIBILITY_DATA)
+except ImportError as e:
+    print("Error loading compatibility data:", e)
+    COMPATIBILITY_DATA = {}
+
+# Make the data available to templates
+html_context = {"compatibility_data_json": COMPATIBILITY_DATA}
 
 # -- General configuration ------------------------------------------------
 
@@ -198,3 +211,6 @@ def setup(app):
         return [node], []
 
     app.add_role("api", api_role)
+
+    # Add jinja2 filters
+    app.add_config_value("compatibility_data_json", COMPATIBILITY_DATA, "html")

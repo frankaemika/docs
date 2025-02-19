@@ -3,3 +3,5 @@
 .vscode
 package-lock.json
 .env
+__pycache__
+source/_static/compatibility_data.js

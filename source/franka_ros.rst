@@ -1165,7 +1165,7 @@ Possible claims to command interfaces are:
 |     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
 |       ``PositionJointInterface``                |       ``FrankaCartesianPoseInterface``       |
 |     - ``EffortJointInterface`` +                |     - ``EffortJointInterface`` +             |
-|       ``VelocityJointInterface``                |     ``FrankaCartesianVelocityInterface``     |
+|       ``VelocityJointInterface``                |       ``FrankaCartesianVelocityInterface``   |
 |     - ``EffortJointInterface`` +                |                                              |
 |       ``FrankaCartesianPoseInterface``          |                                              |
 |     - ``EffortJointInterface`` +                |                                              |
