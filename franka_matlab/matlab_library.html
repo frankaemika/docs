@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franka Library for MATLAB - Reference &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Fanka Library for Simulink - Reference" href="simulink_library.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2.html">franka_ros2</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Franka Library for MATLAB - Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#frankarobot-class">FrankaRobot Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#automatic-error-recovery">Automatic Error Recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-joint-poses">Get Joint Poses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-robot-state">Get Robot State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-point-to-point-motion">Joint Point to Point Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-motion">Joint Trajectory Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-state">Gripper State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-homing">Gripper Homing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-grasp">Gripper Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-move">Gripper Move</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-stop">Gripper Stop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Franka Library for MATLAB - Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_matlab/matlab_library.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-library-for-matlab-reference">
+<span id="matlab-library"></span><h1>Franka Library for MATLAB - Reference<a class="headerlink" href="#franka-library-for-matlab-reference" title="Permalink to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In it’s current form, the MATLAB library is not officially
+supported for usage in combination with the Franka AI companion
+and it’s mainly purposed to be executed natively, in Linux Host PC with
+Real-Time Kernel.</p>
+</div>
+<section id="frankarobot-class">
+<h2>FrankaRobot Class<a class="headerlink" href="#frankarobot-class" title="Permalink to this heading"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">fr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FrankaRobot<span class="o">(</span>&lt;robot<span class="w"> </span>ip<span class="w"> </span>string&gt;<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="automatic-error-recovery">
+<h3>Automatic Error Recovery<a class="headerlink" href="#automatic-error-recovery" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.automatic_error_recovery<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will attempt an automatic error recovery .</p>
+</section>
+<section id="get-joint-poses">
+<h3>Get Joint Poses<a class="headerlink" href="#get-joint-poses" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">jp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fr.joint_poses<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will return a 7 element cell array with the current robot joint poses.</p>
+</section>
+<section id="get-robot-state">
+<h3>Get Robot State<a class="headerlink" href="#get-robot-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fr.robot_state<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will return a struct will the current robot state.</p>
+</section>
+<section id="joint-point-to-point-motion">
+<h3>Joint Point to Point Motion<a class="headerlink" href="#joint-point-to-point-motion" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.joint_point_to_point_motion<span class="o">(</span>&lt;<span class="m">7</span><span class="w"> </span>element<span class="w"> </span>double<span class="w"> </span>array<span class="w"> </span>with<span class="w"> </span>target<span class="w"> </span>configuration&gt;,<span class="w"> </span>&lt;<span class="m">0</span><span class="w"> </span>to<span class="w"> </span><span class="m">1</span><span class="w"> </span>scalar<span class="w"> </span>speed<span class="w"> </span>factor&gt;<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will move the robot into a desired joint configuration.</p>
+</section>
+<section id="joint-trajectory-motion">
+<h3>Joint Trajectory Motion<a class="headerlink" href="#joint-trajectory-motion" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.joint_trajectory_motion<span class="o">(</span>&lt;7xn<span class="w"> </span>double<span class="w"> </span>array<span class="w"> </span>with<span class="w"> </span>desired<span class="w"> </span>joint<span class="w"> </span>trajectory&gt;<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will move the robot based on the given desired joint trajectory.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that the current configuration of the robot maches the initial trajectory element <cite>q(1:7,1)</cite> that is passed in the function! Additionally make sure that
+the given trajectory is sufficiently smooth and continuous.</p>
+</div>
+</section>
+<section id="gripper-state">
+<h3>Gripper State<a class="headerlink" href="#gripper-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">gs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fr.gripper_state<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will return a struct with the current gripper state.</p>
+</section>
+<section id="gripper-homing">
+<h3>Gripper Homing<a class="headerlink" href="#gripper-homing" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.gripper_homing<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will perform a homing operation to the gripper and will return 1 if succesful.</p>
+</section>
+<section id="gripper-grasp">
+<h3>Gripper Grasp<a class="headerlink" href="#gripper-grasp" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.ripper_grasp<span class="o">(</span>width,<span class="w"> </span>speed,<span class="w"> </span>force,<span class="w"> </span>epsilon_inner,<span class="w"> </span>epsilon_outer<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will attempt a grasp and will return 1 if the object is grasped, 0 otherwise.</p>
+</section>
+<section id="gripper-move">
+<h3>Gripper Move<a class="headerlink" href="#gripper-move" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.gripper_move<span class="o">(</span>width,speed<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will move the gripper to a desired width position. Will return 1 if succesful, 0 otherwise.</p>
+</section>
+<section id="gripper-stop">
+<h3>Gripper Stop<a class="headerlink" href="#gripper-stop" title="Permalink to this heading"></a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fr.gripper_stop<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Will stop the current gripper operation. Will return 1 if succesful, 0 otherwise.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="simulink_library.html" class="btn btn-neutral float-left" title="Fanka Library for Simulink - Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
