@@ -6,6 +6,8 @@ Before continuing with this chapter, please install or compile libfranka for :do
 API documentation for the latest version of ``libfranka`` is available at
 https://frankaemika.github.io/libfranka.
 
+Libfranka changelog is available at `CHANGELOG.md <https://github.com/frankaemika/libfranka/blob/main/CHANGELOG.md>`_.
+
 .. figure:: _static/libfranka-architecture.png
     :align: center
     :figclass: align-center

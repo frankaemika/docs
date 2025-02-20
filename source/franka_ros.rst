@@ -6,6 +6,8 @@ franka_ros
 
 Before continuing with this chapter, please :doc:`install or compile franka_ros <installation_linux>`.
 
+You can access the changelog of franka_ros at `this link <https://github.com/frankaemika/franka_ros/blob/develop/CHANGELOG.md>`_
+
 .. figure:: _static/ros-architecture.png
     :align: center
     :figclass: align-center

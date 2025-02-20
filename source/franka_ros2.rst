@@ -4,6 +4,8 @@ franka_ros2
 
  ``franka_ros2`` is not supported on Windows.
 
+You can access the changelog of franka_ros2 at `this link <https://github.com/frankaemika/franka_ros2/blob/humble/CHANGELOG.rst>`_
+
 The `franka_ros2 repo <https://github.com/frankaemika/franka_ros2>`_ contains a ROS 2 integration of
 :doc:`libfranka <libfranka>`.
 

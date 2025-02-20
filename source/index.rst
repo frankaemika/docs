@@ -48,11 +48,8 @@ The source code of this documentation is also `available online
    installation_linux
    getting_started
    libfranka
-   libfranka_changelog
    franka_ros
-   franka_ros_changelog
    franka_ros2
-   franka_ros2_changelog
    franka_matlab/index
    franka_matlab/franka_matlab_changelog
    control_parameters
