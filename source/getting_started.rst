@@ -161,13 +161,6 @@ the robot from your workstation. To verify this, perform the
 :ref:`network-bandwidth-delay-test`. From now on, you can also access Desk
 through this address in your browser.
 
-Windows workstation network configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Setup a static IP address on the Windows workstation. Therefore, open **Control Panel** and go to
-**Network and Internet** > **Network and Sharing Center** > **Change adapter settings**.
-Right-click the network adapter and open **Properties**. Use the same example address and netmask
-as in the Linux workstation network configuration.
-
 .. _preparing_robot_in_desk:
 
 Preparing the robot for FCI usage in Desk
@@ -233,22 +226,9 @@ repository, you can instead read the instructions for
 
 Change to the build directory of ``libfranka`` and execute the example:
 
-*Linux*:
-
 .. code-block:: shell
 
     ./examples/echo_robot_state <fci-ip>
-
-*Windows*:
-
-.. code-block:: shell
-
-    cd /path/to/libfranka/build/examples/
-    echo_robot_state.exe <fci-ip>
-
-.. hint::
-    Before executing libfranka programms, make sure that the executables are able to find their runtime libraries.
-    On Windows, the easiest way is to copy the needed libraries into the same directory as the executable.
 
 The program will print the current state of the robot to the console and terminate after a few
 iterations. The fields are explained in the :api:`RobotState|structfranka_1_1RobotState.html`.
