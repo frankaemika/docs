@@ -36,6 +36,44 @@ If you do not have a robot you can still test your setup by running on a dummy h
 Wait until you can see the green ``You can start planning now!`` message from MoveIt inside the
 terminal. Then turn off the ``PlanningScene`` and turn it on again. After that turn on the ``MotionPlanning``.
 
+Namespace enabled launch files
+------------------------------
+
+To demonstrate how to launch the robot within a specified namespace, we provide an example launch file located at
+``franka_bringup/launch/example.launch.py``. 
+
+By default ``example.launch.py`` file is configured to read essential robot configuration details from a YAML file, ``franka.ns-config.yaml``,
+located in the franka_bringup/launch/ directory. You may provide a different YAML file by specifying the path to it in the command line.
+
+``franka.ns-config.yaml`` file specifies critical parameters, including:
+
+* The path to the robot's URDF file.
+* The namespace to be used for the robot instance.
+* Additional configuration details specific to the robot instance.
+
+example.launch.py "includes" ``franka.ns-launch.py`` which defines the core nodes typically required for robot operation..  
+
+The franka.ns-launch.py file, in turn, relies on ``ns-controllers.yaml`` to configure the ros2_controller framework.
+This configuration ensures that controllers are loaded in a namespace-agnostic manner, supporting consistent behavior across multiple namespaces.
+
+The ns-controllers.yaml file is designed to accommodate zero or more namespaces, provided all namespaces share the same node configuration parameters.
+
+Each of the configuration and launch files (franka.ns-config.yaml, example.launch.py, franka.ns-launch.py, and ns-controllers.yaml)
+contains detailed inline documentation to guide users through their structure and usage.  Further information about namespaces in ROS 2 can be found in the
+`ROS 2 documentation <https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Using-ROS2-Launch-For-Large-Projects.html#namespaces>`_.
+
+To execute any of the example controllers defined in ns-controllers.yaml, you can use the example.launch.py launch file and specify
+the desired controller name as a command-line argument. 
+
+First - modify ``franka.ns-config.yaml`` as appropriate for your setup.
+
+Then, for example, to run the *move_to_start_example_controller*, use the following command:
+
+.. code-block:: shell
+
+    ros2 launch franka_bringup example.launch.py controller_name:=move_to_start_example_controller
+
+
 
 Example Controllers
 -------------------
