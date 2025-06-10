@@ -10,7 +10,7 @@ MATLAB Version - Host PC OS Compatibility
 The Host PC is the machine responsible for running MATLAB and Simulink.
 
 +-------------------------+-------------------+----------------------------------------------------------------------------------------------------------+
-| Franka Toolbox Version  | MATLAB Version    | Host PC OS  / Ubuntu Version                                                                    |
+| Franka Toolbox Version  | MATLAB Version    | Host PC OS  / Ubuntu Version                                                                             |
 +=========================+===================+==========================================================================================================+
 | 2.0.0                   | R2022a or newer   |  [`Matlab System Requirements <https://www.mathworks.com/support/requirements/previous-releases.html>`_] |
 +-------------------------+-------------------+----------------------------------------------------------------------------------------------------------+
