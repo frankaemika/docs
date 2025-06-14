@@ -36,10 +36,16 @@ in order for Matlab to reference the system dynamic libraries instead of the pre
 
     sudo apt install matlab-support
 
-Target PC - AI Companion
-------------------------
+Target PC Requirements
+----------------------
+
+The Target PC is responsible for maintaing the real-time 1kHz control loop,
+all the same system requirements for running libfranka apply.
 
 .. _system_dependencies_precompiled_ai_companion:
+
+Precompiled libfranka and 3d party dependencies for the Target PC
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Franka Toolbox for MATLAB ships with a precompiled libfranka and all its 3d party dependencies for the Target PC and it should be able to execute out-of-the-box without additional installations,
 given that the Target PC is running a supported version of Ubuntu as defined below.
@@ -52,5 +58,5 @@ given that the Target PC is running a supported version of Ubuntu as defined bel
 
 .. warning::
 
-    In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
-    For handling options, see :ref:`libfranka handling options for Target PC<libfranka_handling_options>`.
+    In case of an alternative Target PC OS version, or in case of any issue with the Toolbox prebuilt dependencies, you can always manually build and install libfranka from source for your system.
+    Check the section :ref:`libfranka handling options for Target PC<libfranka_handling_options>` for more details, after the Toolbox installation steps.
