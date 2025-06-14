@@ -16,7 +16,7 @@ To browse the available examples, use the following command:
     :align: center
     :figclass: align-center
 
-    Franka MATLAB Toolbox Examples Navigator.
+    Franka Toolbox for MATLAB Examples Navigator.
 
 .. figure:: _static/cartesian_impedance_control_overview.png
     :align: center
