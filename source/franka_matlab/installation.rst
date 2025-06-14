@@ -57,8 +57,8 @@ Uninstall
 
 .. _libfranka_handling_options:
 
-Switching to system-wide libfranka installation
------------------------------------------------
+Switching to system-wide libfranka installation (optional)
+----------------------------------------------------------
 
 As mentioned in the :ref:`system_dependencies_precompiled_ai_companion` section, the Toolbox ships with a precompiled libfranka and all its 3d party dependencies for the Target PC.
 
