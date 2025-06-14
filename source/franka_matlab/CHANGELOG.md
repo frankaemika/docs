@@ -1,5 +1,11 @@
 # Changelog:
 
+## 3.0.0 (16-05-2025)
+   
+   - **BREAKING** New FrankaRobot() implementation for supporting robot control through AI Companion/Jetson and a non-real time Host PC Windows/Linux
+   - MATLAB & Simulink implementation for the Franka Vacuum Gripper added.
+   - Default project pre-binaries for libfranka 0.15.0 bundled with all 3d party runntime dependencies.The project should be able to execute out-of-the-box without additional installations.
+
 ## 2.0.0 (20-11-2024)
 
    - **BREAKING** libfranka pre-built binaries now are contained in the project. No separate installation is required.
