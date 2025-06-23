@@ -5,9 +5,9 @@ This script reads CSV files containing compatibility information for different r
 and generates a JavaScript file with the data structured for use in the documentation.
 """
 
-import os
 import csv
 import json
+import os
 from pathlib import Path
 
 
@@ -41,7 +41,7 @@ def generate_js():
     # Robot descriptions
     robot_descriptions = {
         "Franka Research 3": "Latest generation Franka Robot with ROS 2 support",
-        "FER": "Previous generation Franka Emika Robot",
+        "FER": "Previous generation Franka Robotics Robot",
     }
 
     # Generate JavaScript content

@@ -18,9 +18,9 @@ The Host PC is the machine responsible for running MATLAB and Simulink.
 MATLAB Toolbox Dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following Mathworks products are required: 
+The following Mathworks products are required:
 
-* `MATLAB <https://www.mathworks.com/products/matlab.html>`_ 
+* `MATLAB <https://www.mathworks.com/products/matlab.html>`_
 * `Simulink <https://www.mathworks.com/products/simulink.html>`_
 * `Simulink Coder <https://www.mathworks.com/products/simulink-coder.html>`_
 * `Matlab Coder <https://www.mathworks.com/products/matlab-coder.html>`_
@@ -84,9 +84,9 @@ System Requirements
 
 Make sure that your target PC configuration complies with the following documentation.
 
-1. `Franka Robot System Compatibility Documentation <https://frankaemika.github.io/docs/compatibility.html>`_ .
-2. `System Requirements <https://frankaemika.github.io/docs/requirements.html#>`_ .
-3. `Setting Up the Real-Time Kernel <https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
+1. `Franka Robot System Compatibility Documentation <https://frankarobotics.github.io/docs/compatibility.html>`_ .
+2. `System Requirements <https://frankarobotics.github.io/docs/requirements.html#>`_ .
+3. `Setting Up the Real-Time Kernel <https://frankarobotics.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel>`_.
 
 The Franka Toolbox for MATLAB ships with prebuilt libfranka and other binaries which are built based on the following Target PC Ubuntu version:
 
@@ -98,8 +98,8 @@ The Franka Toolbox for MATLAB ships with prebuilt libfranka and other binaries w
 
 MATLAB Support Package for Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In case where there is a single Ubuntu Host & Target machine, please ensure that 
-you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ 
+In case where there is a single Ubuntu Host & Target machine, please ensure that
+you have installed the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_
 in order for Matlab to reference the system dynamic libraries instead of the precompiled ones that it ships with:
 
 .. code-block:: shell
@@ -134,4 +134,3 @@ For installing the required version of pinocchio, please refer to the `Pinocchio
 
     In case the system dependencies cannot be met for libfranka, you can build and install libfranka from source, system-wide or locally in the scope of the Franka Toolbox only.
     For handling options, see :ref:`libfranka handling options for Target PC<libfranka_handling_options>`.
-

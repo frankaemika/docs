@@ -27,7 +27,7 @@ Installing from the ROS repositories
 .. hint::
 
     These packages might not always be up-to-date, as they are only synced at certain intervals.
-    Read the changelog at https://frankaemika.github.io to find out which ``libfranka`` version is required for
+    Read the changelog at https://frankarobotics.github.io to find out which ``libfranka`` version is required for
     a particular robot software version. If this doesn't match the ``ros-noetic-libfranka`` version from the
     repositories, you need to :ref:`build from source <installation-build-from-source>`.
 
@@ -41,7 +41,7 @@ After `setting up ROS Noetic <http://wiki.ros.org/noetic/Installation/Ubuntu>`__
 Building from source
 --------------------
 
-Refer to the `README.md <https://github.com/frankaemika/libfranka/blob/main/README.md>`_
+Refer to the `README.md <https://github.com/frankarobotics/libfranka/blob/main/README.md>`_
 
 Building the ROS packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,9 +57,9 @@ workspace in a directory of your choice:
     source /opt/ros/noetic/setup.sh
     catkin_init_workspace src
 
-Then clone the ``franka_ros`` repository from `GitHub <https://github.com/frankaemika/franka_ros>`__::
+Then clone the ``franka_ros`` repository from `GitHub <https://github.com/frankarobotics/franka_ros>`__::
 
-    git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
+    git clone --recursive https://github.com/frankarobotics/franka_ros src/franka_ros
 
 By default, this will check out the newest release of ``franka_ros``. If you want to build a particular version of
 ``franka_ros`` instead, check out the corresponding Git tag::

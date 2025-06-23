@@ -4,9 +4,9 @@ libfranka
 Before continuing with this chapter, please install or compile libfranka for :doc:`Linux <installation_linux>`.
 
 API documentation for the latest version of ``libfranka`` is available at
-https://frankaemika.github.io/libfranka.
+https://frankarobotics.github.io/libfranka.
 
-Libfranka changelog is available at `CHANGELOG.md <https://github.com/frankaemika/libfranka/blob/main/CHANGELOG.md>`_.
+Libfranka changelog is available at `CHANGELOG.md <https://github.com/frankarobotics/libfranka/blob/main/CHANGELOG.md>`_.
 
 .. figure:: _static/libfranka-architecture.png
     :align: center
@@ -395,7 +395,7 @@ It provides:
  * *Interface signals*: the last commanded and desired values and their derivatives,
    as explained in the previous subsection.
 
-For a complete list check the API of the ``franka::RobotState`` 
+For a complete list check the API of the ``franka::RobotState``
 :api:`RobotState|structfranka_1_1RobotState.html`.
 As shown in the the previous subsection, the robot state is always an input of all callback
 functions for control loops. However, if you wish to only read the robot state without controlling

@@ -13,12 +13,12 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import json
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 import os
 import sys
-import json
 from pathlib import Path
 
 sys.path.insert(0, os.path.abspath("_static"))
@@ -189,7 +189,7 @@ def setup(app):
     # Add a function to generate API documentation URLs
     def api_url(text):
         """Generate a URL for the libfranka API documentation."""
-        return f"https://frankaemika.github.io/libfranka/{libfranka_version}/{text}"
+        return f"https://frankarobotics.github.io/libfranka/{libfranka_version}/{text}"
 
     def api_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
         """Handle :api: role in RST.

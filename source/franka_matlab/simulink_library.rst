@@ -2,9 +2,9 @@ Fanka Library for Simulink - Reference
 ======================================
 
 .. hint::
-    Regarding the input/output signal nomenclature, datatypes, and sizes, the libfranka definitions 
-    have been fully adopted. You can find the complete list of signals 
-    `here <https://frankaemika.github.io/libfranka/0.15.0/structfranka_1_1RobotState.html>`_. 
+    Regarding the input/output signal nomenclature, datatypes, and sizes, the libfranka definitions
+    have been fully adopted. You can find the complete list of signals
+    `here <https://frankarobotics.github.io/libfranka/0.15.0/structfranka_1_1RobotState.html>`_.
     The column-major format for signals has been adopted as well.
 
 Robot Control
@@ -27,10 +27,10 @@ The robot settings can be applied through the block parameters.
 
     Robot Control Simulink Block Settings.
 
-.. hint:: 
-    If desired, an initial robot configuration can be applied **before** the main execution of the control loop. 
+.. hint::
+    If desired, an initial robot configuration can be applied **before** the main execution of the control loop.
     Namely, the robot will move to the desired configuration and only then the main execution of the Simulink model
-    will take place. You can define that in the `Initial Configuration` section of the block settings. 
+    will take place. You can define that in the `Initial Configuration` section of the block settings.
 
 Robot State
 -----------
@@ -41,9 +41,9 @@ Robot State
 
     Robot State Simulink Block.
 
-For reading the desired set of signals stemming from the current robot state, 
-you can free-type the names of the signals in the `Parameters` pane of the block parameters. 
-For the set of available signals and their namings --> `Robot State Attributes <https://frankaemika.github.io/libfranka/structfranka_1_1RobotState.html>`_
+For reading the desired set of signals stemming from the current robot state,
+you can free-type the names of the signals in the `Parameters` pane of the block parameters.
+For the set of available signals and their namings --> `Robot State Attributes <https://frankarobotics.github.io/libfranka/structfranka_1_1RobotState.html>`_
 
 .. figure:: _static/get_robot_state_settings.png
     :align: center
@@ -63,7 +63,7 @@ Duration Period
 This Simulink block outputs the duration from the last execution step in seconds. Ideally this should be always
 0.001 seconds but due to lost packages during communication errors 0.002 secs or 0.003 secs could be seen.
 
-.. warning:: 
+.. warning::
     The step count of the Simulink model **does not change** during these communication mishaps. It continues to increment even though an execution step has been lost in reality. Therefore, special design considerations are necessary, especially for sensitive position motion generators. For example, refer to the `generate_cartesian_pose_motion.slx` demo to see how the main "clock" of the application has been designed.
 
 Gripper State
@@ -75,11 +75,11 @@ Gripper State
 
     Get current gripper state Simulink Block.
 
-The gripper state block will inform the application about the current gripper state. 
+The gripper state block will inform the application about the current gripper state.
 
 .. hint::
     Highly recommended to have a look at the
-    `GripperState Struct Reference <https://frankaemika.github.io/libfranka/0.14.2/structfranka_1_1GripperState.html>`_
+    `GripperState Struct Reference <https://frankarobotics.github.io/libfranka/0.14.2/structfranka_1_1GripperState.html>`_
     for the list of available signals and the demo `grasp_objects.slx` which is provided for getting started.
 
 Mass Matrix
@@ -89,7 +89,7 @@ Mass Matrix
     :align: center
     :figclass: align-center
 
-    Get the Mass Matrix of the Robot Model. 
+    Get the Mass Matrix of the Robot Model.
 
 Coriolis
 --------
@@ -119,7 +119,7 @@ Jacobian
 
     Get the Jabobian Matrix of the Robot.
 
-You can select between "zero" or "body" Jacobian as well as the desired 
+You can select between "zero" or "body" Jacobian as well as the desired
 frame inside the block parameters.
 
 Pose

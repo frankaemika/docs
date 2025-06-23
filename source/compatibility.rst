@@ -37,7 +37,7 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .compatibility-table th, 
+        .compatibility-table th,
         .compatibility-table td {
             border: 1px solid #ddd;
             padding: 12px;
@@ -74,14 +74,14 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
     <script>
         // Populate the dropdown
         const selector = document.getElementById('robotSelector');
-        
+
         // Sort robot names to ensure Franka Research 3 is first
         const robotNames = Object.keys(compatibilityData).sort((a, b) => {
             if (a === 'Franka Research 3') return -1;
             if (b === 'Franka Research 3') return 1;
             return a.localeCompare(b);
         });
-        
+
         robotNames.forEach(robot => {
             const option = document.createElement('option');
             option.value = robot;
@@ -92,11 +92,11 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
         // Set default selection to Franka Research 3
         selector.value = 'Franka Research 3';
         showCompatibility();  // Show the default selection immediately
-        
+
         function createTable(robotData) {
             const table = document.createElement('table');
             table.className = 'compatibility-table';
-            
+
             // Create header row
             const headerRow = document.createElement('tr');
             robotData.headers.forEach(header => {
@@ -105,7 +105,7 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
                 headerRow.appendChild(th);
             });
             table.appendChild(headerRow);
-            
+
             // Create data rows
             robotData.data.forEach(row => {
                 const tr = document.createElement('tr');
@@ -116,7 +116,7 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
                 });
                 table.appendChild(tr);
             });
-            
+
             return table;
         }
 
@@ -124,17 +124,17 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
             const selected = selector.value;
             const container = document.getElementById('matrixContainer');
             const descriptionElement = document.getElementById('robotDescription');
-            
+
             // Clear previous content
             container.innerHTML = '';
             descriptionElement.textContent = '';
-            
+
             if (selected && compatibilityData[selected]) {
                 // Show robot description
                 if (robotDescriptions[selected]) {
                     descriptionElement.textContent = robotDescriptions[selected];
                 }
-                
+
                 // Create and show compatibility table
                 const table = createTable(compatibilityData[selected]);
                 container.appendChild(table);
@@ -148,9 +148,9 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
     </script>
 
 `Robot version line 19
-<https://github.com/frankaemika/libfranka-common/blob/fr3-develop/include/research_interface/robot/service_types.h>`_
+<https://github.com/frankarobotics/libfranka-common/blob/fr3-develop/include/research_interface/robot/service_types.h>`_
 and `Gripper version line 17
-<https://github.com/frankaemika/libfranka-common/blob/fr3-develop/include/research_interface/gripper/types.h>`_
+<https://github.com/frankarobotics/libfranka-common/blob/fr3-develop/include/research_interface/gripper/types.h>`_
 are part of libfranka-common repository, a submodule of libfranka repository.
 
 Franka MATLAB® compatible versions are located :ref:`here<compatibility-franka-matlab>`.

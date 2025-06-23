@@ -6,7 +6,7 @@ franka_ros
 
 Before continuing with this chapter, please :doc:`install or compile franka_ros <installation_linux>`.
 
-You can access the changelog of franka_ros at `this link <https://github.com/frankaemika/franka_ros/blob/develop/CHANGELOG.md>`_
+You can access the changelog of franka_ros at `this link <https://github.com/frankarobotics/franka_ros/blob/develop/CHANGELOG.md>`_
 
 .. figure:: _static/ros-architecture.png
     :align: center
@@ -36,7 +36,7 @@ visual description used to improve performance of collision checks. The descript
 the URDF format according to the `URDF XML documentation <http://wiki.ros.org/urdf/XML>`_ .
 
 If you want to simulate the FR3 robots, you can pass a ``gazebo`` argument to the XACRO file.
-`franka_description <https://github.com/frankaemika/franka_description>`_  contains the files for all the Franka Robotics robot models.
+`franka_description <https://github.com/frankarobotics/franka_description>`_  contains the files for all the Franka Robotics robot models.
 
 .. code-block:: shell
 
@@ -350,7 +350,7 @@ rviz. For visualization purposes, a ``robot_state_publisher`` is started.
 This package also implements the ``franka_combined_control_node``, a hardware node for ``ros_control`` based
 on the ``franka_hw::FrankaCombinedHW`` class. The set of robots loaded are configured via the ROS parameter
 server. These parameters have to be in the hardware node's namespace (see `franka_combined_control_node.yaml
-<https://github.com/frankaemika/franka_ros/tree/develop/franka_control/config/franka_combined_control_node.yaml>`__
+<https://github.com/frankarobotics/franka_ros/tree/develop/franka_control/config/franka_combined_control_node.yaml>`__
 as a reference) and look like this:
 
 .. code-block:: yaml
