@@ -40,8 +40,8 @@ def generate_js():
 
     # Robot descriptions
     robot_descriptions = {
-        "Franka Research 3": "Latest generation Franka Robot with ROS 2 support",
-        "FER": "Previous generation Franka Robotics Robot",
+        "Franka Research 3 (FR3)": "Latest generation Franka Robot with ROS 2 support",
+        "Franka Emika Robot (FER)": "First generation Franka Robot",
     }
 
     # Generate JavaScript content

@@ -90,7 +90,7 @@ This controller moves the robot to its home configuration.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup move_to_start_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=move_to_start_example_controller
 
 .. _gravity_example:
 
@@ -102,7 +102,7 @@ It sends zero as torque command to all joints, which means that the robot only c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup gravity_compensation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=gravity_compensation_example_controller
 
 Gripper Example
 ^^^^^^^^^^^^^^^
@@ -112,7 +112,7 @@ failed based on the object's size and the defined tolerances.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup gripper_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=gripper_example_controller
 
 
 Joint Impedance Example
@@ -123,7 +123,7 @@ joints while it is running.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_impedance_example_controller
 
 Joint Impedance With IK Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -134,7 +134,7 @@ in the franka_fr3_moveit_config package, kinematics.yaml file.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py
 
 
 Model Example Controller
@@ -144,7 +144,7 @@ Joint4 body jacobian and end-effector jacobian with respect to the base frame.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup model_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=model_example_controller
 
 Joint Position Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -152,7 +152,7 @@ This example sends periodic position commands to the robot.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_position_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_position_example_controller
 
 Joint Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -160,7 +160,7 @@ This example sends periodic velocity commands to the 4th and 5th joint of the ro
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_velocity_example_controller
 
 Cartesian Pose Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -168,7 +168,7 @@ This example uses the CartesianPose interface to send periodic pose commands to 
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_pose_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_pose_example_controller
 
 Cartesian Orientation Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -176,7 +176,7 @@ This example uses CartesianOrientation interface to send periodic orientation co
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_orientation_example_controller
 
 Cartesian Pose Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -184,7 +184,7 @@ This example sends periodic elbow commands while keeping the end effector pose c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_elbow_example_controller
 
 Cartesian Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -192,7 +192,7 @@ This example uses the CartesianVelocity interface to send periodic velocity comm
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_velocity_example_controller
 
 Cartesian Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -200,7 +200,7 @@ This example uses the CartesianElbow interface to send periodic elbow commands t
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=elbow_example_controller
 
 
 Package Descriptions
@@ -229,7 +229,7 @@ using the torque interface from libfranka. For example it is possible to launch 
 
     ros2 control load_controller --set-state active  gravity_compensation_example_controller
 
-This is the equivalent of running the ``gravity_compensation_example_controller.launch.py`` launch file mentioned in
+This is the equivalent of running the ``gravity_compensation_example_controller`` example mentioned in
 :ref:`Gravity Compensation <gravity_example>`.
 
 When the controller is stopped with::
