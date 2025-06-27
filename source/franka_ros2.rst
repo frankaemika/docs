@@ -4,20 +4,20 @@ franka_ros2
 
  ``franka_ros2`` is not supported on Windows.
 
-You can access the changelog of franka_ros2 at `this link <https://github.com/frankaemika/franka_ros2/blob/humble/CHANGELOG.rst>`_
+You can access the changelog of franka_ros2 at `this link <https://github.com/frankarobotics/franka_ros2/blob/humble/CHANGELOG.rst>`_
 
-The `franka_ros2 repo <https://github.com/frankaemika/franka_ros2>`_ contains a ROS 2 integration of
+The `franka_ros2 repo <https://github.com/frankarobotics/franka_ros2>`_ contains a ROS 2 integration of
 :doc:`libfranka <libfranka>`.
 
 .. caution::
     franka_ros2 is in rapid development. Anticipate breaking changes. Report bugs on
-    `GitHub <https://github.com/frankaemika/franka_ros2/issues>`_.
+    `GitHub <https://github.com/frankarobotics/franka_ros2/issues>`_.
 
 
 Installation
 ------------
 
-Please refer to the `README.md <https://github.com/frankaemika/franka_ros2/blob/humble/README.md>`_
+Please refer to the `README.md <https://github.com/frankarobotics/franka_ros2/blob/humble/README.md>`_
 
 MoveIt
 ------
@@ -40,7 +40,7 @@ Namespace enabled launch files
 ------------------------------
 
 To demonstrate how to launch the robot within a specified namespace, we provide an example launch file located at
-``franka_bringup/launch/example.launch.py``. 
+``franka_bringup/launch/example.launch.py``.
 
 By default ``example.launch.py`` file is configured to read essential robot configuration details from a YAML file, ``franka.ns-config.yaml``,
 located in the franka_bringup/launch/ directory. You may provide a different YAML file by specifying the path to it in the command line.
@@ -51,7 +51,7 @@ located in the franka_bringup/launch/ directory. You may provide a different YAM
 * The namespace to be used for the robot instance.
 * Additional configuration details specific to the robot instance.
 
-example.launch.py "includes" ``franka.ns-launch.py`` which defines the core nodes typically required for robot operation..  
+example.launch.py "includes" ``franka.ns-launch.py`` which defines the core nodes typically required for robot operation..
 
 The franka.ns-launch.py file, in turn, relies on ``ns-controllers.yaml`` to configure the ros2_controller framework.
 This configuration ensures that controllers are loaded in a namespace-agnostic manner, supporting consistent behavior across multiple namespaces.
@@ -63,7 +63,7 @@ contains detailed inline documentation to guide users through their structure an
 `ROS 2 documentation <https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Using-ROS2-Launch-For-Large-Projects.html#namespaces>`_.
 
 To execute any of the example controllers defined in ns-controllers.yaml, you can use the example.launch.py launch file and specify
-the desired controller name as a command-line argument. 
+the desired controller name as a command-line argument.
 
 First - modify ``franka.ns-config.yaml`` as appropriate for your setup.
 
@@ -90,7 +90,7 @@ This controller moves the robot to its home configuration.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup move_to_start_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=move_to_start_example_controller
 
 .. _gravity_example:
 
@@ -102,7 +102,7 @@ It sends zero as torque command to all joints, which means that the robot only c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup gravity_compensation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=gravity_compensation_example_controller
 
 Gripper Example
 ^^^^^^^^^^^^^^^
@@ -112,7 +112,7 @@ failed based on the object's size and the defined tolerances.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup gripper_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=gripper_example_controller
 
 
 Joint Impedance Example
@@ -123,7 +123,7 @@ joints while it is running.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_impedance_example_controller
 
 Joint Impedance With IK Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -134,7 +134,7 @@ in the franka_fr3_moveit_config package, kinematics.yaml file.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup joint_impedance_with_ik_example_controller.launch.py
 
 
 Model Example Controller
@@ -144,7 +144,7 @@ Joint4 body jacobian and end-effector jacobian with respect to the base frame.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup model_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=model_example_controller
 
 Joint Position Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -152,7 +152,7 @@ This example sends periodic position commands to the robot.
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_position_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_position_example_controller
 
 Joint Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -160,7 +160,7 @@ This example sends periodic velocity commands to the 4th and 5th joint of the ro
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup joint_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=joint_velocity_example_controller
 
 Cartesian Pose Example
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -168,7 +168,7 @@ This example uses the CartesianPose interface to send periodic pose commands to 
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_pose_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_pose_example_controller
 
 Cartesian Orientation Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -176,7 +176,7 @@ This example uses CartesianOrientation interface to send periodic orientation co
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_orientation_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_orientation_example_controller
 
 Cartesian Pose Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -184,7 +184,7 @@ This example sends periodic elbow commands while keeping the end effector pose c
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_elbow_example_controller
 
 Cartesian Velocity Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -192,7 +192,7 @@ This example uses the CartesianVelocity interface to send periodic velocity comm
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup cartesian_velocity_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=cartesian_velocity_example_controller
 
 Cartesian Elbow Example
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -200,7 +200,7 @@ This example uses the CartesianElbow interface to send periodic elbow commands t
 
 .. code-block:: shell
 
-    ros2 launch franka_bringup elbow_example_controller.launch.py arm_id:=fr3 robot_ip:=<fci-ip>
+    ros2 launch franka_bringup example.launch.py controller_name:=elbow_example_controller
 
 
 Package Descriptions
@@ -229,7 +229,7 @@ using the torque interface from libfranka. For example it is possible to launch 
 
     ros2 control load_controller --set-state active  gravity_compensation_example_controller
 
-This is the equivalent of running the ``gravity_compensation_example_controller.launch.py`` launch file mentioned in
+This is the equivalent of running the ``gravity_compensation_example_controller`` example mentioned in
 :ref:`Gravity Compensation <gravity_example>`.
 
 When the controller is stopped with::
@@ -253,7 +253,7 @@ franka_description
 ^^^^^^^^^^^^^^^^^^
 .. warning::
     As of version 0.1.14 the franka_description package is not available in the franka_ros2 repository.
-    It is available in a separate repository `Franka Description <https://github.com/frankaemika/franka_description>`_.
+    It is available in a separate repository `Franka Description <https://github.com/frankarobotics/franka_description>`_.
 
 This package contains the xacro files and meshes that are used to visualize the robot.
 Further, it contains a launch file that visualizes the robot model without access to a real robot::
@@ -349,10 +349,10 @@ These classes are used to convert franka_robot_model object and franka_robot_sta
 which are stored in the hardware_state_interface as a double pointer.
 
 For further reference on how to use these classes:
-`Franka Robot State Broadcaster <https://github.com/frankaemika/franka_ros2/tree/humble/franka_robot_state_broadcaster>`_
+`Franka Robot State Broadcaster <https://github.com/frankarobotics/franka_ros2/tree/humble/franka_robot_state_broadcaster>`_
 and
 `Franka Example Controllers(model_example_controller)
-<https://github.com/frankaemika/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp>`_
+<https://github.com/frankarobotics/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp>`_
 
 - Cartesian Pose Interface:
 
@@ -482,7 +482,7 @@ franka_gazebo
 .. important::
 
     Minimum necessary `franka_description` version is 0.3.0.
-    You can clone franka_description package from https://github.com/frankaemika/franka_description.
+    You can clone franka_description package from https://github.com/frankarobotics/franka_description.
 
 A project integrating Franka ROS 2 with the Gazebo simulator.
 
@@ -627,7 +627,7 @@ Compared to ``franka_ros`` we currently offer a reduced set of controller interf
     They are stored in the state_interface as double pointers and casted back to their original objects inside the franka_semantic_component class.
 
     Example of using franka_model can be found in the franka_example_controllers package:
-    `model_example_controller <https://github.com/frankaemika/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp>`_.
+    `model_example_controller <https://github.com/frankarobotics/franka_ros2/blob/humble/franka_example_controllers/src/model_example_controller.cpp>`_.
 
 
 You can base your own controller on one of the :ref:`franka_example_controllers`. To compute kinematic
