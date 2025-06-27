@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+- fix: Broken links for moving from frankaemika to frankarobotics
+- doc: Adapted changed launch commands within franka_ros2
+
 ## 0.5.0
 - Updated links to libfranka documenation
 - doc: update docu for 5.7.2
