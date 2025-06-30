@@ -77,12 +77,6 @@ Gripper State
 
 The gripper state block will inform the application about the current gripper state.
 
-<<<<<<< HEAD
-.. hint::
-    Highly recommended to have a look at the
-    `GripperState Struct Reference <https://frankarobotics.github.io/libfranka/0.14.2/structfranka_1_1GripperState.html>`_
-    for the list of available signals and the demo `grasp_objects.slx` which is provided for getting started.
-=======
 Vacuum Gripper State
 --------------------
 
@@ -94,7 +88,6 @@ Vacuum Gripper State
     Get current vacuum gripper state Simulink Block.
 
 The vacuum gripper state block will inform the application about the current vacuum gripper state. 
->>>>>>> 1a07523 (getting started, simulink lib ref)
 
 Mass Matrix
 -----------

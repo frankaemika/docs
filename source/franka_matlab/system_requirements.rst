@@ -7,11 +7,7 @@ Host PC Requirements
 MATLAB Toolbox Dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-<<<<<<< HEAD
-The following Mathworks products are required:
-=======
 The following Mathworks products are required for the Host PC: 
->>>>>>> 355922f (simulink lib pic, compatibility, requirements pages update)
 
 * `MATLAB <https://www.mathworks.com/products/matlab.html>`_
 * `Simulink <https://www.mathworks.com/products/simulink.html>`_
