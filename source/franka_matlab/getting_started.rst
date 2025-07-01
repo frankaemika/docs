@@ -16,7 +16,7 @@ To browse the available examples, use the following command:
     :align: center
     :figclass: align-center
 
-    Franka MATLAB Toolbox Examples Navigator.
+    Franka Toolbox for MATLAB Examples Navigator.
 
 .. figure:: _static/cartesian_impedance_control_overview.png
     :align: center
@@ -247,7 +247,7 @@ you may attempt a recovery by executing the automatic error recovery command in 
 
 .. code-block:: shell
 
-    fr = FrankaRobot(<robot ip as string>);
+    fr = FrankaRobot('RobotIP', <robot ip as string>);
     fr.automatic_error_recovery();
 
 In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring 
