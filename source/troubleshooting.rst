@@ -247,3 +247,138 @@ This error occurs when a safety function defined in Watchman (the safety configu
 For example, there could be an active safety function limiting the robot's speed to 0.2 m/s. As this cannot be guaranteed when using FCI, the
 robot will not move. However, you can still read the robot state. In order to command movements to the robot again,
 you either need to disable the safety function or delete the corresponding safety rule in Watchman.
+
+.. _troubleshooting_realtime_control_loops:
+
+Realtime Control Loop Best Practices
+------------------------------------
+
+When implementing 1kHz control loops with libfranka, it's crucial to ensure your code completes within the 500us deadline.
+This means between read and write command must be completed in 500us.
+
+The deadline might be tighter based on the following factors:
+* If you are using a switch to connect to the control PC.
+* If your ethernet card is not a high-performance one.
+* If you don't use the real-time kernel.
+
+Here are common pitfalls and how to avoid them:
+
+.. _realtime_what_not_to_do:
+
+What NOT to Do in 1kHz Control Loops
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**❌ DON'T: Load Model Inside Loop**
+
+.. code-block:: cpp
+
+    // BAD - Based on communication_test.cpp
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      
+      // NEVER DO THIS - loads model every cycle!
+      franka::Model model = robot.loadModel();
+      auto gravity = model.gravity(robot_state);
+      
+      rw_interface->writeOnce(torques);
+    }
+
+    // GOOD - Load once before loop
+    franka::Model model = robot.loadModel();  // Before loop!
+    while (!torques.motion_finished) {
+      // Use pre-loaded model
+    }
+
+**❌ DON'T: Sleep or Block**
+
+.. code-block:: cpp
+
+    // BAD - From the example itself!
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      
+      std::this_thread::sleep_for(std::chrono::microseconds(100));  // BLOCKS RT!
+      
+      rw_interface->writeOnce(torques);
+    }
+
+    // GOOD - No sleeping in control loop
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      // Compute and write immediately
+      rw_interface->writeOnce(torques);
+    }
+
+**❌ DON'T: Print Every Cycle**
+
+.. code-block:: cpp
+
+    // BAD - Printing in tight loop
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      
+      // NEVER DO THIS - blocks on I/O
+      std::cout << "Position: " << robot_state.q << std::endl;
+      std::cout << "Success rate: " << robot_state.control_command_success_rate << std::endl;
+      
+      rw_interface->writeOnce(torques);
+    }
+
+    // GOOD - Print periodically or in separate thread
+    if (counter % 1000 == 0) {  // Every second at 1kHz
+      // Store data for printing thread
+      print_data.mutex.try_lock();
+      print_data.robot_state = robot_state;
+      print_data.mutex.unlock();
+    }
+
+**❌ DON'T: Dynamic Allocations**
+
+.. code-block:: cpp
+
+    // BAD - Allocating vectors every cycle
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      
+      // NEVER DO THIS
+      std::vector<double> error(7);
+      Eigen::VectorXd tau_d(7);
+      
+      for (size_t i = 0; i < 7; i++) {
+        error[i] = desired_q[i] - robot_state.q[i];
+        tau_d[i] = k_p * error[i];
+      }
+      
+      rw_interface->writeOnce(franka::Torques(tau_d.data()));
+    }
+
+    //Alternative solutions
+
+    // GOOD - pre-allocate memory
+    std::vector<double> error(7);
+    Eigen::VectorXd tau_d(7);
+    while (!torques.motion_finished) {
+      std::tie(robot_state, period) = rw_interface->readOnce();
+      // Use pre-allocated memory
+      for (size_t i = 0; i < 7; i++) {
+        error[i] = desired_q[i] - robot_state.q[i];
+        tau_d[i] = k_p * error[i];
+      }
+      rw_interface->writeOnce(franka::Torques(tau_d.data()));
+    }
+
+    // GOOD - Use fixed arrays
+    std::array<double, 7> tau_d{};  // Pre-allocated
+    while (!torques.motion_finished) {
+      for (size_t i = 0; i < 7; i++) {
+        tau_d[i] = k_p * (desired_q[i] - robot_state.q[i]);
+      }
+      rw_interface->writeOnce(tau_d);
+    }
+
+**Why Memory Allocation Matters:**
+
+* **Heap allocations** (like ``std::vector``, ``Eigen::VectorXd``) are VERY slow
+* At 1kHz, even small allocations add up and cause jitter
+* Preallocating ensures deterministic, real-time performance
+
